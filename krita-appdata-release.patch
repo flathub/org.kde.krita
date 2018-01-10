@@ -1,0 +1,10 @@
+--- krita-3.3.3/krita/org.kde.krita.appdata.xml.old	2018-01-08 12:49:24.000000000 +0100
++++ krita-3.3.3/krita/org.kde.krita.appdata.xml	2018-01-10 14:53:12.000000000 +0100
+@@ -179,4 +179,7 @@
+   <provides>
+     <binary>krita</binary>
+   </provides>
++  <releases>
++    <release date="2018-01-08" version="3.3.3"/>
++  </releases>
+ </component>
