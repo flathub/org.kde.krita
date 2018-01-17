@@ -64,8 +64,7 @@
             "buildsystem": "cmake-ninja",
             "builddir": true,
             "config-opts": [
-                "-DCMAKE_BUILD_TYPE=Release",
-                "-DCMAKE_INSTALL_LIBDIR=lib"
+                "-DCMAKE_BUILD_TYPE=Release"
             ],
             "cleanup": [
                 "/bin",
@@ -248,7 +247,6 @@
             "builddir": true,
             "config-opts": [
                 "-DCMAKE_BUILD_TYPE=Release",
-                "-DCMAKE_INSTALL_LIBDIR=lib",
                 "-DBUILD_GTK_TESTS=OFF",
                 "-DBUILD_QT5_TESTS=OFF",
                 "-DBUILD_CPP_TESTS=OFF",
@@ -320,8 +318,7 @@
             "buildsystem": "cmake-ninja",
             "builddir": true,
             "config-opts": [
-                "-DCMAKE_BUILD_TYPE=Release",
-                "-DCMAKE_INSTALL_LIBDIR=lib"
+                "-DCMAKE_BUILD_TYPE=Release"
             ],
             "sources": [
                 {
