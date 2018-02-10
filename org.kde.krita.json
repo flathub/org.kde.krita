@@ -314,11 +314,56 @@
             ]
         },
         {
+            "name": "x264",
+            "config-opts": [
+                "--disable-cli",
+                "--enable-shared"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.videolan.org/x264/snapshots/x264-snapshot-20171223-2245-stable.tar.bz2",
+                    "sha256": "ee4ba2c3d1caf786ad66d3fa86bdc368a8f827318788a62a9c8444b2c35816bf"
+                }
+            ]
+        },
+        {
+            "name": "ffmpeg",
+            "config-opts": [
+                "--enable-gpl",
+                "--disable-static",
+                "--enable-shared",
+                "--disable-doc",
+                "--disable-ffplay",
+                "--disable-ffprobe",
+                "--disable-ffserver",
+                "--enable-libfontconfig",
+                "--enable-libfreetype",
+                "--enable-libopus",
+                "--enable-librsvg",
+                "--enable-libtheora",
+                "--enable-libvorbis",
+                "--enable-libvpx",
+                "--enable-libx264"
+            ],
+            "cleanup":[
+                "/share/ffmpeg/examples"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://ffmpeg.org/releases/ffmpeg-3.4.1.tar.xz",
+                    "sha256": "5a77278a63741efa74e26bf197b9bb09ac6381b9757391b922407210f0f991c0"
+                }
+            ]
+        },
+        {
             "name": "krita",
             "buildsystem": "cmake-ninja",
             "builddir": true,
             "config-opts": [
-                "-DCMAKE_BUILD_TYPE=Release"
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DCMAKE_INSTALL_LIBDIR=lib"
             ],
             "sources": [
                 {
@@ -327,8 +372,10 @@
                     "sha256": "bec04e3392e9b311477c5c6a50e2201b43a3afda91d9b24a0fc8e3399585865d"
                 },
                 {
-                    "type": "patch",
-                    "path": "krita-appdata-release.patch"
+                    "type": "shell",
+                    "commands": [
+                        "sed -i '182i <releases><release date=\"2018-01-08\" version=\"3.3.3\"/></releases>' krita/org.kde.krita.appdata.xml"
+                    ]
                 }
             ]
         }
