@@ -11,6 +11,7 @@
         "--socket=x11",
         "--share=network",
         "--device=dri",
+        "--socket=pulseaudio",
         "--filesystem=host"
     ],
     "cleanup": [
