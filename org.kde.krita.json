@@ -385,6 +385,19 @@
                     "type": "git",
                     "url": "git://anongit.kde.org/krita.git",
                     "commit": "17c7d1684733e10cb9cab916abdf46ef1a680d34" /* 4.0 stable branch with flatpak specific fix */
+                },
+                {
+                    "type": "archive", /* krita.git doesn't include translations */
+                    "dest": "krita-tar",
+                    "url": "https://download.kde.org/stable/krita/4.0.3/krita-4.0.3.tar.gz",
+                    "sha256": "f9ead78ff4b184af49aea59385b0cfa1238ebf7fd527bf2f408c59fc5b12b67e"
+                },
+                {
+                    "type": "shell",
+                    "commands": [
+                        "mv krita-tar/po .",
+                        "echo 'find_package(KF5I18n CONFIG REQUIRED)\nki18n_install(po)' >> CMakeLists.txt"
+                    ]
                 }
             ]
         }
