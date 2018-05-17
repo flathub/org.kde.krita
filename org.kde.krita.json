@@ -12,7 +12,8 @@
         "--share=network",
         "--device=dri",
         "--socket=pulseaudio",
-        "--filesystem=host"
+        "--filesystem=host",
+        "--env=PYTHONPATH=/app/lib/python3/dist-packages"
     ],
     "cleanup": [
         "/include",
@@ -29,7 +30,7 @@
             "buildsystem": "simple",
             "build-commands": [
                 "./bootstrap.sh --prefix=/app --with-libraries=system",
-                "./b2 -j `nproc` install"
+                "./b2 -j $FLATPAK_BUILDER_N_JOBS install"
             ],
             "cleanup": [
                 "*.a"
@@ -37,7 +38,7 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://sourceforge.net/projects/boost/files/boost/1.63.0/boost_1_63_0.tar.bz2",
+                    "url": "https://dl.bintray.com/boostorg/release/1.63.0/source/boost_1_63_0.tar.bz2",
                     "sha256": "beae2529f759f6b3bf3f4969a19c2e9d6f0c503edcb2de4a61d1428519fcb3b0"
                 }
             ]
@@ -122,8 +123,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://www.libraw.org/data/LibRaw-0.18.6.tar.gz",
-                    "sha256": "e5b8acca558aa457bc9214802004320c5610d1434c2adb1f3ea367f026afa53b"
+                    "url": "https://www.libraw.org/data/LibRaw-0.18.11.tar.gz",
+                    "sha256": "7cf724a40a0d8915869498f51062a952167e4f5bae2b6920542c9e0e079a471d"
                 }
             ]
         },
@@ -149,7 +150,7 @@
         },
         {
             "name": "opencolorio",
-            "buildsystem": "cmake",
+            "buildsystem": "cmake", /* ninja build broken (upstream issues #467) */
             "builddir": true,
             "build-options": {
                 "arch": {
@@ -167,7 +168,8 @@
             },
             "config-opts": [
                 "-DCMAKE_BUILD_TYPE=Release",
-                "-DOCIO_BUILD_STATIC=OFF"
+                "-DOCIO_BUILD_STATIC=OFF",
+                "-DCMAKE_CXX_FLAGS='-Wno-error=deprecated-declarations -Wno-error=unused-function'"
             ],
             "cleanup": [
                 "/bin"
@@ -175,8 +177,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/imageworks/OpenColorIO/archive/v1.0.9.tar.gz",
-                    "sha256": "27c81e691c15753cd2b560c2ca4bd5679a60c2350eedd43c99d44ca25d65ea7f"
+                    "url": "https://github.com/imageworks/OpenColorIO/archive/v1.1.0.tar.gz",
+                    "sha256": "228589879e1f11e455a555304007748a8904057088319ebbf172d9384b93c079"
                 }
             ]
         },
@@ -192,7 +194,7 @@
                 "-DCMAKE_BUILD_TYPE=Release"
             ],
             "cleanup": [
-                "*.a"
+                "*"
             ],
             "sources": [
                 {
@@ -209,25 +211,6 @@
             ]
         },
         {
-            "name": "openjpeg",
-            "buildsystem": "cmake-ninja",
-            "config-opts": [
-                "-DCMAKE_BUILD_TYPE=Release"
-            ],
-            "cleanup": [
-                "/bin",
-                "/lib/openjpeg-*",
-                "*.a"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://github.com/uclouvain/openjpeg/archive/v2.3.0.tar.gz",
-                    "sha256": "3dc787c1bb6023ba846c2a0d9b1f6e179f1cd255172bde9eb75b01f1e6c7d71a"
-                }
-            ]
-        },
-        {
             "name": "poppler-data",
             "buildsystem": "cmake-ninja",
             "builddir": true,
@@ -237,8 +220,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://poppler.freedesktop.org/poppler-data-0.4.8.tar.gz",
-                    "sha256": "1096a18161f263cccdc6d8a2eb5548c41ff8fcf9a3609243f1b6296abdf72872"
+                    "url": "https://poppler.freedesktop.org/poppler-data-0.4.9.tar.gz",
+                    "sha256": "1f9c7e7de9ecd0db6ab287349e31bf815ca108a5a175cf906a90163bdbe32012"
                 }
             ]
         },
@@ -253,13 +236,14 @@
                 "-DBUILD_CPP_TESTS=OFF",
                 "-DENABLE_UTILS=OFF",
                 "-DENABLE_CPP=OFF",
-                "-DENABLE_GLIB=OFF"
+                "-DENABLE_GLIB=OFF",
+                "-DENABLE_LIBOPENJPEG=none"
             ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://poppler.freedesktop.org/poppler-0.62.0.tar.xz",
-                    "sha256": "5b9a73dfd4d6f61d165ada1e4f0abd2d420494bf9d0b1c15d0db3f7b83a729c6"
+                    "url": "https://poppler.freedesktop.org/poppler-0.64.0.tar.xz",
+                    "sha256": "b21df92ca99f78067785cf2dc8e06deb04726b62389c0ee1f5d8b103c77f64b1"
                 }
             ]
         },
@@ -285,33 +269,27 @@
             "name": "gmic-qt",
             "buildsystem": "cmake-ninja",
             "builddir": true,
+            "no-make-install": true,
             "config-opts": [
                 "-DCMAKE_BUILD_TYPE=Release",
                 "-DGMIC_QT_HOST=krita",
                 "-DGMIC_PATH=./gmic/src"
             ],
+            "post-install": [
+                "install -D -t /app/bin gmic_krita_qt"
+            ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://github.com/c-koi/gmic-qt/archive/v.218.tar.gz",
-                    "sha256": "697861e5a1e024a3ccf9c96e513ec9f60f65d6e3c438ba355afcd10839b06f39"
+                    "url": "https://github.com/c-koi/gmic-qt/archive/v.2.2.3.tar.gz",
+                    "sha256": "72a6ad1f1acb15f4d9417c9cd16615160d04f764aaa2b0206fa6c80587fb91af"
                 },
                 {
-                    "type": "file",
-                    "url": "https://gmic.eu/files/source/gmic_2.1.8.tar.gz",
-                    "sha256": "f22783f14cb202dec4a840733f2028f6e2c464fdd2f0166fc38943702cea6bde",
-                    "dest-filename": "gmic.tar.gz"
-                },
-                {
-                    "type": "shell",
-                    "commands": [
-                        "tar xf gmic.tar.gz",
-                        "mv gmic-* gmic"
-                    ]
+                    "type": "archive",
+                    "dest": "gmic",
+                    "url": "https://gmic.eu/files/source/gmic_2.2.3.tar.gz",
+                    "sha256": "366e348ebfa85354e99b19eecf2e6b10d445901132eb73c84b18fb23af23f0e8"
                 }
-            ],
-            "post-install": [
-                "install -Dm755 gmic_krita_qt /app/bin/gmic_krita_qt"
             ]
         },
         {
@@ -332,50 +310,79 @@
             "name": "ffmpeg",
             "config-opts": [
                 "--enable-gpl",
-                "--disable-static",
-                "--enable-shared",
+                "--enable-static",
+                "--disable-shared",
                 "--disable-doc",
                 "--disable-ffplay",
                 "--disable-ffprobe",
-                "--disable-ffserver",
-                "--enable-libfontconfig",
-                "--enable-libfreetype",
                 "--enable-libopus",
-                "--enable-librsvg",
-                "--enable-libtheora",
-                "--enable-libvorbis",
                 "--enable-libvpx",
                 "--enable-libx264"
             ],
-            "cleanup":[
+            "cleanup": [
                 "/share/ffmpeg/examples"
             ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://ffmpeg.org/releases/ffmpeg-3.4.2.tar.xz",
-                    "sha256": "2b92e9578ef8b3e49eeab229e69305f5f4cbc1fdaa22e927fc7fca18acccd740"
+                    "url": "https://ffmpeg.org/releases/ffmpeg-4.0.tar.xz",
+                    "sha256": "ed945daf40b124e77a685893cc025d086f638bc703183460aff49508edb3a43f"
                 }
             ]
         },
         {
-            "name": "krita",
-            "buildsystem": "cmake-ninja",
-            "builddir": true,
-            "config-opts": [
-                "-DCMAKE_BUILD_TYPE=Release"
+            "name": "sip",
+            "buildsystem": "simple",
+            "build-commands": [
+                "python3 configure.py --bindir=/app/bin --destdir=/app/lib/python3/dist-packages --incdir=/app/include/python3 --sipdir=/app/share/sip --stubsdir=/app/lib/python3/dist-packages",
+                "make -j $FLATPAK_BUILDER_N_JOBS",
+                "make install"
+            ],
+            "cleanup": [
+                "*"
             ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.kde.org/stable/krita/3.3.3/krita-3.3.3.tar.gz",
-                    "sha256": "bec04e3392e9b311477c5c6a50e2201b43a3afda91d9b24a0fc8e3399585865d"
-                },
+                    "url": "http://http.debian.net/debian/pool/main/s/sip4/sip4_4.19.8+dfsg.orig.tar.gz",
+                    "sha256": "4e94369bc0f695854e645771b929fdd3e6965f25e07a05ffeeec502804257f79"
+                }
+            ]
+        },
+        {
+            "name": "pyqt",
+            "buildsystem": "simple",
+            "build-commands": [
+                "python3 configure.py --confirm-license --sip-incdir=/app/include/python3 --bindir=/app/bin --destdir=/app/lib/python3/dist-packages --designer-plugindir=/app/lib/plugins/designer --qml-plugindir=/app/lib/plugins/PyQt5 --sipdir=/app/share/sip --stubsdir=/app/lib/python3/dist-packages/PyQt5",
+                "make -j $FLATPAK_BUILDER_N_JOBS",
+                "make install"
+            ],
+            "sources": [
                 {
-                    "type": "shell",
-                    "commands": [
-                        "sed -i '182i <releases><release date=\"2018-01-08\" version=\"3.3.3\"/></releases>' krita/org.kde.krita.appdata.xml"
-                    ]
+                    "type": "archive",
+                    "url": "http://http.debian.net/debian/pool/main/p/pyqt5/pyqt5_5.10.1+dfsg.orig.tar.gz",
+                    "sha256": "dd248afb9906841e35c069be71374da64c87c8ad1b16dd9ff6a973843d1a52e8"
+                }
+            ]
+        },
+        {
+            "name": "krita1x",
+            "buildsystem": "cmake-ninja",
+            "builddir": true,
+            "config-opts": [
+                "-DCMAKE_BUILD_TYPE=Release",
+                "-DCMAKE_INSTALL_LIBDIR=lib"
+            ],
+            "build-options": {
+                "env": {
+                    "PYTHONPATH": "/app/lib/python3/dist-packages"
+                }
+            },
+            "sources": [
+                {
+                    "type": "git",
+                    "url": "git://anongit.kde.org/krita.git",
+                    "commit": "17c7d1684733e10cb9cab916abdf46ef1a680d34" /* 4.0 stable branch with flatpak specific fix */
                 }
             ]
         }
