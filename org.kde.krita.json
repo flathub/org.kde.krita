@@ -21,6 +21,10 @@
         "/lib/cmake",
         "/share/aclocal",
         "/share/pkgconfig",
+        "/share/info",
+        "/share/man",
+        "/cmake",
+        "*.a",
         "*.la",
         "*.cmake"
     ],
@@ -31,9 +35,6 @@
             "build-commands": [
                 "./bootstrap.sh --prefix=/app --with-libraries=system",
                 "./b2 -j $FLATPAK_BUILDER_N_JOBS install"
-            ],
-            "cleanup": [
-                "*.a"
             ],
             "sources": [
                 {
@@ -69,9 +70,7 @@
                 "-DCMAKE_BUILD_TYPE=Release"
             ],
             "cleanup": [
-                "/bin",
-                "*.a",
-                "/share/man"
+                "/bin"
             ],
             "sources": [
                 {
@@ -137,8 +136,7 @@
                 "--enable-threads"
             ],
             "cleanup": [
-                "/bin",
-                "/share/man"
+                "/bin"
             ],
             "sources": [
                 {
@@ -253,9 +251,7 @@
                 "--disable-static"
             ],
             "cleanup": [
-                "/bin",
-                "/share/info",
-                "/share/man"
+                "/bin"
             ],
             "sources": [
                 {
@@ -296,7 +292,10 @@
             "name": "x264",
             "config-opts": [
                 "--disable-cli",
-                "--enable-shared"
+                "--enable-static"
+            ],
+            "cleanup": [
+                "*"
             ],
             "sources": [
                 {
@@ -339,7 +338,7 @@
                 "make install"
             ],
             "cleanup": [
-                "*"
+                "/bin"
             ],
             "sources": [
                 {
@@ -357,6 +356,9 @@
                 "make -j $FLATPAK_BUILDER_N_JOBS",
                 "make install"
             ],
+            "cleanup": [
+                "/bin"
+            ],
             "sources": [
                 {
                     "type": "archive",
@@ -366,7 +368,7 @@
             ]
         },
         {
-            "name": "krita1x",
+            "name": "krita",
             "buildsystem": "cmake-ninja",
             "builddir": true,
             "config-opts": [
