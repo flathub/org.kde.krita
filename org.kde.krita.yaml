@@ -1,0 +1,279 @@
+app-id: org.kde.krita
+branch: stable
+runtime: org.kde.Platform
+runtime-version: 5.10
+sdk: org.kde.Sdk
+command: krita
+rename-icon: calligrakrita
+finish-args:
+  - --share=ipc
+  - --socket=x11
+  - --share=network
+  - --device=dri
+  - --socket=pulseaudio
+  - --filesystem=host
+  - --env=PYTHONPATH=/app/lib/python3/dist-packages
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /lib/cmake
+  - /share/aclocal
+  - /share/pkgconfig
+  - /share/info
+  - /share/man
+  - /cmake
+  - '*.a'
+  - '*.la'
+  - '*.cmake'
+modules:
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=/app --with-libraries=system
+      - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
+    sources:
+      - type: archive
+        url: https://dl.bintray.com/boostorg/release/1.63.0/source/boost_1_63_0.tar.bz2
+        sha256: beae2529f759f6b3bf3f4969a19c2e9d6f0c503edcb2de4a61d1428519fcb3b0
+
+  - name: eigen
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+    cleanup:
+      - /share
+    sources:
+      - type: archive
+        url: https://bitbucket.org/eigen/eigen/get/3.3.4.tar.bz2
+        sha256: dd254beb0bafc695d0f62ae1a222ff85b52dbaa3a16f76e781dce22d0d20a4a6
+
+  - name: exiv2
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: http://www.exiv2.org/builds/exiv2-0.26-trunk.tar.gz
+        sha256: c75e3c4a0811bf700d92c82319373b7a825a2331c12b8b37d41eb58e4f18eafb
+  
+  - name: ilmbase
+    config-opts:
+      - --disable-static
+    sources:
+      - type: archive
+        url: https://download.savannah.nongnu.org/releases/openexr/ilmbase-2.2.1.tar.gz
+        sha256: cac206e63be68136ef556c2b555df659f45098c159ce24804e9d5e9e0286609e
+
+  - name: openexr
+    config-opts:
+      - --disable-static
+    cleanup:
+      - /bin
+      - /share/doc
+    sources:
+      - type: archive
+        url: https://download.savannah.nongnu.org/releases/openexr/openexr-2.2.1.tar.gz
+        sha256: 8f9a5af6131583404261931d9a5c83de0a425cb4b8b25ddab2b169fbf113aecd
+
+  - name: libraw
+    config-opts:
+      - --disable-static
+    cleanup:
+      - /bin
+      - /share/doc
+    sources:
+      - type: archive
+        url: https://www.libraw.org/data/LibRaw-0.18.11.tar.gz
+        sha256: 7cf724a40a0d8915869498f51062a952167e4f5bae2b6920542c9e0e079a471d
+
+  - name: fftw
+    config-opts:
+      - --disable-static
+      - --enable-shared
+      - --disable-doc
+      - --enable-threads
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: http://www.fftw.org/fftw-3.3.7.tar.gz
+        sha256: 3b609b7feba5230e8f6dd8d245ddbefac324c5a6ae4186947670d9ac2cd25573
+
+  - name: opencolorio
+    buildsystem: cmake # ninja build broken (upstream issues #467)
+    builddir: true
+    build-options:
+      arch:
+        arm:
+          config-opts:
+          - -DOCIO_USE_SSE=OFF
+        aarch64:
+          config-opts:
+          - -DOCIO_USE_SSE=OFF
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DOCIO_BUILD_STATIC=OFF
+      - -DCMAKE_CXX_FLAGS='-Wno-error=deprecated-declarations -Wno-error=unused-function'
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://github.com/imageworks/OpenColorIO/archive/v1.1.0.tar.gz
+        sha256: 228589879e1f11e455a555304007748a8904057088319ebbf172d9384b93c079
+
+  - name: vc
+    skip-arches:
+      - aarch64
+      - arm
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+    cleanup:
+      - '*'
+    sources:
+      - type: archive
+        url: https://github.com/VcDevel/Vc/releases/download/1.3.3/Vc-1.3.3.tar.gz
+        sha256: 08c629d2e14bfb8e4f1a10f09535e4a3c755292503c971ab46637d2986bdb4fe
+      - type: shell
+        commands:
+          - sed -i 's/x86|/x86|i686|/' CMakeLists.txt
+
+  - name: poppler-data
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+    sources:
+      - type: archive
+        url: https://poppler.freedesktop.org/poppler-data-0.4.9.tar.gz
+        sha256: 1f9c7e7de9ecd0db6ab287349e31bf815ca108a5a175cf906a90163bdbe32012
+
+  - name: poppler
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DBUILD_GTK_TESTS=OFF
+      - -DBUILD_QT5_TESTS=OFF
+      - -DBUILD_CPP_TESTS=OFF
+      - -DENABLE_UTILS=OFF
+      - -DENABLE_CPP=OFF
+      - -DENABLE_GLIB=OFF
+      - -DENABLE_LIBOPENJPEG=none
+    sources:
+      - type: archive
+        url: https://poppler.freedesktop.org/poppler-0.64.0.tar.xz
+        sha256: b21df92ca99f78067785cf2dc8e06deb04726b62389c0ee1f5d8b103c77f64b1
+
+  - name: gsl
+    config-opts:
+      - --disable-static
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://ftpmirror.gnu.org/gnu/gsl/gsl-2.4.tar.gz
+        sha256: 4d46d07b946e7b31c19bbf33dda6204d7bedc2f5462a1bae1d4013426cd1ce9b
+
+  - name: gmic-qt
+    buildsystem: cmake-ninja
+    builddir: true
+    no-make-install: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DGMIC_QT_HOST=krita
+      - -DGMIC_PATH=./gmic/src
+    post-install:
+      - install -D -t /app/bin gmic_krita_qt
+    sources:
+      - type: archive
+        url: https://github.com/c-koi/gmic-qt/archive/v.2.2.3.tar.gz
+        sha256: 72a6ad1f1acb15f4d9417c9cd16615160d04f764aaa2b0206fa6c80587fb91af
+      - type: archive
+        dest: gmic
+        url: https://gmic.eu/files/source/gmic_2.2.3.tar.gz
+        sha256: 366e348ebfa85354e99b19eecf2e6b10d445901132eb73c84b18fb23af23f0e8
+
+  - name: x264
+    config-opts:
+      - --disable-cli
+      - --enable-static
+    cleanup:
+      - '*'
+    sources:
+      - type: archive
+        url: https://download.videolan.org/x264/snapshots/x264-snapshot-20171223-2245-stable.tar.bz2
+        sha256: ee4ba2c3d1caf786ad66d3fa86bdc368a8f827318788a62a9c8444b2c35816bf
+
+  - name: ffmpeg
+    config-opts:
+      - --enable-gpl
+      - --enable-static
+      - --disable-shared
+      - --disable-doc
+      - --disable-ffplay
+      - --disable-ffprobe
+      - --enable-libopus
+      - --enable-libvpx
+      - --enable-libx264
+    cleanup:
+      - /share/ffmpeg/examples
+    sources:
+      - type: archive
+        url: https://ffmpeg.org/releases/ffmpeg-4.0.tar.xz
+        sha256: ed945daf40b124e77a685893cc025d086f638bc703183460aff49508edb3a43f
+
+  - name: sip
+    buildsystem: simple
+    build-commands:
+      - python3 configure.py --bindir=/app/bin --destdir=/app/lib/python3/dist-packages --incdir=/app/include/python3
+        --sipdir=/app/share/sip --stubsdir=/app/lib/python3/dist-packages
+      - make -j $FLATPAK_BUILDER_N_JOBS
+      - make install
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: http://http.debian.net/debian/pool/main/s/sip4/sip4_4.19.8+dfsg.orig.tar.gz
+        sha256: 4e94369bc0f695854e645771b929fdd3e6965f25e07a05ffeeec502804257f79
+        
+  - name: pyqt
+    buildsystem: simple
+    build-commands:
+      - python3 configure.py --confirm-license --sip-incdir=/app/include/python3 --bindir=/app/bin
+        --destdir=/app/lib/python3/dist-packages --designer-plugindir=/app/lib/plugins/designer
+        --qml-plugindir=/app/lib/plugins/PyQt5 --sipdir=/app/share/sip --stubsdir=/app/lib/python3/dist-packages/PyQt5
+      - make -j $FLATPAK_BUILDER_N_JOBS
+      - make install
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: http://http.debian.net/debian/pool/main/p/pyqt5/pyqt5_5.10.1+dfsg.orig.tar.gz
+        sha256: dd248afb9906841e35c069be71374da64c87c8ad1b16dd9ff6a973843d1a52e8
+
+  - name: krita
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_INSTALL_LIBDIR=lib
+    build-options:
+      env:
+        PYTHONPATH: /app/lib/python3/dist-packages
+    sources:
+      - type: git # 4.0 stable branch with flatpak specific fix
+        url: git://anongit.kde.org/krita.git
+        commit: d4e8cc1dfe71eecb5607fb9cc56603b31d33209b
+      - type: archive # krita.git doesn't include translations
+        dest: krita-tar
+        url: https://download.kde.org/stable/krita/4.0.3/krita-4.0.3.tar.gz
+        sha256: f9ead78ff4b184af49aea59385b0cfa1238ebf7fd527bf2f408c59fc5b12b67e
+      - type: shell
+        commands:
+        - mv krita-tar/po .
