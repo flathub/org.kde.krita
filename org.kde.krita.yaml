@@ -57,7 +57,7 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: http://www.exiv2.org/builds/exiv2-0.26-trunk.tar.gz
+        url: https://src.fedoraproject.org/repo/pkgs/rpms/exiv2/exiv2-0.26-trunk.tar.gz/sha512/0caab1aeaab171201c1d19d21b8484a91d076e78c93c4a5fbb7e21510cc0eaff81b04f45434207d857ba0de5bd6e368743a1cc571d78a27b44e157f6b031f481/exiv2-0.26-trunk.tar.gz
         sha256: c75e3c4a0811bf700d92c82319373b7a825a2331c12b8b37d41eb58e4f18eafb
   
   - name: ilmbase
