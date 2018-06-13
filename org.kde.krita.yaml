@@ -167,8 +167,8 @@ modules:
       - -DENABLE_LIBOPENJPEG=none
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-0.64.0.tar.xz
-        sha256: b21df92ca99f78067785cf2dc8e06deb04726b62389c0ee1f5d8b103c77f64b1
+        url: https://poppler.freedesktop.org/poppler-0.65.0.tar.xz
+        sha256: 89c8cf73f83efda78c5a9bd37c28f4593ad0e8a51556dbe39ed81e1ae2dd8f07
 
   - name: gsl
     config-opts:
@@ -196,15 +196,13 @@ modules:
         sha256: 72a6ad1f1acb15f4d9417c9cd16615160d04f764aaa2b0206fa6c80587fb91af
       - type: archive
         dest: gmic
-        url: https://gmic.eu/files/source/gmic_2.2.3.tar.gz
+        url: https://github.com/eszlari/flatpak-sources/releases/download/v1/gmic_2.2.3.tar.gz
         sha256: 366e348ebfa85354e99b19eecf2e6b10d445901132eb73c84b18fb23af23f0e8
 
   - name: x264
     config-opts:
       - --disable-cli
-      - --enable-static
-    cleanup:
-      - '*'
+      - --enable-shared
     sources:
       - type: archive
         url: https://download.videolan.org/x264/snapshots/x264-snapshot-20171223-2245-stable.tar.bz2
@@ -213,14 +211,16 @@ modules:
   - name: ffmpeg
     config-opts:
       - --enable-gpl
-      - --enable-static
-      - --disable-shared
+      - --disable-static
+      - --enable-shared
       - --disable-doc
       - --disable-ffplay
       - --disable-ffprobe
       - --enable-libopus
       - --enable-libvpx
       - --enable-libx264
+    post-install:
+      - chrpath -d /app/bin/ffmpeg
     cleanup:
       - /share/ffmpeg/examples
     sources:
@@ -231,8 +231,12 @@ modules:
   - name: sip
     buildsystem: simple
     build-commands:
-      - python3 configure.py --bindir=/app/bin --destdir=/app/lib/python3/dist-packages --incdir=/app/include/python3
-        --sipdir=/app/share/sip --stubsdir=/app/lib/python3/dist-packages
+      - python3 configure.py
+        --bindir=/app/bin
+        --destdir=/app/lib/python3/dist-packages
+        --incdir=/app/include/python3
+        --sipdir=/app/share/sip
+        --stubsdir=/app/lib/python3/dist-packages
       - make -j $FLATPAK_BUILDER_N_JOBS
       - make install
     cleanup:
@@ -245,9 +249,15 @@ modules:
   - name: pyqt
     buildsystem: simple
     build-commands:
-      - python3 configure.py --confirm-license --sip-incdir=/app/include/python3 --bindir=/app/bin
-        --destdir=/app/lib/python3/dist-packages --designer-plugindir=/app/lib/plugins/designer
-        --qml-plugindir=/app/lib/plugins/PyQt5 --sipdir=/app/share/sip --stubsdir=/app/lib/python3/dist-packages/PyQt5
+      - python3 configure.py
+        --confirm-license
+        --sip-incdir=/app/include/python3
+        --bindir=/app/bin
+        --destdir=/app/lib/python3/dist-packages
+        --designer-plugindir=/app/lib/plugins/designer
+        --qml-plugindir=/app/lib/plugins/PyQt5
+        --sipdir=/app/share/sip
+        --stubsdir=/app/lib/python3/dist-packages/PyQt5
       - make -j $FLATPAK_BUILDER_N_JOBS
       - make install
     cleanup:
@@ -261,19 +271,12 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DCMAKE_INSTALL_LIBDIR=lib
     build-options:
       env:
         PYTHONPATH: /app/lib/python3/dist-packages
     sources:
-      - type: git # 4.0 stable branch with flatpak specific fix
-        url: git://anongit.kde.org/krita.git
-        commit: d4e8cc1dfe71eecb5607fb9cc56603b31d33209b
-      - type: archive # krita.git doesn't include translations
-        dest: krita-tar
-        url: https://download.kde.org/stable/krita/4.0.3/krita-4.0.3.tar.gz
-        sha256: f9ead78ff4b184af49aea59385b0cfa1238ebf7fd527bf2f408c59fc5b12b67e
-      - type: shell
-        commands:
-        - mv krita-tar/po .
+      - type: archive
+        url: https://github.com/eszlari/flatpak-sources/releases/download/v1/krita-4.0.4.tar.gz
+        sha256: f3d3f27873381897dcbf84b68497812cdbe5ae1bb49eb3826be13cd568577a7c
