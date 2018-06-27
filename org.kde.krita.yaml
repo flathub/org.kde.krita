@@ -87,8 +87,8 @@ modules:
       - /share/doc
     sources:
       - type: archive
-        url: https://www.libraw.org/data/LibRaw-0.18.11.tar.gz
-        sha256: 7cf724a40a0d8915869498f51062a952167e4f5bae2b6920542c9e0e079a471d
+        url: https://www.libraw.org/data/LibRaw-0.18.12.tar.gz
+        sha256: 57754d75a857e16ba1c2a429e4b5b4d79160a59eadaec715351fc9c8448653d4
 
   - name: fftw
     config-opts:
@@ -167,8 +167,8 @@ modules:
       - -DENABLE_LIBOPENJPEG=none
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-0.65.0.tar.xz
-        sha256: 89c8cf73f83efda78c5a9bd37c28f4593ad0e8a51556dbe39ed81e1ae2dd8f07
+        url: https://poppler.freedesktop.org/poppler-0.66.0.tar.xz
+        sha256: 2c096431adfb74bc2f53be466889b7646e1b599f28fa036094f3f7235cc9eae7
 
   - name: gsl
     config-opts:
@@ -192,12 +192,12 @@ modules:
       - install -D -t /app/bin gmic_krita_qt
     sources:
       - type: archive
-        url: https://github.com/c-koi/gmic-qt/archive/v.2.2.3.tar.gz
-        sha256: 72a6ad1f1acb15f4d9417c9cd16615160d04f764aaa2b0206fa6c80587fb91af
-      - type: archive
         dest: gmic
-        url: https://github.com/eszlari/flatpak-sources/releases/download/v1/gmic_2.2.3.tar.gz
-        sha256: 366e348ebfa85354e99b19eecf2e6b10d445901132eb73c84b18fb23af23f0e8
+        url: https://gmic.eu/files/source/gmic_2.3.1.tar.gz
+        sha256: 295c39bccdadc3d308d3f6a6e9fa55bbc648e180af5a0286da16320811e45328
+      - type: archive
+        url: https://github.com/c-koi/gmic-qt/archive/v.2.3.1.tar.gz
+        sha256: da0e2182ab2ed9abf2c2471e209b10017d6cf289730761c18d2065cc2f74b96d
 
   - name: x264
     config-opts:
@@ -225,8 +225,8 @@ modules:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://ffmpeg.org/releases/ffmpeg-4.0.tar.xz
-        sha256: ed945daf40b124e77a685893cc025d086f638bc703183460aff49508edb3a43f
+        url: https://ffmpeg.org/releases/ffmpeg-4.0.1.tar.xz
+        sha256: 605f5c01c60db35d3b617a79cabb2c7032412be243554602eeed1b628125c0ee
 
   - name: sip
     buildsystem: simple
@@ -267,7 +267,7 @@ modules:
         url: http://http.debian.net/debian/pool/main/p/pyqt5/pyqt5_5.10.1+dfsg.orig.tar.gz
         sha256: dd248afb9906841e35c069be71374da64c87c8ad1b16dd9ff6a973843d1a52e8
 
-  - name: krita
+  - name: krita2x
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
@@ -278,5 +278,5 @@ modules:
         PYTHONPATH: /app/lib/python3/dist-packages
     sources:
       - type: archive
-        url: https://github.com/eszlari/flatpak-sources/releases/download/v1/krita-4.0.4.tar.gz
-        sha256: f3d3f27873381897dcbf84b68497812cdbe5ae1bb49eb3826be13cd568577a7c
+        url: https://download.kde.org/stable/krita/4.1.0/krita-4.1.0.tar.gz
+        sha256: 78792df8165b986b806dcf9960a2679f683f2263e06f3ad5a24b0f78d8f27ed5
