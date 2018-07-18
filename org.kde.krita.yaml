@@ -87,8 +87,8 @@ modules:
       - /share/doc
     sources:
       - type: archive
-        url: https://www.libraw.org/data/LibRaw-0.18.12.tar.gz
-        sha256: 57754d75a857e16ba1c2a429e4b5b4d79160a59eadaec715351fc9c8448653d4
+        url: https://www.libraw.org/data/LibRaw-0.18.13.tar.gz
+        sha256: cb1f9d0d1fabc8967d501d95c05d2b53d97a2b917345c66553b1abbea06757ca
 
   - name: fftw
     config-opts:
@@ -193,11 +193,11 @@ modules:
     sources:
       - type: archive
         dest: gmic
-        url: https://gmic.eu/files/source/gmic_2.3.1.tar.gz
-        sha256: 295c39bccdadc3d308d3f6a6e9fa55bbc648e180af5a0286da16320811e45328
+        url: https://gmic.eu/files/source/gmic_2.3.3.tar.gz
+        sha256: 46417d48d9dd87a155ba979667834a7d6899652f097cc25652e0680ee0b13c6a
       - type: archive
-        url: https://github.com/c-koi/gmic-qt/archive/v.2.3.1.tar.gz
-        sha256: da0e2182ab2ed9abf2c2471e209b10017d6cf289730761c18d2065cc2f74b96d
+        url: https://github.com/c-koi/gmic-qt/archive/v.2.3.3.tar.gz
+        sha256: dd711e7f62d50bf124a58e0c3e593eb36914b005244542123cbde589b13a5e31
 
   - name: x264
     config-opts:
@@ -267,7 +267,7 @@ modules:
         url: http://http.debian.net/debian/pool/main/p/pyqt5/pyqt5_5.10.1+dfsg.orig.tar.gz
         sha256: dd248afb9906841e35c069be71374da64c87c8ad1b16dd9ff6a973843d1a52e8
 
-  - name: krita2x
+  - name: krita
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
@@ -278,5 +278,5 @@ modules:
         PYTHONPATH: /app/lib/python3/dist-packages
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/4.1.0/krita-4.1.0.tar.gz
-        sha256: 78792df8165b986b806dcf9960a2679f683f2263e06f3ad5a24b0f78d8f27ed5
+        url: https://download.kde.org/stable/krita/4.1.1/krita-4.1.1.tar.gz
+        sha256: 5cab10343f97a9944a1ab2e137cd0ade6029ce157118009660af286eb75ce9e3
