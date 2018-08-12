@@ -1,7 +1,7 @@
 app-id: org.kde.krita
 branch: stable
 runtime: org.kde.Platform
-runtime-version: 5.10
+runtime-version: '5.11'
 sdk: org.kde.Sdk
 command: krita
 rename-icon: calligrakrita
@@ -57,7 +57,7 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://src.fedoraproject.org/repo/pkgs/rpms/exiv2/exiv2-0.26-trunk.tar.gz/sha512/0caab1aeaab171201c1d19d21b8484a91d076e78c93c4a5fbb7e21510cc0eaff81b04f45434207d857ba0de5bd6e368743a1cc571d78a27b44e157f6b031f481/exiv2-0.26-trunk.tar.gz
+        url: http://www.exiv2.org/builds/exiv2-0.26-trunk.tar.gz
         sha256: c75e3c4a0811bf700d92c82319373b7a825a2331c12b8b37d41eb58e4f18eafb
   
   - name: ilmbase
@@ -167,8 +167,8 @@ modules:
       - -DENABLE_LIBOPENJPEG=none
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-0.66.0.tar.xz
-        sha256: 2c096431adfb74bc2f53be466889b7646e1b599f28fa036094f3f7235cc9eae7
+        url: https://poppler.freedesktop.org/poppler-0.67.0.tar.xz
+        sha256: a34a4f1a0f5b610c584c65824e92e3ba3e08a89d8ab4622aee11b8ceea5366f9
 
   - name: gsl
     config-opts:
@@ -237,14 +237,15 @@ modules:
         --incdir=/app/include/python3
         --sipdir=/app/share/sip
         --stubsdir=/app/lib/python3/dist-packages
+        --sip-module=PyQt5.sip
       - make -j $FLATPAK_BUILDER_N_JOBS
       - make install
     cleanup:
       - /bin
     sources:
       - type: archive
-        url: http://http.debian.net/debian/pool/main/s/sip4/sip4_4.19.8+dfsg.orig.tar.gz
-        sha256: 4e94369bc0f695854e645771b929fdd3e6965f25e07a05ffeeec502804257f79
+        url: https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.12/sip-4.19.12.tar.gz
+        sha256: 24617fc31b983df075500ecac0e99d2fb48bf63ba82d4a17518659e571923822
         
   - name: pyqt
     buildsystem: simple
@@ -264,15 +265,16 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: http://http.debian.net/debian/pool/main/p/pyqt5/pyqt5_5.10.1+dfsg.orig.tar.gz
-        sha256: dd248afb9906841e35c069be71374da64c87c8ad1b16dd9ff6a973843d1a52e8
+        url: https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.2/PyQt5_gpl-5.11.2.tar.gz
+        sha256: 7caa581155c3433716b7e6aba71fe1378cd7d92f4155c266d60e5cffb64e9603
+      - type: patch
+        path: pyqt-5.11-sip-fix.patch
 
   - name: krita
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DCMAKE_INSTALL_LIBDIR=lib
     build-options:
       env:
         PYTHONPATH: /app/lib/python3/dist-packages
@@ -280,3 +282,5 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/krita/4.1.1/krita-4.1.1.tar.gz
         sha256: 5cab10343f97a9944a1ab2e137cd0ade6029ce157118009660af286eb75ce9e3
+      - type: patch
+        path: krita-4.1.1-pyqt-fix.patch
