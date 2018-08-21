@@ -33,20 +33,18 @@ modules:
       - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-        url: https://dl.bintray.com/boostorg/release/1.63.0/source/boost_1_63_0.tar.bz2
-        sha256: beae2529f759f6b3bf3f4969a19c2e9d6f0c503edcb2de4a61d1428519fcb3b0
+        url: https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.tar.bz2
+        sha256: 7f6130bc3cf65f56a618888ce9d5ea704fa10b462be126ad053e80e553d6d8b7
 
   - name: eigen
     buildsystem: cmake-ninja
     builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
     cleanup:
-      - /share
+      - '*'
     sources:
       - type: archive
-        url: https://bitbucket.org/eigen/eigen/get/3.3.4.tar.bz2
-        sha256: dd254beb0bafc695d0f62ae1a222ff85b52dbaa3a16f76e781dce22d0d20a4a6
+        url: https://bitbucket.org/eigen/eigen/get/3.3.5.tar.bz2
+        sha256: 7352bff3ea299e4c7d7fbe31c504f8eb9149d7e685dec5a12fbaa26379f603e2
 
   - name: exiv2
     buildsystem: cmake-ninja
@@ -100,8 +98,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: http://www.fftw.org/fftw-3.3.7.tar.gz
-        sha256: 3b609b7feba5230e8f6dd8d245ddbefac324c5a6ae4186947670d9ac2cd25573
+        url: http://www.fftw.org/fftw-3.3.8.tar.gz
+        sha256: 6113262f6e92c5bd474f2875fa1b01054c4ad5040f6b0da7c03c98821d9ae303
 
   - name: opencolorio
     buildsystem: cmake # ninja build broken (upstream issues #467)
@@ -167,8 +165,8 @@ modules:
       - -DENABLE_LIBOPENJPEG=none
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-0.67.0.tar.xz
-        sha256: a34a4f1a0f5b610c584c65824e92e3ba3e08a89d8ab4622aee11b8ceea5366f9
+        url: https://poppler.freedesktop.org/poppler-0.68.0.tar.xz
+        sha256: f90d04f0fb8df6923ecb0f106ae866cf9f8761bb537ddac64dfb5322763d0e58
 
   - name: gsl
     config-opts:
@@ -177,8 +175,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://ftpmirror.gnu.org/gnu/gsl/gsl-2.4.tar.gz
-        sha256: 4d46d07b946e7b31c19bbf33dda6204d7bedc2f5462a1bae1d4013426cd1ce9b
+        url: https://ftpmirror.gnu.org/gnu/gsl/gsl-2.5.tar.gz
+        sha256: 0460ad7c2542caaddc6729762952d345374784100223995eb14d614861f2258d
 
   - name: gmic-qt
     buildsystem: cmake-ninja
@@ -193,8 +191,8 @@ modules:
     sources:
       - type: archive
         dest: gmic
-        url: https://gmic.eu/files/source/gmic_2.3.3.tar.gz
-        sha256: 46417d48d9dd87a155ba979667834a7d6899652f097cc25652e0680ee0b13c6a
+        url: https://gmic.eu/files/source/gmic_2.3.4.tar.gz
+        sha256: fdcb16ec21673e241de18fb9caece437e51fa1fee34c8613d195ba66d23b51f9
       - type: archive
         url: https://github.com/c-koi/gmic-qt/archive/v.2.3.3.tar.gz
         sha256: dd711e7f62d50bf124a58e0c3e593eb36914b005244542123cbde589b13a5e31
@@ -225,8 +223,8 @@ modules:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://ffmpeg.org/releases/ffmpeg-4.0.1.tar.xz
-        sha256: 605f5c01c60db35d3b617a79cabb2c7032412be243554602eeed1b628125c0ee
+        url: https://ffmpeg.org/releases/ffmpeg-4.0.2.tar.xz
+        sha256: a95c0cc9eb990e94031d2183f2e6e444cc61c99f6f182d1575c433d62afb2f97
 
   - name: sip
     buildsystem: simple
