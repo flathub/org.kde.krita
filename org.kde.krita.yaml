@@ -278,7 +278,5 @@ modules:
         PYTHONPATH: /app/lib/python3/dist-packages
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/4.1.1/krita-4.1.1.tar.gz
-        sha256: 5cab10343f97a9944a1ab2e137cd0ade6029ce157118009660af286eb75ce9e3
-      - type: patch
-        path: krita-4.1.1-pyqt-fix.patch
+        url: https://download.kde.org/stable/krita/4.1.2/krita-4.1.2.tar.gz
+        sha256: 14d217c7f2fd3193cbf7f9c5a56739768a05986fd821fe0c5afdf1675f69a047
