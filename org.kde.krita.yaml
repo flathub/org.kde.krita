@@ -12,6 +12,7 @@ finish-args:
   - --device=dri
   - --socket=pulseaudio
   - --filesystem=host
+  - --filesystem=xdg-config/kdeglobals:ro
   - --env=PYTHONPATH=/app/lib/python3/dist-packages
 cleanup:
   - /include
