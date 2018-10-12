@@ -27,6 +27,46 @@ cleanup:
   - '*.la'
   - '*.cmake'
 modules:
+  - name: sip
+    buildsystem: simple
+    build-commands:
+      - python3 configure.py
+        --bindir=/app/bin
+        --destdir=/app/lib/python3/dist-packages
+        --incdir=/app/include/python3
+        --sipdir=/app/share/sip
+        --stubsdir=/app/lib/python3/dist-packages
+        --sip-module=PyQt5.sip
+      - make -j $FLATPAK_BUILDER_N_JOBS
+      - make install
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.tar.gz
+        sha256: e353a7056599bf5fbd5d3ff9842a6ab2ea3cf4e0304a0f925ec5862907c0d15e
+
+  - name: pyqt
+    buildsystem: simple
+    build-commands:
+      - python3 configure.py
+        --confirm-license
+        --sip-incdir=/app/include/python3
+        --bindir=/app/bin
+        --destdir=/app/lib/python3/dist-packages
+        --designer-plugindir=/app/lib/plugins/designer
+        --qml-plugindir=/app/lib/plugins/PyQt5
+        --sipdir=/app/share/sip
+        --stubsdir=/app/lib/python3/dist-packages/PyQt5
+      - make -j $FLATPAK_BUILDER_N_JOBS
+      - make install
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.tar.gz
+        sha256: c9b57d15601d436faf35dacf8e0acefa220194829a653e771e80b189b3261073
+
   - name: boost
     buildsystem: simple
     build-commands:
@@ -64,8 +104,8 @@ modules:
       - --disable-static
     sources:
       - type: archive
-        url: https://download.savannah.nongnu.org/releases/openexr/ilmbase-2.2.1.tar.gz
-        sha256: cac206e63be68136ef556c2b555df659f45098c159ce24804e9d5e9e0286609e
+        url: https://github.com/openexr/openexr/releases/download/v2.3.0/ilmbase-2.3.0.tar.gz
+        sha256: 456978d1a978a5f823c7c675f3f36b0ae14dba36638aeaa3c4b0e784f12a3862
 
   - name: openexr
     config-opts:
@@ -75,8 +115,8 @@ modules:
       - /share/doc
     sources:
       - type: archive
-        url: https://download.savannah.nongnu.org/releases/openexr/openexr-2.2.1.tar.gz
-        sha256: 8f9a5af6131583404261931d9a5c83de0a425cb4b8b25ddab2b169fbf113aecd
+        url: https://github.com/openexr/openexr/releases/download/v2.3.0/openexr-2.3.0.tar.gz
+        sha256: fd6cb3a87f8c1a233be17b94c74799e6241d50fc5efd4df75c7a4b9cf4e25ea6
 
   - name: libraw
     config-opts:
@@ -86,8 +126,8 @@ modules:
       - /share/doc
     sources:
       - type: archive
-        url: https://www.libraw.org/data/LibRaw-0.18.13.tar.gz
-        sha256: cb1f9d0d1fabc8967d501d95c05d2b53d97a2b917345c66553b1abbea06757ca
+        url: https://www.libraw.org/data/LibRaw-0.19.0.tar.gz
+        sha256: e83f51e83b19f9ba6b8bd144475fc12edf2d7b3b930d8d280bdebd8a8f3ed259
 
   - name: fftw
     config-opts:
@@ -166,8 +206,8 @@ modules:
       - -DENABLE_LIBOPENJPEG=none
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-0.68.0.tar.xz
-        sha256: f90d04f0fb8df6923ecb0f106ae866cf9f8761bb537ddac64dfb5322763d0e58
+        url: https://poppler.freedesktop.org/poppler-0.69.0.tar.xz
+        sha256: 637ff943f805f304ff1da77ba2e7f1cbd675f474941fd8ae1e0fc01a5b45a3f9
 
   - name: gsl
     config-opts:
@@ -182,21 +222,18 @@ modules:
   - name: gmic-qt
     buildsystem: cmake-ninja
     builddir: true
+    subdir: gmic-qt
     no-make-install: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DGMIC_QT_HOST=krita
-      - -DGMIC_PATH=./gmic/src
+      - -DGMIC_PATH=../src
     post-install:
       - install -D -t /app/bin gmic_krita_qt
     sources:
       - type: archive
-        dest: gmic
-        url: https://gmic.eu/files/source/gmic_2.3.4.tar.gz
-        sha256: fdcb16ec21673e241de18fb9caece437e51fa1fee34c8613d195ba66d23b51f9
-      - type: archive
-        url: https://github.com/c-koi/gmic-qt/archive/v.2.3.3.tar.gz
-        sha256: dd711e7f62d50bf124a58e0c3e593eb36914b005244542123cbde589b13a5e31
+        url: https://gmic.eu/files/source/gmic_2.4.0.tar.gz
+        sha256: ffc649c960f2dc52cea77039802a8c2b71f997ba300270e08fc2117e238614c3
 
   - name: x264
     config-opts:
@@ -227,48 +264,6 @@ modules:
         url: https://ffmpeg.org/releases/ffmpeg-4.0.2.tar.xz
         sha256: a95c0cc9eb990e94031d2183f2e6e444cc61c99f6f182d1575c433d62afb2f97
 
-  - name: sip
-    buildsystem: simple
-    build-commands:
-      - python3 configure.py
-        --bindir=/app/bin
-        --destdir=/app/lib/python3/dist-packages
-        --incdir=/app/include/python3
-        --sipdir=/app/share/sip
-        --stubsdir=/app/lib/python3/dist-packages
-        --sip-module=PyQt5.sip
-      - make -j $FLATPAK_BUILDER_N_JOBS
-      - make install
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.12/sip-4.19.12.tar.gz
-        sha256: 24617fc31b983df075500ecac0e99d2fb48bf63ba82d4a17518659e571923822
-        
-  - name: pyqt
-    buildsystem: simple
-    build-commands:
-      - python3 configure.py
-        --confirm-license
-        --sip-incdir=/app/include/python3
-        --bindir=/app/bin
-        --destdir=/app/lib/python3/dist-packages
-        --designer-plugindir=/app/lib/plugins/designer
-        --qml-plugindir=/app/lib/plugins/PyQt5
-        --sipdir=/app/share/sip
-        --stubsdir=/app/lib/python3/dist-packages/PyQt5
-      - make -j $FLATPAK_BUILDER_N_JOBS
-      - make install
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.2/PyQt5_gpl-5.11.2.tar.gz
-        sha256: 7caa581155c3433716b7e6aba71fe1378cd7d92f4155c266d60e5cffb64e9603
-      - type: patch
-        path: pyqt-5.11-sip-fix.patch
-
   - name: krita
     buildsystem: cmake-ninja
     builddir: true
@@ -279,5 +274,5 @@ modules:
         PYTHONPATH: /app/lib/python3/dist-packages
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/4.1.3/krita-4.1.3.tar.gz
-        sha256: bdbd867423f4823f5271fc9ce34ee05b653d4f95414d65fb055f94a27b33a434
+        url: https://download.kde.org/stable/krita/4.1.5/krita-4.1.5.tar.gz
+        sha256: 20603393afcb093a4c5fdf4a799d556600195a7b1e3db80a7003dce622bac8af
