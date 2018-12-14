@@ -206,8 +206,8 @@ modules:
       - -DENABLE_LIBOPENJPEG=none
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-0.69.0.tar.xz
-        sha256: 637ff943f805f304ff1da77ba2e7f1cbd675f474941fd8ae1e0fc01a5b45a3f9
+        url: https://poppler.freedesktop.org/poppler-0.72.0.tar.xz
+        sha256: c1747eb8f26e9e753c4001ed951db2896edc1021b6d0f547a0bd2a27c30ada51
 
   - name: gsl
     config-opts:
@@ -232,8 +232,8 @@ modules:
       - install -D -t /app/bin gmic_krita_qt
     sources:
       - type: archive
-        url: https://gmic.eu/files/source/gmic_2.4.0.tar.gz
-        sha256: ffc649c960f2dc52cea77039802a8c2b71f997ba300270e08fc2117e238614c3
+        url: https://gmic.eu/files/source/gmic_2.4.2.tar.gz
+        sha256: 0fae452232501ed7e50bbe2eaa96900a5b6daa7fb1d4366d207311bdc27d0762
 
   - name: x264
     config-opts:
@@ -255,14 +255,12 @@ modules:
       - --enable-libopus
       - --enable-libvpx
       - --enable-libx264
-    post-install:
-      - chrpath -d /app/bin/ffmpeg
     cleanup:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://ffmpeg.org/releases/ffmpeg-4.0.2.tar.xz
-        sha256: a95c0cc9eb990e94031d2183f2e6e444cc61c99f6f182d1575c433d62afb2f97
+        url: https://ffmpeg.org/releases/ffmpeg-4.0.3.tar.xz
+        sha256: 253c37e3f1d3626a2566e496554de9a4c29050753660835909a466d66b12e2ed
 
   - name: krita
     buildsystem: cmake-ninja
@@ -274,5 +272,8 @@ modules:
         PYTHONPATH: /app/lib/python3/dist-packages
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/4.1.5/krita-4.1.5.tar.gz
-        sha256: 20603393afcb093a4c5fdf4a799d556600195a7b1e3db80a7003dce622bac8af
+        url: https://download.kde.org/stable/krita/4.1.7/krita-4.1.7.tar.gz
+        sha256: c16ec0dd23cdf20e9dd4d34ebabcf5bdb06a825bd6fe2c7196d6777279bdabd0
+      - type: shell
+        commands:
+          - sed -i 's/2018-14-12/2018-12-14/' krita/org.kde.krita.appdata.xml
