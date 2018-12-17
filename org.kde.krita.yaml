@@ -274,6 +274,8 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/krita/4.1.7/krita-4.1.7.tar.gz
         sha256: c16ec0dd23cdf20e9dd4d34ebabcf5bdb06a825bd6fe2c7196d6777279bdabd0
+      - type: patch
+        path: patches/krita-qt5.11.3.patch
       - type: shell
         commands:
           - sed -i 's/2018-14-12/2018-12-14/' krita/org.kde.krita.appdata.xml

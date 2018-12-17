@@ -1,0 +1,42 @@
+From 6b7ab506305126c4f594874555010b0781f467a4 Mon Sep 17 00:00:00 2001
+From: Boudewijn Rempt <boud@valdyas.org>
+Date: Sun, 16 Dec 2018 13:39:20 +0100
+Subject: Qt-5.11.3 also has bug QTBUG-72488
+
+CCBUG:401988,401988,402188,402169,402155
+---
+ libs/ui/input/kis_input_manager.cpp | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/libs/ui/input/kis_input_manager.cpp b/libs/ui/input/kis_input_manager.cpp
+index aabd3f2..d901892 100644
+--- a/libs/ui/input/kis_input_manager.cpp
++++ b/libs/ui/input/kis_input_manager.cpp
+@@ -218,7 +218,7 @@ bool KisInputManager::compressMoveEventCommon(Event *event)
+      * Compress the events if the tool doesn't need high resolution input
+      */
+ // See https://bugreports.qt.io/browse/QTBUG-72488    
+-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)
++#if QT_VERSION < QT_VERSION_CHECK(5, 11, 3)
+     if ((event->type() == QEvent::MouseMove ||
+          event->type() == QEvent::TabletMove) &&
+             (!d->matcher.supportsHiResInputEvents() ||
+@@ -239,12 +239,12 @@ bool KisInputManager::compressMoveEventCommon(Event *event)
+ 
+         retval = true;
+     } else {
+-#endif        
++#endif
+         slotCompressedMoveEvent();
+         retval = d->handleCompressedTabletEvent(event);
+-#if QT_VERSION < QT_VERSION_CHECK(5, 12, 0)    
++#if QT_VERSION < QT_VERSION_CHECK(5, 11, 3)
+     }
+-#endif    
++#endif
+ 
+     return retval;
+ }
+-- 
+cgit v1.1
+
