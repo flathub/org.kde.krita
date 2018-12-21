@@ -126,8 +126,8 @@ modules:
       - /share/doc
     sources:
       - type: archive
-        url: https://www.libraw.org/data/LibRaw-0.19.0.tar.gz
-        sha256: e83f51e83b19f9ba6b8bd144475fc12edf2d7b3b930d8d280bdebd8a8f3ed259
+        url: https://www.libraw.org/data/LibRaw-0.19.1.tar.gz
+        sha256: a21019db16d87accbb8660056365ab09a204475c77c97b86c922bb972ce15ef6
 
   - name: fftw
     config-opts:
@@ -232,8 +232,8 @@ modules:
       - install -D -t /app/bin gmic_krita_qt
     sources:
       - type: archive
-        url: https://gmic.eu/files/source/gmic_2.4.2.tar.gz
-        sha256: 0fae452232501ed7e50bbe2eaa96900a5b6daa7fb1d4366d207311bdc27d0762
+        url: https://gmic.eu/files/source/gmic_2.4.3.tar.gz
+        sha256: eaa263854cb6e88ee5d2704ac97cb891191bd03fd157cea211f98aff1c96ae5a
 
   - name: x264
     config-opts:
@@ -272,10 +272,8 @@ modules:
         PYTHONPATH: /app/lib/python3/dist-packages
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/4.1.7/krita-4.1.7.tar.gz
-        sha256: c16ec0dd23cdf20e9dd4d34ebabcf5bdb06a825bd6fe2c7196d6777279bdabd0
-      - type: patch
-        path: patches/krita-qt5.11.3.patch
+        url: https://download.kde.org/stable/krita/4.1.7/krita-4.1.7.101.tar.gz
+        sha256: 5bc95baa3980b7d75eb6bf103f72344014eac7733fd8a0780a7ec87dc2826f5f
       - type: shell
         commands:
-          - sed -i 's/2018-14-12/2018-12-14/' krita/org.kde.krita.appdata.xml
+          - sed -i 's/2018-16-12/2018-12-16/' krita/org.kde.krita.appdata.xml
