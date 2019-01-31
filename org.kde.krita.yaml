@@ -1,7 +1,7 @@
 app-id: org.kde.krita
 branch: stable
 runtime: org.kde.Platform
-runtime-version: '5.11'
+runtime-version: '5.12'
 sdk: org.kde.Sdk
 command: krita
 rename-icon: calligrakrita
@@ -43,7 +43,7 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://sourceforge.net/projects/pyqt/files/sip/sip-4.19.13/sip-4.19.13.tar.gz
+        url: https://downloads.sourceforge.net/projects/pyqt/sip/sip-4.19.13/sip-4.19.13.tar.gz
         sha256: e353a7056599bf5fbd5d3ff9842a6ab2ea3cf4e0304a0f925ec5862907c0d15e
 
   - name: pyqt
@@ -64,7 +64,7 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://sourceforge.net/projects/pyqt/files/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.tar.gz
+        url: https://downloads.sourceforge.net/projects/pyqt/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.tar.gz
         sha256: c9b57d15601d436faf35dacf8e0acefa220194829a653e771e80b189b3261073
 
   - name: boost
@@ -91,12 +91,12 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     cleanup:
       - /bin
     sources:
       - type: archive
-        url: http://www.exiv2.org/builds/exiv2-0.26-trunk.tar.gz
+        url: http://www.exiv2.org/releases/exiv2-0.26-trunk.tar.gz
         sha256: c75e3c4a0811bf700d92c82319373b7a825a2331c12b8b37d41eb58e4f18eafb
   
   - name: ilmbase
@@ -126,21 +126,8 @@ modules:
       - /share/doc
     sources:
       - type: archive
-        url: https://www.libraw.org/data/LibRaw-0.19.1.tar.gz
-        sha256: a21019db16d87accbb8660056365ab09a204475c77c97b86c922bb972ce15ef6
-
-  - name: fftw
-    config-opts:
-      - --disable-static
-      - --enable-shared
-      - --disable-doc
-      - --enable-threads
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: http://www.fftw.org/fftw-3.3.8.tar.gz
-        sha256: 6113262f6e92c5bd474f2875fa1b01054c4ad5040f6b0da7c03c98821d9ae303
+        url: https://www.libraw.org/data/LibRaw-0.19.2.tar.gz
+        sha256: 400d47969292291d297873a06fb0535ccce70728117463927ddd9452aa849644
 
   - name: opencolorio
     buildsystem: cmake # ninja build broken (upstream issues #467)
@@ -154,9 +141,9 @@ modules:
           config-opts:
           - -DOCIO_USE_SSE=OFF
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DOCIO_BUILD_STATIC=OFF
-      - -DCMAKE_CXX_FLAGS='-Wno-error=deprecated-declarations -Wno-error=unused-function'
+      - -DCMAKE_CXX_FLAGS='-Wno-error=deprecated-declarations -Wno-error=unused-function -Wno-error=cast-function-type'
     cleanup:
       - /bin
     sources:
@@ -171,7 +158,7 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     cleanup:
       - '*'
     sources:
@@ -186,7 +173,7 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
         url: https://poppler.freedesktop.org/poppler-data-0.4.9.tar.gz
@@ -196,7 +183,7 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=Release
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_GTK_TESTS=OFF
       - -DBUILD_QT5_TESTS=OFF
       - -DBUILD_CPP_TESTS=OFF
@@ -206,8 +193,8 @@ modules:
       - -DENABLE_LIBOPENJPEG=none
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-0.72.0.tar.xz
-        sha256: c1747eb8f26e9e753c4001ed951db2896edc1021b6d0f547a0bd2a27c30ada51
+        url: https://poppler.freedesktop.org/poppler-0.73.0.tar.xz
+        sha256: e44b5543903128884ba4538c2a97d3bcc8889e97ffacc4636112101f0238db03
 
   - name: gsl
     config-opts:
@@ -232,8 +219,8 @@ modules:
       - install -D -t /app/bin gmic_krita_qt
     sources:
       - type: archive
-        url: https://gmic.eu/files/source/gmic_2.4.3.tar.gz
-        sha256: eaa263854cb6e88ee5d2704ac97cb891191bd03fd157cea211f98aff1c96ae5a
+        url: https://gmic.eu/files/source/gmic_2.4.5.tar.gz
+        sha256: e87efa20abdedf5e0000c490669d76c8a8d16a9fafa27bc9e31b79b5cbc3277f
 
   - name: x264
     config-opts:
@@ -241,11 +228,12 @@ modules:
       - --enable-shared
     sources:
       - type: archive
-        url: https://download.videolan.org/x264/snapshots/x264-snapshot-20171223-2245-stable.tar.bz2
-        sha256: ee4ba2c3d1caf786ad66d3fa86bdc368a8f827318788a62a9c8444b2c35816bf
+        url: https://download.videolan.org/x264/snapshots/x264-snapshot-20180807-2245-stable.tar.bz2
+        sha256: 1439f1a054c87965089b646e77d16e1a8bf2f9687e4dd696ac518e44c7644c2a
 
   - name: ffmpeg
     config-opts:
+      - --enable-rpath
       - --enable-gpl
       - --disable-static
       - --enable-shared
