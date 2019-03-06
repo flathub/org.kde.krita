@@ -259,6 +259,8 @@ modules:
     build-options:
       env:
         PYTHONPATH: /app/lib/python3/dist-packages
+    post-install:
+      - rm -r /app/share/icons/hicolor/1024x1024
     sources:
       - type: archive
         url: https://download.kde.org/stable/krita/4.1.8/krita-4.1.8.tar.gz
