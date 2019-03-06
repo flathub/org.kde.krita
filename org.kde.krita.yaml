@@ -14,6 +14,7 @@ finish-args:
   - --filesystem=host
   - --filesystem=xdg-config/kdeglobals:ro
   - --env=PYTHONPATH=/app/lib/python3/dist-packages
+  - --env=TMPDIR=/var/tmp
 cleanup:
   - /include
   - /lib/pkgconfig
@@ -43,8 +44,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://downloads.sourceforge.net/projects/pyqt/sip/sip-4.19.13/sip-4.19.13.tar.gz
-        sha256: e353a7056599bf5fbd5d3ff9842a6ab2ea3cf4e0304a0f925ec5862907c0d15e
+        url: https://www.riverbankcomputing.com/static/Downloads/sip/sip-4.19.14.tar.gz
+        sha256: 0ef3765dbcc3b8131f83e60239f49508f82205b33cae5408c405e2e2f2d0af87
 
   - name: pyqt
     buildsystem: simple
@@ -64,8 +65,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://downloads.sourceforge.net/projects/pyqt/PyQt5/PyQt-5.11.3/PyQt5_gpl-5.11.3.tar.gz
-        sha256: c9b57d15601d436faf35dacf8e0acefa220194829a653e771e80b189b3261073
+        url: https://www.riverbankcomputing.com/static/Downloads/PyQt5/PyQt5_gpl-5.12.tar.gz
+        sha256: d9e70065b5980afde5f2b9bc900910050331604e02c70666c45fcfc66b0d4f34
 
   - name: boost
     buildsystem: simple
@@ -74,8 +75,8 @@ modules:
       - ./b2 -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-        url: https://dl.bintray.com/boostorg/release/1.68.0/source/boost_1_68_0.tar.bz2
-        sha256: 7f6130bc3cf65f56a618888ce9d5ea704fa10b462be126ad053e80e553d6d8b7
+        url: https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.tar.bz2
+        sha256: 8f32d4617390d1c2d16f26a27ab60d97807b35440d45891fa340fc2648b04406
 
   - name: eigen
     buildsystem: cmake-ninja
@@ -96,8 +97,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: http://www.exiv2.org/releases/exiv2-0.26-trunk.tar.gz
-        sha256: c75e3c4a0811bf700d92c82319373b7a825a2331c12b8b37d41eb58e4f18eafb
+        url: http://exiv2.dyndns.org/builds/exiv2-0.27.0a-Source.tar.gz
+        sha256: a4adfa7aaf295b0383adead476f8e0493b9d6c6c7570d5884d2ebf8a2871902f
   
   - name: ilmbase
     config-opts:
@@ -193,8 +194,8 @@ modules:
       - -DENABLE_LIBOPENJPEG=none
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-0.73.0.tar.xz
-        sha256: e44b5543903128884ba4538c2a97d3bcc8889e97ffacc4636112101f0238db03
+        url: https://poppler.freedesktop.org/poppler-0.74.0.tar.xz
+        sha256: 92e09fd3302567fd36146b36bb707db43ce436e8841219025a82ea9fb0076b2f
 
   - name: gsl
     config-opts:
@@ -247,8 +248,8 @@ modules:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://ffmpeg.org/releases/ffmpeg-4.0.3.tar.xz
-        sha256: 253c37e3f1d3626a2566e496554de9a4c29050753660835909a466d66b12e2ed
+        url: https://www.ffmpeg.org/releases/ffmpeg-4.1.1.tar.xz
+        sha256: 373749824dfd334d84e55dff406729edfd1606575ee44dd485d97d45ea4d2d86
 
   - name: krita
     buildsystem: cmake-ninja
@@ -260,8 +261,10 @@ modules:
         PYTHONPATH: /app/lib/python3/dist-packages
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/4.1.7/krita-4.1.7.101.tar.gz
-        sha256: 5bc95baa3980b7d75eb6bf103f72344014eac7733fd8a0780a7ec87dc2826f5f
+        url: https://download.kde.org/stable/krita/4.1.8/krita-4.1.8.tar.gz
+        sha256: 0476c9e2279f0ae690c2ed02e1aa9c3d491943643f9859355a02657318bd5940
       - type: shell
         commands:
-          - sed -i 's/2018-16-12/2018-12-16/' krita/org.kde.krita.appdata.xml
+          - sed -i 's|cfg.customFFMpegPath()|"/app/bin/ffmpeg"|' plugins/impex/video/kis_video_export.cpp
+          - sed -i 's|/usr/bin|/app/bin|' plugins/extensions/animationrenderer/DlgAnimationRenderer.cpp
+          - sed -i 's/2019-06-03/2019-03-06/' krita/org.kde.krita.appdata.xml
