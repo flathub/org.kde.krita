@@ -1,5 +1,5 @@
 app-id: org.kde.krita
-branch: stable
+default-branch: stable
 runtime: org.kde.Platform
 runtime-version: '5.12'
 sdk: org.kde.Sdk
@@ -44,8 +44,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://www.riverbankcomputing.com/static/Downloads/sip/sip-4.19.14.tar.gz
-        sha256: 0ef3765dbcc3b8131f83e60239f49508f82205b33cae5408c405e2e2f2d0af87
+        url: https://www.riverbankcomputing.com/static/Downloads/sip/4.19.17/sip-4.19.17.tar.gz
+        sha256: 12bcd8f4d5feefc105bc075d12c5090ee783f7380728563c91b8b95d0ec45df3
 
   - name: pyqt
     buildsystem: simple
@@ -65,8 +65,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://www.riverbankcomputing.com/static/Downloads/PyQt5/PyQt5_gpl-5.12.tar.gz
-        sha256: d9e70065b5980afde5f2b9bc900910050331604e02c70666c45fcfc66b0d4f34
+        url: https://www.riverbankcomputing.com/static/Downloads/PyQt5/5.12.2/PyQt5_gpl-5.12.2.tar.gz
+        sha256: c565829e77dc9c281aa1a0cdf2eddaead4e0f844cbaf7a4408441967f03f5f0f
 
   - name: boost
     buildsystem: simple
@@ -85,8 +85,21 @@ modules:
       - '*'
     sources:
       - type: archive
-        url: https://bitbucket.org/eigen/eigen/get/3.3.5.tar.bz2
-        sha256: 7352bff3ea299e4c7d7fbe31c504f8eb9149d7e685dec5a12fbaa26379f603e2
+        url: https://bitbucket.org/eigen/eigen/get/3.3.7.tar.bz2
+        sha256: 9f13cf90dedbe3e52a19f43000d71fdf72e986beb9a5436dddcd61ff9d77a3ce
+
+  - name: quazip
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/stachenov/quazip/archive/0.7.6.tar.gz
+        sha256: 4118a830a375a81211956611cc34b1b5b4ddc108c126287b91b40c2493046b70
+      - type: shell
+        commands:
+          - sed -i 's|${CMAKE_ROOT}/Modules|share/cmake|' CMakeLists.txt
 
   - name: exiv2
     buildsystem: cmake-ninja
@@ -97,8 +110,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: http://exiv2.dyndns.org/builds/exiv2-0.27.0a-Source.tar.gz
-        sha256: a4adfa7aaf295b0383adead476f8e0493b9d6c6c7570d5884d2ebf8a2871902f
+        url: https://www.exiv2.org/builds/exiv2-0.27.1-Source.tar.gz
+        sha256: f125286980fd1bcb28e188c02a93946951c61e10784720be2301b661a65b3081
   
   - name: ilmbase
     config-opts:
@@ -131,7 +144,7 @@ modules:
         sha256: 400d47969292291d297873a06fb0535ccce70728117463927ddd9452aa849644
 
   - name: opencolorio
-    buildsystem: cmake # ninja build broken (upstream issues #467)
+    buildsystem: cmake # ninja build broken (fixed in 2.0)
     builddir: true
     build-options:
       arch:
@@ -149,8 +162,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/imageworks/OpenColorIO/archive/v1.1.0.tar.gz
-        sha256: 228589879e1f11e455a555304007748a8904057088319ebbf172d9384b93c079
+        url: https://github.com/imageworks/OpenColorIO/archive/v1.1.1.tar.gz
+        sha256: c9b5b9def907e1dafb29e37336b702fff22cc6306d445a13b1621b8a754c14c8
 
   - name: vc
     skip-arches:
@@ -194,8 +207,8 @@ modules:
       - -DENABLE_LIBOPENJPEG=none
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-0.74.0.tar.xz
-        sha256: 92e09fd3302567fd36146b36bb707db43ce436e8841219025a82ea9fb0076b2f
+        url: https://poppler.freedesktop.org/poppler-0.76.1.tar.xz
+        sha256: e62cd4053f851eecc4a6aa2b81d739fbab1d67b3c60b31ebac7049483cc617b1
 
   - name: gsl
     config-opts:
@@ -211,17 +224,15 @@ modules:
     buildsystem: cmake-ninja
     builddir: true
     subdir: gmic-qt
-    no-make-install: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DGMIC_QT_HOST=krita
       - -DGMIC_PATH=../src
-    post-install:
-      - install -D -t /app/bin gmic_krita_qt
+      - -DCMAKE_CXX_FLAGS=-lfftw3_threads
     sources:
       - type: archive
-        url: https://gmic.eu/files/source/gmic_2.4.5.tar.gz
-        sha256: e87efa20abdedf5e0000c490669d76c8a8d16a9fafa27bc9e31b79b5cbc3277f
+        url: https://gmic.eu/files/source/gmic_2.6.4.tar.gz
+        sha256: 4cd88b2dca6b9b1a330ab4556d36656bafb98e4e9814bf0448545b27ef18dae3
 
   - name: x264
     config-opts:
@@ -229,8 +240,8 @@ modules:
       - --enable-shared
     sources:
       - type: archive
-        url: https://download.videolan.org/x264/snapshots/x264-snapshot-20180807-2245-stable.tar.bz2
-        sha256: 1439f1a054c87965089b646e77d16e1a8bf2f9687e4dd696ac518e44c7644c2a
+        url: https://download.videolan.org/x264/snapshots/x264-snapshot-20190305-2245-stable.tar.bz2
+        sha256: be52c96ef8bd930fbc1ecff03abac9b94976b444ea7641345e08e20d9e594d16
 
   - name: ffmpeg
     config-opts:
@@ -248,14 +259,15 @@ modules:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-4.1.1.tar.xz
-        sha256: 373749824dfd334d84e55dff406729edfd1606575ee44dd485d97d45ea4d2d86
+        url: https://www.ffmpeg.org/releases/ffmpeg-4.1.3.tar.xz
+        sha256: 0c3020452880581a8face91595b239198078645e7d7184273b8bcc7758beb63d
 
   - name: krita
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
     build-options:
       env:
         PYTHONPATH: /app/lib/python3/dist-packages
@@ -263,10 +275,5 @@ modules:
       - rm -r /app/share/icons/hicolor/{1024x1024,scalable}
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/4.1.8/krita-4.1.8.tar.gz
-        sha256: 0476c9e2279f0ae690c2ed02e1aa9c3d491943643f9859355a02657318bd5940
-      - type: shell
-        commands:
-          - sed -i 's|cfg.customFFMpegPath()|"/app/bin/ffmpeg"|' plugins/impex/video/kis_video_export.cpp
-          - sed -i 's|/usr/bin|/app/bin|' plugins/extensions/animationrenderer/DlgAnimationRenderer.cpp
-          - sed -i 's/2019-06-03/2019-03-06/' krita/org.kde.krita.appdata.xml
+        url: https://download.kde.org/stable/krita/4.2.0/krita-4.2.0.tar.xz
+        sha256: 19a10525e4fcc00d3888f2758c078ea82f074bcb3401422820b6454bf2276a62
