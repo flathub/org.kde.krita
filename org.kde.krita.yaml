@@ -279,4 +279,4 @@ modules:
         sha256: 19a10525e4fcc00d3888f2758c078ea82f074bcb3401422820b6454bf2276a62
       - type: shell
         commands:
-          - sed -i 's|org.kde.krita</launchable>|org.kde.krita.desktop</launchable>|' org.kde.krita.appdata.xml
+          - sed -i 's|org.kde.krita</launchable>|org.kde.krita.desktop</launchable>|' krita/org.kde.krita.appdata.xml
