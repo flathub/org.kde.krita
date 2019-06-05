@@ -232,8 +232,8 @@ modules:
       - -DCMAKE_CXX_FLAGS=-lfftw3_threads
     sources:
       - type: archive
-        url: https://gmic.eu/files/source/gmic_2.6.1.tar.gz
-        sha256: 48de7045a36eb718d55b0dfd68a797380b5390af99c9737a4dfba0fb678ed2b4
+        url: https://gmic.eu/files/source/gmic_2.6.4.tar.gz
+        sha256: 4cd88b2dca6b9b1a330ab4556d36656bafb98e4e9814bf0448545b27ef18dae3
 
   - name: x264
     config-opts:
@@ -264,10 +264,11 @@ modules:
         sha256: 0c3020452880581a8face91595b239198078645e7d7184273b8bcc7758beb63d
 
   - name: krita
-    buildsystem: cmake # https://bugs.kde.org/show_bug.cgi?id=407347
+    buildsystem: cmake-ninja
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
     build-options:
       env:
         PYTHONPATH: /app/lib/python3/dist-packages
@@ -275,8 +276,8 @@ modules:
       - rm -r /app/share/icons/hicolor/{1024x1024,scalable}
     sources:
       - type: archive
-        url: https://download.kde.org/unstable/krita/4.2.0-alpha/krita-4.2.0-alpha.tar.xz
-        sha256: f19b655212cb89f3a8a9e74cea8f18e113210e719320d653e289508ae0640b1d
+        url: https://download.kde.org/stable/krita/4.2.1/krita-4.2.1.tar.gz
+        sha256: 35367adde808c9460a9d6e08f80255a64d08470acbef391e56d00acc929ca9ca
       - type: shell
         commands:
-          - sed -i 's|2019-06-04|2019-05-08|' krita/org.kde.krita.appdata.xml
+          - sed -i 's|org.kde.krita</launchable>|org.kde.krita.desktop</launchable>|' krita/org.kde.krita.appdata.xml
