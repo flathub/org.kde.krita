@@ -264,7 +264,7 @@ modules:
         sha256: 0c3020452880581a8face91595b239198078645e7d7184273b8bcc7758beb63d
 
   - name: krita
-    buildsystem: cmake-ninja
+    buildsystem: cmake
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
