@@ -259,8 +259,8 @@ modules:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-4.1.3.tar.xz
-        sha256: 0c3020452880581a8face91595b239198078645e7d7184273b8bcc7758beb63d
+        url: https://www.ffmpeg.org/releases/ffmpeg-4.1.4.tar.xz
+        sha256: f1f049a82fcfbf156564e73a3935d7e750891fab2abf302e735104fd4050a7e1
 
   - name: krita
     buildsystem: cmake-ninja
@@ -275,5 +275,5 @@ modules:
       - rm -r /app/share/icons/hicolor/{1024x1024,scalable}
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/4.2.2/krita-4.2.2.tar.xz
-        sha256: fdca0624e6e4deec20598ea141344086de75a9208687fcc9cd4b14597caa811a
+        url: https://download.kde.org/stable/krita/4.2.3/krita-4.2.3.tar.gz
+        sha256: 7b302dc204fba84737013528720c1704bea98f805a1215369f53c6421c088467
