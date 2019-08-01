@@ -275,5 +275,5 @@ modules:
       - rm -r /app/share/icons/hicolor/{1024x1024,scalable}
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/4.2.3/krita-4.2.3.tar.gz
-        sha256: 7b302dc204fba84737013528720c1704bea98f805a1215369f53c6421c088467
+        url: https://download.kde.org/stable/krita/4.2.4/krita-4.2.4.tar.xz
+        sha256: ddaac8bca5b187c2b8a02bce215c12491b42064a4171f280b5bad2e497f9c719
