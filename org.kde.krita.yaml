@@ -4,7 +4,7 @@ runtime: org.kde.Platform
 runtime-version: '5.12'
 sdk: org.kde.Sdk
 command: krita
-rename-icon: calligrakrita
+rename-icon: krita
 finish-args:
   - --share=ipc
   - --socket=x11
@@ -275,5 +275,5 @@ modules:
       - rm -r /app/share/icons/hicolor/{1024x1024,scalable}
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/4.2.5/krita-4.2.5.tar.xz
-        sha256: 213fdd3cbf2a2b21e2c208bfb422067888b3741780cd34749c63875f58a41f59
+        url: https://download.kde.org/stable/krita/4.2.6/krita-4.2.6.tar.xz
+        sha256: d57f498a80a3395ccbe7986482157510a9698e80825bc323da21c1d13be2aa61
