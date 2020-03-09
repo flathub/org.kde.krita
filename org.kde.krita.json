@@ -16,7 +16,8 @@
     "--filesystem=host",
     "--filesystem=xdg-config/kdeglobals:ro",
     "--env=PYTHONPATH=/app/lib/python3/dist-packages",
-    "--env=TMPDIR=/var/tmp"
+    "--env=TMPDIR=/var/tmp",
+    "--system-talk-name=org.freedesktop.ColorManager"
   ],
   "cleanup": [
     "/include",
@@ -46,8 +47,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.riverbankcomputing.com/static/Downloads/sip/4.19.17/sip-4.19.17.tar.gz",
-          "sha256": "12bcd8f4d5feefc105bc075d12c5090ee783f7380728563c91b8b95d0ec45df3"
+          "url": "https://www.riverbankcomputing.com/static/Downloads/sip/4.19.21/sip-4.19.21.tar.gz",
+          "sha256": "6af9979ab41590e8311b8cc94356718429ef96ba0e3592bdd630da01211200ae"
         }
       ]
     },
@@ -65,8 +66,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.riverbankcomputing.com/static/Downloads/PyQt5/5.12.2/PyQt5_gpl-5.12.2.tar.gz",
-          "sha256": "c565829e77dc9c281aa1a0cdf2eddaead4e0f844cbaf7a4408441967f03f5f0f"
+          "url": "https://www.riverbankcomputing.com/static/Downloads/PyQt5/5.12.3/PyQt5_gpl-5.12.3.tar.gz",
+          "sha256": "0db0fa37debab147450f9e052286f7a530404e2aaddc438e97a7dcdf56292110"
         }
       ]
     },
@@ -75,13 +76,13 @@
       "buildsystem": "simple",
       "build-commands": [
         "./bootstrap.sh --prefix=/app --with-libraries=system",
-        "./b2 -j $FLATPAK_BUILDER_N_JOBS install"
+        "./b2 install variant=release link=shared runtime-link=shared cxxflags="$CXXFLAGS" linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS"
       ],
       "sources": [
         {
           "type": "archive",
-          "url": "https://dl.bintray.com/boostorg/release/1.69.0/source/boost_1_69_0.tar.bz2",
-          "sha256": "8f32d4617390d1c2d16f26a27ab60d97807b35440d45891fa340fc2648b04406"
+          "url": "https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.bz2",
+          "sha256": "59c9b274bc451cf91a9ba1dd2c7fdcaf5d60b1b3aa83f2c9fa143417cc660722"
         }
       ]
     },
@@ -95,8 +96,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://bitbucket.org/eigen/eigen/get/3.3.7.tar.bz2",
-          "sha256": "9f13cf90dedbe3e52a19f43000d71fdf72e986beb9a5436dddcd61ff9d77a3ce"
+          "url": "https://gitlab.com/libeigen/eigen/-/archive/3.3.7/eigen-3.3.7.tar.bz2",
+          "sha256": "685adf14bd8e9c015b78097c1dc22f2f01343756f196acdc76a678e1ae352e11"
         }
       ]
     },
@@ -110,14 +111,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/stachenov/quazip/archive/0.7.6.tar.gz",
-          "sha256": "4118a830a375a81211956611cc34b1b5b4ddc108c126287b91b40c2493046b70"
-        },
-        {
-          "type": "shell",
-          "commands": [
-            "sed -i 's|${CMAKE_ROOT}/Modules|share/cmake|' CMakeLists.txt"
-          ]
+          "url": "https://github.com/stachenov/quazip/archive/v0.8.1.tar.gz",
+          "sha256": "4fda4d4248e08015b5090d0369ef9e68bdc4475aa12494f7c0f6d79e43270d14"
         }
       ]
     },
@@ -140,22 +135,11 @@
       ]
     },
     {
-      "name": "ilmbase",
-      "config-opts": [
-        "--disable-static"
-      ],
-      "sources": [
-        {
-          "type": "archive",
-          "url": "https://github.com/openexr/openexr/releases/download/v2.3.0/ilmbase-2.3.0.tar.gz",
-          "sha256": "456978d1a978a5f823c7c675f3f36b0ae14dba36638aeaa3c4b0e784f12a3862"
-        }
-      ]
-    },
-    {
       "name": "openexr",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
       "config-opts": [
-        "--disable-static"
+        "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
       ],
       "cleanup": [
         "/bin",
@@ -164,8 +148,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/openexr/openexr/releases/download/v2.3.0/openexr-2.3.0.tar.gz",
-          "sha256": "fd6cb3a87f8c1a233be17b94c74799e6241d50fc5efd4df75c7a4b9cf4e25ea6"
+          "url": "https://github.com/AcademySoftwareFoundation/openexr/archive/v2.4.1.tar.gz",
+          "sha256": "3ebbe9a8e67edb4a25890b98c598e9fe23b10f96d1416d6a3ff0732e99d001c1"
         }
       ]
     },
@@ -181,8 +165,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.libraw.org/data/LibRaw-0.19.2.tar.gz",
-          "sha256": "400d47969292291d297873a06fb0535ccce70728117463927ddd9452aa849644"
+          "url": "https://www.libraw.org/data/LibRaw-0.19.5.tar.gz",
+          "sha256": "40a262d7cc71702711a0faec106118ee004f86c86cc228281d12d16da03e02f5"
         }
       ]
     },
@@ -237,14 +221,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/VcDevel/Vc/releases/download/1.3.3/Vc-1.3.3.tar.gz",
-          "sha256": "08c629d2e14bfb8e4f1a10f09535e4a3c755292503c971ab46637d2986bdb4fe"
-        },
-        {
-          "type": "shell",
-          "commands": [
-            "sed -i 's/x86|/x86|i686|/' CMakeLists.txt"
-          ]
+          "url": "https://github.com/VcDevel/Vc/releases/download/1.4.1/Vc-1.4.1.tar.gz",
+          "sha256": "68e609a735326dc3625e98bd85258e1329fb2a26ce17f32c432723b750a4119f"
         }
       ]
     },
@@ -280,8 +258,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://poppler.freedesktop.org/poppler-0.77.0.tar.xz",
-          "sha256": "7267eb4cbccd64a58244b8211603c1c1b6bf32c7f6a4ced2642865346102f36b"
+          "url": "https://poppler.freedesktop.org/poppler-0.86.1.tar.xz",
+          "sha256": "af630a277c8e194c31339c5446241834aed6ed3d4b4dc7080311e51c66257f6c"
         }
       ]
     },
@@ -296,8 +274,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://ftpmirror.gnu.org/gnu/gsl/gsl-2.5.tar.gz",
-          "sha256": "0460ad7c2542caaddc6729762952d345374784100223995eb14d614861f2258d"
+          "url": "https://ftpmirror.gnu.org/gnu/gsl/gsl-2.6.tar.gz",
+          "sha256": "b782339fc7a38fe17689cb39966c4d821236c28018b6593ddb6fd59ee40786a8"
         }
       ]
     },
@@ -315,8 +293,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://gmic.eu/files/source/gmic_2.6.4.tar.gz",
-          "sha256": "4cd88b2dca6b9b1a330ab4556d36656bafb98e4e9814bf0448545b27ef18dae3"
+          "url": "https://gmic.eu/files/source/gmic_2.8.4.tar.gz",
+          "sha256": "b2a279bdf981595b30d8d7828fabf9a620cde06eae8db345a8cddf2160c25379"
         }
       ]
     },
@@ -354,8 +332,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.ffmpeg.org/releases/ffmpeg-4.1.4.tar.xz",
-          "sha256": "f1f049a82fcfbf156564e73a3935d7e750891fab2abf302e735104fd4050a7e1"
+          "url": "https://www.ffmpeg.org/releases/ffmpeg-4.2.2.tar.xz",
+          "sha256": "cb754255ab0ee2ea5f66f8850e1bd6ad5cac1cd855d0a2f4990fb8c668b0d29c"
         }
       ]
     },
@@ -372,14 +350,11 @@
           "PYTHONPATH": "/app/lib/python3/dist-packages"
         }
       },
-      "post-install": [
-        "rm -r /app/share/icons/hicolor/{1024x1024,scalable}"
-      ],
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.kde.org/unstable/krita/4.2.8-beta1/krita-4.2.8-beta1.tar.xz",
-          "sha256": "e24b962b04e6cad45f8c7fa61bca17a75835ff62a5677a638439cff8a3fafe69"
+          "url": "https://download.kde.org/unstable/krita/4.2.9-beta1/krita-4.2.9-beta1.tar.xz",
+          "sha256": "e580bfca71201df74d19580de58f1ae03eb9b86fad89e9df0a4b8b1e8b5e4544"
         }
       ]
     }
