@@ -66,8 +66,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.riverbankcomputing.com/static/Downloads/PyQt5/5.12.3/PyQt5_gpl-5.12.3.tar.gz",
-          "sha256": "0db0fa37debab147450f9e052286f7a530404e2aaddc438e97a7dcdf56292110"
+          "url": "https://files.pythonhosted.org/packages/3a/fb/eb51731f2dc7c22d8e1a63ba88fb702727b324c6352183a32f27f73b8116/PyQt5-5.14.1.tar.gz",
+          "sha256": "2f230f2dbd767099de7a0cb915abdf0cbc3256a0b5bb910eb09b99117db7a65b"
         }
       ]
     },
