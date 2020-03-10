@@ -350,6 +350,9 @@
           "PYTHONPATH": "/app/lib/python3/dist-packages"
         }
       },
+      "cleanup": [
+        "/share/icons/hicolor/1024x1024"
+      ],
       "sources": [
         {
           "type": "archive",
