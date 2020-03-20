@@ -14,7 +14,6 @@
     "--device=dri",
     "--socket=pulseaudio",
     "--filesystem=host",
-    "--filesystem=xdg-config/kdeglobals:ro",
     "--env=PYTHONPATH=/app/lib/python3/dist-packages",
     "--env=TMPDIR=/var/tmp",
     "--system-talk-name=org.freedesktop.ColorManager"
@@ -287,8 +286,7 @@
       "config-opts": [
         "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
         "-DGMIC_QT_HOST=krita",
-        "-DGMIC_PATH=../src",
-        "-DCMAKE_CXX_FLAGS=-lfftw3_threads"
+        "-DGMIC_PATH=../src"
       ],
       "sources": [
         {
@@ -307,8 +305,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.videolan.org/x264/snapshots/x264-snapshot-20190305-2245-stable.tar.bz2",
-          "sha256": "be52c96ef8bd930fbc1ecff03abac9b94976b444ea7641345e08e20d9e594d16"
+          "url": "https://code.videolan.org/videolan/x264/-/archive/1771b556ee45207f8711744ccbd5d42a3949b14c/x264-1771b556ee45207f8711744ccbd5d42a3949b14c.tar.bz2",
+          "sha256": "b31c5db5337873b9ee42b8cbc60b56d60ce368fa7e4c4eff90a729b36eeb8326"
         }
       ]
     },
