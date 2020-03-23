@@ -356,6 +356,12 @@
           "type": "archive",
           "url": "https://download.kde.org/stable/krita/4.2.9/krita-4.2.9.tar.xz",
           "sha256": "4ef711887dd3ec5f2a1c42a80f2fd0fec1de0d4f3d0147b0efd418ac6e4d7567"
+        },
+        {
+          "type": "shell",
+          "commands": [
+            "sed -i 's/2020-03-25/2020-03-23/' krita/org.kde.krita.appdata.xml"
+          ]
         }
       ]
     }
