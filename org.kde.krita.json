@@ -2,7 +2,7 @@
   "app-id": "org.kde.krita",
   "default-branch": "stable",
   "runtime": "org.kde.Platform",
-  "runtime-version": "5.12",
+  "runtime-version": "5.14",
   "sdk": "org.kde.Sdk",
   "command": "krita",
   "rename-icon": "krita",
@@ -356,6 +356,10 @@
           "type": "archive",
           "url": "https://download.kde.org/stable/krita/4.2.9/krita-4.2.9.tar.xz",
           "sha256": "4ef711887dd3ec5f2a1c42a80f2fd0fec1de0d4f3d0147b0efd418ac6e4d7567"
+        },
+        {
+          "type": "patch",
+          "path": "Do-not-load-plugins-from-plugins-that-are-being-loaded.patch"
         }
       ]
     }
