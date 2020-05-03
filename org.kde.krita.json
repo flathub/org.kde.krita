@@ -3,7 +3,7 @@
   "default-branch": "beta",
   "desktop-file-name-suffix": " (Beta)",
   "runtime": "org.kde.Platform",
-  "runtime-version": "5.12",
+  "runtime-version": "5.14",
   "sdk": "org.kde.Sdk",
   "command": "krita",
   "rename-icon": "krita",
@@ -16,6 +16,7 @@
     "--filesystem=host",
     "--env=PYTHONPATH=/app/lib/python3/dist-packages",
     "--env=TMPDIR=/var/tmp",
+    /* Needed for colord to work */
     "--system-talk-name=org.freedesktop.ColorManager"
   ],
   "cleanup": [
@@ -354,14 +355,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.kde.org/stable/krita/4.2.9/krita-4.2.9.tar.xz",
-          "sha256": "4ef711887dd3ec5f2a1c42a80f2fd0fec1de0d4f3d0147b0efd418ac6e4d7567"
-        },
-        {
-          "type": "shell",
-          "commands": [
-            "sed -i 's/2020-03-25/2020-03-23/' krita/org.kde.krita.appdata.xml"
-          ]
+          "url": "https://download.kde.org/unstable/krita/4.3.0-beta1/krita-4.3.0-beta1.tar.xz",
+          "sha256": "e2a3a61f3d8be6009895417c5094859a98307091b12624eb52281f2657e23ff0"
         }
       ]
     }
