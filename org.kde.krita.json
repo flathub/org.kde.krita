@@ -16,7 +16,8 @@
     "--env=PYTHONPATH=/app/lib/python3/dist-packages",
     "--env=TMPDIR=/var/tmp",
     /* Needed for colord to work */
-    "--system-talk-name=org.freedesktop.ColorManager"
+    "--system-talk-name=org.freedesktop.ColorManager",
+    "--filesystem=xdg-run/gvfs"
   ],
   "cleanup": [
     "/include",
