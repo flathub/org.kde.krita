@@ -258,8 +258,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://poppler.freedesktop.org/poppler-0.86.1.tar.xz",
-          "sha256": "af630a277c8e194c31339c5446241834aed6ed3d4b4dc7080311e51c66257f6c"
+          "url": "https://poppler.freedesktop.org/poppler-0.88.0.tar.xz",
+          "sha256": "b4453804e9a5a519e6ceee0ac8f5efc229e3b0bf70419263c239124474d256c7"
         }
       ]
     },
@@ -331,8 +331,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.ffmpeg.org/releases/ffmpeg-4.2.2.tar.xz",
-          "sha256": "cb754255ab0ee2ea5f66f8850e1bd6ad5cac1cd855d0a2f4990fb8c668b0d29c"
+          "url": "https://www.ffmpeg.org/releases/ffmpeg-4.2.3.tar.xz",
+          "sha256": "9df6c90aed1337634c1fb026fb01c154c29c82a64ea71291ff2da9aacb9aad31"
         }
       ]
     },
@@ -355,12 +355,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.kde.org/stable/krita/4.2.9/krita-4.2.9.tar.xz",
-          "sha256": "4ef711887dd3ec5f2a1c42a80f2fd0fec1de0d4f3d0147b0efd418ac6e4d7567"
-        },
-        {
-          "type": "patch",
-          "path": "Do-not-load-plugins-from-plugins-that-are-being-loaded.patch"
+          "url": "https://download.kde.org/stable/krita/4.3.0/krita-4.3.0.tar.xz",
+          "sha256": "4d537709ab681019b2843dcfc6a0b09fd81f702326f23bce520b18ddd2bd14a7"
         }
       ]
     }
