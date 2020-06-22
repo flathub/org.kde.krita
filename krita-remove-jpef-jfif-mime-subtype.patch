@@ -1,0 +1,26 @@
+diff --git a/plugins/impex/jpeg/krita_jpeg_export.json b/plugins/impex/jpeg/krita_jpeg_export.json
+index 2a26cf9b6597ad828219fcb486858751ac255d33..661dc164d84f3479e3baf22dada46dcdb36437e2 100644
+--- a/plugins/impex/jpeg/krita_jpeg_export.json
++++ b/plugins/impex/jpeg/krita_jpeg_export.json
+@@ -3,7 +3,7 @@
+     "Id": "Krita JPEG Export Filter",
+     "NoDisplay": "true",
+     "Type": "Service",
+-    "X-KDE-Export": "image/jpeg,jpeg/jfif",
++    "X-KDE-Export": "image/jpeg",
+     
+     "X-KDE-Library": "kritajpegexport",
+     "X-KDE-ServiceTypes": [
+diff --git a/plugins/impex/jpeg/krita_jpeg_import.json b/plugins/impex/jpeg/krita_jpeg_import.json
+index 2c6b97ffa4ae34f0c5fc2fe6822a2c7ae2825899..b243d586574c38e6fa4d3a017ba861ec6b8be57a 100644
+--- a/plugins/impex/jpeg/krita_jpeg_import.json
++++ b/plugins/impex/jpeg/krita_jpeg_import.json
+@@ -4,7 +4,7 @@
+     "NoDisplay": "true",
+     "Type": "Service",
+     
+-    "X-KDE-Import": "image/jpeg,jpeg/jfif",
++    "X-KDE-Import": "image/jpeg",
+     "X-KDE-Library": "kritajpegimport",
+     "X-KDE-ServiceTypes": [
+         "Krita/FileFilter"
