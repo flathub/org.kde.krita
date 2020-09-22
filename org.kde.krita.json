@@ -355,8 +355,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.kde.org/unstable/krita/4.3.0-beta2/krita-4.3.0-beta2.tar.xz",
-          "sha256": "63479ea6b009bc55254ac2df7a043ebd659e5fe5db696e308e01bf1a56c89d32"
+          "url": "https://download.kde.org/unstable/krita/4.4.0-beta1/krita-4.4.0-beta1.tar.xz",
+          "sha256": "e5254f9b5d84a7885ae8ef93fb79448acf0bf9f46fad1d537867419ddbf0455c"
         }
       ]
     }
