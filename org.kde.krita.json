@@ -1,9 +1,9 @@
 {
   "app-id": "org.kde.krita",
   "default-branch": "stable",
-  "runtime": "org.kde.Platform",
-  "runtime-version": "5.14",
-  "sdk": "org.kde.Sdk",
+  "runtime": "org.freedesktop.Platform",
+  "runtime-version": "20.08",
+  "sdk": "org.freedesktop.Sdk",
   "command": "krita",
   "rename-icon": "krita",
   "finish-args": [
@@ -34,6 +34,346 @@
   ],
   "modules": [
     {
+      "name": "qtbase",
+      "cleanup-platform": [
+        "/bin",
+        "/mkspecs"
+      ],
+      "build-options": {
+        "arch": {
+          "x86_64": {
+            "config-opts": [
+              "-reduce-relocations",
+              "-force-debug-info"
+            ]
+          },
+          "aarch64": {
+            "config-opts": [
+              "-no-reduce-relocations",
+              "-optimize-size",
+              "-opengl es2"
+            ]
+          }
+        }
+      },
+      "config-opts": [
+        "-confirm-license",
+        "-opensource",
+        "-shared",
+        "-platform",
+        "linux-g++",
+        "-optimized-qmake",
+        "-nomake",
+        "examples",
+        "-nomake",
+        "tests",
+        "-system-harfbuzz",
+        "-system-sqlite",
+        "-accessibility",
+        "-dbus-linked",
+        "-fontconfig",
+        "-glib",
+        "-icu",
+        "-openssl-linked",
+        "-no-pch",
+        "-no-rpath",
+        "-no-directfb",
+        "-no-linuxfb",
+        "-no-kms",
+        "-system-proxies",
+        "-gtk",
+        "-no-use-gold-linker",
+        "-archdatadir",
+        "/app/lib"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://download.qt.io/archive/qt/5.12/5.12.9/submodules/qtbase-everywhere-src-5.12.9.tar.xz",
+          "sha256": "331dafdd0f3e8623b51bd0da2266e7e7c53aa8e9dc28a8eb6f0b22609c5d337e"
+        },
+        {
+          "type": "patch",
+          "paths": [
+            "patches/open-file-portal-writable.patch",
+            "patches/qtbase-avoid-hardcoding-kernel-version.patch",
+            "patches/qtbase-use-wayland-on-gnome.patch",
+            "patches/qtbase-make-sure-to-correctly-construct-base-platform-theme.patch",
+            "patches/0012-Synthesize-Enter-LeaveEvent-for-accepted-QTabletEven.patch",
+            "patches/0013-Poison-Qt-s-headers-with-a-mark-about-presence-of-En.patch",
+            "patches/0081-Fix-no-warning-for-overwriting-files-in-non-native-d.patch",
+            "patches/0082-Make-jp-e-g-default-extensions-context-aware.patch",
+            "patches/0100-Fix-artifacts-when-rendering-multisubpath-dashed-QPa.patch",
+            "patches/0101-Don-t-eat-ShortcutOverride-events-when-there-is-a-pa.patch",
+            "patches/0110-Pass-proper-dirty-rect-in-paint-event-to-QOpenGLWidg.patch"
+          ]
+        },
+        {
+          "type": "shell",
+          "commands": [
+            "mv configure configure.qt"
+          ]
+        },
+        {
+          "type": "script",
+          "commands": [
+            "processed=`sed -e 's/--/-/g ; s/=/ /g' <<< $@`",
+            "./configure.qt $processed"
+          ],
+          "dest-filename": "configure"
+        }
+      ]
+    },
+    {
+      "name": "qttools",
+      "buildsystem": "qmake",
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://download.qt.io/archive/qt/5.12/5.12.9/submodules/qttools-everywhere-src-5.12.9.tar.xz",
+          "sha256": "002dc23410a9d1af6f1cfc696ee18fd3baeddbbfeb9758ddb04bbdb17b2fffdf"
+        }
+      ]
+    },
+    {
+      "name": "qtx11extras",
+      "buildsystem": "qmake",
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://download.qt.io/archive/qt/5.12/5.12.9/submodules/qtx11extras-everywhere-src-5.12.9.tar.xz",
+          "sha256": "09432392641b56205cbcda6be89d0835bfecad64ad61713a414b951b740c9cec"
+        }
+      ]
+    },
+    {
+      "name": "qtsvg",
+      "buildsystem": "qmake",
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://download.qt.io/archive/qt/5.12/5.12.9/submodules/qtsvg-everywhere-src-5.12.9.tar.xz",
+          "sha256": "32ec251e411d31734b873dd82fd68b6a3142227fdf06fe6ad879f16997fb98d2"
+        }
+      ]
+    },
+    {
+      "name": "qtmultimedia",
+      "buildsystem": "qmake",
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://download.qt.io/archive/qt/5.12/5.12.9/submodules/qtmultimedia-everywhere-src-5.12.9.tar.xz",
+          "sha256": "59a2f2418cefe030094687dff0846fb8957abbc0e060501a4fee40cb4a52838c"
+        }
+      ]
+    },
+    {
+      "name": "qtdeclarative",
+      "buildsystem": "qmake",
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://download.qt.io/archive/qt/5.12/5.12.9/submodules/qtdeclarative-everywhere-src-5.12.9.tar.xz",
+          "sha256": "c11ae68aedcdea7e721ec22a95265ac91b5e128a5c12d3b61b5b732d3a02be80"
+        }
+      ]
+    },
+    {
+      "name": "qtquickcontrols",
+      "buildsystem": "qmake",
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://download.qt.io/archive/qt/5.12/5.12.9/submodules/qtquickcontrols-everywhere-src-5.12.9.tar.xz",
+          "sha256": "d89084ebccf155f4c966d4a2a188e6e870c37535a7751740960f5c38088373f6"
+        }
+      ]
+    },
+    {
+      "name": "extra-cmake-modules",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/extra-cmake-modules-5.74.0.tar.xz",
+          "sha256": "71406067bcd99ac106e0e3bfbb073653b18fd6d01039c0298d9767680977364f"
+        }
+      ]
+    },
+    {
+      "name": "kconfig",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/kconfig-5.74.0.tar.xz",
+          "sha256": "dfeff0649f8987f88a01827c06468b87547509d9e46920902a55f6a0d6adc5db"
+        }
+      ]
+    },
+    {
+      "name": "kwidgetsaddons",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/kwidgetsaddons-5.74.0.tar.xz",
+          "sha256": "5b61c13a6ebb1e248fe38bd3912919f4bf6be93d74bb2f8b1d97caf6dd9a2342"
+        }
+      ]
+    },
+    {
+      "name": "kcompletion",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/kcompletion-5.74.0.tar.xz",
+          "sha256": "5bec7f31bab8eb724bfb01690bd1585b43eccca4e37c80cc3729af2f7c7b2875"
+        }
+      ]
+    },
+    {
+      "name": "kcoreaddons",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/kcoreaddons-5.74.0.tar.xz",
+          "sha256": "e122d0750c594dc68dea20e40c833b6615f5ddf21a2b2e439c7236e73f4523a8"
+        }
+      ]
+    },
+    {
+      "name": "kguiaddons",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/kguiaddons-5.74.0.tar.xz",
+          "sha256": "bb7c5b88e1738b22571f2f135202b3c08230911fcb8d089b8676d4d59af4578b"
+        }
+      ]
+    },
+    {
+      "name": "ki18n",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/ki18n-5.74.0.tar.xz",
+          "sha256": "bcbb95a81cd8f808fc8314741309c4b4ec25fc1c347e285a7cfefc006df3009c"
+        }
+      ]
+    },
+    {
+      "name": "kitemmodels",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/kitemmodels-5.74.0.tar.xz",
+          "sha256": "89c91051445137959e3dd7276d428adaff09b1ca9980f37d4a66d0c34c7b36c1"
+        }
+      ]
+    },
+    {
+      "name": "kitemviews",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/kitemviews-5.74.0.tar.xz",
+          "sha256": "09417ce8b84dc81575ec3612ad0c19d923b2511051c0cb3b98282a013bae5ef7"
+        }
+      ]
+    },
+    {
+      "name": "kwindowsystem",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/kwindowsystem-5.74.0.tar.xz",
+          "sha256": "33da54b0f76a661919445c9352c04cc23f9b6a0f4c842a76aa810091ca09b12f"
+        }
+      ]
+    },
+    {
+      "name": "kcrash",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/kcrash-5.74.0.tar.xz",
+          "sha256": "4aaffaed77c0aebf7f68183ed2256173a35c7200be1e99984cbfd9c9f332b07f"
+        }
+      ]
+    },
+    {
       "name": "sip",
       "buildsystem": "simple",
       "build-commands": [
@@ -47,8 +387,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.riverbankcomputing.com/static/Downloads/sip/4.19.21/sip-4.19.21.tar.gz",
-          "sha256": "6af9979ab41590e8311b8cc94356718429ef96ba0e3592bdd630da01211200ae"
+          "url": "https://www.riverbankcomputing.com/static/Downloads/sip/4.19.24/sip-4.19.24.tar.gz",
+          "sha256": "edcd3790bb01938191eef0f6117de0bf56d1136626c0ddb678f3a558d62e41e5"
         }
       ]
     },
@@ -66,8 +406,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://files.pythonhosted.org/packages/3a/fb/eb51731f2dc7c22d8e1a63ba88fb702727b324c6352183a32f27f73b8116/PyQt5-5.14.1.tar.gz",
-          "sha256": "2f230f2dbd767099de7a0cb915abdf0cbc3256a0b5bb910eb09b99117db7a65b"
+          "url": "https://files.pythonhosted.org/packages/1d/31/896dc3dfb6c81c70164019a6cbba6ab037e3af7653d9ca60ccc874ee4c27/PyQt5-5.15.1.tar.gz",
+          "sha256": "d9a76b850246d08da9863189ecb98f6c2aa9b4d97a3e85e29330a264aed0f9a1"
         }
       ]
     },
@@ -360,7 +700,7 @@
         },
         {
           "type": "patch",
-          "path": "krita-remove-jpef-jfif-mime-subtype.patch"
+          "path": "patches/krita-remove-jpef-jfif-mime-subtype.patch"
         }
       ]
     }
