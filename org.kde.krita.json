@@ -95,6 +95,7 @@
         {
           "type": "patch",
           "paths": [
+            "patches/FileChooser-portal-skip-empty-filters.patch",
             "patches/open-file-portal-writable.patch",
             "patches/qtbase-avoid-hardcoding-kernel-version.patch",
             "patches/qtbase-use-wayland-on-gnome.patch",
