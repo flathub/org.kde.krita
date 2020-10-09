@@ -23,6 +23,7 @@
     "/include",
     "/lib/pkgconfig",
     "/lib/cmake",
+    "/lib/mkspecs",
     "/share/aclocal",
     "/share/pkgconfig",
     "/share/info",
@@ -30,14 +31,14 @@
     "/cmake",
     "*.a",
     "*.la",
-    "*.cmake"
+    "*.cmake",
+    "*.prl"
   ],
   "modules": [
     {
       "name": "qtbase",
-      "cleanup-platform": [
-        "/bin",
-        "/mkspecs"
+      "cleanup": [
+        "/bin"
       ],
       "build-options": {
         "arch": {
@@ -129,7 +130,8 @@
       "name": "qttools",
       "buildsystem": "qmake",
       "cleanup": [
-        "/bin"
+        "/bin",
+        "/phrasebooks"
       ],
       "sources": [
         {
@@ -185,7 +187,8 @@
       "name": "qtdeclarative",
       "buildsystem": "qmake",
       "cleanup": [
-        "/bin"
+        "/bin",
+        "/lib/plugins/qmltooling"
       ],
       "sources": [
         {
