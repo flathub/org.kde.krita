@@ -425,8 +425,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://dl.bintray.com/boostorg/release/1.72.0/source/boost_1_72_0.tar.bz2",
-          "sha256": "59c9b274bc451cf91a9ba1dd2c7fdcaf5d60b1b3aa83f2c9fa143417cc660722"
+          "url": "https://dl.bintray.com/boostorg/release/1.74.0/source/boost_1_74_0.tar.bz2",
+          "sha256": "83bfc1507731a0906e387fc28b7ef5417d591429e51e788417fe9ff025e116b1"
         }
       ]
     },
@@ -454,9 +454,10 @@
       ],
       "sources": [
         {
-          "type": "archive",
-          "url": "https://github.com/stachenov/quazip/archive/v0.8.1.tar.gz",
-          "sha256": "4fda4d4248e08015b5090d0369ef9e68bdc4475aa12494f7c0f6d79e43270d14"
+          "type": "git",
+          "url": "https://github.com/stachenov/quazip.git",
+          "commit": "6938d8b108b09ebb14ef25542abd2d9108f8e036",
+          "tag:": "v0.9.1"
         }
       ]
     },
@@ -473,8 +474,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.exiv2.org/builds/exiv2-0.27.2-Source.tar.gz",
-          "sha256": "2652f56b912711327baff6dc0c90960818211cf7ab79bb5e1eb59320b78d153f"
+          "url": "https://www.exiv2.org/builds/exiv2-0.27.3-Source.tar.gz",
+          "sha256": "a79f5613812aa21755d578a297874fb59a85101e793edc64ec2c6bd994e3e778"
         }
       ]
     },
@@ -492,8 +493,9 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://github.com/AcademySoftwareFoundation/openexr/archive/v2.4.1.tar.gz",
-          "sha256": "3ebbe9a8e67edb4a25890b98c598e9fe23b10f96d1416d6a3ff0732e99d001c1"
+          "url": "https://github.com/AcademySoftwareFoundation/openexr.git",
+          "commit": "c32f82c5f1833d959321fc5f615ca52836c7ba65",
+          "tag": "v2.5.3"
         }
       ]
     },
@@ -509,8 +511,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.libraw.org/data/LibRaw-0.19.5.tar.gz",
-          "sha256": "40a262d7cc71702711a0faec106118ee004f86c86cc228281d12d16da03e02f5"
+          "url": "https://www.libraw.org/data/LibRaw-0.20.0.tar.gz",
+          "sha256": "1f0a383da2ce9f409087facd28261decbf6be72cc90c78cd003b0766e4d694a3"
         }
       ]
     },
@@ -520,11 +522,6 @@
       "builddir": true,
       "build-options": {
         "arch": {
-          "arm": {
-            "config-opts": [
-              "-DOCIO_USE_SSE=OFF"
-            ]
-          },
           "aarch64": {
             "config-opts": [
               "-DOCIO_USE_SSE=OFF"
@@ -542,17 +539,17 @@
       ],
       "sources": [
         {
-          "type": "archive",
-          "url": "https://github.com/imageworks/OpenColorIO/archive/v1.1.1.tar.gz",
-          "sha256": "c9b5b9def907e1dafb29e37336b702fff22cc6306d445a13b1621b8a754c14c8"
+          "type": "git",
+          "url": "https://github.com/AcademySoftwareFoundation/OpenColorIO.git",
+          "commit": "ebdec4111f449bea995d01ecd9693b7e704498fe",
+          "tag": "v1.1.1"
         }
       ]
     },
     {
       "name": "vc",
       "skip-arches": [
-        "aarch64",
-        "arm"
+        "aarch64"
       ],
       "buildsystem": "cmake-ninja",
       "builddir": true,
@@ -602,8 +599,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://poppler.freedesktop.org/poppler-0.88.0.tar.xz",
-          "sha256": "b4453804e9a5a519e6ceee0ac8f5efc229e3b0bf70419263c239124474d256c7"
+          "url": "https://poppler.freedesktop.org/poppler-20.10.0.tar.xz",
+          "sha256": "434ecbbb539c1a75955030a1c9b24c7b58200b7f68d2e4269e29acf2f8f13336"
         }
       ]
     },
@@ -636,8 +633,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://gmic.eu/files/source/gmic_2.8.4.tar.gz",
-          "sha256": "b2a279bdf981595b30d8d7828fabf9a620cde06eae8db345a8cddf2160c25379"
+          "url": "https://gmic.eu/files/source/gmic_2.9.2.tar.gz",
+          "sha256": "385db1ef3ef5805bc7bcb65255e188e349fc5e0ae35687b1b914291212bc4c91"
         }
       ]
     },
@@ -649,9 +646,9 @@
       ],
       "sources": [
         {
-          "type": "archive",
-          "url": "https://code.videolan.org/videolan/x264/-/archive/1771b556ee45207f8711744ccbd5d42a3949b14c/x264-1771b556ee45207f8711744ccbd5d42a3949b14c.tar.bz2",
-          "sha256": "b31c5db5337873b9ee42b8cbc60b56d60ce368fa7e4c4eff90a729b36eeb8326"
+          "type": "git",
+          "url": "https://code.videolan.org/videolan/x264.git",
+          "commit": "cde9a93319bea766a92e306d69059c76de970190"
         }
       ]
     },
@@ -675,8 +672,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.ffmpeg.org/releases/ffmpeg-4.2.3.tar.xz",
-          "sha256": "9df6c90aed1337634c1fb026fb01c154c29c82a64ea71291ff2da9aacb9aad31"
+          "url": "https://www.ffmpeg.org/releases/ffmpeg-4.3.1.tar.xz",
+          "sha256": "ad009240d46e307b4e03a213a0f49c11b650e445b1f8be0dda2a9212b34d2ffb"
         }
       ]
     },
@@ -699,12 +696,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.kde.org/stable/krita/4.3.0/krita-4.3.0.tar.xz",
-          "sha256": "4d537709ab681019b2843dcfc6a0b09fd81f702326f23bce520b18ddd2bd14a7"
-        },
-        {
-          "type": "patch",
-          "path": "patches/krita-remove-jpef-jfif-mime-subtype.patch"
+          "url": "https://download.kde.org/stable/krita/4.4.0/krita-4.4.0.tar.xz",
+          "sha256": "837ff7c94553f2ff2a8876994810b4e14b9296adc9726c0116a6fa8828eeb579"
         }
       ]
     }
