@@ -492,7 +492,7 @@
       ],
       "sources": [
         {
-          "type": "archive",
+          "type": "git",
           "url": "https://github.com/AcademySoftwareFoundation/openexr.git",
           "commit": "c32f82c5f1833d959321fc5f615ca52836c7ba65",
           "tag": "v2.5.3"
