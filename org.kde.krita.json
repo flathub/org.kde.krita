@@ -722,6 +722,26 @@
       ]
     },
     {
+      "name": "seexpr",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
+        "-DENABLE_LLVM_BACKEND=OFF",
+        "-DBUILD_DOC=OFF",
+        "-DBUILD_TESTS=OFF",
+        "-DBUILD_UTILS=OFF",
+        "-DUSE_PYTHON=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/seexpr/seexpr-3.4.4.0.tar.gz",
+          "sha256": "3f5b5330667d398285c9f7086cc3fd7e1363f3fa75f79b39766c34fe2e233656"
+        }
+      ]
+    },
+    {
       "name": "krita",
       "buildsystem": "cmake-ninja",
       "builddir": true,
