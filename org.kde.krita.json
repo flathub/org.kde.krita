@@ -213,6 +213,20 @@
       ]
     },
     {
+      "name": "qtimageformats",
+      "buildsystem": "qmake",
+      "cleanup": [
+        "/bin"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "http://download.qt.io/archive/qt/5.12/5.12.9/submodules/qtimageformats-everywhere-src-5.12.9.tar.xz",
+          "sha256": "cd8193698f830cce30959564c191e7bb698877aca3a263c652b4a23907c72b6a"
+        }
+      ]
+    },
+    {
       "name": "extra-cmake-modules",
       "buildsystem": "cmake-ninja",
       "builddir": true,
@@ -378,6 +392,36 @@
       ]
     },
     {
+      "name": "karchive",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/karchive-5.74.0.tar.xz",
+          "sha256": "deba7aedd9cbf707a56cabeb33d231d64db36c3e5ff866b543c374613be1fc21"
+        }
+      ]
+    },
+    {
+      "name": "kimageformats",
+      "buildsystem": "cmake-ninja",
+      "builddir": true,
+      "config-opts": [
+        "-DBUILD_TESTING=OFF"
+      ],
+      "sources": [
+        {
+          "type": "archive",
+          "url": "https://download.kde.org/stable/frameworks/5.74/kimageformats-5.74.0.tar.xz",
+          "sha256": "732c94512a26ff4c4fcdea46ce26fcd7c700c129188c181115fbb0facac937fe"
+        }
+      ]
+    },
+    {
       "name": "sip",
       "buildsystem": "simple",
       "build-commands": [
@@ -457,7 +501,7 @@
           "type": "git",
           "url": "https://github.com/stachenov/quazip.git",
           "commit": "6938d8b108b09ebb14ef25542abd2d9108f8e036",
-          "tag:": "v0.9.1"
+          "tag": "v0.9.1"
         }
       ]
     },
