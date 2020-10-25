@@ -524,7 +524,7 @@
         {
           "type": "patch",
           "path": "patches/exiv2-fcf-protection-only-on-x86.patch"
-        },
+        }
       ]
     },
     {
