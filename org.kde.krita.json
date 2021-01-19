@@ -647,8 +647,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://poppler.freedesktop.org/poppler-20.12.1.tar.xz",
-          "sha256": "d0aa2586c0a4296c775f0d2045f28bb95a694113fc995f95350faa12930f7b35"
+          "url": "https://poppler.freedesktop.org/poppler-21.01.0.tar.xz",
+          "sha256": "016dde34e5f868ea98a32ca99b643325a9682281500942b7113f4ec88d20e2f3"
         }
       ]
     },
@@ -681,8 +681,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://gmic.eu/files/source/gmic_2.9.2.tar.gz",
-          "sha256": "385db1ef3ef5805bc7bcb65255e188e349fc5e0ae35687b1b914291212bc4c91"
+          "url": "https://gmic.eu/files/source/gmic_2.9.4.tar.gz",
+          "sha256": "790bee48f496765f6b59067dfb10dc34e1eb576caf9a95f30af0d567026eacc7"
         }
       ]
     },
@@ -726,22 +726,17 @@
       ]
     },
     {
-      "name": "seexpr",
+      "name": "kseexpr",
       "buildsystem": "cmake-ninja",
       "builddir": true,
       "config-opts": [
-        "-DCMAKE_BUILD_TYPE=RelWithDebInfo",
-        "-DENABLE_LLVM_BACKEND=OFF",
-        "-DBUILD_DOC=OFF",
-        "-DBUILD_TESTS=OFF",
-        "-DBUILD_UTILS=OFF",
-        "-DUSE_PYTHON=OFF"
+        "-DCMAKE_BUILD_TYPE=RelWithDebInfo"
       ],
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.kde.org/stable/seexpr/seexpr-3.4.4.0.tar.gz",
-          "sha256": "3f5b5330667d398285c9f7086cc3fd7e1363f3fa75f79b39766c34fe2e233656"
+          "url": "https://download.kde.org/stable/kseexpr/4.0.1/kseexpr-4.0.1.0.tar.gz",
+          "sha256": "13b8455883001668f5d79c5734821c1ad2a0fbc91d019af085bb7e31cf6ce926"
         }
       ]
     },
@@ -764,8 +759,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.kde.org/stable/krita/4.4.1/krita-4.4.1.tar.xz",
-          "sha256": "799770a624b4fbb9ab1b889f14b5b3e446355de7b9e939f182915aaeea76b5ae"
+          "url": "https://download.kde.org/stable/krita/4.4.2/krita-4.4.2.tar.xz",
+          "sha256": "1ee503afc86178e1abbae63e8334e26116a6779aa9ef202656a1c35b76932e88"
         }
       ]
     }
