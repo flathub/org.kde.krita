@@ -761,6 +761,18 @@
           "type": "archive",
           "url": "https://download.kde.org/stable/krita/4.4.2/krita-4.4.2.tar.xz",
           "sha256": "1ee503afc86178e1abbae63e8334e26116a6779aa9ef202656a1c35b76932e88"
+        },
+        {
+          "type": "file",
+          "dest-filename": "fixed_RGBA_brushes.bundle",
+          "url": "https://invent.kde.org/graphics/krita/-/raw/da1c5a579eb01504df150a753c33b3674a2e3e82/krita/data/bundles/RGBA_brushes.bundle",
+          "sha256": "b3eb46d7b71de1ec3aeecc0c2b522b9666c75d83f063722615cf6182eeddd0f0"
+        },
+        {
+          "type": "shell",
+          "commands": [
+            "cp -v fixed_RGBA_brushes.bundle krita/data/bundles/RGBA_brushes.bundle"
+          ]
         }
       ]
     }
