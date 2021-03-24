@@ -647,8 +647,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://poppler.freedesktop.org/poppler-21.01.0.tar.xz",
-          "sha256": "016dde34e5f868ea98a32ca99b643325a9682281500942b7113f4ec88d20e2f3"
+          "url": "https://poppler.freedesktop.org/poppler-21.03.0.tar.xz",
+          "sha256": "fd51ead4aac1d2f4684fa6e7b0ec06f0233ed21667e720a4e817e4455dd63d27"
         }
       ]
     },
@@ -681,8 +681,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://gmic.eu/files/source/gmic_2.9.4.tar.gz",
-          "sha256": "790bee48f496765f6b59067dfb10dc34e1eb576caf9a95f30af0d567026eacc7"
+          "url": "https://gmic.eu/files/source/gmic_2.9.6.tar.gz",
+          "sha256": "d22fe8515af16dcd050d09a0bc7127ec29f4795ce732a0c6c3eaf839356bc11a"
         }
       ]
     },
@@ -696,7 +696,7 @@
         {
           "type": "git",
           "url": "https://code.videolan.org/videolan/x264.git",
-          "commit": "cde9a93319bea766a92e306d69059c76de970190"
+          "commit": "544c61f082194728d0391fb280a6e138ba320a96"
         }
       ]
     },
@@ -720,8 +720,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://www.ffmpeg.org/releases/ffmpeg-4.3.1.tar.xz",
-          "sha256": "ad009240d46e307b4e03a213a0f49c11b650e445b1f8be0dda2a9212b34d2ffb"
+          "url": "https://www.ffmpeg.org/releases/ffmpeg-4.3.2.tar.xz",
+          "sha256": "46e4e64f1dd0233cbc0934b9f1c0da676008cad34725113fb7f802cfa84ccddb"
         }
       ]
     },
@@ -759,20 +759,8 @@
       "sources": [
         {
           "type": "archive",
-          "url": "https://download.kde.org/stable/krita/4.4.2/krita-4.4.2.tar.xz",
-          "sha256": "1ee503afc86178e1abbae63e8334e26116a6779aa9ef202656a1c35b76932e88"
-        },
-        {
-          "type": "file",
-          "dest-filename": "fixed_RGBA_brushes.bundle",
-          "url": "https://invent.kde.org/graphics/krita/-/raw/da1c5a579eb01504df150a753c33b3674a2e3e82/krita/data/bundles/RGBA_brushes.bundle",
-          "sha256": "b3eb46d7b71de1ec3aeecc0c2b522b9666c75d83f063722615cf6182eeddd0f0"
-        },
-        {
-          "type": "shell",
-          "commands": [
-            "cp -v fixed_RGBA_brushes.bundle krita/data/bundles/RGBA_brushes.bundle"
-          ]
+          "url": "https://download.kde.org/stable/krita/4.4.3/krita-4.4.3.tar.xz",
+          "sha256": "4aa0821af0baf3f21c1f6b4e97a3cbb41f2bf23b74d59b049c653c8d1cb9a784"
         }
       ]
     }
