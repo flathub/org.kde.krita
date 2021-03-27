@@ -17,7 +17,8 @@
     "--env=TMPDIR=/var/tmp",
     /* Needed for colord to work */
     "--system-talk-name=org.freedesktop.ColorManager",
-    "--filesystem=xdg-run/gvfs"
+    "--filesystem=xdg-run/gvfs",
+    "--filesystem=xdg-run/gvfsd"
   ],
   "cleanup": [
     "/include",
