@@ -117,7 +117,7 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/exiv2-0.27.3-Source.tar.gz
+        url: https://mirrors.ocf.berkeley.edu/kde-applicationdata/krita/build/dependencies/exiv2-0.27.3-Source.tar.gz
         sha256: a7cee019b07f50e8f61f95326964ef57b05dfe1e599dcbb1a945d466219cede0
       - type: patch
         paths:
@@ -371,7 +371,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/extra-cmake-modules-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/extra-cmake-modules-5.64.0.tar.xz
         sha256: 1865efc6254bed44e0a6918c5af3da62be4008ba7a197a47f35251f298041a69
       - type: patch
         paths:
@@ -386,7 +386,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/kconfig-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kconfig-5.64.0.tar.xz
         sha256: 112c1db9f038dbacf357d08645c83ca103d8c3e7fb0c880ac16f665fdf7d9157
       - type: patch
         paths:
@@ -399,7 +399,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/karchive-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/karchive-5.64.0.tar.xz
         sha256: 135fbfb2dfe107e4487723a5f887d1d074e13258a4583d592639366094aafe1a
       - type: patch
         paths:
@@ -412,7 +412,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/kwidgetsaddons-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kwidgetsaddons-5.64.0.tar.xz
         sha256: a2d4a47489621d095c4979ea25d5d8304cf4004b10a892a2b314d74cd30cb5da
   - name: kcompletion
     buildsystem: cmake-ninja
@@ -422,7 +422,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/kcompletion-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kcompletion-5.64.0.tar.xz
         sha256: 4fe5b9254e038e654d55167163b2812582f31fe550c977979d692b69424c2508
   - name: kcoreaddons
     buildsystem: cmake-ninja
@@ -432,7 +432,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/kcoreaddons-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kcoreaddons-5.64.0.tar.xz
         sha256: 3f0cb3273debf9791dda3f1ad135b6b1a20d88fed1e21890c4b70bac64fdb188
   - name: kguiaddons
     buildsystem: cmake-ninja
@@ -442,7 +442,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/kguiaddons-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kguiaddons-5.64.0.tar.xz
         sha256: 4caac79b7341c7796f3ca5e1d88cef57ecab2eefcac9ab654fd977706c89bae4
   - name: ki18n
     buildsystem: cmake-ninja
@@ -452,7 +452,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/ki18n-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/ki18n-5.64.0.tar.xz
         sha256: ccd2c2f8b14251701f902c9e7d046da1582e544d31edae743911f3554022d024
       - type: patch
         paths:
@@ -465,7 +465,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/kitemmodels-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kitemmodels-5.64.0.tar.xz
         sha256: 1bae70e4c6a033eea649efc17f0a060aba89144f4c469f235fbf5023dba5abc4
   - name: kitemviews
     buildsystem: cmake-ninja
@@ -475,7 +475,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/kitemviews-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kitemviews-5.64.0.tar.xz
         sha256: 0b3f8a0116c042ae187b67f35ffd40872352b91f5f236d19dd26ffad8db83fee
   - name: kimageformats
     buildsystem: cmake-ninja
@@ -485,7 +485,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/kimageformats-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kimageformats-5.64.0.tar.xz
         sha256: 48c6a7026854127fc83698ab11e6639a525d387cf384f2558db6c7478bceae4c
       - type: patch
         paths:
@@ -499,7 +499,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/kwindowsystem-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kwindowsystem-5.64.0.tar.xz
         sha256: 77c2e6b0032a79547f80bcd36682aa72c0e901e3b5acc83a58f69d644ce03dab
       - type: patch
         paths:
@@ -512,7 +512,7 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.64/kcrash-5.64.0.tar.xz
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kcrash-5.64.0.tar.xz
         sha256: 9e9ad5e7a6a3e9a128128a7863204f8c4a555bd8659d8ed4ef4cc6bb2fc48290
   - name: poppler-data
     buildsystem: cmake-ninja
@@ -572,7 +572,7 @@ modules:
       - -DBUILD_UTILS=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/kseexpr/4.0.4/kseexpr-4.0.4.0.tar.gz
+        url: https://mirrors.ocf.berkeley.edu/kde/stable/kseexpr/4.0.4/kseexpr-4.0.4.0.tar.gz
         sha256: ea4f6a8e820e6cc12d2a1e6977e96ea5457f37729fe0bc4ee8cc62d4c26c36ae
   - name: json_c
     buildsystem: cmake-ninja
@@ -667,7 +667,7 @@ modules:
       - /share/icons/hicolor/1024x1024
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.0.0/krita-5.0.0.tar.gz
+        url: https://mirrors.ocf.berkeley.edu/kde/stable/krita/5.0.0/krita-5.0.0.tar.gz
         sha256: 84d5833dbcab3fd3a418f4c37670d82ad919430f0c6d0a57b993907471eecc57
   - name: gmic
     buildsystem: cmake-ninja
@@ -677,5 +677,5 @@ modules:
       - -DGMIC_QT_HOST=krita-plugin
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.0.0.2-patched.tar.gz
+        url: https://mirrors.ocf.berkeley.edu/kde-applicationdata/krita/build/dependencies/gmic-3.0.0.2-patched.tar.gz
         sha256: 22d4104fb83f6c9f4d6045ba3cd634e3df1995a803890f56199ed8664fe463b6
