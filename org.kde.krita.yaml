@@ -669,3 +669,13 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/krita/5.0.0/krita-5.0.0.tar.gz
         sha256: 84d5833dbcab3fd3a418f4c37670d82ad919430f0c6d0a57b993907471eecc57
+  - name: gmic
+    buildsystem: cmake-ninja
+    subdir: gmic-qt
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DGMIC_QT_HOST=krita-plugin
+    sources:
+      - type: archive
+        url: https://files.kde.org/krita/build/dependencies/gmic-3.0.0.2-patched.tar.gz
+        sha256: 22d4104fb83f6c9f4d6045ba3cd634e3df1995a803890f56199ed8664fe463b6
