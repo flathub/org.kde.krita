@@ -1,0 +1,671 @@
+app-id: org.kde.krita
+default-branch: stable
+runtime: org.freedesktop.Platform
+runtime-version: '21.08'
+sdk: org.freedesktop.Sdk
+command: krita
+rename-icon: krita
+finish-args:
+  - --share=ipc
+  - --share=network
+  - --socket=x11
+  - --socket=pulseaudio
+  - --device=dri
+  - --filesystem=host
+  - --filesystem=xdg-run/gvfs
+  - --env=PYTHONPATH=/app/lib/python3/dist-packages
+  - --env=TMPDIR=/var/tmp
+  - --system-talk-name=org.freedesktop.ColorManager
+cleanup:
+  - /include
+  - /lib/pkgconfig
+  - /lib/cmake"
+  - /lib/mkspecs
+  - /share/aclocal
+  - /share/pkgconfig
+  - /share/info
+  - /share/man
+  - /cmake
+  - '*.a'
+  - '*.la'
+  - '*.cmake'
+  - '*.prl'
+modules:
+  - name: png
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DPNG_TESTS=OFF
+    sources:
+      - type: archive
+        url: https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz
+        sha256: daeb2620d829575513e35fecc83f0d3791a620b9b93d800b763542ece9390fb4
+  - name: tiff
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://download.osgeo.org/libtiff/tiff-4.2.0.tar.gz
+        sha256: eb0484e568ead8fa23b513e9b0041df7e327f4ee2d22db5a533929dfc19633cb
+      - type: patch
+        paths:
+          - patches/tiff/CVE-2018-12900.patch
+          - patches/tiff/0001-Enable-writing-Photoshop-blobs.patch
+  - name: jpeg
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DWITH_SIMD=OFF
+    sources:
+      - type: archive
+        url: https://downloads.sourceforge.net/project/libjpeg-turbo/2.0.6/libjpeg-turbo-2.0.6.tar.gz
+        sha256: d74b92ac33b0e3657123ddcf6728788c90dc84dcb6a52013d758af3c4af481bb
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=/app --with-libraries=system
+      - ./b2 install -j $FLATPAK_BUILDER_N_JOBS
+    sources:
+      - type: archive
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.71.0/source/boost_1_71_0.tar.bz2
+        sha256: d73a8da01e8bf8c7eda40b4c84915071a8c8a0df4a6734537ddde4a8580524ee
+  - name: fftw3
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTS=OFF
+      - -DENABLE_THREADS=ON
+    sources:
+      - type: archive
+        url: http://fftw.org/fftw-3.3.9.tar.gz
+        sha256: bf2c7ce40b04ae811af714deb512510cc2c17b9ab9d6ddcf49fe4487eea7af3d
+  - name: eigen3
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    cleanup:
+      - '*'
+    sources:
+      - type: archive
+        url: https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.gz
+        sha256: 7985975b787340124786f092b3a07d594b2e9cd53bbfe5f3d9b1daee7d55f56f
+  - name: expat
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/libexpat/libexpat/releases/download/R_2_2_9/expat-2.2.9.tar.gz
+        sha256: 4456e0aa72ecc7e1d4b3368cd545a5eec7f9de5133a8dc37fdb1efa6174c4947
+  - name: exiv2
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DEXIV2_BUILD_SAMPLES=OFF
+      - -DEXIV2_ENABLE_NLS=OFF
+      - -DEXIV2_BUILD_EXIV2_COMMAND=OFF
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://files.kde.org/krita/build/dependencies/exiv2-0.27.3-Source.tar.gz
+        sha256: a7cee019b07f50e8f61f95326964ef57b05dfe1e599dcbb1a945d466219cede0
+      - type: patch
+        paths:
+          - patches/exiv2/0001-Remove-fcf-protection-from-Exiv2.patch
+  - name: lcms2
+    buildsystem: cmake-ninja
+    cleanup:
+      - /bin
+      - /share
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTS=FALSE
+      - -DBUILD_UTILS=FALSE
+      - -DBUILD_STATIC=FALSE
+      - -DBUILD_PLUGINS=TRUE
+    sources:
+      - type: archive
+        url: https://github.com/mm2/Little-CMS/archive/67d6968f8ff00e9134a574ae919b7360f1d8ec94.zip
+        sha256: a76bf163044d80a7800087356f94815a29dcad1056cd4d74bcbb8f84c993b01e
+      - type: patch
+        paths:
+          - patches/lcms2/0001-Add-cmake-build-system.patch
+          - patches/lcms2/0002-Quick-check-for-SSE-support.patch
+          - patches/lcms2/0003-Separate-fast-float-plugin.patch
+          - patches/lcms2/0004-Use-correct-input-channel-index.patch
+          - patches/lcms2/0005-Fix-copy-alpha-for-float-CMYK-and-L-a-b.patch
+  - name: openexr
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DNAMESPACE_VERSIONING=OFF
+    cleanup:
+      - /bin
+      - /share/doc
+    sources:
+      - type: archive
+        url: https://github.com/AcademySoftwareFoundation/openexr/archive/v2.5.5.tar.gz
+        sha256: 59e98361cb31456a9634378d0f653a2b9554b8900f233450f2396ff495ea76b3
+  - name: vc
+    skip-arches:
+      - aarch64
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+      - -DCMAKE_SYSTEM_PROCESSOR=x86
+    cleanup:
+      - '*'
+    sources:
+      - type: archive
+        url: https://github.com/VcDevel/Vc/releases/download/1.4.1/Vc-1.4.1.tar.gz
+        sha256: 68e609a735326dc3625e98bd85258e1329fb2a26ce17f32c432723b750a4119f
+      - type: patch
+        paths:
+          - patches/vc/0001-Fix-Vc-s-headers-to-support-GCC11.patch
+          - patches/vc/0001-Remove-cmake_minimum_required-from-VcMacro.patch
+  - name: libraw
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cleanup:
+      - /bin
+      - /share/doc
+    sources:
+      - type: archive
+        url: https://www.libraw.org/data/LibRaw-0.20.2.tar.gz
+        sha256: dc1b486c2003435733043e4e05273477326e51c3ea554c6864a4eafaff1004a6
+      - type: patch
+        paths:
+          - patches/libraw/0001-LibRaw-cmake.patch
+          - patches/libraw/0002-Use-CMake-install-prefix.patch
+  - name: giflib
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cleanup:
+      - /bin
+      - /share/doc
+    sources:
+      - type: archive
+        url: https://downloads.sourceforge.net/project/giflib/giflib-5.2.1.tar.gz
+        sha256: 31da5562f44c5f15d63340a09a4fd62b48c45620cd302f77a6d9acf0077879bd
+      - type: patch
+        paths:
+          - patches/giflib/0001-Add-vcpkg-CMake-toolchain.patch
+  - name: gsl
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_SHARED_LIBS=ON
+      - -DBUILD_TESTING=OFF
+      - -DNO_AMPL_BINDINGS=ON
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://github.com/ampl/gsl/archive/e020de75f5b469b8cab600c9da64c39383ca9ab1.tar.gz
+        sha256: 1cf1528d49ca845ca6b96b8593abbb5e3e332dec6b44fe33a62e1a2b3999bc65
+      - type: patch
+        paths:
+          - patches/gsl/gsl-2.3_clang12.patch
+  - name: qtbase
+    cleanup:
+      - /bin
+    build-options:
+      arch:
+        x86_64:
+          config-opts:
+            - -reduce-relocations
+            - -force-debug-info
+        aarch64:
+          config-opts:
+            - -no-reduce-relocations
+            - -optimize-size
+            - -opengl desktop
+    config-opts:
+      - -confirm-license
+      - -opensource
+      - -shared
+      - -platform
+      - linux-g++
+      - -optimized-qmake
+      - -nomake
+      - examples
+      - -nomake
+      - tests
+      - -system-harfbuzz
+      - -qt-sqlite
+      - -accessibility
+      - -dbus-linked
+      - -fontconfig
+      - -glib
+      - -icu
+      - -openssl-linked
+      - -no-pch
+      - -no-rpath
+      - -no-directfb
+      - -no-linuxfb
+      - -no-kms
+      - -system-proxies
+      - -gtk
+      - -no-use-gold-linker
+      - -archdatadir
+      - /app/lib
+    sources:
+      - type: archive
+        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtbase-everywhere-src-5.12.12.tar.xz
+        sha256: 7c15c31590b6ec12408242b1a32075d1d545f35e1d41fdbad31ec670d00680f2
+      - type: patch
+        paths:
+          - patches/qt/base/FileChooser-portal-skip-empty-filters.patch
+          - patches/qt/base/qtbase-avoid-hardcoding-kernel-version.patch
+          - patches/qt/base/qtbase-use-wayland-on-gnome.patch
+          - patches/qt/base/qtbase-make-sure-to-correctly-construct-base-platform-theme.patch
+          - patches/qt/base/open-file-portal-writable.patch
+          - patches/qt/base/0012-Synthesize-Enter-LeaveEvent-for-accepted-QTabletEven.patch
+          - patches/qt/base/0013-Poison-Qt-s-headers-with-a-mark-about-presence-of-En.patch
+          - patches/qt/base/0081-Fix-no-warning-for-overwriting-files-in-non-native-d.patch
+          - patches/qt/base/0082-Make-jp-e-g-default-extensions-context-aware.patch
+          - patches/qt/base/0100-Fix-artifacts-when-rendering-multisubpath-dashed-QPa.patch
+          - patches/qt/base/0101-Don-t-eat-ShortcutOverride-events-when-there-is-a-pa.patch
+          - patches/qt/base/0110-Pass-proper-dirty-rect-in-paint-event-to-QOpenGLWidg.patch
+          - patches/qt/base/0111-Fix-unbalanced-KeyPress-Release-events-in-children-o.patch
+          - patches/qt/base/0112-Fix-shortcuts-assigned-to-special-keys-on-non-latin-.patch
+          - patches/qt/base/0113-Fix-multiple-shortcuts-match-from-different-keyboard.patch
+          - patches/qt/base/0114-Fix-shortcuts-with-special-keys-on-non-US-layouts-on.patch
+          - patches/qt/base/0001-Check-if-we-reached-the-end-of-Iterator.patch
+          - patches/qt/base/0116-Make-Qt-relocatable.patch
+          - patches/qt/base/0119-Fix-relocated-Qt-to-be-found-when-its-path-has-non-A.patch
+          - patches/qt/base/0120-Fix-building-QtBase-with-GCC11.patch
+          - patches/qt/base/0001-Do-not-crash-if-the-foundry-name-is-an-empty-space.patch
+          - patches/qt/base/frac_dpi_paint_artifacts/0001-Add-faster-path-for-scaling-QRegion-with-multiple-re.patch
+          - patches/qt/base/frac_dpi_paint_artifacts/0002-Fix-QPainter-off-by-one-clipping-for-some-non-intege.patch
+          - patches/qt/base/frac_dpi_paint_artifacts/0003-Fix-under-non-integer-scaling-incorrect-update-area.patch
+      - type: shell
+        commands:
+          - mv configure configure.qt
+      - type: script
+        commands:
+          - processed=`sed -e 's/--/-/g ; s/=/ /g' <<< $@`
+          - ./configure.qt $processed
+        dest-filename: configure
+  - name: qttools
+    buildsystem: qmake
+    cleanup:
+      - /bin
+      - /phrasebooks
+    sources:
+      - type: archive
+        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qttools-everywhere-src-5.12.12.tar.xz
+        sha256: 33897d94f4d8f5c5b88f78d61759f774e0d12c1aec3fc001b2a418eea77f4263
+  - name: qtx11extras
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtx11extras-everywhere-src-5.12.12.tar.xz
+        sha256: d3a46415ecd91d61c532cb7d7dd1800545add61966fc22e15487db77927be875
+  - name: qtsvg
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtsvg-everywhere-src-5.12.12.tar.xz
+        sha256: 1623928e548ab86c525a5fa8d8eb02841ecf749f98ba78410311c60bf5fb75e2
+  - name: qtmultimedia
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtmultimedia-everywhere-src-5.12.12.tar.xz
+        sha256: b6807ec865feaec2a89bfefb075fe8e2beff6b0db41c7f8aadb345541c8b6e35
+  - name: qtdeclarative
+    buildsystem: qmake
+    cleanup:
+      - /bin
+      - /lib/plugins/qmltooling
+    sources:
+      - type: archive
+        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtdeclarative-everywhere-src-5.12.12.tar.xz
+        sha256: a63c0ae198abc65dcb7c84e8fb8891df7ef56f72347d7382a4d08c5a8a364790
+      - type: patch
+        paths:
+          - patches/qt/declarative/Additional-GCC11-Fixes.patch
+          - patches/qt/declarative/0121-Fix-compilation-of-QtDeclarative-with-GCC11.patch
+  - name: qtquickcontrols
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtquickcontrols-everywhere-src-5.12.12.tar.xz
+        sha256: 63b9666522aea7262eca154968b1717c65ecaa8f2602fbefe901a33d90ed438d
+  - name: qtimageformats
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtimageformats-everywhere-src-5.12.12.tar.xz
+        sha256: 5b1e56df31fd70f75911427f133be159abf2adf408bf7c8733938097eb096436
+  - name: extra-cmake-modules
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/extra-cmake-modules-5.64.0.tar.xz
+        sha256: 1865efc6254bed44e0a6918c5af3da62be4008ba7a197a47f35251f298041a69
+      - type: patch
+        paths:
+          - patches/frameworks/extra-cmake-modules/ecm_install_to_share.diff
+          - patches/frameworks/extra-cmake-modules/0001-Skip-looking-for-Png2Ico-when-IcoTool-is-found.patch
+          - patches/frameworks/extra-cmake-modules/0001-Don-t-cause-warning-on-newer-CMake-due-to-package-na.patch
+  - name: kconfig
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/kconfig-5.64.0.tar.xz
+        sha256: 112c1db9f038dbacf357d08645c83ca103d8c3e7fb0c880ac16f665fdf7d9157
+      - type: patch
+        paths:
+          - patches/frameworks/kconfig/0001-Patch-kconfig-to-save-the-config-to-AppConfigLocatio.patch
+  - name: karchive
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/karchive-5.64.0.tar.xz
+        sha256: 135fbfb2dfe107e4487723a5f887d1d074e13258a4583d592639366094aafe1a
+      - type: patch
+        paths:
+          - patches/frameworks/karchive/karchive.diff
+  - name: kwidgetsaddons
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/kwidgetsaddons-5.64.0.tar.xz
+        sha256: a2d4a47489621d095c4979ea25d5d8304cf4004b10a892a2b314d74cd30cb5da
+  - name: kcompletion
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/kcompletion-5.64.0.tar.xz
+        sha256: 4fe5b9254e038e654d55167163b2812582f31fe550c977979d692b69424c2508
+  - name: kcoreaddons
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/kcoreaddons-5.64.0.tar.xz
+        sha256: 3f0cb3273debf9791dda3f1ad135b6b1a20d88fed1e21890c4b70bac64fdb188
+  - name: kguiaddons
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/kguiaddons-5.64.0.tar.xz
+        sha256: 4caac79b7341c7796f3ca5e1d88cef57ecab2eefcac9ab654fd977706c89bae4
+  - name: ki18n
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/ki18n-5.64.0.tar.xz
+        sha256: ccd2c2f8b14251701f902c9e7d046da1582e544d31edae743911f3554022d024
+      - type: patch
+        paths:
+          - patches/frameworks/ki18n/ki18n-appdatalocation.diff
+  - name: kitemmodels
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/kitemmodels-5.64.0.tar.xz
+        sha256: 1bae70e4c6a033eea649efc17f0a060aba89144f4c469f235fbf5023dba5abc4
+  - name: kitemviews
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/kitemviews-5.64.0.tar.xz
+        sha256: 0b3f8a0116c042ae187b67f35ffd40872352b91f5f236d19dd26ffad8db83fee
+  - name: kimageformats
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/kimageformats-5.64.0.tar.xz
+        sha256: 48c6a7026854127fc83698ab11e6639a525d387cf384f2558db6c7478bceae4c
+      - type: patch
+        paths:
+          - patches/frameworks/kimageformats/kimageformats.diff
+          - patches/frameworks/kimageformats/disable_exr.diff
+  - name: kwindowsystem
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/kwindowsystem-5.64.0.tar.xz
+        sha256: 77c2e6b0032a79547f80bcd36682aa72c0e901e3b5acc83a58f69d644ce03dab
+      - type: patch
+        paths:
+          - patches/frameworks/kwindowsystem/kwindowsystem-x11.diff
+  - name: kcrash
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/5.64/kcrash-5.64.0.tar.xz
+        sha256: 9e9ad5e7a6a3e9a128128a7863204f8c4a555bd8659d8ed4ef4cc6bb2fc48290
+  - name: poppler-data
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://poppler.freedesktop.org/poppler-data-0.4.10.tar.gz
+        sha256: 6e2fcef66ec8c44625f94292ccf8af9f1d918b410d5aa69c274ce67387967b30
+  - name: poppler
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_GTK_TESTS=OFF
+      - -DBUILD_QT5_TESTS=FALSE
+      - -DBUILD_CPP_TESTS=FALSE
+      - -DENABLE_UTILS=FALSE
+      - -DENABLE_GLIB=FALSE
+      - -DENABLE_LIBOPENJPEG=none
+      - -DWITH_NSS3=OFF
+    sources:
+      - type: archive
+        url: https://poppler.freedesktop.org/poppler-21.02.0.tar.xz
+        sha256: 5c14759c99891e6e472aced6d5f0ff1dacf85d80cd9026d365c55c653edf792c
+  - name: quazip
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/stachenov/quazip/archive/v0.9.1.tar.gz
+        sha256: 5d36b745cb94da440432690050e6db45b99b477cfe9bc3b82fd1a9d36fff95f5
+      - type: patch
+        paths:
+          - patches/quazip/liblocation.diff
+  - name: openjpeg
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DOPENJPEG_INSTALL_INCLUDE_DIR=include/
+    sources:
+      - type: archive
+        url: https://github.com/uclouvain/openjpeg/archive/v2.4.0.tar.gz
+        sha256: 8702ba68b442657f11aaeb2b338443ca8d5fb95b0d845757968a7be31ef7f16d
+  - name: seexpr
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DENABLE_LLVM_BACKEND=OFF
+      - -DBUILD_DOC=OFF
+      - -DBUILD_TESTS=OFF
+      - -DBUILD_UTILS=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/kseexpr/4.0.4/kseexpr-4.0.4.0.tar.gz
+        sha256: ea4f6a8e820e6cc12d2a1e6977e96ea5457f37729fe0bc4ee8cc62d4c26c36ae
+  - name: json_c
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/json-c/json-c/archive/json-c-0.15-20200726.tar.gz
+        sha256: 4ba9a090a42cf1e12b84c64e4464bb6fb893666841d5843cc5bef90774028882
+  - name: mypaint
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz
+        sha256: 741754f293f6b7668f941506da07cd7725629a793108bb31633fb6c3eae5315f
+      - type: patch
+        paths:
+          - patches/mypaint/0001-Add-cmake-build-system.patch
+          - patches/mypaint/0002-cmake-library-versioning-info-for-pkg-config.patch
+          - patches/mypaint/0003-cmake-library-versioning-info-for-CMake-itself.patch
+          - patches/mypaint/0004-cmake-Fix-relative-paths.patch
+          - patches/mypaint/0005-Export-all-symbols.patch
+  - name: fcitx-qt5
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+      - -DENABLE_LIBRARY=OFF
+    sources:
+      - type: archive
+        url: https://github.com/fcitx/fcitx-qt5/archive/refs/tags/1.2.5.tar.gz
+        sha256: b45183d9a51a65dacaed33726587a1604d09c77adffea9f02735085e9335053d
+  - name: webp
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_SHARED_LIBS=OFF
+    sources:
+      - type: archive
+        url: https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.0.tar.gz
+        sha256: 2fc8bbde9f97f2ab403c0224fb9ca62b2e6852cbc519e91ceaa7c153ffd88a0c
+      - type: patch
+        paths:
+          - patches/webp/0001-Fix-CMake-targets-install-directory.patch
+  - name: x264
+    config-opts:
+      - --disable-cli
+      - --enable-shared
+    sources:
+      - type: git
+        url: https://code.videolan.org/videolan/x264.git
+        commit: 5db6aa6cab1b146e07b60cc1736a01f21da01154
+  - name: ffmpeg
+    config-opts:
+      - --enable-rpath
+      - --enable-gpl
+      - --disable-static
+      - --enable-shared
+      - --disable-doc
+      - --disable-ffplay
+      - --disable-ffprobe
+      - --enable-libopus
+      - --enable-libvpx
+      - --enable-libx264
+    cleanup:
+      - /share/ffmpeg/examples
+    sources:
+      - type: archive
+        url: https://www.ffmpeg.org/releases/ffmpeg-4.4.1.tar.xz
+        sha256: eadbad9e9ab30b25f5520fbfde99fae4a92a1ae3c0257a8d68569a4651e30e02
+  - name: krita
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DDEFINE_NO_DEPRECATED=1
+      - -DFOUNDATION_BUILD=1
+      - -DHIDE_SAFE_ASSERTS=ON
+      - -DFETCH_TRANSLATIONS=ON
+      - -DBUILD_TESTING=OFF
+      - -DHAVE_MEMORY_LEAK_TRACKER=FALSE
+    build-options:
+      env:
+        PYTHONPATH: /app/lib/python3/dist-packages
+    cleanup:
+      - /share/icons/hicolor/1024x1024
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/krita/5.0.0/krita-5.0.0.tar.gz
+        sha256: 84d5833dbcab3fd3a418f4c37670d82ad919430f0c6d0a57b993907471eecc57
