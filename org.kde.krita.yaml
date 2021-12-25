@@ -31,196 +31,6 @@ cleanup:
   - '*.cmake'
   - '*.prl'
 modules:
-  - name: png
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DPNG_TESTS=OFF
-    sources:
-      - type: archive
-        url: https://download.sourceforge.net/libpng/libpng-1.6.37.tar.gz
-        sha256: daeb2620d829575513e35fecc83f0d3791a620b9b93d800b763542ece9390fb4
-  - name: tiff
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://download.osgeo.org/libtiff/tiff-4.2.0.tar.gz
-        sha256: eb0484e568ead8fa23b513e9b0041df7e327f4ee2d22db5a533929dfc19633cb
-      - type: patch
-        paths:
-          - patches/tiff/CVE-2018-12900.patch
-          - patches/tiff/0001-Enable-writing-Photoshop-blobs.patch
-  - name: jpeg
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DWITH_SIMD=OFF
-    sources:
-      - type: archive
-        url: https://downloads.sourceforge.net/project/libjpeg-turbo/2.0.6/libjpeg-turbo-2.0.6.tar.gz
-        sha256: d74b92ac33b0e3657123ddcf6728788c90dc84dcb6a52013d758af3c4af481bb
-  - name: boost
-    buildsystem: simple
-    build-commands:
-      - ./bootstrap.sh --prefix=/app --with-libraries=system
-      - ./b2 install -j $FLATPAK_BUILDER_N_JOBS
-    sources:
-      - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.71.0/source/boost_1_71_0.tar.bz2
-        sha256: d73a8da01e8bf8c7eda40b4c84915071a8c8a0df4a6734537ddde4a8580524ee
-  - name: fftw3
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTS=OFF
-      - -DENABLE_THREADS=ON
-    sources:
-      - type: archive
-        url: http://fftw.org/fftw-3.3.9.tar.gz
-        sha256: bf2c7ce40b04ae811af714deb512510cc2c17b9ab9d6ddcf49fe4487eea7af3d
-  - name: eigen3
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTING=OFF
-    cleanup:
-      - '*'
-    sources:
-      - type: archive
-        url: https://gitlab.com/libeigen/eigen/-/archive/3.3.9/eigen-3.3.9.tar.gz
-        sha256: 7985975b787340124786f092b3a07d594b2e9cd53bbfe5f3d9b1daee7d55f56f
-  - name: expat
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/libexpat/libexpat/releases/download/R_2_2_9/expat-2.2.9.tar.gz
-        sha256: 4456e0aa72ecc7e1d4b3368cd545a5eec7f9de5133a8dc37fdb1efa6174c4947
-  - name: exiv2
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DEXIV2_BUILD_SAMPLES=OFF
-      - -DEXIV2_ENABLE_NLS=OFF
-      - -DEXIV2_BUILD_EXIV2_COMMAND=OFF
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde-applicationdata/krita/build/dependencies/exiv2-0.27.3-Source.tar.gz
-        sha256: a7cee019b07f50e8f61f95326964ef57b05dfe1e599dcbb1a945d466219cede0
-      - type: patch
-        paths:
-          - patches/exiv2/0001-Remove-fcf-protection-from-Exiv2.patch
-  - name: lcms2
-    buildsystem: cmake-ninja
-    cleanup:
-      - /bin
-      - /share
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTS=FALSE
-      - -DBUILD_UTILS=FALSE
-      - -DBUILD_STATIC=FALSE
-      - -DBUILD_PLUGINS=TRUE
-    sources:
-      - type: archive
-        url: https://github.com/mm2/Little-CMS/archive/67d6968f8ff00e9134a574ae919b7360f1d8ec94.zip
-        sha256: a76bf163044d80a7800087356f94815a29dcad1056cd4d74bcbb8f84c993b01e
-      - type: patch
-        paths:
-          - patches/lcms2/0001-Add-cmake-build-system.patch
-          - patches/lcms2/0002-Quick-check-for-SSE-support.patch
-          - patches/lcms2/0003-Separate-fast-float-plugin.patch
-          - patches/lcms2/0004-Use-correct-input-channel-index.patch
-          - patches/lcms2/0005-Fix-copy-alpha-for-float-CMYK-and-L-a-b.patch
-  - name: openexr
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DNAMESPACE_VERSIONING=OFF
-    cleanup:
-      - /bin
-      - /share/doc
-    sources:
-      - type: archive
-        url: https://github.com/AcademySoftwareFoundation/openexr/archive/v2.5.5.tar.gz
-        sha256: 59e98361cb31456a9634378d0f653a2b9554b8900f233450f2396ff495ea76b3
-  - name: vc
-    skip-arches:
-      - aarch64
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTING=OFF
-      - -DCMAKE_SYSTEM_PROCESSOR=x86
-    cleanup:
-      - '*'
-    sources:
-      - type: archive
-        url: https://github.com/VcDevel/Vc/releases/download/1.4.1/Vc-1.4.1.tar.gz
-        sha256: 68e609a735326dc3625e98bd85258e1329fb2a26ce17f32c432723b750a4119f
-      - type: patch
-        paths:
-          - patches/vc/0001-Fix-Vc-s-headers-to-support-GCC11.patch
-          - patches/vc/0001-Remove-cmake_minimum_required-from-VcMacro.patch
-  - name: libraw
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cleanup:
-      - /bin
-      - /share/doc
-    sources:
-      - type: archive
-        url: https://www.libraw.org/data/LibRaw-0.20.2.tar.gz
-        sha256: dc1b486c2003435733043e4e05273477326e51c3ea554c6864a4eafaff1004a6
-      - type: patch
-        paths:
-          - patches/libraw/0001-LibRaw-cmake.patch
-          - patches/libraw/0002-Use-CMake-install-prefix.patch
-  - name: giflib
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cleanup:
-      - /bin
-      - /share/doc
-    sources:
-      - type: archive
-        url: https://downloads.sourceforge.net/project/giflib/giflib-5.2.1.tar.gz
-        sha256: 31da5562f44c5f15d63340a09a4fd62b48c45620cd302f77a6d9acf0077879bd
-      - type: patch
-        paths:
-          - patches/giflib/0001-Add-vcpkg-CMake-toolchain.patch
-  - name: gsl
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_SHARED_LIBS=ON
-      - -DBUILD_TESTING=OFF
-      - -DNO_AMPL_BINDINGS=ON
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/ampl/gsl/archive/e020de75f5b469b8cab600c9da64c39383ca9ab1.tar.gz
-        sha256: 1cf1528d49ca845ca6b96b8593abbb5e3e332dec6b44fe33a62e1a2b3999bc65
-      - type: patch
-        paths:
-          - patches/gsl/gsl-2.3_clang12.patch
   - name: qtbase
     cleanup:
       - /bin
@@ -371,149 +181,315 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/extra-cmake-modules-5.64.0.tar.xz
-        sha256: 1865efc6254bed44e0a6918c5af3da62be4008ba7a197a47f35251f298041a69
-      - type: patch
-        paths:
-          - patches/frameworks/extra-cmake-modules/ecm_install_to_share.diff
-          - patches/frameworks/extra-cmake-modules/0001-Skip-looking-for-Png2Ico-when-IcoTool-is-found.patch
-          - patches/frameworks/extra-cmake-modules/0001-Don-t-cause-warning-on-newer-CMake-due-to-package-na.patch
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/extra-cmake-modules-5.76.0.tar.xz
+        sha256: 4845e9e0a43ba15158c0cfdc7ab594e7d02692fab9083201715270a096704a32
   - name: kconfig
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kconfig-5.64.0.tar.xz
-        sha256: 112c1db9f038dbacf357d08645c83ca103d8c3e7fb0c880ac16f665fdf7d9157
-      - type: patch
-        paths:
-          - patches/frameworks/kconfig/0001-Patch-kconfig-to-save-the-config-to-AppConfigLocatio.patch
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kconfig-5.76.0.tar.xz
+        sha256: 153d3ed114954594b0dcc00e1317483609649c064203e6eb8b110686dbaba686
   - name: karchive
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/karchive-5.64.0.tar.xz
-        sha256: 135fbfb2dfe107e4487723a5f887d1d074e13258a4583d592639366094aafe1a
-      - type: patch
-        paths:
-          - patches/frameworks/karchive/karchive.diff
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/karchive-5.76.0.tar.xz
+        sha256: 503d33b247ae24260c73aac2c48601eb4f8be3f10c9149549ea5dd2d22082a2a
   - name: kwidgetsaddons
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kwidgetsaddons-5.64.0.tar.xz
-        sha256: a2d4a47489621d095c4979ea25d5d8304cf4004b10a892a2b314d74cd30cb5da
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kwidgetsaddons-5.76.0.tar.xz
+        sha256: ab7aa94bb1f63e5bea5cf461349c1add96fd608a73c5b7c9d374e6bf035fcac6
   - name: kcompletion
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kcompletion-5.64.0.tar.xz
-        sha256: 4fe5b9254e038e654d55167163b2812582f31fe550c977979d692b69424c2508
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kcompletion-5.76.0.tar.xz
+        sha256: 014c56172040bf3aa27f81a6bb433914a5c22d2dfb1f8566be4cce678d09193a
   - name: kcoreaddons
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kcoreaddons-5.64.0.tar.xz
-        sha256: 3f0cb3273debf9791dda3f1ad135b6b1a20d88fed1e21890c4b70bac64fdb188
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kcoreaddons-5.76.0.tar.xz
+        sha256: fbab3e3e18f42922ecdc50138ed31f62007cafa902b959d89b1233b5557282d6
   - name: kguiaddons
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kguiaddons-5.64.0.tar.xz
-        sha256: 4caac79b7341c7796f3ca5e1d88cef57ecab2eefcac9ab654fd977706c89bae4
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kguiaddons-5.76.0.tar.xz
+        sha256: bdaa2ed104bfa9c2ebd702f033935a83560e1d00c7302620a6ae52cb309c7125
   - name: ki18n
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/ki18n-5.64.0.tar.xz
-        sha256: ccd2c2f8b14251701f902c9e7d046da1582e544d31edae743911f3554022d024
-      - type: patch
-        paths:
-          - patches/frameworks/ki18n/ki18n-appdatalocation.diff
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/ki18n-5.76.0.tar.xz
+        sha256: 0e87bc1136e21f7860f15daa39e8d16e5a773995fce2b87b0cef0043c4ce0e7a
   - name: kitemmodels
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kitemmodels-5.64.0.tar.xz
-        sha256: 1bae70e4c6a033eea649efc17f0a060aba89144f4c469f235fbf5023dba5abc4
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kitemmodels-5.76.0.tar.xz
+        sha256: 53855ccdd1105aa792914f9c88f357039bf2394af8400beaaecd9729f70e9cb0
   - name: kitemviews
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kitemviews-5.64.0.tar.xz
-        sha256: 0b3f8a0116c042ae187b67f35ffd40872352b91f5f236d19dd26ffad8db83fee
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kitemviews-5.76.0.tar.xz
+        sha256: b102cb67513d804fd7eed2ae20bb4ba679d38de4f236de6bc03709ff0c0bc001
   - name: kimageformats
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kimageformats-5.64.0.tar.xz
-        sha256: 48c6a7026854127fc83698ab11e6639a525d387cf384f2558db6c7478bceae4c
-      - type: patch
-        paths:
-          - patches/frameworks/kimageformats/kimageformats.diff
-          - patches/frameworks/kimageformats/disable_exr.diff
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kimageformats-5.76.0.tar.xz
+        sha256: 78ced2665f8918beb617b74962d188dcbb01a92a90ba49bfd173671bdb14e68d
   - name: kwindowsystem
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kwindowsystem-5.64.0.tar.xz
-        sha256: 77c2e6b0032a79547f80bcd36682aa72c0e901e3b5acc83a58f69d644ce03dab
-      - type: patch
-        paths:
-          - patches/frameworks/kwindowsystem/kwindowsystem-x11.diff
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kwindowsystem-5.76.0.tar.xz
+        sha256: 8dced74012bed3f33c3c51874aa9c3a57093573c1c0e263b758cefa96c26f7b7
   - name: kcrash
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.76/kcrash-5.76.0.tar.xz
+        sha256: c4e32254b22f1f02db556be2ad40000cc52cac2e30a35682af3c75ac69710993
+  - name: boost
+    buildsystem: simple
+    build-commands:
+      - ./bootstrap.sh --prefix=/app --with-libraries=system
+      - ./b2 install -j $FLATPAK_BUILDER_N_JOBS
+    sources:
+      - type: archive
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2
+        sha256: 8681f175d4bdb26c52222665793eef08490d7758529330f98d3b29dd0735bccc
+  - name: fftw
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTS=OFF
+      - -DENABLE_THREADS=ON
+    sources:
+      - type: archive
+        url: https://fftw.org/fftw-3.3.10.tar.gz
+        sha256: 56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467
+  - name: eigen
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
+      - -DENABLE_THREADS=ON
+    cleanup:
+      - '*'
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/Attic/frameworks/5.64/kcrash-5.64.0.tar.xz
-        sha256: 9e9ad5e7a6a3e9a128128a7863204f8c4a555bd8659d8ed4ef4cc6bb2fc48290
+        url: https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
+        sha256: 8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72
+  - name: exiv2
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DEXIV2_BUILD_SAMPLES=OFF
+      - -DEXIV2_ENABLE_NLS=OFF
+      - -DEXIV2_BUILD_EXIV2_COMMAND=OFF
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://www.exiv2.org/builds/exiv2-0.27.5-Source.tar.gz
+        sha256: 35a58618ab236a901ca4928b0ad8b31007ebdc0386d904409d825024e45ea6e2
+  - name: lcms2
+    buildsystem: cmake-ninja
+    cleanup:
+      - /bin
+      - /share
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTS=FALSE
+      - -DBUILD_UTILS=FALSE
+      - -DBUILD_STATIC=FALSE
+      - -DBUILD_PLUGINS=TRUE
+    sources:
+      - type: archive
+        url: https://github.com/mm2/Little-CMS/archive/81598b9e9bfa7b8cfb3a347bb0f2d9b3b4fe2d74.tar.gz
+        sha256: 075fc5feba5612bfd564205431a7bb391ca3c61c89c6cb88c8c5c035bfd70b01
+      - type: patch
+        paths:
+          - patches/lcms2/0001-Add-cmake-build-system.patch
+          - patches/lcms2/0002-Quick-check-for-SSE-support.patch
+          - patches/lcms2/0003-Separate-fast-float-plugin.patch
+  - name: glu
+    sources:
+      - type: archive
+        url: https://mesa.freedesktop.org/archive/glu/glu-9.0.2.tar.xz
+        sha256: 6e7280ff585c6a1d9dfcdf2fca489251634b3377bfc33c29e4002466a38d02d4
+  - name: glew
+    no-autogen: true
+    make-args:
+      - GLEW_PREFIX=/app
+      - GLEW_DEST=/app
+      - LIBDIR=/app/lib
+    make-install-args:
+      - GLEW_PREFIX=/app
+      - GLEW_DEST=/app
+      - LIBDIR=/app/lib
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /lib/*.a
+    sources:
+      - type: archive
+        url: https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.tgz
+        sha256: d4fc82893cfb00109578d0a1a2337fb8ca335b3ceccf97b97e5cc7f08e4353e1
+  - name: freeglut
+    buildsystem: cmake-ninja
+    builddir: true
+    build-options:
+      cflags: -fcommon
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://phoenixnap.dl.sourceforge.net/project/freeglut/freeglut/3.2.1/freeglut-3.2.1.tar.gz
+        sha256: d4000e02102acaf259998c870e25214739d1f16f67f99cb35e4f46841399da68
+  - name: imath
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.3.tar.gz
+        sha256: 0bf7ec51162c4d17a4c5b850fb3f6f7a195cff9fa71f4da7735f74d7b5124320
+  - name: pystring
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/imageworks/pystring/archive/281419de2f91f9e0f2df6acddfea3b06a43436be.tar.gz
+        sha256: 46161e75f85a3e8867233aebb6f4399f405c565db76dc07731a7ef662459609d
+      - type: file
+        path: patches/pystring/CMakeLists.txt
+  - name: yaml-cpp
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_SHARED_LIBS=ON
+      - -DYAML_BUILD_SHARED_LIBS=ON
+      - -DYAML_CPP_BUILD_TOOLS=OFF
+      - -DYAML_CPP_BUILD_TESTS=OFF
+      - -DYAML_CPP_BUILD_CONTRIB=OFF
+    sources:
+      - type: archive
+        url: https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.7.0.tar.gz
+        sha256: 43e6a9fcb146ad871515f0d0873947e5d497a1c9c60c58cb102a97b47208b7c3
+  - name: pybind11
+    buildsystem: simple
+    build-commands:
+      - python setup.py build -j $FLATPAK_BUILDER_N_JOBS
+      - python setup.py install --skip-build --prefix=/app --optimize=1
+    sources:
+      - type: archive
+        url: https://github.com/pybind/pybind11/archive/refs/tags/v2.8.1.tar.gz
+        sha256: f1bcc07caa568eb312411dde5308b1e250bd0e1bc020fae855bf9f43209940cc
+  - name: openexr
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DNAMESPACE_VERSIONING=OFF
+    cleanup:
+      - /bin
+      - /share/doc
+    sources:
+      - type: archive
+        url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.3.tar.gz
+        sha256: 6f70a624d1321319d8269a911c4032f24950cde52e76f46e9ecbebfcb762f28c
+  - name: vc
+    skip-arches:
+      - aarch64
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+      - -DCMAKE_SYSTEM_PROCESSOR=x86
+    cleanup:
+      - '*'
+    sources:
+      - type: archive
+        url: https://github.com/VcDevel/Vc/releases/download/1.4.2/Vc-1.4.2.tar.gz
+        sha256: 50d3f151e40b0718666935aa71d299d6370fafa67411f0a9e249fbce3e6e3952
+  - name: libraw
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cleanup:
+      - /bin
+      - /share/doc
+    sources:
+      - type: archive
+        url: https://www.libraw.org/data/LibRaw-0.20.2.tar.gz
+        sha256: dc1b486c2003435733043e4e05273477326e51c3ea554c6864a4eafaff1004a6
+      - type: patch
+        paths:
+          - patches/libraw/0001-LibRaw-cmake.patch
+          - patches/libraw/0002-Use-CMake-install-prefix.patch
+  - name: gsl
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+      - -DNO_AMPL_BINDINGS=ON
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://github.com/ampl/gsl/archive/refs/tags/20211111.tar.gz
+        sha256: d719d9af948e6d03424d35f0b272a30e54448e958491ad0415ba4ee69b781ebf
   - name: poppler-data
     buildsystem: cmake-ninja
     builddir: true
@@ -521,8 +497,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-data-0.4.10.tar.gz
-        sha256: 6e2fcef66ec8c44625f94292ccf8af9f1d918b410d5aa69c274ce67387967b30
+        url: https://poppler.freedesktop.org/poppler-data-0.4.11.tar.gz
+        sha256: 2cec05cd1bb03af98a8b06a1e22f6e6e1a65b1e2f3816cb3069bb0874825f08c
   - name: poppler
     buildsystem: cmake-ninja
     builddir: true
@@ -537,8 +513,8 @@ modules:
       - -DWITH_NSS3=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-21.02.0.tar.xz
-        sha256: 5c14759c99891e6e472aced6d5f0ff1dacf85d80cd9026d365c55c653edf792c
+        url: https://poppler.freedesktop.org/poppler-21.12.0.tar.xz
+        sha256: acb840c2c1ec07d07e53c57c4b3a1ff3e3ee2d888d44e1e9f2f01aaf16814de7
   - name: quazip
     buildsystem: cmake-ninja
     builddir: true
@@ -546,21 +522,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/stachenov/quazip/archive/v0.9.1.tar.gz
-        sha256: 5d36b745cb94da440432690050e6db45b99b477cfe9bc3b82fd1a9d36fff95f5
-      - type: patch
-        paths:
-          - patches/quazip/liblocation.diff
-  - name: openjpeg
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DOPENJPEG_INSTALL_INCLUDE_DIR=include/
-    sources:
-      - type: archive
-        url: https://github.com/uclouvain/openjpeg/archive/v2.4.0.tar.gz
-        sha256: 8702ba68b442657f11aaeb2b338443ca8d5fb95b0d845757968a7be31ef7f16d
+        url: https://github.com/stachenov/quazip/archive/refs/tags/v1.2.tar.gz
+        sha256: 2dfb911d6b27545de0b98798d967c40430312377e6ade57096d6ec80c720cb61
   - name: seexpr
     buildsystem: cmake-ninja
     builddir: true
@@ -574,15 +537,15 @@ modules:
       - type: archive
         url: https://mirrors.ocf.berkeley.edu/kde/stable/kseexpr/4.0.4/kseexpr-4.0.4.0.tar.gz
         sha256: ea4f6a8e820e6cc12d2a1e6977e96ea5457f37729fe0bc4ee8cc62d4c26c36ae
-  - name: json_c
+  - name: json-c
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/json-c/json-c/archive/json-c-0.15-20200726.tar.gz
-        sha256: 4ba9a090a42cf1e12b84c64e4464bb6fb893666841d5843cc5bef90774028882
+        url: https://github.com/json-c/json-c/archive/a5c2e11460d8f00f2a3d9da5e179df3d05b91268.tar.gz
+        sha256: d8d0747c219497a019cb377a63a3a0f341a15f04a222038c7459d6a93ec8f7ad
   - name: mypaint
     buildsystem: cmake-ninja
     builddir: true
@@ -610,19 +573,6 @@ modules:
       - type: archive
         url: https://github.com/fcitx/fcitx-qt5/archive/refs/tags/1.2.5.tar.gz
         sha256: b45183d9a51a65dacaed33726587a1604d09c77adffea9f02735085e9335053d
-  - name: webp
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_SHARED_LIBS=OFF
-    sources:
-      - type: archive
-        url: https://storage.googleapis.com/downloads.webmproject.org/releases/webp/libwebp-1.2.0.tar.gz
-        sha256: 2fc8bbde9f97f2ab403c0224fb9ca62b2e6852cbc519e91ceaa7c153ffd88a0c
-      - type: patch
-        paths:
-          - patches/webp/0001-Fix-CMake-targets-install-directory.patch
   - name: x264
     config-opts:
       - --disable-cli
@@ -630,6 +580,7 @@ modules:
     sources:
       - type: git
         url: https://code.videolan.org/videolan/x264.git
+        branch: stable
         commit: 5db6aa6cab1b146e07b60cc1736a01f21da01154
   - name: ffmpeg
     config-opts:
@@ -679,3 +630,11 @@ modules:
       - type: archive
         url: https://mirrors.ocf.berkeley.edu/kde-applicationdata/krita/build/dependencies/gmic-3.0.0.2-patched.tar.gz
         sha256: 22d4104fb83f6c9f4d6045ba3cd634e3df1995a803890f56199ed8664fe463b6
+  - name: appdata
+    buildsystem: simple
+    build-commands:
+      - install -Dm644 org.kde.krita.appdata.xml -t ${FLATPAK_DEST}/share/appdata
+      - appstream-compose --basename=org.kde.krita --prefix=${FLATPAK_DEST} --origin=flatpak org.kde.krita
+    sources:
+      - type: file
+        path: org.kde.krita.appdata.xml
