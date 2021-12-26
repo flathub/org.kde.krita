@@ -3,6 +3,8 @@ default-branch: stable
 runtime: org.freedesktop.Platform
 runtime-version: '21.08'
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.rust-stable
 command: krita
 rename-icon: krita
 finish-args:
@@ -19,7 +21,7 @@ finish-args:
 cleanup:
   - /include
   - /lib/pkgconfig
-  - /lib/cmake"
+  - /lib/cmake
   - /lib/mkspecs
   - /share/aclocal
   - /share/pkgconfig
@@ -294,30 +296,18 @@ modules:
   - name: boost
     buildsystem: simple
     build-commands:
-      - ./bootstrap.sh --prefix=/app --with-libraries=system
-      - ./b2 install -j $FLATPAK_BUILDER_N_JOBS
+      - ./bootstrap.sh --prefix=${FLATPAK_DEST} --with-libraries=system
+      - ./b2 variant=release link=shared runtime-link=shared cxxflags="$CXXFLAGS" linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
         url: https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2
         sha256: 8681f175d4bdb26c52222665793eef08490d7758529330f98d3b29dd0735bccc
-  - name: fftw
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTS=OFF
-      - -DENABLE_THREADS=ON
-    sources:
-      - type: archive
-        url: https://fftw.org/fftw-3.3.10.tar.gz
-        sha256: 56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467
   - name: eigen
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
-      - -DENABLE_THREADS=ON
     cleanup:
       - '*'
     sources:
@@ -359,6 +349,8 @@ modules:
           - patches/lcms2/0002-Quick-check-for-SSE-support.patch
           - patches/lcms2/0003-Separate-fast-float-plugin.patch
   - name: glu
+    config-opts:
+      - --disable-static
     sources:
       - type: archive
         url: https://mesa.freedesktop.org/archive/glu/glu-9.0.2.tar.xz
@@ -366,17 +358,17 @@ modules:
   - name: glew
     no-autogen: true
     make-args:
-      - GLEW_PREFIX=/app
-      - GLEW_DEST=/app
-      - LIBDIR=/app/lib
+      - GLEW_PREFIX=${FLATPAK_DEST}
+      - GLEW_DEST=${FLATPAK_DEST}
+      - LIBDIR=${FLATPAK_DEST}/lib
+      - CFLAGS.EXTRA:=${CFLAGS} -fPIC
+      - LDFLAGS.EXTRA=${LDFLAGS}
     make-install-args:
-      - GLEW_PREFIX=/app
-      - GLEW_DEST=/app
-      - LIBDIR=/app/lib
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /lib/*.a
+      - GLEW_PREFIX=${FLATPAK_DEST}
+      - GLEW_DEST=${FLATPAK_DEST}
+      - LIBDIR=${FLATPAK_DEST}/lib
+      - CFLAGS.EXTRA:=${CFLAGS} -fPIC
+      - LDFLAGS.EXTRA=${LDFLAGS}
     sources:
       - type: archive
         url: https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0.tgz
@@ -388,6 +380,7 @@ modules:
       cflags: -fcommon
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DFREEGLUT_BUILD_STATIC_LIBS=OFF
     sources:
       - type: archive
         url: https://phoenixnap.dl.sourceforge.net/project/freeglut/freeglut/3.2.1/freeglut-3.2.1.tar.gz
@@ -430,11 +423,37 @@ modules:
     buildsystem: simple
     build-commands:
       - python setup.py build -j $FLATPAK_BUILDER_N_JOBS
-      - python setup.py install --skip-build --prefix=/app --optimize=1
+      - python setup.py install --skip-build --prefix=${FLATPAK_DEST} --optimize=1
     sources:
       - type: archive
         url: https://github.com/pybind/pybind11/archive/refs/tags/v2.8.1.tar.gz
         sha256: f1bcc07caa568eb312411dde5308b1e250bd0e1bc020fae855bf9f43209940cc
+  - name: opencolorio
+    buildsystem: cmake
+    builddir: true
+    build-options:
+      arch:
+        aarch64:
+          config-opts:
+            - -DOCIO_USE_SSE=OFF
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DOCIO_BUILD_APPS=OFF
+      - -DOCIO_BUILD_TRUELIGHT=OFF
+      - -DOCIO_BUILD_NUKE=OFF
+      - -DOCIO_BUILD_DOCS=OFF
+      - -DOCIO_BUILD_TESTS=OFF
+      - -DOCIO_BUILD_PYGLUE=OFF
+      - -DOCIO_BUILD_STATIC_JNIGLUE=OFF
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v1.1.1.tar.gz
+        sha256: c9b5b9def907e1dafb29e37336b702fff22cc6306d445a13b1621b8a754c14c8
+      - type: patch
+        paths:
+          - patches/opencolorio/0004-Remove-Werror-to-fix-build-on-GCC11.patch
   - name: openexr
     buildsystem: cmake-ninja
     builddir: true
@@ -480,6 +499,7 @@ modules:
           - patches/libraw/0002-Use-CMake-install-prefix.patch
   - name: gsl
     buildsystem: cmake-ninja
+    builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
@@ -515,6 +535,97 @@ modules:
       - type: archive
         url: https://poppler.freedesktop.org/poppler-21.12.0.tar.xz
         sha256: acb840c2c1ec07d07e53c57c4b3a1ff3e3ee2d888d44e1e9f2f01aaf16814de7
+  - name: python-toml
+    buildsystem: simple
+    ensure-writable:
+      - /lib/python*/site-packages/easy-install.pth
+    build-commands:
+      - python setup.py install --prefix=${FLATPAK_DEST}
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/source/t/toml/toml-0.10.2.tar.gz
+        sha256: b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f
+  - name: python-pyparsing
+    buildsystem: simple
+    ensure-writable:
+      - /lib/python3.9/site-packages/easy-install.pth
+    build-commands:
+      - python setup.py install --prefix=${FLATPAK_DEST}
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/source/p/pyparsing/pyparsing-3.0.6.tar.gz
+        sha256: d9bdec0013ef1eb5a84ab39a3b3868911598afa494f5faa038647101504e2b81
+  - name: python-packaging
+    buildsystem: simple
+    ensure-writable:
+      - /lib/python3.9/site-packages/easy-install.pth
+    build-commands:
+      - python setup.py install --prefix=${FLATPAK_DEST}
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/source/p/packaging/packaging-21.3.tar.gz
+        sha256: dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb
+  - name: sip
+    buildsystem: simple
+    ensure-writable:
+      - /lib/python3.9/site-packages/easy-install.pth
+    build-commands:
+      - python setup.py build -j $FLATPAK_BUILDER_N_JOBS
+      - python setup.py install --skip-build --prefix=${FLATPAK_DEST} --optimize=1
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/source/s/sip/sip-6.5.0.tar.gz
+        sha256: a1cf8431a8eb9392b3ff6dc61d832d0447bfdcae5b3e4256a5fa74dbc25b0734
+  - name: pyqt-builder
+    buildsystem: simple
+    ensure-writable:
+      - /lib/python3.9/site-packages/easy-install.pth
+    build-options:
+      env:
+        PYTHONPATH: /app/lib/python3.9/site-packages
+    build-commands:
+      - python setup.py build -j $FLATPAK_BUILDER_N_JOBS
+      - python setup.py install --skip-build --prefix=${FLATPAK_DEST} --optimize=1
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://pypi.io/packages/source/P/PyQt-builder/PyQt-builder-1.10.0.tar.gz
+        sha256: 86bd19fde83d92beaefacdeac1e26c6e1918c300ff78d7ec2a19973bf2cf21b5
+  - name: pyqt5
+    buildsystem: simple
+    ensure-writable:
+      - /lib/python3.9/site-packages/PyQt5
+    build-options:
+      env:
+        PYTHONPATH: /app/lib/python3.9/site-packages
+    build-commands:
+      - sip-build --target-dir ${FLATPAK_DEST}/lib/python3.9/site-packages --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python --no-tools --no-make --jobs $FLATPAK_BUILDER_N_JOBS
+      - make -C build -j $FLATPAK_BUILDER_N_JOBS
+      - make -C build -j 1 install
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/source/P/PyQt5/PyQt5-5.15.6.tar.gz
+        sha256: 80343bcab95ffba619f2ed2467fd828ffeb0a251ad7225be5fc06dcc333af452
+  - name: pyqt5-sip
+    buildsystem: simple
+    ensure-writable:
+      - /lib/python3.9/site-packages/easy-install.pth
+    build-commands:
+      - python setup.py build -j $FLATPAK_BUILDER_N_JOBS
+      - python setup.py install --skip-build --prefix=${FLATPAK_DEST} --optimize=1
+    sources:
+      - type: archive
+        url: https://pypi.python.org/packages/source/P/PyQt5-sip/PyQt5_sip-12.9.0.tar.gz
+        sha256: d3e4489d7c2b0ece9d203ae66e573939f7f60d4d29e089c9f11daa17cfeaae32
   - name: quazip
     buildsystem: cmake-ninja
     builddir: true
@@ -524,6 +635,144 @@ modules:
       - type: archive
         url: https://github.com/stachenov/quazip/archive/refs/tags/v1.2.tar.gz
         sha256: 2dfb911d6b27545de0b98798d967c40430312377e6ade57096d6ec80c720cb61
+  - name: cargo-c
+    buildsystem: simple
+    builddir: true
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin
+    sources:
+      - type: archive
+        url: https://files.kde.org/krita/build/dependencies/flatpak/cargo-c-0.8.1.tar.gz
+        sha256: 3b1fe50e210e3800608372b47e4488caecd7789117fb4dfe2e5f50813d9ddff6
+    build-commands:
+      - cargo build --release --offline
+      - cargo install --path . --root ${FLATPAK_DEST}
+  - name: rav1e
+    buildsystem: simple
+    builddir: true
+    build-options:
+      append-path: /usr/lib/sdk/rust-stable/bin
+    sources:
+      - type: archive
+        url: https://files.kde.org/krita/build/dependencies/flatpak/rav1e-p20210525.tar.gz
+        sha256: cf52b5180a645473f6262c9c225b77810707aa2ec652b914ca48421c0f802579
+    build-commands:
+      - cargo cbuild --release --prefix=${FLATPAK_DEST} --library-type=cdylib -j $FLATPAK_BUILDER_N_JOBS
+      - cargo cinstall --release --library-type=cdylib --prefix=${FLATPAK_DEST}
+  - name: x265
+    skip-arches:
+      - x86_64
+    buildsystem: cmake-ninja
+    builddir: true
+    subdir: source
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DENABLE_SHARED=TRUE
+    sources:
+      - type: archive
+        url: https://github.com/videolan/x265/archive/refs/tags/3.4.tar.gz
+        sha256: 544d147bf146f8994a7bf8521ed878c93067ea1c7c6e93ab602389be3117eaaf
+  - name: libx265-10bit
+    skip-arches:
+      - aarch64
+    buildsystem: cmake-ninja
+    builddir: true
+    subdir: source
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DHIGH_BIT_DEPTH=TRUE
+      - -DEXPORT_C_API=FALSE
+      - -DENABLE_CLI=FALSE
+      - -DENABLE_SHARED=FALSE
+    sources:
+      - type: archive
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20210203-12666.tar.gz
+        sha256: a4a712c9fbe724c263f4506e19aeca74e0259b33126d2e60c813352483f5110c
+      - type: patch
+        paths:
+          - patches/libx265/A00-darwin-Revert-Add-aarch64-support-Part-2.patch
+          - patches/libx265/A01-darwin-neon-support-for-arm64.patch
+          - patches/libx265/A02-threads-priority.patch
+          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
+          - patches/libx265/0002-Fix-rc-versioning.patch
+    post-install:
+      - mv ${FLATPAK_DEST}/lib/libx265.a ${FLATPAK_DEST}/lib/libx265_main10.a
+  - name: libx265-12bit
+    skip-arches:
+      - aarch64
+    buildsystem: cmake-ninja
+    builddir: true
+    subdir: source
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DHIGH_BIT_DEPTH=TRUE
+      - -DMAIN12=TRUE
+      - -DEXPORT_C_API=FALSE
+      - -DENABLE_CLI=FALSE
+      - -DENABLE_SHARED=FALSE
+    sources:
+      - type: archive
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20210203-12666.tar.gz
+        sha256: a4a712c9fbe724c263f4506e19aeca74e0259b33126d2e60c813352483f5110c
+      - type: patch
+        paths:
+          - patches/libx265/A00-darwin-Revert-Add-aarch64-support-Part-2.patch
+          - patches/libx265/A01-darwin-neon-support-for-arm64.patch
+          - patches/libx265/A02-threads-priority.patch
+          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
+          - patches/libx265/0002-Fix-rc-versioning.patch
+    post-install:
+      - mv ${FLATPAK_DEST}/lib/libx265.a ${FLATPAK_DEST}/lib/libx265_main12.a
+  - name: libx265
+    skip-arches:
+      - aarch64
+    buildsystem: cmake-ninja
+    builddir: true
+    subdir: source
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DENABLE_SHARED=TRUE
+      - -DENABLE_HDR10_PLUS=TRUE
+      - -DEXTRA_LIB='x265_main10.a;x265_main12.a'
+      - -DEXTRA_LINK_FLAGS=-L.
+      - -DLINKED_10BIT=TRUE
+      - -DLINKED_12BIT=TRUE
+    sources:
+      - type: archive
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20210203-12666.tar.gz
+        sha256: a4a712c9fbe724c263f4506e19aeca74e0259b33126d2e60c813352483f5110c
+      - type: patch
+        paths:
+          - patches/libx265/A00-darwin-Revert-Add-aarch64-support-Part-2.patch
+          - patches/libx265/A01-darwin-neon-support-for-arm64.patch
+          - patches/libx265/A02-threads-priority.patch
+          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
+          - patches/libx265/0002-Fix-rc-versioning.patch
+  - name: libde265
+    skip-arches:
+      - aarch64
+    builddir: true
+    cleanup:
+      - /bin
+    config-opts:
+      - --disable-sherlock265
+    sources:
+      - type: archive
+        url: https://github.com/strukturag/libde265/releases/download/v1.0.8/libde265-1.0.8.tar.gz
+        sha256: 24c791dd334fa521762320ff54f0febfd3c09fc978880a8c5fbc40a88f21d905
+      - type: patch
+        paths:
+          - patches/libde265/0001-Quick-check-for-SSE-support.patch
+  - name: libheif
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_EXAMPLES=OFF
+    sources:
+      - type: archive
+        url: https://github.com/strukturag/libheif/releases/download/v1.12.0/libheif-1.12.0.tar.gz
+        sha256: e1ac2abb354fdc8ccdca71363ebad7503ad731c84022cf460837f0839e171718
   - name: seexpr
     buildsystem: cmake-ninja
     builddir: true
@@ -578,10 +827,9 @@ modules:
       - --disable-cli
       - --enable-shared
     sources:
-      - type: git
-        url: https://code.videolan.org/videolan/x264.git
-        branch: stable
-        commit: 5db6aa6cab1b146e07b60cc1736a01f21da01154
+      - type: archive
+        url: https://code.videolan.org/videolan/x264/-/archive/5db6aa6cab1b146e07b60cc1736a01f21da01154.tar.gz
+        sha256: e55e5ab8bec0897ef83ddf71b2c8969ea377a9cd4cb097ba5dca115a23e18ef9
   - name: ffmpeg
     config-opts:
       - --enable-rpath
@@ -605,12 +853,8 @@ modules:
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DDEFINE_NO_DEPRECATED=1
-      - -DFOUNDATION_BUILD=1
-      - -DHIDE_SAFE_ASSERTS=ON
-      - -DFETCH_TRANSLATIONS=ON
       - -DBUILD_TESTING=OFF
-      - -DHAVE_MEMORY_LEAK_TRACKER=FALSE
+      - -DFOUNDATION_BUILD=1
     build-options:
       env:
         PYTHONPATH: /app/lib/python3/dist-packages
@@ -620,6 +864,9 @@ modules:
       - type: archive
         url: https://mirrors.ocf.berkeley.edu/kde/stable/krita/5.0.0/krita-5.0.0.tar.gz
         sha256: 84d5833dbcab3fd3a418f4c37670d82ad919430f0c6d0a57b993907471eecc57
+      - type: patch
+        paths:
+          - patches/krita/Temp-AppData.diff
   - name: gmic
     buildsystem: cmake-ninja
     subdir: gmic-qt
@@ -630,11 +877,3 @@ modules:
       - type: archive
         url: https://mirrors.ocf.berkeley.edu/kde-applicationdata/krita/build/dependencies/gmic-3.0.0.2-patched.tar.gz
         sha256: 22d4104fb83f6c9f4d6045ba3cd634e3df1995a803890f56199ed8664fe463b6
-  - name: appdata
-    buildsystem: simple
-    build-commands:
-      - install -Dm644 org.kde.krita.appdata.xml -t ${FLATPAK_DEST}/share/appdata
-      - appstream-compose --basename=org.kde.krita --prefix=${FLATPAK_DEST} --origin=flatpak org.kde.krita
-    sources:
-      - type: file
-        path: org.kde.krita.appdata.xml
