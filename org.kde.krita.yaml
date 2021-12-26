@@ -588,6 +588,7 @@ modules:
     buildsystem: simple
     ensure-writable:
       - /lib/python3.9/site-packages/easy-install.pth
+      - /lib/python3.9/site-packages/setuptools.pth
     build-options:
       env:
         PYTHONPATH: /app/lib/python3.9/site-packages
