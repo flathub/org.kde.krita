@@ -833,7 +833,7 @@ modules:
         sha256: 84d5833dbcab3fd3a418f4c37670d82ad919430f0c6d0a57b993907471eecc57
       - type: patch
         paths:
-          - patches/krita/Temp-AppData.diff
+          - patches/krita/Fix-link-to-welcomepage-png.patch
   - name: gmic
     buildsystem: cmake-ninja
     subdir: gmic-qt
