@@ -829,8 +829,8 @@ modules:
       - /share/icons/hicolor/scalable
     sources:
       - type: archive
-        url: https://mirrors.ocf.berkeley.edu/kde/stable/krita/5.0.0/krita-5.0.0.tar.gz
-        sha256: 84d5833dbcab3fd3a418f4c37670d82ad919430f0c6d0a57b993907471eecc57
+        url: https://mirrors.ocf.berkeley.edu/kde/stable/krita/5.0.2/krita-5.0.2.tar.gz
+        sha256: e6751fc7eb504977a4880a376ebbd3995c87dad154486084e82397e65d499cbf
       - type: patch
         paths:
           - patches/krita/Fix-link-to-welcomepage-png.patch
