@@ -14,6 +14,7 @@ finish-args:
   - --socket=pulseaudio
   - --device=dri
   - --filesystem=host
+  - --filesystem=xdg-config/kdeglobals:ro
   - --filesystem=xdg-run/gvfs
   - --env=PYTHONPATH=/app/lib/python3/dist-packages
   - --env=TMPDIR=/var/tmp
@@ -351,15 +352,15 @@ modules:
   - name: glew
     no-autogen: true
     make-args:
-      - GLEW_PREFIX=/app
-      - GLEW_DEST=/app
-      - LIBDIR=/app/lib
+      - GLEW_PREFIX=${FLATPAK_DEST}
+      - GLEW_DEST=${FLATPAK_DEST}
+      - LIBDIR=${FLATPAK_DEST}/lib
       - CFLAGS.EXTRA:=${CFLAGS} -fPIC
       - LDFLAGS.EXTRA=${LDFLAGS}
     make-install-args:
-      - GLEW_PREFIX=/app
-      - GLEW_DEST=/app
-      - LIBDIR=/app/lib
+      - GLEW_PREFIX=${FLATPAK_DEST}
+      - GLEW_DEST=${FLATPAK_DEST}
+      - LIBDIR=${FLATPAK_DEST}/lib
       - CFLAGS.EXTRA:=${CFLAGS} -fPIC
       - LDFLAGS.EXTRA=${LDFLAGS}
     sources:
@@ -411,14 +412,13 @@ modules:
   - name: pybind11
     buildsystem: simple
     build-commands:
-      - python setup.py build -j $FLATPAK_BUILDER_N_JOBS
-      - python setup.py install --skip-build --prefix=/app --optimize=1
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "pybind11" --no-build-isolation
     cleanup:
       - /bin
     sources:
-      - type: archive
-        url: https://github.com/pybind/pybind11/archive/refs/tags/v2.8.1.tar.gz
-        sha256: f1bcc07caa568eb312411dde5308b1e250bd0e1bc020fae855bf9f43209940cc
+      - type: file
+        url: https://pypi.python.org/packages/source/p/pybind11/pybind11-2.9.0.tar.gz
+        sha256: 46d315a669a59b660def6c5ca4e128f6fa975ec4abce6019a43d92084ad1bf89
   - name: expat
     buildsystem: cmake-ninja
     config-opts:
@@ -523,96 +523,72 @@ modules:
         sha256: acb840c2c1ec07d07e53c57c4b3a1ff3e3ee2d888d44e1e9f2f01aaf16814de7
   - name: toml
     buildsystem: simple
-    ensure-writable:
-      - /lib/python*/site-packages/easy-install.pth
     build-commands:
-      - python setup.py install --prefix=/app
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "toml" --no-build-isolation
     cleanup:
       - /bin
     sources:
-      - type: archive
+      - type: file
         url: https://pypi.python.org/packages/source/t/toml/toml-0.10.2.tar.gz
         sha256: b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f
   - name: pyparsing
     buildsystem: simple
-    ensure-writable:
-      - /lib/python3.9/site-packages/easy-install.pth
     build-commands:
-      - python setup.py install --prefix=/app
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "pyparsing" --no-build-isolation
     cleanup:
       - /bin
     sources:
-      - type: archive
+      - type: file
         url: https://pypi.python.org/packages/source/p/pyparsing/pyparsing-3.0.6.tar.gz
         sha256: d9bdec0013ef1eb5a84ab39a3b3868911598afa494f5faa038647101504e2b81
   - name: packaging
     buildsystem: simple
-    ensure-writable:
-      - /lib/python3.9/site-packages/easy-install.pth
     build-commands:
-      - python setup.py install --prefix=/app
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "packaging" --no-build-isolation
     cleanup:
       - /bin
     sources:
-      - type: archive
+      - type: file
         url: https://pypi.python.org/packages/source/p/packaging/packaging-21.3.tar.gz
         sha256: dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb
   - name: sip
     buildsystem: simple
-    ensure-writable:
-      - /lib/python3.9/site-packages/easy-install.pth
     build-commands:
-      - python setup.py build -j $FLATPAK_BUILDER_N_JOBS
-      - python setup.py install --skip-build --prefix=/app --optimize=1
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "sip" --no-build-isolation
     cleanup:
       - /bin
     sources:
-      - type: archive
+      - type: file
         url: https://pypi.python.org/packages/source/s/sip/sip-6.5.0.tar.gz
         sha256: a1cf8431a8eb9392b3ff6dc61d832d0447bfdcae5b3e4256a5fa74dbc25b0734
   - name: pyqt-builder
     buildsystem: simple
-    ensure-writable:
-      - /lib/python3.9/site-packages/easy-install.pth
-      - /lib/python3.9/site-packages/setuptools.pth
-    build-options:
-      env:
-        PYTHONPATH: /app/lib/python3.9/site-packages
     build-commands:
-      - python setup.py build -j $FLATPAK_BUILDER_N_JOBS
-      - python setup.py install --skip-build --prefix=/app --optimize=1
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "PyQt-builder" --no-build-isolation
     cleanup:
       - /bin
     sources:
-      - type: archive
+      - type: file
         url: https://pypi.io/packages/source/P/PyQt-builder/PyQt-builder-1.10.0.tar.gz
         sha256: 86bd19fde83d92beaefacdeac1e26c6e1918c300ff78d7ec2a19973bf2cf21b5
-  - name: pyqt5
-    buildsystem: simple
-    ensure-writable:
-      - /lib/python3.9/site-packages/PyQt5
-    build-options:
-      env:
-        PYTHONPATH: /app/lib/python3.9/site-packages
-    build-commands:
-      - sip-build --target-dir /app/lib/python3.9/site-packages --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python --no-tools --no-make --jobs $FLATPAK_BUILDER_N_JOBS
-      - make -C build -j $FLATPAK_BUILDER_N_JOBS
-      - make -C build -j 1 install
-    sources:
-      - type: archive
-        url: https://pypi.python.org/packages/source/P/PyQt5/PyQt5-5.15.6.tar.gz
-        sha256: 80343bcab95ffba619f2ed2467fd828ffeb0a251ad7225be5fc06dcc333af452
   - name: pyqt5-sip
     buildsystem: simple
-    ensure-writable:
-      - /lib/python3.9/site-packages/easy-install.pth
     build-commands:
-      - python setup.py build -j $FLATPAK_BUILDER_N_JOBS
-      - python setup.py install --skip-build --prefix=/app --optimize=1
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "PyQt5_sip" --no-build-isolation
     sources:
-      - type: archive
+      - type: file
         url: https://pypi.python.org/packages/source/P/PyQt5-sip/PyQt5_sip-12.9.0.tar.gz
         sha256: d3e4489d7c2b0ece9d203ae66e573939f7f60d4d29e089c9f11daa17cfeaae32
+  - name: pyqt5
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "PyQt5" --no-build-isolation
+    cleanup:
+      - /bin
+    sources:
+      - type: file
+        url: https://pypi.python.org/packages/source/P/PyQt5/PyQt5-5.15.6.tar.gz
+        sha256: 80343bcab95ffba619f2ed2467fd828ffeb0a251ad7225be5fc06dcc333af452
   - name: quazip
     buildsystem: cmake-ninja
     config-opts:
@@ -763,7 +739,7 @@ modules:
       - type: archive
         url: https://github.com/json-c/json-c/archive/a5c2e11460d8f00f2a3d9da5e179df3d05b91268.tar.gz
         sha256: d8d0747c219497a019cb377a63a3a0f341a15f04a222038c7459d6a93ec8f7ad
-  - name: mypaint
+  - name: libmypaint
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
