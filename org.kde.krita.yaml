@@ -86,6 +86,7 @@ modules:
         sha256: 7c15c31590b6ec12408242b1a32075d1d545f35e1d41fdbad31ec670d00680f2
       - type: patch
         paths:
+          - patches/qt/base/portal.patch
           - patches/qt/base/FileChooser-portal-skip-empty-filters.patch
           - patches/qt/base/qtbase-avoid-hardcoding-kernel-version.patch
           - patches/qt/base/qtbase-use-wayland-on-gnome.patch
