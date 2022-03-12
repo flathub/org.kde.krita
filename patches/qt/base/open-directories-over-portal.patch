@@ -18,12 +18,12 @@ Reviewed-by: Thiago Macieira <thiago.macieira@intel.com>
  2 files changed, 30 insertions(+), 1 deletion(-)
 
 diff --git a/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportalfiledialog.cpp b/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportalfiledialog.cpp
-index 13c39436ba6..4b37367ad01 100644
+index dcf5292..74fb1d6 100644
 --- a/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportalfiledialog.cpp
 +++ b/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportalfiledialog.cpp
-@@ -107,6 +107,7 @@ class QXdgDesktopPortalFileDialogPrivate
+@@ -107,6 +107,7 @@ public:
      { }
- 
+
      WId winId = 0;
 +    bool directoryMode = false;
      bool modal = false;
@@ -32,29 +32,29 @@ index 13c39436ba6..4b37367ad01 100644
 @@ -145,6 +146,9 @@ void QXdgDesktopPortalFileDialog::initializeDialog()
      if (options()->fileMode() == QFileDialogOptions::ExistingFiles)
          d->multipleFiles = true;
- 
+
 +    if (options()->fileMode() == QFileDialogOptions::Directory || options()->fileMode() == QFileDialogOptions::DirectoryOnly)
 +        d->directoryMode = true;
 +
      if (options()->isLabelExplicitlySet(QFileDialogOptions::Accept))
          d->acceptLabel = options()->labelText(QFileDialogOptions::Accept);
- 
+
 @@ -179,6 +183,7 @@ void QXdgDesktopPortalFileDialog::openPortal()
- 
+
      options.insert(QLatin1String("modal"), d->modal);
      options.insert(QLatin1String("multiple"), d->multipleFiles);
 +    options.insert(QLatin1String("directory"), d->directoryMode);
- 
+
      if (d->saveFile) {
          if (!d->directory.isEmpty())
 diff --git a/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportaltheme.cpp b/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportaltheme.cpp
-index fb65f6d9096..30c43b67dc6 100644
+index fb65f6d..30c43b6 100644
 --- a/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportaltheme.cpp
 +++ b/src/plugins/platformthemes/xdgdesktopportal/qxdgdesktopportaltheme.cpp
 @@ -45,6 +45,12 @@
  #include <qpa/qplatformthemefactory_p.h>
  #include <qpa/qplatformintegration.h>
- 
+
 +#include <QDBusConnection>
 +#include <QDBusMessage>
 +#include <QDBusPendingCall>
@@ -62,15 +62,15 @@ index fb65f6d9096..30c43b67dc6 100644
 +#include <QDBusPendingReply>
 +
  QT_BEGIN_NAMESPACE
- 
+
  class QXdgDesktopPortalThemePrivate : public QPlatformThemePrivate
-@@ -60,6 +66,7 @@ class QXdgDesktopPortalThemePrivate : public QPlatformThemePrivate
+@@ -60,6 +66,7 @@ public:
      }
- 
+
      QPlatformTheme *baseTheme;
 +    uint fileChooserPortalVersion = 0;
  };
- 
+
  QXdgDesktopPortalTheme::QXdgDesktopPortalTheme()
 @@ -90,6 +97,21 @@ QXdgDesktopPortalTheme::QXdgDesktopPortalTheme()
      // 3) Fall back on the built-in "null" platform theme.
@@ -92,16 +92,16 @@ index fb65f6d9096..30c43b67dc6 100644
 +        }
 +    });
  }
- 
+
  QPlatformMenuItem* QXdgDesktopPortalTheme::createPlatformMenuItem() const
 @@ -131,7 +153,9 @@ QPlatformDialogHelper* QXdgDesktopPortalTheme::createPlatformDialogHelper(Dialog
      Q_D(const QXdgDesktopPortalTheme);
- 
+
      if (type == FileDialog) {
 -        if (d->baseTheme->usePlatformNativeDialog(type))
 +        // Older versions of FileChooser portal don't support opening directories, therefore we fallback
 +        // to native file dialog opened inside the sandbox to open a directory.
 +        if (d->fileChooserPortalVersion < 3 && d->baseTheme->usePlatformNativeDialog(type))
              return new QXdgDesktopPortalFileDialog(static_cast<QPlatformFileDialogHelper*>(d->baseTheme->createPlatformDialogHelper(type)));
- 
+
          return new QXdgDesktopPortalFileDialog;
