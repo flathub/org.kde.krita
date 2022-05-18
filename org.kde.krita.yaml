@@ -93,8 +93,6 @@ modules:
           - patches/qt/base/open-file-portal-writable.patch
           - patches/qt/base/0012-Synthesize-Enter-LeaveEvent-for-accepted-QTabletEven.patch
           - patches/qt/base/0013-Poison-Qt-s-headers-with-a-mark-about-presence-of-En.patch
-          - patches/qt/base/0081-Fix-no-warning-for-overwriting-files-in-non-native-d.patch
-          - patches/qt/base/0082-Make-jp-e-g-default-extensions-context-aware.patch
           - patches/qt/base/0100-Fix-artifacts-when-rendering-multisubpath-dashed-QPa.patch
           - patches/qt/base/0101-Don-t-eat-ShortcutOverride-events-when-there-is-a-pa.patch
           - patches/qt/base/0110-Pass-proper-dirty-rect-in-paint-event-to-QOpenGLWidg.patch
@@ -105,11 +103,14 @@ modules:
           - patches/qt/base/0001-Check-if-we-reached-the-end-of-Iterator.patch
           - patches/qt/base/0116-Make-Qt-relocatable.patch
           - patches/qt/base/0119-Fix-relocated-Qt-to-be-found-when-its-path-has-non-A.patch
-          - patches/qt/base/0120-Fix-building-QtBase-with-GCC11.patch
+          - patches/qt/base/0126-qtbase-Build-fixes-for-GCC-11.patch
           - patches/qt/base/0001-Do-not-crash-if-the-foundry-name-is-an-empty-space.patch
+          - patches/qt/base/bug449118-QMdiSubWindow-Set-correct-ControlLabel-size.patch
+          - patches/qt/base/bug449779-Check-for-uninitialized-QDockAreaLayoutInfo.patch
           - patches/qt/base/frac_dpi_paint_artifacts/0001-Add-faster-path-for-scaling-QRegion-with-multiple-re.patch
           - patches/qt/base/frac_dpi_paint_artifacts/0002-Fix-QPainter-off-by-one-clipping-for-some-non-intege.patch
           - patches/qt/base/frac_dpi_paint_artifacts/0003-Fix-under-non-integer-scaling-incorrect-update-area.patch
+          - patches/qt/base/0001-QMenu-make-less-sensitive-to-mouse-jitter.patch
       - type: shell
         commands:
           - mv configure configure.qt
@@ -162,8 +163,11 @@ modules:
         sha256: a63c0ae198abc65dcb7c84e8fb8891df7ef56f72347d7382a4d08c5a8a364790
       - type: patch
         paths:
-          - patches/qt/declarative/Additional-GCC11-Fixes.patch
           - patches/qt/declarative/0121-Fix-compilation-of-QtDeclarative-with-GCC11.patch
+          - patches/qt/declarative/0122-Don-t-use-UINT_MAX-as-invalid-array-index-in-PropertyKey.patch
+          - patches/qt/declarative/0124-qtdeclarative-Include-limits-in-yarr-h.patch
+          - patches/qt/declarative/0125-qtdeclarative-Build-fixes-for-GCC-11.patch
+          - patches/qt/declarative/Make-QQuickWindow-renderer-follow-real-logical-size.patch
   - name: qtquickcontrols
     buildsystem: qmake
     cleanup:
@@ -295,8 +299,8 @@ modules:
       - ./b2 variant=release link=shared runtime-link=shared cxxflags="$CXXFLAGS" linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.78.0/source/boost_1_78_0.tar.bz2
-        sha256: 8681f175d4bdb26c52222665793eef08490d7758529330f98d3b29dd0735bccc
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.79.0/source/boost_1_79_0.tar.bz2
+        sha256: 475d589d51a7f8b3ba2ba4eda022b170e562ca3b760ee922c146b6c65856ef39
     x-checker-data:
         type: anitya
         project-id: 6845
@@ -340,8 +344,8 @@ modules:
       - /share
     sources:
       - type: archive
-        url: https://github.com/mm2/Little-CMS/archive/81598b9e9bfa7b8cfb3a347bb0f2d9b3b4fe2d74.tar.gz
-        sha256: 075fc5feba5612bfd564205431a7bb391ca3c61c89c6cb88c8c5c035bfd70b01
+        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.13.1/lcms2-2.13.1.tar.gz
+        sha256: d473e796e7b27c5af01bd6d1552d42b45b43457e7182ce9903f38bb748203b88
       - type: patch
         paths:
           - patches/lcms2/0001-Add-cmake-build-system.patch
@@ -381,16 +385,16 @@ modules:
       - -DFREEGLUT_BUILD_STATIC_LIBS=OFF
     sources:
       - type: archive
-        url: https://phoenixnap.dl.sourceforge.net/project/freeglut/freeglut/3.2.1/freeglut-3.2.1.tar.gz
-        sha256: d4000e02102acaf259998c870e25214739d1f16f67f99cb35e4f46841399da68
+        url: https://github.com/FreeGLUTProject/freeglut/releases/download/v3.2.2/freeglut-3.2.2.tar.gz
+        sha256: c5944a082df0bba96b5756dddb1f75d0cd72ce27b5395c6c1dde85c2ff297a50
   - name: imath
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.3.tar.gz
-        sha256: 0bf7ec51162c4d17a4c5b850fb3f6f7a195cff9fa71f4da7735f74d7b5124320
+        url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.5.tar.gz
+        sha256: 1e9c7c94797cf7b7e61908aed1f80a331088cc7d8873318f70376e4aed5f25fb
   - name: pystring
     buildsystem: cmake-ninja
     config-opts:
@@ -422,8 +426,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://pypi.python.org/packages/source/p/pybind11/pybind11-2.9.0.tar.gz
-        sha256: 46d315a669a59b660def6c5ca4e128f6fa975ec4abce6019a43d92084ad1bf89
+        url: https://pypi.python.org/packages/source/p/pybind11/pybind11-2.9.2.tar.gz
+        sha256: e5541f8bccf9111d1a94f7897593b55c4cf1a28d5e8cfc8225a855651f011071
   - name: expat
     buildsystem: cmake-ninja
     config-opts:
@@ -432,8 +436,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/libexpat/libexpat/releases/download/R_2_4_2/expat-2.4.2.tar.gz
-        sha256: a2fb692e8e610406168296f25ba500ae8ce22cb4c8947a8689894d744b6deb02
+        url: https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.4.8.tar.gz
+        sha256: 398f6d95bf808d3108e27547b372cb4ac8dc2298a3c4251eb7aa3d4c6d4bb3e2
   - name: opencolorio
     buildsystem: cmake-ninja
     builddir: true
@@ -459,8 +463,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.3.tar.gz
-        sha256: 6f70a624d1321319d8269a911c4032f24950cde52e76f46e9ecbebfcb762f28c
+        url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.5.tar.gz
+        sha256: 93925805c1fc4f8162b35f0ae109c4a75344e6decae5a240afdfce25f8a433ec
   - name: vc
     skip-arches:
       - aarch64
@@ -524,8 +528,8 @@ modules:
       - -DWITH_NSS3=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-21.12.0.tar.xz
-        sha256: acb840c2c1ec07d07e53c57c4b3a1ff3e3ee2d888d44e1e9f2f01aaf16814de7
+        url: https://poppler.freedesktop.org/poppler-22.05.0.tar.xz
+        sha256: a969ced458e050d6202367bd7427054e2bd19bae39e8f969910d3b9151abf958
   - name: toml
     buildsystem: simple
     build-commands:
@@ -544,8 +548,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://pypi.python.org/packages/source/p/pyparsing/pyparsing-3.0.6.tar.gz
-        sha256: d9bdec0013ef1eb5a84ab39a3b3868911598afa494f5faa038647101504e2b81
+        url: https://pypi.python.org/packages/source/p/pyparsing/pyparsing-3.0.9.tar.gz
+        sha256: 2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb
   - name: packaging
     buildsystem: simple
     build-commands:
@@ -564,8 +568,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://pypi.python.org/packages/source/s/sip/sip-6.5.0.tar.gz
-        sha256: a1cf8431a8eb9392b3ff6dc61d832d0447bfdcae5b3e4256a5fa74dbc25b0734
+        url: https://pypi.python.org/packages/source/s/sip/sip-6.6.1.tar.gz
+        sha256: 696c575c72144122701171f2cc767fe6cc87050ea755a04909152a8508ae10c3
   - name: pyqt-builder
     buildsystem: simple
     build-commands:
@@ -574,16 +578,16 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://pypi.io/packages/source/P/PyQt-builder/PyQt-builder-1.10.0.tar.gz
-        sha256: 86bd19fde83d92beaefacdeac1e26c6e1918c300ff78d7ec2a19973bf2cf21b5
+        url: https://pypi.io/packages/source/P/PyQt-builder/PyQt-builder-1.12.2.tar.gz
+        sha256: f62bb688d70e0afd88c413a8d994bda824e6cebd12b612902d1945c5a67edcd7
   - name: pyqt5-sip
     buildsystem: simple
     build-commands:
       - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "PyQt5_sip" --no-build-isolation
     sources:
       - type: file
-        url: https://pypi.python.org/packages/source/P/PyQt5-sip/PyQt5_sip-12.9.0.tar.gz
-        sha256: d3e4489d7c2b0ece9d203ae66e573939f7f60d4d29e089c9f11daa17cfeaae32
+        url: https://pypi.python.org/packages/source/P/PyQt5-sip/PyQt5_sip-12.10.1.tar.gz
+        sha256: 97e008795c453488f51a5c97dbff29cda7841afb1ca842c9e819d8e6cc0ae724
   - name: pyqt5
     buildsystem: simple
     build-commands:
@@ -600,8 +604,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/stachenov/quazip/archive/refs/tags/v1.2.tar.gz
-        sha256: 2dfb911d6b27545de0b98798d967c40430312377e6ade57096d6ec80c720cb61
+        url: https://github.com/stachenov/quazip/archive/refs/tags/v1.3.tar.gz
+        sha256: c1239559cd6860cab80a0fd81f4204e606f9324f702dab6166b0960676ee1754
   - name: cargo-c
     buildsystem: simple
     build-options:
@@ -742,8 +746,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/json-c/json-c/archive/a5c2e11460d8f00f2a3d9da5e179df3d05b91268.tar.gz
-        sha256: d8d0747c219497a019cb377a63a3a0f341a15f04a222038c7459d6a93ec8f7ad
+        url: https://github.com/json-c/json-c/archive/refs/tags/json-c-0.16-20220414.tar.gz
+        sha256: 3ecaeedffd99a60b1262819f9e60d7d983844073abc74e495cb822b251904185
   - name: libmypaint
     buildsystem: cmake-ninja
     config-opts:
@@ -767,8 +771,8 @@ modules:
       - -DENABLE_LIBRARY=OFF
     sources:
       - type: archive
-        url: https://github.com/fcitx/fcitx-qt5/archive/refs/tags/1.2.5.tar.gz
-        sha256: b45183d9a51a65dacaed33726587a1604d09c77adffea9f02735085e9335053d
+        url: https://github.com/fcitx/fcitx-qt5/archive/refs/tags/1.2.7.tar.gz
+        sha256: 4c1c5e4f9c9067f7274a23411599f8510f52d4fa892c87af63466ec806667823
   - name: x264
     config-opts:
       - --disable-cli
@@ -793,8 +797,8 @@ modules:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-4.4.1.tar.xz
-        sha256: eadbad9e9ab30b25f5520fbfde99fae4a92a1ae3c0257a8d68569a4651e30e02
+        url: https://www.ffmpeg.org/releases/ffmpeg-5.0.1.tar.xz
+        sha256: ef2efae259ce80a240de48ec85ecb062cecca26e4352ffb3fda562c21a93007b
   - name: krita
     buildsystem: cmake-ninja
     builddir: true
@@ -810,11 +814,8 @@ modules:
       - /share/icons/hicolor/scalable
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.0.2/krita-5.0.2.tar.gz
-        sha256: e6751fc7eb504977a4880a376ebbd3995c87dad154486084e82397e65d499cbf
-      - type: patch
-        paths:
-          - patches/krita/AppData.patch
+        url: https://download.kde.org/stable/krita/5.0.6/krita-5.0.6.tar.gz
+        sha256: edd76d1b3e5fd00cffb90c4fdaa4dafecc8bf3638d1f7bccf463ec11ea3e0e62
   - name: gmic
     buildsystem: cmake-ninja
     subdir: gmic-qt
@@ -823,5 +824,6 @@ modules:
       - -DGMIC_QT_HOST=krita-plugin
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.0.0.2-patched.tar.gz
-        sha256: 22d4104fb83f6c9f4d6045ba3cd634e3df1995a803890f56199ed8664fe463b6
+        url: https://files.kde.org/krita/build/dependencies/gmic-3.0.2.2-patched.tar.gz
+        sha256: 117f0469e8697271f8808318d928013dc5036fe7dc6be180aa30757b65444aae
+
