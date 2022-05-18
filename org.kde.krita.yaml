@@ -103,6 +103,7 @@ modules:
           - patches/qt/base/0001-Check-if-we-reached-the-end-of-Iterator.patch
           - patches/qt/base/0116-Make-Qt-relocatable.patch
           - patches/qt/base/0119-Fix-relocated-Qt-to-be-found-when-its-path-has-non-A.patch
+          - patches/qt/base/0120-qtbase-Fix-build-with-GCC-11.patch
           - patches/qt/base/0126-qtbase-Build-fixes-for-GCC-11.patch
           - patches/qt/base/0001-Do-not-crash-if-the-foundry-name-is-an-empty-space.patch
           - patches/qt/base/bug449118-QMdiSubWindow-Set-correct-ControlLabel-size.patch
