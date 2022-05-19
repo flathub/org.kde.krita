@@ -843,6 +843,7 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DGMIC_QT_HOST=krita-plugin
+      - -DENABLE_SYSTEM_GMIC=FALSE
     sources:
       - type: archive
         url: https://files.kde.org/krita/build/dependencies/gmic-3.0.2.2-patched.tar.gz
