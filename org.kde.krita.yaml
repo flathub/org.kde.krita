@@ -541,6 +541,16 @@ modules:
       - type: file
         url: https://pypi.python.org/packages/source/t/toml/toml-0.10.2.tar.gz
         sha256: b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f
+  - name: flit_core
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "flit_core" --no-build-isolation
+    cleanup:
+      - /bin
+    sources:
+      - type: file
+        url: https://pypi.python.org/packages/source/f/flit_core/flit_core-3.7.1.tar.gz
+        sha256: 14955af340c43035dbfa96b5ee47407e377ee337f69e70f73064940d27d0a44f
   - name: pyparsing
     buildsystem: simple
     build-commands:
@@ -581,7 +591,7 @@ modules:
       - type: file
         url: https://pypi.io/packages/source/P/PyQt-builder/PyQt-builder-1.12.2.tar.gz
         sha256: f62bb688d70e0afd88c413a8d994bda824e6cebd12b612902d1945c5a67edcd7
-  - name: pyqt5-sip
+  - name: pyqt5_sip
     buildsystem: simple
     build-commands:
       - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST} "PyQt5_sip" --no-build-isolation
