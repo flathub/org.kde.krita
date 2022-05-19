@@ -837,6 +837,9 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/krita/5.0.6/krita-5.0.6.tar.gz
         sha256: edd76d1b3e5fd00cffb90c4fdaa4dafecc8bf3638d1f7bccf463ec11ea3e0e62
+      - type: patch
+        paths:
+          - patches/krita/AppData.patch
   - name: gmic
     buildsystem: cmake-ninja
     subdir: gmic-qt
