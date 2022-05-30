@@ -849,6 +849,6 @@ modules:
       - -DENABLE_SYSTEM_GMIC=FALSE
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.0.2.2-patched.tar.gz
-        sha256: 117f0469e8697271f8808318d928013dc5036fe7dc6be180aa30757b65444aae
+        url: https://files.kde.org/krita/build/dependencies/gmic-3.1.2.2-patched.tar.gz
+        sha256: b8a706445f26138ad067f27feca57313ed9917ec7fde7c2ec11755be41b491f6
 
