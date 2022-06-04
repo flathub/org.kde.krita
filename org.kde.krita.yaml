@@ -341,6 +341,31 @@ modules:
           project-id: 769
           stable-only: true
           url-template: https://github.com/Exiv2/exiv2/releases/download/v$version/exiv2-$version-Source.tar.gz
+  - name: lcms2
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTS=FALSE
+      - -DBUILD_UTILS=FALSE
+      - -DBUILD_STATIC=FALSE
+      - -DBUILD_PLUGINS=TRUE
+    cleanup:
+      - /bin
+      - /share
+    sources:
+      - type: archive
+        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.13.1/lcms2-2.13.1.tar.gz
+        sha256: d473e796e7b27c5af01bd6d1552d42b45b43457e7182ce9903f38bb748203b88
+        x-checker-data:
+          type: anitya
+          project-id: 9815
+          stable-only: true
+          url-template: https://github.com/mm2/Little-CMS/releases/download/lcms$version/lcms2-$version.tar.gz
+      - type: patch
+        paths:
+          - patches/lcms2/0001-Add-cmake-build-system.patch
+          - patches/lcms2/0002-Quick-check-for-SSE-support.patch
+          - patches/lcms2/0003-Separate-fast-float-plugin.patch
   - shared-modules/glu/glu-9.json
   - shared-modules/glew/glew.json
   - name: freeglut
@@ -413,6 +438,21 @@ modules:
         x-checker-data:
           type: pypi
           name: pybind11
+  - name: expat
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.4.8.tar.gz
+        sha256: 398f6d95bf808d3108e27547b372cb4ac8dc2298a3c4251eb7aa3d4c6d4bb3e2
+        x-checker-data:
+          type: anitya
+          project-id: 770
+          stable-only: true
+          url-template: https://github.com/libexpat/libexpat/releases/download/R_${major}_${minor}_${patch}/expat-$version.tar.gz
   - name: opencolorio
     buildsystem: cmake-ninja
     builddir: true
@@ -471,9 +511,9 @@ modules:
           stable-only: true
           url-template: https://github.com/VcDevel/Vc/releases/download/$version/Vc-$version.tar.gz
   - name: libraw
+    buildsystem: cmake-ninja
     config-opts:
-      - --disable-examples
-      - --disable-static
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     cleanup:
       - /bin
       - /share/doc
@@ -486,9 +526,10 @@ modules:
           project-id: 1709
           stable-only: true
           url-template: https://www.libraw.org/data/LibRaw-$version.tar.gz
-      - type: shell
-        commands:
-          - autoreconf -vfi
+      - type: patch
+        paths:
+          - patches/libraw/0001-LibRaw-cmake.patch
+          - patches/libraw/0002-Use-CMake-install-prefix.patch
   - name: gsl
     config-opts:
       - --disable-static
@@ -503,6 +544,39 @@ modules:
           project-id: 1267
           stable-only: true
           url-template: https://ftp.gnu.org/gnu/gsl/gsl-$version.tar.gz
+  - name: poppler-data
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://poppler.freedesktop.org/poppler-data-0.4.11.tar.gz
+        sha256: 2cec05cd1bb03af98a8b06a1e22f6e6e1a65b1e2f3816cb3069bb0874825f08c
+        x-checker-data:
+          type: anitya
+          project-id: 3687
+          stable-only: true
+          url-template: https://poppler.freedesktop.org/poppler-data-$version.tar.gz
+  - name: poppler
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_GTK_TESTS=OFF
+      - -DBUILD_QT5_TESTS=FALSE
+      - -DBUILD_CPP_TESTS=FALSE
+      - -DENABLE_UTILS=FALSE
+      - -DENABLE_GLIB=FALSE
+      - -DENABLE_LIBOPENJPEG=none
+      - -DWITH_NSS3=OFF
+    sources:
+      - type: archive
+        url: https://poppler.freedesktop.org/poppler-22.06.0.tar.xz
+        sha256: a0f9aaa3918bad781039fc307a635652a14d1b391cd559b66edec4bedba3c5d7
+        x-checker-data:
+          type: anitya
+          project-id: 3686
+          stable-only: true
+          url-template: https://poppler.freedesktop.org/poppler-$version.tar.xz
   - name: toml
     buildsystem: simple
     build-commands:
@@ -792,9 +866,9 @@ modules:
           stable-only: true
           url-template: https://s3.amazonaws.com/json-c_releases/releases/json-c-$version-nodoc.tar.gz
   - name: libmypaint
+    buildsystem: cmake-ninja
     config-opts:
-      - --disable-gegl
-      - --disable-introspection
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
         url: https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz
@@ -804,6 +878,13 @@ modules:
           project-id: 12974
           stable-only: true
           url-template: https://github.com/mypaint/libmypaint/releases/download/v$version/libmypaint-$version.tar.xz
+      - type: patch
+        paths:
+          - patches/mypaint/0001-Add-cmake-build-system.patch
+          - patches/mypaint/0002-cmake-library-versioning-info-for-pkg-config.patch
+          - patches/mypaint/0003-cmake-library-versioning-info-for-CMake-itself.patch
+          - patches/mypaint/0004-cmake-Fix-relative-paths.patch
+          - patches/mypaint/0005-Export-all-symbols.patch
   - name: fcitx-qt5
     buildsystem: cmake-ninja
     config-opts:
