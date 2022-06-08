@@ -628,23 +628,7 @@ modules:
     build-commands:
       - cargo cbuild --release --prefix=/app --library-type=cdylib -j $FLATPAK_BUILDER_N_JOBS
       - cargo cinstall --release --library-type=cdylib --prefix=/app
-  - name: x265
-    skip-arches:
-      - x86_64
-    buildsystem: cmake-ninja
-    subdir: source
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DENABLE_SHARED=TRUE
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/videolan/x265/archive/refs/tags/3.4.tar.gz
-        sha256: 544d147bf146f8994a7bf8521ed878c93067ea1c7c6e93ab602389be3117eaaf
   - name: libx265-10bit
-    skip-arches:
-      - aarch64
     buildsystem: cmake-ninja
     subdir: source
     config-opts:
@@ -657,13 +641,18 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.5.tar.gz
-        sha256: e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
+        sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+      - type: patch
+        paths:
+          - patches/libx265/A01-build-fix.patch
+          - patches/libx265/A02-threads-priority.patch
+          - patches/libx265/A03-threads-pool-adjustments.patch
+          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
+          - patches/libx265/0003-Skip-PDB-in-MinGW.patch
     post-install:
       - mv /app/lib/libx265.a /app/lib/libx265_main10.a
   - name: libx265-12bit
-    skip-arches:
-      - aarch64
     buildsystem: cmake-ninja
     subdir: source
     config-opts:
@@ -677,8 +666,15 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.5.tar.gz
-        sha256: e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
+        sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+      - type: patch
+        paths:
+          - patches/libx265/A01-build-fix.patch
+          - patches/libx265/A02-threads-priority.patch
+          - patches/libx265/A03-threads-pool-adjustments.patch
+          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
+          - patches/libx265/0003-Skip-PDB-in-MinGW.patch
     post-install:
       - mv /app/lib/libx265.a /app/lib/libx265_main12.a
   - name: libx265
@@ -698,8 +694,15 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://bitbucket.org/multicoreware/x265_git/downloads/x265_3.5.tar.gz
-        sha256: e70a3335cacacbba0b3a20ec6fecd6783932288ebc8163ad74bcc9606477cae8
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
+        sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+      - type: patch
+        paths:
+          - patches/libx265/A01-build-fix.patch
+          - patches/libx265/A02-threads-priority.patch
+          - patches/libx265/A03-threads-pool-adjustments.patch
+          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
+          - patches/libx265/0003-Skip-PDB-in-MinGW.patch
   - name: libde265
     skip-arches:
       - aarch64
