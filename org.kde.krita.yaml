@@ -14,7 +14,6 @@ finish-args:
   - --socket=pulseaudio
   - --device=dri
   - --filesystem=host
-  - --filesystem=xdg-config/kdeglobals:ro
   - --filesystem=xdg-run/gvfs
   - --env=PYTHONPATH=/app/lib/python3/dist-packages
   - --env=TMPDIR=/var/tmp
