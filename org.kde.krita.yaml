@@ -695,7 +695,7 @@ modules:
   - name: pyqt5
     buildsystem: simple
     build-commands:
-      - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python --no-tools --target-dir ${FLATPAK_DEST}/lib/python3.9/site-packages
+      - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.9/site-packages
     cleanup:
       - /bin
     sources:
