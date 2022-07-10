@@ -877,8 +877,10 @@ modules:
           project-id: 1477
           stable-only: true
           url-template: https://s3.amazonaws.com/json-c_releases/releases/json-c-$version.tar.gz
-  - shared-modules/intltool/intltool-0.51.json
   - name: libmypaint
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
         url: https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz
@@ -888,6 +890,13 @@ modules:
           project-id: 12974
           stable-only: true
           url-template: https://github.com/mypaint/libmypaint/releases/download/v$version/libmypaint-$version.tar.xz
+      - type: patch
+        paths:
+          - patches/mypaint/0001-Add-cmake-build-system.patch
+          - patches/mypaint/0002-cmake-library-versioning-info-for-pkg-config.patch
+          - patches/mypaint/0003-cmake-library-versioning-info-for-CMake-itself.patch
+          - patches/mypaint/0004-cmake-Fix-relative-paths.patch
+          - patches/mypaint/0005-Export-all-symbols.patch
   - name: fcitx-qt5
     buildsystem: cmake-ninja
     config-opts:
