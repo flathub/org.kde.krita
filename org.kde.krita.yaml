@@ -694,7 +694,8 @@ modules:
   - name: pyqt5
     buildsystem: simple
     build-commands:
-      - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.9/site-packages
+      - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
+        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.9/site-packages
     cleanup:
       - /bin
     sources:
@@ -974,8 +975,8 @@ modules:
       - -DENABLE_SYSTEM_GMIC=FALSE
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.1.4.2-patched.tar.gz
-        sha256: a2dde3f70bd7a2e0e3b12cad273c5bda56292be728ea534e8fbe15ac67d007a8
+        url: https://files.kde.org/krita/build/dependencies/gmic-3.1.4.3-patched.tar.gz
+        sha256: 5d27b697caf2f650173d25de14f9eea4434a5f0aab3a70a79fb8df6f2d21cec8
         x-checker-data:
           type: html
           url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty_plugins/ext_gmic/CMakeLists.txt
