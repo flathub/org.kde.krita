@@ -437,8 +437,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/cf/6a/a7f2c40fdb43fcf59bc1eebb0a4c4206a99ccddee6391a1168fa6efebce9/pybind11-2.9.2.tar.gz
-        sha256: e5541f8bccf9111d1a94f7897593b55c4cf1a28d5e8cfc8225a855651f011071
+        url: https://files.pythonhosted.org/packages/59/f6/aafe0b7e798f25632b199523cce98552fde53e8c552b9d96765426532d5f/pybind11-2.10.0.tar.gz
+        sha256: 18977589c10f595f65ec1be90b0a0763b43e458d25d97be9db75b958eb1f43fe
         x-checker-data:
           type: pypi
           name: pybind11
@@ -694,7 +694,8 @@ modules:
   - name: pyqt5
     buildsystem: simple
     build-commands:
-      - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.9/site-packages
+      - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
+        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.9/site-packages
     cleanup:
       - /bin
     sources:
@@ -974,8 +975,8 @@ modules:
       - -DENABLE_SYSTEM_GMIC=FALSE
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.1.4.2-patched.tar.gz
-        sha256: a2dde3f70bd7a2e0e3b12cad273c5bda56292be728ea534e8fbe15ac67d007a8
+        url: https://files.kde.org/krita/build/dependencies/gmic-3.1.4.3-patched.tar.gz
+        sha256: 5d27b697caf2f650173d25de14f9eea4434a5f0aab3a70a79fb8df6f2d21cec8
         x-checker-data:
           type: html
           url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty_plugins/ext_gmic/CMakeLists.txt
