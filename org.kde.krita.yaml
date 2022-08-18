@@ -3,8 +3,6 @@ default-branch: stable
 runtime: org.freedesktop.Platform
 runtime-version: '21.08'
 sdk: org.freedesktop.Sdk
-sdk-extensions:
-  - org.freedesktop.Sdk.Extension.rust-stable
 command: krita
 rename-icon: krita
 finish-args:
@@ -17,6 +15,7 @@ finish-args:
   - --filesystem=xdg-run/gvfs
   - --env=PYTHONPATH=/app/lib/python3/dist-packages
   - --env=TMPDIR=/var/tmp
+  - --env=XDG_CURRENT_DESKTOP=gtk3
   - --system-talk-name=org.freedesktop.ColorManager
   - --talk-name=com.canonical.AppMenu.Registrar
 cleanup:
@@ -105,6 +104,7 @@ modules:
           - patches/qt/base/0119-Fix-relocated-Qt-to-be-found-when-its-path-has-non-A.patch
           - patches/qt/base/0120-qtbase-Fix-build-with-GCC-11.patch
           - patches/qt/base/0126-qtbase-Build-fixes-for-GCC-11.patch
+          - patches/qt/base/0131-Fix-build-with-Android-NDK-21.4.patch
           - patches/qt/base/0001-Do-not-crash-if-the-foundry-name-is-an-empty-space.patch
           - patches/qt/base/bug449118-QMdiSubWindow-Set-correct-ControlLabel-size.patch
           - patches/qt/base/bug449779-Check-for-uninitialized-QDockAreaLayoutInfo.patch
@@ -294,6 +294,130 @@ modules:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/kcrash-5.76.0.tar.xz
         sha256: c4e32254b22f1f02db556be2ad40000cc52cac2e30a35682af3c75ac69710993
+  - name: toml
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "toml" --no-build-isolation
+    cleanup:
+      - /bin
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34d9b30660f6f9daaf70eead706e3203ec3c/toml-0.10.2.tar.gz
+        sha256: b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f
+        x-checker-data:
+          type: pypi
+          name: toml
+  - name: flit_core
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "flit_core" --no-build-isolation
+    cleanup:
+      - /bin
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/15/d1/d8798b83e953fd6f86ca9b50f93eec464a9305b0661469c8234e61095481/flit_core-3.7.1.tar.gz
+        sha256: 14955af340c43035dbfa96b5ee47407e377ee337f69e70f73064940d27d0a44f
+        x-checker-data:
+          type: pypi
+          name: flit_core
+  - name: pyparsing
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "pyparsing" --no-build-isolation
+    cleanup:
+      - /bin
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/71/22/207523d16464c40a0310d2d4d8926daffa00ac1f5b1576170a32db749636/pyparsing-3.0.9.tar.gz
+        sha256: 2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb
+        x-checker-data:
+          type: pypi
+          name: pyparsing
+  - name: packaging
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "packaging" --no-build-isolation
+    cleanup:
+      - /bin
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/df/9e/d1a7217f69310c1db8fdf8ab396229f55a699ce34a203691794c5d1cad0c/packaging-21.3.tar.gz
+        sha256: dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb
+        x-checker-data:
+          type: pypi
+          name: packaging
+  - name: ply
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "ply" --no-build-isolation
+    cleanup:
+      - /bin
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/e5/69/882ee5c9d017149285cab114ebeab373308ef0f874fcdac9beb90e0ac4da/ply-3.11.tar.gz
+        sha256: 00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3
+        x-checker-data:
+          type: pypi
+          name: ply
+  - name: sip
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "sip" --no-build-isolation
+    cleanup:
+      - /bin
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/5b/cb/c27c925ae07bd03a2597fa1db17bfc2a4ac57da61aeb90f8ec98ffbb975b/sip-6.6.2.tar.gz
+        sha256: 0e3efac1c5dfd8e525ae57140927df26993e13f58b89d1577c314f4105bfd90d
+        x-checker-data:
+          type: pypi
+          name: sip
+  - name: pyqt-builder
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "PyQt-builder" --no-build-isolation
+    cleanup:
+      - /bin
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/31/36/6c73f2bd8e4ac5594f6331735951d16d0800f297473db77996966d57cfc7/PyQt-builder-1.13.0.tar.gz
+        sha256: 4877580c38ceb5320e129b381d083b0a8601c68166d8b99707f08fa0a1689eef
+        x-checker-data:
+          type: pypi
+          name: PyQt-builder
+  - name: pyqt5_sip
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "PyQt5_sip" --no-build-isolation
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/39/5f/fd9384fdcb9cd0388088899c110838007f49f5da1dd1ef6749bfb728a5da/PyQt5_sip-12.11.0.tar.gz
+        sha256: b4710fd85b57edef716cc55fae45bfd5bfac6fc7ba91036f1dcc3f331ca0eb39
+        x-checker-data:
+          type: pypi
+          name: PyQt5_sip
+  - name: pyqt5
+    buildsystem: simple
+    build-commands:
+      - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
+        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.9/site-packages
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://files.pythonhosted.org/packages/e1/57/2023316578646e1adab903caab714708422f83a57f97eb34a5d13510f4e1/PyQt5-5.15.7.tar.gz
+        sha256: 755121a52b3a08cb07275c10ebb96576d36e320e572591db16cfdbc558101594
+        x-checker-data:
+          type: pypi
+          name: PyQt5
   - name: boost
     buildsystem: simple
     build-commands:
@@ -494,26 +618,6 @@ modules:
           project-id: 13289
           stable-only: true
           url-template: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v$version.tar.gz
-  - name: vc
-    skip-arches:
-      - aarch64
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTING=OFF
-      - -DCMAKE_SYSTEM_PROCESSOR=x86
-    cleanup:
-      - '*'
-    sources:
-      - type: archive
-        url: https://github.com/VcDevel/Vc/releases/download/1.4.3/Vc-1.4.3.tar.gz
-        sha256: 988ea0053f3fbf17544ca776a2749c097b3139089408b0286fa4e9e8513e037f
-        x-checker-data:
-          type: anitya
-          project-id: 16034
-          stable-only: true
-          url-template: https://github.com/VcDevel/Vc/releases/download/$version/Vc-$version.tar.gz
   - name: libraw
     buildsystem: cmake-ninja
     config-opts:
@@ -581,130 +685,6 @@ modules:
           project-id: 3686
           stable-only: true
           url-template: https://poppler.freedesktop.org/poppler-$version.tar.xz
-  - name: toml
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "toml" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34d9b30660f6f9daaf70eead706e3203ec3c/toml-0.10.2.tar.gz
-        sha256: b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f
-        x-checker-data:
-          type: pypi
-          name: toml
-  - name: flit_core
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "flit_core" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/15/d1/d8798b83e953fd6f86ca9b50f93eec464a9305b0661469c8234e61095481/flit_core-3.7.1.tar.gz
-        sha256: 14955af340c43035dbfa96b5ee47407e377ee337f69e70f73064940d27d0a44f
-        x-checker-data:
-          type: pypi
-          name: flit_core
-  - name: pyparsing
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "pyparsing" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/71/22/207523d16464c40a0310d2d4d8926daffa00ac1f5b1576170a32db749636/pyparsing-3.0.9.tar.gz
-        sha256: 2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb
-        x-checker-data:
-          type: pypi
-          name: pyparsing
-  - name: packaging
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "packaging" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/df/9e/d1a7217f69310c1db8fdf8ab396229f55a699ce34a203691794c5d1cad0c/packaging-21.3.tar.gz
-        sha256: dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb
-        x-checker-data:
-          type: pypi
-          name: packaging
-  - name: ply
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "ply" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/e5/69/882ee5c9d017149285cab114ebeab373308ef0f874fcdac9beb90e0ac4da/ply-3.11.tar.gz
-        sha256: 00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3
-        x-checker-data:
-          type: pypi
-          name: ply
-  - name: sip
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "sip" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/5b/cb/c27c925ae07bd03a2597fa1db17bfc2a4ac57da61aeb90f8ec98ffbb975b/sip-6.6.2.tar.gz
-        sha256: 0e3efac1c5dfd8e525ae57140927df26993e13f58b89d1577c314f4105bfd90d
-        x-checker-data:
-          type: pypi
-          name: sip
-  - name: pyqt-builder
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "PyQt-builder" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/31/36/6c73f2bd8e4ac5594f6331735951d16d0800f297473db77996966d57cfc7/PyQt-builder-1.13.0.tar.gz
-        sha256: 4877580c38ceb5320e129b381d083b0a8601c68166d8b99707f08fa0a1689eef
-        x-checker-data:
-          type: pypi
-          name: PyQt-builder
-  - name: pyqt5_sip
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "PyQt5_sip" --no-build-isolation
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/39/5f/fd9384fdcb9cd0388088899c110838007f49f5da1dd1ef6749bfb728a5da/PyQt5_sip-12.11.0.tar.gz
-        sha256: b4710fd85b57edef716cc55fae45bfd5bfac6fc7ba91036f1dcc3f331ca0eb39
-        x-checker-data:
-          type: pypi
-          name: PyQt5_sip
-  - name: pyqt5
-    buildsystem: simple
-    build-commands:
-      - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
-        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.9/site-packages
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://files.pythonhosted.org/packages/e1/57/2023316578646e1adab903caab714708422f83a57f97eb34a5d13510f4e1/PyQt5-5.15.7.tar.gz
-        sha256: 755121a52b3a08cb07275c10ebb96576d36e320e572591db16cfdbc558101594
-        x-checker-data:
-          type: pypi
-          name: PyQt5
   - name: quazip
     buildsystem: cmake-ninja
     config-opts:
@@ -718,31 +698,25 @@ modules:
           project-id: 4141
           stable-only: true
           url-template: https://github.com/stachenov/quazip/archive/refs/tags/v$version.tar.gz
-  - name: cargo-c
-    buildsystem: simple
-    build-options:
-      append-path: /usr/lib/sdk/rust-stable/bin
-    cleanup:
-      - /bin
-      - .*
+  - name: aom
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCONFIG_PIC=1
+      - -DENABLE_EXAMPLES=OFF
+      - -DENABLE_TESTDATA=OFF
+      - -DENABLE_TESTS=OFF
+      - -DENABLE_TOOLS=OFF
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/flatpak/cargo-c-0.8.1.tar.gz
-        sha256: 3b1fe50e210e3800608372b47e4488caecd7789117fb4dfe2e5f50813d9ddff6
-    build-commands:
-      - cargo build --release --offline
-      - cargo install --path . --root /app
-  - name: rav1e
-    buildsystem: simple
-    build-options:
-      append-path: /usr/lib/sdk/rust-stable/bin
-    sources:
-      - type: archive
-        url: https://files.kde.org/krita/build/dependencies/flatpak/rav1e-p20210525.tar.gz
-        sha256: cf52b5180a645473f6262c9c225b77810707aa2ec652b914ca48421c0f802579
-    build-commands:
-      - cargo cbuild --release --prefix=/app --library-type=cdylib -j $FLATPAK_BUILDER_N_JOBS
-      - cargo cinstall --release --library-type=cdylib --prefix=/app
+        url: https://storage.googleapis.com/aom-releases/libaom-3.4.0.tar.gz
+        sha256: bd754b58c3fa69f3ffd29da77de591bd9c26970e3b18537951336d6c0252e354
+        x-checker-data:
+          type: anitya
+          project-id: 17628
+          stable-only: true
+          url-template: https://storage.googleapis.com/aom-releases/libaom-$version.tar.gz
   - name: libx265-10bit
     buildsystem: cmake-ninja
     subdir: source
@@ -758,6 +732,11 @@ modules:
       - type: archive
         url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
         sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+        x-checker-data:
+          type: html
+          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
+          version-pattern: x265-snapshot-([\d-]+).tar.gz
+          url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
         paths:
           - patches/libx265/A01-build-fix.patch
@@ -783,6 +762,11 @@ modules:
       - type: archive
         url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
         sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+        x-checker-data:
+          type: html
+          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
+          version-pattern: x265-snapshot-([\d-]+).tar.gz
+          url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
         paths:
           - patches/libx265/A01-build-fix.patch
@@ -811,6 +795,11 @@ modules:
       - type: archive
         url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
         sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+        x-checker-data:
+          type: html
+          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
+          version-pattern: x265-snapshot-([\d-]+).tar.gz
+          url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
         paths:
           - patches/libx265/A01-build-fix.patch
@@ -913,6 +902,57 @@ modules:
           project-id: 6513
           stable-only: true
           url-template: https://github.com/fcitx/fcitx-qt5/archive/refs/tags/$version.tar.gz
+  - name: highway
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+      - -DBUILD_STATIC_LIBS=ON
+      - -DBUILD_SHARED_LIBS=OFF
+    sources:
+      - type: archive
+        url: https://github.com/google/highway/archive/refs/tags/1.0.0.tar.gz
+        sha256: ab4f5f864932268356f9f6aa86f612fa4430a7db3c8de0391076750197e876b8
+        x-checker-data:
+          type: anitya
+          project-id: 205809
+          stable-only: true
+          url-template: https://github.com/google/highway/archive/refs/tags/$version.tar.gz
+  - name: libjxl
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+      - -DJPEGXL_ENABLE_BENCHMARK=OFF
+      - -DJPEGXL_ENABLE_COVERAGE=OFF
+      - -DJPEGXL_ENABLE_EXAMPLES=OFF
+      - -DJPEGXL_ENABLE_FUZZERS=OFF
+      - -DJPEGXL_ENABLE_JNI=OFF
+      - -DJPEGXL_ENABLE_SJPEG=OFF
+      - -DJPEGXL_ENABLE_SKCMS=OFF
+      - -DJPEGXL_ENABLE_TOOLS=OFF
+      - -DJPEGXL_ENABLE_VIEWERS=OFF
+    sources:
+      - type: git
+        url: https://github.com/libjxl/libjxl.git
+        commit: 980c90f65f41066cc4959b4eb80eba906867103b
+        # Enable on 0.7 release
+        # x-checker-data:
+        #   type: git
+        #   tag-pattern: ^v([\d.]+)$
+  - name: xsimd
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/8.1.0.tar.gz
+        sha256: d52551360d37709675237d2a0418e28f70995b5b7cdad7c674626bcfbbf48328
+        x-checker-data:
+          type: anitya
+          project-id: 138109
+          stable-only: true
+          url-template: https://github.com/xtensor-stack/xsimd/archive/refs/tags/$version.tar.gz
   - name: x264
     config-opts:
       - --disable-cli
@@ -961,8 +1001,13 @@ modules:
       - /share/icons/hicolor/scalable
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.0.8/krita-5.0.8.tar.gz
-        sha256: ed1d1fa5073ee0c4150e1fde9e109382980ea94d32e5845286bbff20b6bf5e45
+        url: https://download.kde.org/stable/krita/5.1.0/krita-5.1.0.tar.gz
+        sha256: 9a3b3f5858480b7091bd48449926e613538ea8a4dc06249c860ffe3da5acd882
+        x-checker-data:
+          type: anitya
+          project-id: 10918
+          stable-only: true
+          url-template: https://download.kde.org/stable/krita/$version/krita-$version.tar.gz
       - type: patch
         paths:
           - patches/krita/AppData.patch
@@ -980,5 +1025,5 @@ modules:
         x-checker-data:
           type: html
           url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty_plugins/ext_gmic/CMakeLists.txt
-          version-pattern: gmic-([\d.]+)\-patched.tar.gz
+          version-pattern: gmic-([\d.]+)-patched.tar.gz
           url-template: https://files.kde.org/krita/build/dependencies/gmic-$version-patched.tar.gz
