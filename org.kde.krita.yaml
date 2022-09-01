@@ -1,7 +1,7 @@
 app-id: org.kde.krita
 default-branch: stable
 runtime: org.freedesktop.Platform
-runtime-version: '21.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: krita
 rename-icon: krita
@@ -408,7 +408,7 @@ modules:
     buildsystem: simple
     build-commands:
       - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
-        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.9/site-packages
+        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.10/site-packages
     cleanup:
       - /bin
     sources:
@@ -989,7 +989,7 @@ modules:
     builddir: true
     build-options:
       env:
-        PYTHONPATH: /app/lib/python3.9/dist-packages
+        PYTHONPATH: /app/lib/python3.10/dist-packages
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
