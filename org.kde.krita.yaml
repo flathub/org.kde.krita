@@ -198,6 +198,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     cleanup:
       - /bin
     sources:
@@ -208,6 +209,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/karchive-5.76.0.tar.xz
@@ -216,6 +218,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/kwidgetsaddons-5.76.0.tar.xz
@@ -224,6 +227,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/kcompletion-5.76.0.tar.xz
@@ -232,6 +236,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     cleanup:
       - /bin
     sources:
@@ -242,6 +247,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/kguiaddons-5.76.0.tar.xz
@@ -250,6 +256,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/ki18n-5.76.0.tar.xz
@@ -258,6 +265,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/kitemmodels-5.76.0.tar.xz
@@ -266,6 +274,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/kitemviews-5.76.0.tar.xz
@@ -274,6 +283,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/kimageformats-5.76.0.tar.xz
@@ -282,6 +292,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/kwindowsystem-5.76.0.tar.xz
@@ -290,6 +301,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/kcrash-5.76.0.tar.xz
