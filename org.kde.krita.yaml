@@ -594,7 +594,7 @@ modules:
           stable-only: true
           url-template: https://github.com/libexpat/libexpat/releases/download/R_${major}_${minor}_${patch}/expat-$version.tar.gz
   - name: opencolorio
-    buildsystem: cmake-ninja
+    buildsystem: cmake
     builddir: true
     config-opts:
       - -DOCIO_BUILD_NUKE=OFF
