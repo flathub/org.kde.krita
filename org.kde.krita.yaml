@@ -1001,8 +1001,8 @@ modules:
       - /share/icons/hicolor/scalable
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.1.0/krita-5.1.0.tar.gz
-        sha256: 9a3b3f5858480b7091bd48449926e613538ea8a4dc06249c860ffe3da5acd882
+        url: https://download.kde.org/stable/krita/5.1.1/krita-5.1.1.tar.gz
+        sha256: 4ddbf897afa7b187131697d12a23ba39894638068b2eae12b3b434fe42ad8e24
         x-checker-data:
           type: anitya
           project-id: 10918
