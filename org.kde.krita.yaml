@@ -923,7 +923,6 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
-      - -DJPEGXL_VERSION=0.7.0
       - -DJPEGXL_ENABLE_BENCHMARK=OFF
       - -DJPEGXL_ENABLE_COVERAGE=OFF
       - -DJPEGXL_ENABLE_EXAMPLES=OFF
