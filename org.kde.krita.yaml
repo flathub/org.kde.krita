@@ -934,9 +934,9 @@ modules:
       - -DJPEGXL_ENABLE_TOOLS=OFF
       - -DJPEGXL_ENABLE_VIEWERS=OFF
     sources:
-      - type: git
+      - type: archive
         url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.7rc.tar.gz
-        commit: 17148629624e328cd015439b37bf07fc49245afefa1abaa50ef9e7a56028dcef
+        sha256: 17148629624e328cd015439b37bf07fc49245afefa1abaa50ef9e7a56028dcef
         x-checker-data:
           type: html
           url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_jpegxl/CMakeLists.txt
