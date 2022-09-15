@@ -911,18 +911,19 @@ modules:
       - -DBUILD_SHARED_LIBS=OFF
     sources:
       - type: archive
-        url: https://github.com/google/highway/archive/refs/tags/1.0.0.tar.gz
-        sha256: ab4f5f864932268356f9f6aa86f612fa4430a7db3c8de0391076750197e876b8
+        url: https://github.com/google/highway/archive/refs/tags/1.0.1.tar.gz
+        sha256: 7ca6af7dc2e3e054de9e17b9dfd88609a7fd202812b1c216f43cc41647c97311
         x-checker-data:
-          type: anitya
-          project-id: 205809
-          stable-only: true
+          type: html
+          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_jpegxl/CMakeLists.txt
+          version-pattern: https://github.com/google/highway/archive/refs/tags/([\d.]+).tar.gz
           url-template: https://github.com/google/highway/archive/refs/tags/$version.tar.gz
   - name: libjxl
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
+      - -DJPEGXL_VERSION=0.7.0
       - -DJPEGXL_ENABLE_BENCHMARK=OFF
       - -DJPEGXL_ENABLE_COVERAGE=OFF
       - -DJPEGXL_ENABLE_EXAMPLES=OFF
@@ -934,12 +935,13 @@ modules:
       - -DJPEGXL_ENABLE_VIEWERS=OFF
     sources:
       - type: git
-        url: https://github.com/libjxl/libjxl.git
-        commit: 980c90f65f41066cc4959b4eb80eba906867103b
-        # Enable on 0.7 release
-        # x-checker-data:
-        #   type: git
-        #   tag-pattern: ^v([\d.]+)$
+        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.7rc.tar.gz
+        commit: 17148629624e328cd015439b37bf07fc49245afefa1abaa50ef9e7a56028dcef
+        x-checker-data:
+          type: html
+          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_jpegxl/CMakeLists.txt
+          version-pattern: https://github.com/libjxl/libjxl/archive/refs/tags/v([\d.]+).tar.gz
+          url-template: https://github.com/libjxl/libjxl/archive/refs/tags/v$version.tar.gz
   - name: xsimd
     buildsystem: cmake-ninja
     config-opts:
