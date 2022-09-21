@@ -418,6 +418,21 @@ modules:
         x-checker-data:
           type: pypi
           name: PyQt5
+  - name: fcitx-qt5
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+      - -DENABLE_LIBRARY=OFF
+    sources:
+      - type: archive
+        url: https://github.com/fcitx/fcitx-qt5/archive/refs/tags/1.2.7.tar.gz
+        sha256: 4c1c5e4f9c9067f7274a23411599f8510f52d4fa892c87af63466ec806667823
+        x-checker-data:
+          type: anitya
+          project-id: 6513
+          stable-only: true
+          url-template: https://github.com/fcitx/fcitx-qt5/archive/refs/tags/$version.tar.gz
   - name: boost
     buildsystem: simple
     build-commands:
@@ -678,8 +693,8 @@ modules:
       - -DWITH_NSS3=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-22.08.0.tar.xz
-        sha256: b493328721402f25cb7523f9cdc2f7d7c59f45ad999bde75c63c90604db0f20b
+        url: https://poppler.freedesktop.org/poppler-22.09.0.tar.xz
+        sha256: d7a8f748211359cadb774ba3e18ecda6464b34027045c0648eb30d5852a41e2e
         x-checker-data:
           type: anitya
           project-id: 3686
@@ -734,7 +749,7 @@ modules:
         sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
         x-checker-data:
           type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
+          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
           version-pattern: x265-snapshot-([\d-]+).tar.gz
           url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
@@ -764,7 +779,7 @@ modules:
         sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
         x-checker-data:
           type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
+          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
           version-pattern: x265-snapshot-([\d-]+).tar.gz
           url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
@@ -797,7 +812,7 @@ modules:
         sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
         x-checker-data:
           type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
+          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
           version-pattern: x265-snapshot-([\d-]+).tar.gz
           url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
@@ -835,13 +850,13 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.12.0/libheif-1.12.0.tar.gz
-        sha256: e1ac2abb354fdc8ccdca71363ebad7503ad731c84022cf460837f0839e171718
+        url: https://github.com/strukturag/libheif/archive/5a7b2f4ec49c3788460db698cb68223d537ea4c5.tar.gz
+        sha256: 6be490b74bef2f91683d5649f2aa22652b0f558ff7a7f713a016fe3582b01f87
         x-checker-data:
-          type: anitya
-          project-id: 64439
-          stable-only: true
-          url-template: https://github.com/strukturag/libheif/releases/download/v$version/libheif-$version.tar.gz
+          type: html
+          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
+          version-pattern: https://github.com/strukturag/libheif/archive/([\wd.]+).tar.gz
+          url-template: https://github.com/strukturag/libheif/archive/$version.tar.gz
   - name: kseexpr
     buildsystem: cmake-ninja
     config-opts:
@@ -860,13 +875,13 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.16.tar.gz
-        sha256: 8e45ac8f96ec7791eaf3bb7ee50e9c2100bbbc87b8d0f1d030c5ba8a0288d96b
+        url: https://github.com/json-c/json-c/archive/json-c-0.15-20200726.tar.gz
+        sha256: 4ba9a090a42cf1e12b84c64e4464bb6fb893666841d5843cc5bef90774028882
         x-checker-data:
-          type: anitya
-          project-id: 1477
-          stable-only: true
-          url-template: https://s3.amazonaws.com/json-c_releases/releases/json-c-$version.tar.gz
+          type: html
+          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_json_c/CMakeLists.txt
+          version-pattern: https://github.com/json-c/json-c/archive/json-c-([\Sd.]+).tar.gz
+          url-template: https://github.com/json-c/json-c/archive/json-c-$version.tar.gz
   - name: libmypaint
     buildsystem: cmake-ninja
     config-opts:
@@ -876,9 +891,9 @@ modules:
         url: https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz
         sha256: 741754f293f6b7668f941506da07cd7725629a793108bb31633fb6c3eae5315f
         x-checker-data:
-          type: anitya
-          project-id: 12974
-          stable-only: true
+          type: html
+          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_mypaint/CMakeLists.txt
+          version-pattern: https://github.com/mypaint/libmypaint/releases/download/v([\d.]+)/
           url-template: https://github.com/mypaint/libmypaint/releases/download/v$version/libmypaint-$version.tar.xz
       - type: patch
         paths:
@@ -887,21 +902,6 @@ modules:
           - patches/mypaint/0003-cmake-library-versioning-info-for-CMake-itself.patch
           - patches/mypaint/0004-cmake-Fix-relative-paths.patch
           - patches/mypaint/0005-Export-all-symbols.patch
-  - name: fcitx-qt5
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTING=OFF
-      - -DENABLE_LIBRARY=OFF
-    sources:
-      - type: archive
-        url: https://github.com/fcitx/fcitx-qt5/archive/refs/tags/1.2.7.tar.gz
-        sha256: 4c1c5e4f9c9067f7274a23411599f8510f52d4fa892c87af63466ec806667823
-        x-checker-data:
-          type: anitya
-          project-id: 6513
-          stable-only: true
-          url-template: https://github.com/fcitx/fcitx-qt5/archive/refs/tags/$version.tar.gz
   - name: highway
     buildsystem: cmake-ninja
     config-opts:
@@ -911,12 +911,12 @@ modules:
       - -DBUILD_SHARED_LIBS=OFF
     sources:
       - type: archive
-        url: https://github.com/google/highway/archive/refs/tags/1.0.0.tar.gz
-        sha256: ab4f5f864932268356f9f6aa86f612fa4430a7db3c8de0391076750197e876b8
+        url: https://github.com/google/highway/archive/refs/tags/1.0.1.tar.gz
+        sha256: 7ca6af7dc2e3e054de9e17b9dfd88609a7fd202812b1c216f43cc41647c97311
         x-checker-data:
-          type: anitya
-          project-id: 205809
-          stable-only: true
+          type: html
+          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_jpegxl/CMakeLists.txt
+          version-pattern: https://github.com/google/highway/archive/refs/tags/([\d.]+).tar.gz
           url-template: https://github.com/google/highway/archive/refs/tags/$version.tar.gz
   - name: libjxl
     buildsystem: cmake-ninja
@@ -935,7 +935,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/libjxl/libjxl.git
-        commit: 980c90f65f41066cc4959b4eb80eba906867103b
+        tag: v0.7rc
         # Enable on 0.7 release
         # x-checker-data:
         #   type: git
@@ -946,13 +946,13 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/8.1.0.tar.gz
-        sha256: d52551360d37709675237d2a0418e28f70995b5b7cdad7c674626bcfbbf48328
+        url: https://github.com/xtensor-stack/xsimd/archive/5647254635ea6f590b7366e0848a8a0ab3007efa.tar.gz
+        sha256: 5b175c8b671d4287343b0e79e9e3a8070992815f5e0ed44bfc9bce01f8880814
         x-checker-data:
-          type: anitya
-          project-id: 138109
-          stable-only: true
-          url-template: https://github.com/xtensor-stack/xsimd/archive/refs/tags/$version.tar.gz
+          type: html
+          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_xsimd/CMakeLists.txt
+          version-pattern: https://github.com/xtensor-stack/xsimd/archive/([\wd.]+).tar.gz
+          url-template: https://github.com/xtensor-stack/xsimd/archive/$version.tar.gz
   - name: x264
     config-opts:
       - --disable-cli
@@ -977,8 +977,8 @@ modules:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-5.1.tar.xz
-        sha256: 55eb6aab5ee235550fa54a33eaf8bf1b4ec66c01453182b12f6a993d75698b03
+        url: https://www.ffmpeg.org/releases/ffmpeg-5.1.1.tar.xz
+        sha256: 95bf3ff8c496511e71e958fb249e663c8c9c3de583c5bebc0f5a9745abbc0435
         x-checker-data:
           type: anitya
           project-id: 5405
@@ -1024,6 +1024,6 @@ modules:
         sha256: 5d27b697caf2f650173d25de14f9eea4434a5f0aab3a70a79fb8df6f2d21cec8
         x-checker-data:
           type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty_plugins/ext_gmic/CMakeLists.txt
-          version-pattern: gmic-([\d.]+)-patched.tar.gz
+          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty_plugins/ext_gmic/CMakeLists.txt
+          version-pattern: https://files.kde.org/krita/build/dependencies/gmic-([\d.]+)-patched.tar.gz
           url-template: https://files.kde.org/krita/build/dependencies/gmic-$version-patched.tar.gz
