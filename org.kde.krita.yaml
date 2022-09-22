@@ -725,8 +725,8 @@ modules:
       - -DENABLE_TOOLS=OFF
     sources:
       - type: archive
-        url: https://storage.googleapis.com/aom-releases/libaom-3.4.0.tar.gz
-        sha256: bd754b58c3fa69f3ffd29da77de591bd9c26970e3b18537951336d6c0252e354
+        url: https://storage.googleapis.com/aom-releases/libaom-3.5.0.tar.gz
+        sha256: d37dbee372e2430a7efde813984ae6d78bdf1fc4080ebe32457c9115408b0738
         x-checker-data:
           type: anitya
           project-id: 17628
@@ -1020,8 +1020,8 @@ modules:
       - -DENABLE_SYSTEM_GMIC=FALSE
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.1.4.3-patched.tar.gz
-        sha256: 5d27b697caf2f650173d25de14f9eea4434a5f0aab3a70a79fb8df6f2d21cec8
+        url: https://files.kde.org/krita/build/dependencies/gmic-3.1.6.1-patched.tar.gz
+        sha256: 15e195aa728a5d88d3111a199ec73069d0491804dd49afb49beec3e85e93d994
         x-checker-data:
           type: html
           url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty_plugins/ext_gmic/CMakeLists.txt
