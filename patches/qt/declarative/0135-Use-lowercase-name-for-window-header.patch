@@ -1,4 +1,4 @@
-From 50b12120df0906a231853fb9acf5fa44a9565d9e Mon Sep 17 00:00:00 2001
+From 2065bb01e9a3235d89834d02ff52f703640aa4e4 Mon Sep 17 00:00:00 2001
 From: Samuli Piippo <samuli.piippo@qt.io>
 Date: Thu, 7 Mar 2019 15:02:52 +0200
 Subject: [PATCH 135/139] Use lowercase name for window header
@@ -9,13 +9,14 @@ since the filename is is lowercased.
 Change-Id: I0b25f814543b677802cd6f07dc91964547a6028a
 Reviewed-by: Simon Hausmann <simon.hausmann@qt.io>
 (cherry picked from commit 587d789fa5929f462b5744ba33a25db6c77b36fc)
+Signed-off-by: L. E. Segovia <amy@amyspark.me>
 ---
  src/qml/jsruntime/qv4functiontable_win64.cpp     | 2 +-
  tests/auto/qml/qv4assembler/tst_qv4assembler.cpp | 2 +-
  2 files changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/qml/jsruntime/qv4functiontable_win64.cpp b/src/qml/jsruntime/qv4functiontable_win64.cpp
-index bc5b24f6cd..fc13dc2602 100644
+index bc5b24f6..fc13dc26 100644
 --- a/src/qml/jsruntime/qv4functiontable_win64.cpp
 +++ b/src/qml/jsruntime/qv4functiontable_win64.cpp
 @@ -43,7 +43,7 @@
@@ -28,7 +29,7 @@ index bc5b24f6cd..fc13dc2602 100644
  QT_BEGIN_NAMESPACE
  
 diff --git a/tests/auto/qml/qv4assembler/tst_qv4assembler.cpp b/tests/auto/qml/qv4assembler/tst_qv4assembler.cpp
-index 61a3e7780c..fd50ff5020 100644
+index 61a3e778..fd50ff50 100644
 --- a/tests/auto/qml/qv4assembler/tst_qv4assembler.cpp
 +++ b/tests/auto/qml/qv4assembler/tst_qv4assembler.cpp
 @@ -37,7 +37,7 @@
@@ -41,5 +42,5 @@ index 61a3e7780c..fd50ff5020 100644
  
  class tst_QV4Assembler : public QQmlDataTest
 -- 
-2.37.1.windows.1
+2.37.3
 

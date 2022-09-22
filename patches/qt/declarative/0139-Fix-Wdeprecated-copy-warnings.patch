@@ -1,4 +1,4 @@
-From 1007a729865c15d35c226693ed6cb98b196ccbf4 Mon Sep 17 00:00:00 2001
+From 4bbbe3b388befb858b4c783506ab94f62f099885 Mon Sep 17 00:00:00 2001
 From: Fabian Kosmale <fabian.kosmale@qt.io>
 Date: Tue, 26 May 2020 16:57:36 +0200
 Subject: [PATCH 139/139] Fix -Wdeprecated-copy warnings
@@ -12,6 +12,7 @@ Change-Id: If8152fd24c9084bd85be3741fc218709e50fc375
 Reviewed-by: Fabian Kosmale <fabian.kosmale@qt.io>
 
 (cherry picked from commit ed27157ca9a2c482bcfc79cf1f6f0e496b6a947c)
+Signed-off-by: L. E. Segovia <amy@amyspark.me>
 ---
  src/3rdparty/masm/stubs/wtf/Vector.h      | 1 -
  src/3rdparty/masm/wtf/CheckedArithmetic.h | 3 +++
@@ -21,7 +22,7 @@ Reviewed-by: Fabian Kosmale <fabian.kosmale@qt.io>
  5 files changed, 6 insertions(+), 20 deletions(-)
 
 diff --git a/src/3rdparty/masm/stubs/wtf/Vector.h b/src/3rdparty/masm/stubs/wtf/Vector.h
-index f4f4dc5cf4..346a8010c8 100644
+index f4f4dc5c..346a8010 100644
 --- a/src/3rdparty/masm/stubs/wtf/Vector.h
 +++ b/src/3rdparty/masm/stubs/wtf/Vector.h
 @@ -55,7 +55,6 @@ class Vector : public std::vector<T> {
@@ -33,7 +34,7 @@ index f4f4dc5cf4..346a8010c8 100644
  
      inline void append(const T& value)
 diff --git a/src/3rdparty/masm/wtf/CheckedArithmetic.h b/src/3rdparty/masm/wtf/CheckedArithmetic.h
-index dd4acbb9b5..7d36ca5c28 100644
+index dd4acbb9..7d36ca5c 100644
 --- a/src/3rdparty/masm/wtf/CheckedArithmetic.h
 +++ b/src/3rdparty/masm/wtf/CheckedArithmetic.h
 @@ -430,6 +430,9 @@ public:
@@ -47,7 +48,7 @@ index dd4acbb9b5..7d36ca5c28 100644
          : m_value(0)
      {
 diff --git a/src/3rdparty/masm/wtf/PageBlock.h b/src/3rdparty/masm/wtf/PageBlock.h
-index 9e2e561073..d85c39cb33 100644
+index 9e2e5610..d85c39cb 100644
 --- a/src/3rdparty/masm/wtf/PageBlock.h
 +++ b/src/3rdparty/masm/wtf/PageBlock.h
 @@ -42,7 +42,6 @@ inline bool isPowerOfTwo(size_t size) { return !(size & (size - 1)); }
@@ -73,7 +74,7 @@ index 9e2e561073..d85c39cb33 100644
      : m_realBase(base)
      , m_base(static_cast<char*>(base) + ((base && hasGuardPages) ? pageSize() : 0))
 diff --git a/src/qml/jsruntime/qv4scopedvalue_p.h b/src/qml/jsruntime/qv4scopedvalue_p.h
-index e4aceef3ee..12447a861e 100644
+index e4aceef3..12447a86 100644
 --- a/src/qml/jsruntime/qv4scopedvalue_p.h
 +++ b/src/qml/jsruntime/qv4scopedvalue_p.h
 @@ -172,6 +172,9 @@ private:
@@ -99,7 +100,7 @@ index e4aceef3ee..12447a861e 100644
          setPointer(t);
          return *this;
 diff --git a/src/qml/qml/qqmltypenamecache_p.h b/src/qml/qml/qqmltypenamecache_p.h
-index 28b5e7f0ad..7ec938686c 100644
+index 28b5e7f0..7ec93868 100644
 --- a/src/qml/qml/qqmltypenamecache_p.h
 +++ b/src/qml/qml/qqmltypenamecache_p.h
 @@ -97,7 +97,6 @@ public:
@@ -123,5 +124,5 @@ index 28b5e7f0ad..7ec938686c 100644
  {
      return type.isValid() || importNamespace || scriptIndex != -1;
 -- 
-2.37.1.windows.1
+2.37.3
 

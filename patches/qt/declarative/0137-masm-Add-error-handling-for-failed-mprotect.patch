@@ -1,4 +1,4 @@
-From a7b2069d689480b3a0b563fcedfc22db89bb221f Mon Sep 17 00:00:00 2001
+From 4b7586b88b7bb611f72c0a1cfca9b2c257da84a2 Mon Sep 17 00:00:00 2001
 From: Ulf Hermann <ulf.hermann@qt.io>
 Date: Mon, 11 Jan 2021 11:33:26 +0100
 Subject: [PATCH 137/139] masm: Add error handling for failed mprotect()
@@ -14,6 +14,7 @@ Reviewed-by: Andrei Golubev <andrei.golubev@qt.io>
 (cherry picked from commit 131e2c81d40e3d324c62e113749a08e7993d008f)
 Reviewed-by: Fabian Kosmale <fabian.kosmale@qt.io>
 (cherry picked from commit ab15d9a547dbd83bec99366e7f7b0449fdcdb6ef)
+Signed-off-by: L. E. Segovia <amy@amyspark.me>
 ---
  .../masm/assembler/AbstractMacroAssembler.h   |   2 -
  src/3rdparty/masm/assembler/AssemblerBuffer.h |   3 +-
@@ -31,7 +32,7 @@ Reviewed-by: Fabian Kosmale <fabian.kosmale@qt.io>
  delete mode 100644 src/3rdparty/masm/assembler/RepatchBuffer.h
 
 diff --git a/src/3rdparty/masm/assembler/AbstractMacroAssembler.h b/src/3rdparty/masm/assembler/AbstractMacroAssembler.h
-index d0c1c4613e..9bafa243c8 100644
+index d0c1c461..9bafa243 100644
 --- a/src/3rdparty/masm/assembler/AbstractMacroAssembler.h
 +++ b/src/3rdparty/masm/assembler/AbstractMacroAssembler.h
 @@ -51,7 +51,6 @@ template <typename, template <typename> class>
@@ -51,7 +52,7 @@ index d0c1c4613e..9bafa243c8 100644
      static void linkJump(void* code, Jump jump, CodeLocationLabel target)
      {
 diff --git a/src/3rdparty/masm/assembler/AssemblerBuffer.h b/src/3rdparty/masm/assembler/AssemblerBuffer.h
-index 2292a4c244..58ecac2a4a 100644
+index 2292a4c2..58ecac2a 100644
 --- a/src/3rdparty/masm/assembler/AssemblerBuffer.h
 +++ b/src/3rdparty/masm/assembler/AssemblerBuffer.h
 @@ -140,7 +140,8 @@ namespace JSC {
@@ -65,7 +66,7 @@ index 2292a4c244..58ecac2a4a 100644
              memcpy(result->codeStart(), m_buffer, m_index);
              
 diff --git a/src/3rdparty/masm/assembler/LinkBuffer.h b/src/3rdparty/masm/assembler/LinkBuffer.h
-index aef35662bd..d9b5959f44 100644
+index aef35662..d9b5959f 100644
 --- a/src/3rdparty/masm/assembler/LinkBuffer.h
 +++ b/src/3rdparty/masm/assembler/LinkBuffer.h
 @@ -228,7 +228,7 @@ public:
@@ -127,7 +128,7 @@ index aef35662bd..d9b5959f44 100644
      uint8_t* outData = reinterpret_cast<uint8_t*>(m_code);
      int readPtr = 0;
 diff --git a/src/3rdparty/masm/assembler/MacroAssemblerARMv7.h b/src/3rdparty/masm/assembler/MacroAssemblerARMv7.h
-index 99801a0e3b..dd66eefbd6 100644
+index 99801a0e..dd66eefb 100644
 --- a/src/3rdparty/masm/assembler/MacroAssemblerARMv7.h
 +++ b/src/3rdparty/masm/assembler/MacroAssemblerARMv7.h
 @@ -2022,7 +2022,6 @@ protected:
@@ -139,7 +140,7 @@ index 99801a0e3b..dd66eefbd6 100644
  #if !defined(V4_BOOTSTRAP)
      static void linkCall(void* code, Call call, FunctionPtr function)
 diff --git a/src/3rdparty/masm/assembler/MacroAssemblerMIPS.h b/src/3rdparty/masm/assembler/MacroAssemblerMIPS.h
-index 07f0ec623f..6dfc104823 100644
+index 07f0ec62..6dfc1048 100644
 --- a/src/3rdparty/masm/assembler/MacroAssemblerMIPS.h
 +++ b/src/3rdparty/masm/assembler/MacroAssemblerMIPS.h
 @@ -2818,7 +2818,6 @@ private:
@@ -151,7 +152,7 @@ index 07f0ec623f..6dfc104823 100644
      static void linkCall(void* code, Call call, FunctionPtr function)
      {
 diff --git a/src/3rdparty/masm/assembler/MacroAssemblerX86.h b/src/3rdparty/masm/assembler/MacroAssemblerX86.h
-index e3e0bfe5e1..bf5deeb18a 100644
+index e3e0bfe5..bf5deeb1 100644
 --- a/src/3rdparty/masm/assembler/MacroAssemblerX86.h
 +++ b/src/3rdparty/masm/assembler/MacroAssemblerX86.h
 @@ -345,7 +345,6 @@ public:
@@ -163,7 +164,7 @@ index e3e0bfe5e1..bf5deeb18a 100644
      static void linkCall(void* code, Call call, FunctionPtr function)
      {
 diff --git a/src/3rdparty/masm/assembler/MacroAssemblerX86_64.h b/src/3rdparty/masm/assembler/MacroAssemblerX86_64.h
-index f4349e1f93..c419bcd782 100644
+index f4349e1f..c419bcd7 100644
 --- a/src/3rdparty/masm/assembler/MacroAssemblerX86_64.h
 +++ b/src/3rdparty/masm/assembler/MacroAssemblerX86_64.h
 @@ -743,7 +743,6 @@ public:
@@ -176,7 +177,7 @@ index f4349e1f93..c419bcd782 100644
      {
 diff --git a/src/3rdparty/masm/assembler/RepatchBuffer.h b/src/3rdparty/masm/assembler/RepatchBuffer.h
 deleted file mode 100644
-index dbb56f9ad5..0000000000
+index dbb56f9a..00000000
 --- a/src/3rdparty/masm/assembler/RepatchBuffer.h
 +++ /dev/null
 @@ -1,181 +0,0 @@
@@ -362,7 +363,7 @@ index dbb56f9ad5..0000000000
 -
 -#endif // RepatchBuffer_h
 diff --git a/src/3rdparty/masm/stubs/ExecutableAllocator.h b/src/3rdparty/masm/stubs/ExecutableAllocator.h
-index f984704023..515285a7dc 100644
+index f9847040..515285a7 100644
 --- a/src/3rdparty/masm/stubs/ExecutableAllocator.h
 +++ b/src/3rdparty/masm/stubs/ExecutableAllocator.h
 @@ -109,7 +109,7 @@ struct ExecutableAllocator {
@@ -431,7 +432,7 @@ index f984704023..515285a7dc 100644
  
      QV4::ExecutableAllocator *realAllocator;
 diff --git a/src/3rdparty/masm/yarr/YarrJIT.cpp b/src/3rdparty/masm/yarr/YarrJIT.cpp
-index 98e4ade51f..92706ffb52 100644
+index 98e4ade5..92706ffb 100644
 --- a/src/3rdparty/masm/yarr/YarrJIT.cpp
 +++ b/src/3rdparty/masm/yarr/YarrJIT.cpp
 @@ -3553,7 +3553,8 @@ public:
@@ -445,7 +446,7 @@ index 98e4ade51f..92706ffb52 100644
          if (m_failureReason)
              codeBlock.setFallBackWithFailureReason(*m_failureReason);
 diff --git a/src/qml/jit/qv4assemblercommon.cpp b/src/qml/jit/qv4assemblercommon.cpp
-index 6dc40ad899..45ff79c988 100644
+index 6dc40ad8..45ff79c9 100644
 --- a/src/qml/jit/qv4assemblercommon.cpp
 +++ b/src/qml/jit/qv4assemblercommon.cpp
 @@ -153,7 +153,8 @@ void PlatformAssemblerCommon::link(Function *function, const char *jitKind)
@@ -459,7 +460,7 @@ index 6dc40ad899..45ff79c988 100644
  
  void PlatformAssemblerCommon::prepareCallWithArgCount(int argc)
 diff --git a/src/qml/jsruntime/qv4vme_moth.cpp b/src/qml/jsruntime/qv4vme_moth.cpp
-index 47ad22f4f7..9d8a1c5af5 100644
+index 47ad22f4..9d8a1c5a 100644
 --- a/src/qml/jsruntime/qv4vme_moth.cpp
 +++ b/src/qml/jsruntime/qv4vme_moth.cpp
 @@ -429,7 +429,10 @@ ReturnedValue VME::exec(CppStackFrame *frame, ExecutionEngine *engine)
@@ -475,5 +476,5 @@ index 47ad22f4f7..9d8a1c5af5 100644
                  QV4::JIT::BaselineJIT(function).generate();
              else
 -- 
-2.37.1.windows.1
+2.37.3
 

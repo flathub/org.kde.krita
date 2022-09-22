@@ -1,4 +1,4 @@
-From 11f8a6287ce7e385e5b89ba30e2d76f9089772e4 Mon Sep 17 00:00:00 2001
+From 67bb77d22b7a5a3452b2c36da8ec2154d24489e6 Mon Sep 17 00:00:00 2001
 From: Ulf Hermann <ulf.hermann@qt.io>
 Date: Thu, 8 Nov 2018 18:09:21 +0100
 Subject: [PATCH 134/139] V4: Generate function tables on 64bit windows
@@ -15,13 +15,16 @@ Fixes: QTBUG-50061
 Change-Id: Ib0b8ae9356ed80afe1cab017e36efa4ccbe73f90
 Reviewed-by: Simon Hausmann <simon.hausmann@qt.io>
 (cherry picked from commit 74d23ca548b47c85c4b8cdde5fd5a9026e4eb08c)
+Signed-off-by: L. E. Segovia <amy@amyspark.me>
 ---
+ .../QtQml/private/qv4functiontable_p.h        |   1 +
+ include/QtQml/headers.pri                     |   2 +-
  src/3rdparty/masm/assembler/LinkBuffer.h      |  13 ++
  src/3rdparty/masm/stubs/ExecutableAllocator.h |   1 +
  src/3rdparty/masm/yarr/YarrJIT.cpp            |  40 ++++-
  src/3rdparty/masm/yarr/YarrJIT.h              |  25 ++-
  src/qml/jit/qv4assemblercommon.cpp            |  44 +----
- src/qml/jsruntime/jsruntime.pri               |  20 ++-
+ src/qml/jsruntime/jsruntime.pri               |  18 +++
  src/qml/jsruntime/qv4executableallocator.cpp  |  10 +-
  src/qml/jsruntime/qv4executableallocator_p.h  |   1 +
  src/qml/jsruntime/qv4function.cpp             |  17 +-
@@ -33,15 +36,35 @@ Reviewed-by: Simon Hausmann <simon.hausmann@qt.io>
  tests/auto/qml/qv4assembler/data/crash.qml    |  53 ++++++
  tests/auto/qml/qv4assembler/qv4assembler.pro  |   5 +
  .../qml/qv4assembler/tst_qv4assembler.cpp     |  55 ++++++-
- 17 files changed, 622 insertions(+), 59 deletions(-)
+ 19 files changed, 623 insertions(+), 59 deletions(-)
+ create mode 100644 include/QtQml/5.12.12/QtQml/private/qv4functiontable_p.h
  create mode 100644 src/qml/jsruntime/qv4functiontable_noop.cpp
  create mode 100644 src/qml/jsruntime/qv4functiontable_p.h
  create mode 100644 src/qml/jsruntime/qv4functiontable_unix.cpp
  create mode 100644 src/qml/jsruntime/qv4functiontable_win64.cpp
  create mode 100644 tests/auto/qml/qv4assembler/data/crash.qml
 
+diff --git a/include/QtQml/5.12.12/QtQml/private/qv4functiontable_p.h b/include/QtQml/5.12.12/QtQml/private/qv4functiontable_p.h
+new file mode 100644
+index 00000000..55a639eb
+--- /dev/null
++++ b/include/QtQml/5.12.12/QtQml/private/qv4functiontable_p.h
+@@ -0,0 +1 @@
++#include "../../../../../src/qml/jsruntime/qv4functiontable_p.h"
+diff --git a/include/QtQml/headers.pri b/include/QtQml/headers.pri
+index 08811981..634a8a24 100644
+--- a/include/QtQml/headers.pri
++++ b/include/QtQml/headers.pri
+@@ -1,6 +1,6 @@
+ SYNCQT.HEADER_FILES = qtqmlglobal.h debugger/qqmldebug.h jsapi/qjsengine.h jsapi/qjsvalue.h jsapi/qjsvalueiterator.h qml/qqml.h qml/qqmlabstracturlinterceptor.h qml/qqmlapplicationengine.h qml/qqmlcomponent.h qml/qqmlcontext.h qml/qqmlengine.h qml/qqmlerror.h qml/qqmlexpression.h qml/qqmlextensioninterface.h qml/qqmlextensionplugin.h qml/qqmlfile.h qml/qqmlfileselector.h qml/qqmlincubator.h qml/qqmlinfo.h qml/qqmllist.h qml/qqmlnetworkaccessmanagerfactory.h qml/qqmlparserstatus.h qml/qqmlprivate.h qml/qqmlproperty.h qml/qqmlpropertyvaluesource.h qml/qqmlscriptstring.h util/qqmlpropertymap.h 
+ SYNCQT.GENERATED_HEADER_FILES = QQmlDebuggingEnabler QJSEngine QJSValueList QJSValue QJSValueIterator QQmlAbstractUrlInterceptor QQmlApplicationEngine QQmlComponent QQmlContext QQmlImageProviderBase QQmlEngine QQmlError QQmlExpression QQmlTypesExtensionInterface QQmlExtensionInterface QQmlExtensionPlugin QQmlFile QQmlFileSelector QQmlIncubator QQmlIncubationController QQmlInfo QQmlListProperty QQmlListReference QQmlNetworkAccessManagerFactory QQmlParserStatus QQmlAttachedPropertiesFunc QQmlTypeInfo QQmlProperty QQmlProperties QQmlPropertyValueSource QQmlScriptString QQmlPropertyMap qtqmlversion.h QtQmlVersion QtQml 
+-SYNCQT.PRIVATE_HEADER_FILES = qtqmlglobal_p.h animations/qabstractanimationjob_p.h animations/qanimationgroupjob_p.h animations/qanimationjobutil_p.h animations/qcontinuinganimationgroupjob_p.h animations/qparallelanimationgroupjob_p.h animations/qpauseanimationjob_p.h animations/qsequentialanimationgroupjob_p.h compiler/qqmlirbuilder_p.h compiler/qqmlpropertycachecreator_p.h compiler/qqmlpropertyvalidator_p.h compiler/qqmltypecompiler_p.h compiler/qv4bytecodegenerator_p.h compiler/qv4bytecodehandler_p.h compiler/qv4codegen_p.h compiler/qv4compilationunitmapper_p.h compiler/qv4compileddata_p.h compiler/qv4compiler_p.h compiler/qv4compilercontext_p.h compiler/qv4compilercontrolflow_p.h compiler/qv4compilerscanfunctions_p.h compiler/qv4instr_moth_p.h debugger/qqmlabstractprofileradapter_p.h debugger/qqmlconfigurabledebugservice_p.h debugger/qqmldebugconnector_p.h debugger/qqmldebugpluginmanager_p.h debugger/qqmldebugserver_p.h debugger/qqmldebugserverconnection_p.h debugger/qqmldebugservice_p.h debugger/qqmldebugservicefactory_p.h debugger/qqmldebugserviceinterfaces_p.h debugger/qqmldebugstatesdelegate_p.h debugger/qqmlmemoryprofiler_p.h debugger/qqmlprofiler_p.h debugger/qqmlprofilerdefinitions_p.h jit/qv4assemblercommon_p.h jit/qv4baselineassembler_p.h jit/qv4baselinejit_p.h jit/qv4jithelpers_p.h jsapi/qjsengine_p.h jsapi/qjsvalue_p.h jsapi/qjsvalueiterator_p.h jsruntime/qv4alloca_p.h jsruntime/qv4argumentsobject_p.h jsruntime/qv4arraybuffer_p.h jsruntime/qv4arraydata_p.h jsruntime/qv4arrayiterator_p.h jsruntime/qv4arrayobject_p.h jsruntime/qv4atomics_p.h jsruntime/qv4booleanobject_p.h jsruntime/qv4context_p.h jsruntime/qv4dataview_p.h jsruntime/qv4dateobject_p.h jsruntime/qv4debugging_p.h jsruntime/qv4engine_p.h jsruntime/qv4enginebase_p.h jsruntime/qv4errorobject_p.h jsruntime/qv4estable_p.h jsruntime/qv4executableallocator_p.h jsruntime/qv4function_p.h jsruntime/qv4functionobject_p.h jsruntime/qv4generatorobject_p.h jsruntime/qv4global_p.h jsruntime/qv4globalobject_p.h jsruntime/qv4identifier_p.h jsruntime/qv4identifiertable_p.h jsruntime/qv4include_p.h jsruntime/qv4internalclass_p.h jsruntime/qv4iterator_p.h jsruntime/qv4jscall_p.h jsruntime/qv4jsonobject_p.h jsruntime/qv4lookup_p.h jsruntime/qv4managed_p.h jsruntime/qv4mapiterator_p.h jsruntime/qv4mapobject_p.h jsruntime/qv4math_p.h jsruntime/qv4mathobject_p.h jsruntime/qv4memberdata_p.h jsruntime/qv4module_p.h jsruntime/qv4numberobject_p.h jsruntime/qv4object_p.h jsruntime/qv4objectiterator_p.h jsruntime/qv4objectproto_p.h jsruntime/qv4persistent_p.h jsruntime/qv4profiling_p.h jsruntime/qv4promiseobject_p.h jsruntime/qv4property_p.h jsruntime/qv4propertykey_p.h jsruntime/qv4proxy_p.h jsruntime/qv4qmlcontext_p.h jsruntime/qv4qobjectwrapper_p.h jsruntime/qv4reflect_p.h jsruntime/qv4regexp_p.h jsruntime/qv4regexpobject_p.h jsruntime/qv4runtime_p.h jsruntime/qv4runtimeapi_p.h jsruntime/qv4runtimecodegen_p.h jsruntime/qv4scopedvalue_p.h jsruntime/qv4script_p.h jsruntime/qv4sequenceobject_p.h jsruntime/qv4serialize_p.h jsruntime/qv4setiterator_p.h jsruntime/qv4setobject_p.h jsruntime/qv4sparsearray_p.h jsruntime/qv4stackframe_p.h jsruntime/qv4string_p.h jsruntime/qv4stringiterator_p.h jsruntime/qv4stringobject_p.h jsruntime/qv4symbol_p.h jsruntime/qv4typedarray_p.h jsruntime/qv4util_p.h jsruntime/qv4value_p.h jsruntime/qv4variantobject_p.h jsruntime/qv4vme_moth_p.h jsruntime/qv4vtable_p.h memory/qv4heap_p.h memory/qv4mm_p.h memory/qv4mmdefs_p.h memory/qv4writebarrier_p.h parser/qqmljsast_p.h parser/qqmljsastfwd_p.h parser/qqmljsastvisitor_p.h parser/qqmljsengine_p.h parser/qqmljsglobal_p.h parser/qqmljskeywords_p.h parser/qqmljslexer_p.h parser/qqmljsmemorypool_p.h qml/qqmlabstractbinding_p.h qml/qqmlapplicationengine_p.h qml/qqmlbinding_p.h qml/qqmlboundsignal_p.h qml/qqmlboundsignalexpressionpointer_p.h qml/qqmlcleanup_p.h qml/qqmlcomponent_p.h qml/qqmlcomponentattached_p.h qml/qqmlcontext_p.h qml/qqmlcustomparser_p.h qml/qqmldata_p.h qml/qqmldelayedcallqueue_p.h qml/qqmldirparser_p.h qml/qqmlengine_p.h qml/qqmlexpression_p.h qml/qqmlextensionplugin_p.h qml/qqmlfileselector_p.h qml/qqmlglobal_p.h qml/qqmlguard_p.h qml/qqmlimport_p.h qml/qqmlincubator_p.h qml/qqmljavascriptexpression_p.h qml/qqmllist_p.h qml/qqmllistwrapper_p.h qml/qqmllocale_p.h qml/qqmlloggingcategory_p.h qml/qqmlmetatype_p.h qml/qqmlnotifier_p.h qml/qqmlobjectcreator_p.h qml/qqmlopenmetaobject_p.h qml/qqmlplatform_p.h qml/qqmlproperty_p.h qml/qqmlpropertycache_p.h qml/qqmlpropertyindex_p.h qml/qqmlpropertyvalueinterceptor_p.h qml/qqmlproxymetaobject_p.h qml/qqmlscriptstring_p.h qml/qqmlstringconverters_p.h qml/qqmltypeloader_p.h qml/qqmltypenamecache_p.h qml/qqmltypenotavailable_p.h qml/qqmltypewrapper_p.h qml/qqmlvaluetype_p.h qml/qqmlvaluetypeproxybinding_p.h qml/qqmlvaluetypewrapper_p.h qml/qqmlvme_p.h qml/qqmlvmemetaobject_p.h qml/qqmlxmlhttprequest_p.h types/qqmlbind_p.h types/qqmlconnections_p.h types/qqmldelegatecomponent_p.h types/qqmldelegatemodel_p.h types/qqmldelegatemodel_p_p.h types/qqmlinstantiator_p.h types/qqmlinstantiator_p_p.h types/qqmllistmodel_p.h types/qqmllistmodel_p_p.h types/qqmllistmodelworkeragent_p.h types/qqmlmodelindexvaluetype_p.h types/qqmlmodelsmodule_p.h types/qqmlobjectmodel_p.h types/qqmltableinstancemodel_p.h types/qqmltimer_p.h types/qquickpackage_p.h types/qquickworkerscript_p.h util/qqmladaptormodel_p.h util/qqmlchangeset_p.h util/qqmllistaccessor_p.h util/qqmllistcompositor_p.h qml/ftw/qbitfield_p.h qml/ftw/qfieldlist_p.h qml/ftw/qfinitestack_p.h qml/ftw/qflagpointer_p.h qml/ftw/qhashedstring_p.h qml/ftw/qintrusivelist_p.h qml/ftw/qlazilyallocated_p.h qml/ftw/qpodvector_p.h qml/ftw/qqmlnullablevalue_p.h qml/ftw/qqmlrefcount_p.h qml/ftw/qqmlthread_p.h qml/ftw/qrecursionwatcher_p.h qml/ftw/qrecyclepool_p.h qml/v8/qqmlbuiltinfunctions_p.h qml/v8/qv4domerrors_p.h qml/v8/qv4sqlerrors_p.h qml/v8/qv8engine_p.h 
++SYNCQT.PRIVATE_HEADER_FILES = qtqmlglobal_p.h animations/qabstractanimationjob_p.h animations/qanimationgroupjob_p.h animations/qanimationjobutil_p.h animations/qcontinuinganimationgroupjob_p.h animations/qparallelanimationgroupjob_p.h animations/qpauseanimationjob_p.h animations/qsequentialanimationgroupjob_p.h compiler/qqmlirbuilder_p.h compiler/qqmlpropertycachecreator_p.h compiler/qqmlpropertyvalidator_p.h compiler/qqmltypecompiler_p.h compiler/qv4bytecodegenerator_p.h compiler/qv4bytecodehandler_p.h compiler/qv4codegen_p.h compiler/qv4compilationunitmapper_p.h compiler/qv4compileddata_p.h compiler/qv4compiler_p.h compiler/qv4compilercontext_p.h compiler/qv4compilercontrolflow_p.h compiler/qv4compilerscanfunctions_p.h compiler/qv4instr_moth_p.h debugger/qqmlabstractprofileradapter_p.h debugger/qqmlconfigurabledebugservice_p.h debugger/qqmldebugconnector_p.h debugger/qqmldebugpluginmanager_p.h debugger/qqmldebugserver_p.h debugger/qqmldebugserverconnection_p.h debugger/qqmldebugservice_p.h debugger/qqmldebugservicefactory_p.h debugger/qqmldebugserviceinterfaces_p.h debugger/qqmldebugstatesdelegate_p.h debugger/qqmlmemoryprofiler_p.h debugger/qqmlprofiler_p.h debugger/qqmlprofilerdefinitions_p.h jit/qv4assemblercommon_p.h jit/qv4baselineassembler_p.h jit/qv4baselinejit_p.h jit/qv4jithelpers_p.h jsapi/qjsengine_p.h jsapi/qjsvalue_p.h jsapi/qjsvalueiterator_p.h jsruntime/qv4alloca_p.h jsruntime/qv4argumentsobject_p.h jsruntime/qv4arraybuffer_p.h jsruntime/qv4arraydata_p.h jsruntime/qv4arrayiterator_p.h jsruntime/qv4arrayobject_p.h jsruntime/qv4atomics_p.h jsruntime/qv4booleanobject_p.h jsruntime/qv4context_p.h jsruntime/qv4dataview_p.h jsruntime/qv4dateobject_p.h jsruntime/qv4debugging_p.h jsruntime/qv4engine_p.h jsruntime/qv4enginebase_p.h jsruntime/qv4errorobject_p.h jsruntime/qv4estable_p.h jsruntime/qv4executableallocator_p.h jsruntime/qv4function_p.h jsruntime/qv4functionobject_p.h jsruntime/qv4functiontable_p.h jsruntime/qv4generatorobject_p.h jsruntime/qv4global_p.h jsruntime/qv4globalobject_p.h jsruntime/qv4identifier_p.h jsruntime/qv4identifiertable_p.h jsruntime/qv4include_p.h jsruntime/qv4internalclass_p.h jsruntime/qv4iterator_p.h jsruntime/qv4jscall_p.h jsruntime/qv4jsonobject_p.h jsruntime/qv4lookup_p.h jsruntime/qv4managed_p.h jsruntime/qv4mapiterator_p.h jsruntime/qv4mapobject_p.h jsruntime/qv4math_p.h jsruntime/qv4mathobject_p.h jsruntime/qv4memberdata_p.h jsruntime/qv4module_p.h jsruntime/qv4numberobject_p.h jsruntime/qv4object_p.h jsruntime/qv4objectiterator_p.h jsruntime/qv4objectproto_p.h jsruntime/qv4persistent_p.h jsruntime/qv4profiling_p.h jsruntime/qv4promiseobject_p.h jsruntime/qv4property_p.h jsruntime/qv4propertykey_p.h jsruntime/qv4proxy_p.h jsruntime/qv4qmlcontext_p.h jsruntime/qv4qobjectwrapper_p.h jsruntime/qv4reflect_p.h jsruntime/qv4regexp_p.h jsruntime/qv4regexpobject_p.h jsruntime/qv4runtime_p.h jsruntime/qv4runtimeapi_p.h jsruntime/qv4runtimecodegen_p.h jsruntime/qv4scopedvalue_p.h jsruntime/qv4script_p.h jsruntime/qv4sequenceobject_p.h jsruntime/qv4serialize_p.h jsruntime/qv4setiterator_p.h jsruntime/qv4setobject_p.h jsruntime/qv4sparsearray_p.h jsruntime/qv4stackframe_p.h jsruntime/qv4string_p.h jsruntime/qv4stringiterator_p.h jsruntime/qv4stringobject_p.h jsruntime/qv4symbol_p.h jsruntime/qv4typedarray_p.h jsruntime/qv4util_p.h jsruntime/qv4value_p.h jsruntime/qv4variantobject_p.h jsruntime/qv4vme_moth_p.h jsruntime/qv4vtable_p.h memory/qv4heap_p.h memory/qv4mm_p.h memory/qv4mmdefs_p.h memory/qv4writebarrier_p.h parser/qqmljsast_p.h parser/qqmljsastfwd_p.h parser/qqmljsastvisitor_p.h parser/qqmljsengine_p.h parser/qqmljsglobal_p.h parser/qqmljskeywords_p.h parser/qqmljslexer_p.h parser/qqmljsmemorypool_p.h qml/qqmlabstractbinding_p.h qml/qqmlapplicationengine_p.h qml/qqmlbinding_p.h qml/qqmlboundsignal_p.h qml/qqmlboundsignalexpressionpointer_p.h qml/qqmlcleanup_p.h qml/qqmlcomponent_p.h qml/qqmlcomponentattached_p.h qml/qqmlcontext_p.h qml/qqmlcustomparser_p.h qml/qqmldata_p.h qml/qqmldelayedcallqueue_p.h qml/qqmldirparser_p.h qml/qqmlengine_p.h qml/qqmlexpression_p.h qml/qqmlextensionplugin_p.h qml/qqmlfileselector_p.h qml/qqmlglobal_p.h qml/qqmlguard_p.h qml/qqmlimport_p.h qml/qqmlincubator_p.h qml/qqmljavascriptexpression_p.h qml/qqmllist_p.h qml/qqmllistwrapper_p.h qml/qqmllocale_p.h qml/qqmlloggingcategory_p.h qml/qqmlmetatype_p.h qml/qqmlnotifier_p.h qml/qqmlobjectcreator_p.h qml/qqmlopenmetaobject_p.h qml/qqmlplatform_p.h qml/qqmlproperty_p.h qml/qqmlpropertycache_p.h qml/qqmlpropertyindex_p.h qml/qqmlpropertyvalueinterceptor_p.h qml/qqmlproxymetaobject_p.h qml/qqmlscriptstring_p.h qml/qqmlstringconverters_p.h qml/qqmltypeloader_p.h qml/qqmltypenamecache_p.h qml/qqmltypenotavailable_p.h qml/qqmltypewrapper_p.h qml/qqmlvaluetype_p.h qml/qqmlvaluetypeproxybinding_p.h qml/qqmlvaluetypewrapper_p.h qml/qqmlvme_p.h qml/qqmlvmemetaobject_p.h qml/qqmlxmlhttprequest_p.h types/qqmlbind_p.h types/qqmlconnections_p.h types/qqmldelegatecomponent_p.h types/qqmldelegatemodel_p.h types/qqmldelegatemodel_p_p.h types/qqmlinstantiator_p.h types/qqmlinstantiator_p_p.h types/qqmllistmodel_p.h types/qqmllistmodel_p_p.h types/qqmllistmodelworkeragent_p.h types/qqmlmodelindexvaluetype_p.h types/qqmlmodelsmodule_p.h types/qqmlobjectmodel_p.h types/qqmltableinstancemodel_p.h types/qqmltimer_p.h types/qquickpackage_p.h types/qquickworkerscript_p.h util/qqmladaptormodel_p.h util/qqmlchangeset_p.h util/qqmllistaccessor_p.h util/qqmllistcompositor_p.h qml/ftw/qbitfield_p.h qml/ftw/qfieldlist_p.h qml/ftw/qfinitestack_p.h qml/ftw/qflagpointer_p.h qml/ftw/qhashedstring_p.h qml/ftw/qintrusivelist_p.h qml/ftw/qlazilyallocated_p.h qml/ftw/qpodvector_p.h qml/ftw/qqmlnullablevalue_p.h qml/ftw/qqmlrefcount_p.h qml/ftw/qqmlthread_p.h qml/ftw/qrecursionwatcher_p.h qml/ftw/qrecyclepool_p.h qml/v8/qqmlbuiltinfunctions_p.h qml/v8/qv4domerrors_p.h qml/v8/qv4sqlerrors_p.h qml/v8/qv8engine_p.h 
+ SYNCQT.QPA_HEADER_FILES = 
+ SYNCQT.CLEAN_HEADER_FILES = qtqmlglobal.h debugger/qqmldebug.h jsapi/qjsengine.h jsapi/qjsvalue.h jsapi/qjsvalueiterator.h qml/qqml.h qml/qqmlabstracturlinterceptor.h qml/qqmlapplicationengine.h qml/qqmlcomponent.h qml/qqmlcontext.h qml/qqmlengine.h qml/qqmlerror.h qml/qqmlexpression.h qml/qqmlextensioninterface.h qml/qqmlextensionplugin.h qml/qqmlfile.h qml/qqmlfileselector.h qml/qqmlincubator.h qml/qqmlinfo.h qml/qqmllist.h qml/qqmlnetworkaccessmanagerfactory.h qml/qqmlparserstatus.h qml/qqmlprivate.h qml/qqmlproperty.h qml/qqmlpropertyvaluesource.h qml/qqmlscriptstring.h util/qqmlpropertymap.h 
+ SYNCQT.INJECTIONS = src/qml/qqmljsgrammar_p.h:^5.12.12/QtQml/private/qqmljsgrammar_p.h src/qml/qqmljsparser_p.h:^5.12.12/QtQml/private/qqmljsparser_p.h 
 diff --git a/src/3rdparty/masm/assembler/LinkBuffer.h b/src/3rdparty/masm/assembler/LinkBuffer.h
-index 7f9979302e..a1bb046d43 100644
+index 7f997930..a1bb046d 100644
 --- a/src/3rdparty/masm/assembler/LinkBuffer.h
 +++ b/src/3rdparty/masm/assembler/LinkBuffer.h
 @@ -228,6 +228,8 @@ public:
@@ -86,7 +109,7 @@ index 7f9979302e..a1bb046d43 100644
  }
  
 diff --git a/src/3rdparty/masm/stubs/ExecutableAllocator.h b/src/3rdparty/masm/stubs/ExecutableAllocator.h
-index 156b24b4e8..a439c53827 100644
+index 156b24b4..a439c538 100644
 --- a/src/3rdparty/masm/stubs/ExecutableAllocator.h
 +++ b/src/3rdparty/masm/stubs/ExecutableAllocator.h
 @@ -82,6 +82,7 @@ struct ExecutableMemoryHandle : public RefCounted<ExecutableMemoryHandle> {
@@ -98,7 +121,7 @@ index 156b24b4e8..a439c53827 100644
      size_t sizeInBytes() { return m_size; }
  
 diff --git a/src/3rdparty/masm/yarr/YarrJIT.cpp b/src/3rdparty/masm/yarr/YarrJIT.cpp
-index dee2ade407..98e4ade51f 100644
+index dee2ade4..98e4ade5 100644
 --- a/src/3rdparty/masm/yarr/YarrJIT.cpp
 +++ b/src/3rdparty/masm/yarr/YarrJIT.cpp
 @@ -33,6 +33,8 @@
@@ -166,7 +189,7 @@ index dee2ade407..98e4ade51f 100644
  {
      switch (failure) {
 diff --git a/src/3rdparty/masm/yarr/YarrJIT.h b/src/3rdparty/masm/yarr/YarrJIT.h
-index 8b6b3a7577..35a0690f6e 100644
+index 8b6b3a75..35a0690f 100644
 --- a/src/3rdparty/masm/yarr/YarrJIT.h
 +++ b/src/3rdparty/masm/yarr/YarrJIT.h
 @@ -82,19 +82,28 @@ class YarrCodeBlock {
@@ -218,7 +241,7 @@ index 8b6b3a7577..35a0690f6e 100644
      }
  
 diff --git a/src/qml/jit/qv4assemblercommon.cpp b/src/qml/jit/qv4assemblercommon.cpp
-index 831496a628..6dc40ad899 100644
+index 831496a6..6dc40ad8 100644
 --- a/src/qml/jit/qv4assemblercommon.cpp
 +++ b/src/qml/jit/qv4assemblercommon.cpp
 @@ -43,6 +43,7 @@
@@ -294,19 +317,17 @@ index 831496a628..6dc40ad899 100644
  
  void PlatformAssemblerCommon::prepareCallWithArgCount(int argc)
 diff --git a/src/qml/jsruntime/jsruntime.pri b/src/qml/jsruntime/jsruntime.pri
-index 5ec55b960b..f256718ac9 100644
+index 5ec55b96..b0562ef8 100644
 --- a/src/qml/jsruntime/jsruntime.pri
 +++ b/src/qml/jsruntime/jsruntime.pri
-@@ -147,7 +147,8 @@ HEADERS += \
-     $$PWD/qv4value_p.h \
-     $$PWD/qv4string_p.h \
-     $$PWD/qv4util_p.h \
--    $$PWD/qv4value_p.h
-+    $$PWD/qv4value_p.h \
-+    $$PWD/qv4functiontable_p.h
+@@ -142,6 +142,7 @@ qtConfig(qml-sequence-object) {
  
- SOURCES += \
-     $$PWD/qv4engine.cpp \
+ 
+ HEADERS += \
++    $$PWD/qv4functiontable_p.h \
+     $$PWD/qv4runtime_p.h \
+     $$PWD/qv4runtimeapi_p.h \
+     $$PWD/qv4value_p.h \
 @@ -156,6 +157,23 @@ SOURCES += \
      $$PWD/qv4value.cpp \
      $$PWD/qv4executableallocator.cpp
@@ -332,7 +353,7 @@ index 5ec55b960b..f256718ac9 100644
      DEFINES += V4_USE_VALGRIND
  }
 diff --git a/src/qml/jsruntime/qv4executableallocator.cpp b/src/qml/jsruntime/qv4executableallocator.cpp
-index 6f04a712e6..c836d121e3 100644
+index 6f04a712..c836d121 100644
 --- a/src/qml/jsruntime/qv4executableallocator.cpp
 +++ b/src/qml/jsruntime/qv4executableallocator.cpp
 @@ -38,17 +38,23 @@
@@ -370,7 +391,7 @@ index 6f04a712e6..c836d121e3 100644
      QMultiMap<size_t, Allocation*>::Iterator it = freeAllocations.lowerBound(size);
      if (it != freeAllocations.end()) {
 diff --git a/src/qml/jsruntime/qv4executableallocator_p.h b/src/qml/jsruntime/qv4executableallocator_p.h
-index 375c9a365f..013c6d7120 100644
+index 375c9a36..013c6d71 100644
 --- a/src/qml/jsruntime/qv4executableallocator_p.h
 +++ b/src/qml/jsruntime/qv4executableallocator_p.h
 @@ -86,6 +86,7 @@ public:
@@ -382,14 +403,14 @@ index 375c9a365f..013c6d7120 100644
          void invalidate() { addr = 0; }
          bool isValid() const { return addr != 0; }
 diff --git a/src/qml/jsruntime/qv4function.cpp b/src/qml/jsruntime/qv4function.cpp
-index 51a9b92967..dcf3660f5d 100644
+index 51a9b929..55fca618 100644
 --- a/src/qml/jsruntime/qv4function.cpp
 +++ b/src/qml/jsruntime/qv4function.cpp
 @@ -46,6 +46,7 @@
  #include "qv4lookup_p.h"
  #include <private/qv4mm_p.h>
  #include <private/qv4identifiertable_p.h>
-+#include <private/qv4functiontable_p.h>
++#include "qv4functiontable_p.h"
  #include <assembler/MacroAssemblerCodeRef.h>
  #include <private/qv4vme_moth_p.h>
  #include <private/qqmlglobal_p.h>
@@ -424,7 +445,7 @@ index 51a9b92967..dcf3660f5d 100644
  {
      return QQmlSourceLocation(sourceFile(), compiledFunction->location.line, compiledFunction->location.column);
 diff --git a/src/qml/jsruntime/qv4function_p.h b/src/qml/jsruntime/qv4function_p.h
-index 62c5d24fc4..859b6a879c 100644
+index 62c5d24f..859b6a87 100644
 --- a/src/qml/jsruntime/qv4function_p.h
 +++ b/src/qml/jsruntime/qv4function_p.h
 @@ -88,9 +88,12 @@ struct Q_QML_EXPORT Function {
@@ -443,7 +464,7 @@ index 62c5d24fc4..859b6a879c 100644
  
 diff --git a/src/qml/jsruntime/qv4functiontable_noop.cpp b/src/qml/jsruntime/qv4functiontable_noop.cpp
 new file mode 100644
-index 0000000000..31c198eb00
+index 00000000..31c198eb
 --- /dev/null
 +++ b/src/qml/jsruntime/qv4functiontable_noop.cpp
 @@ -0,0 +1,65 @@
@@ -514,7 +535,7 @@ index 0000000000..31c198eb00
 +QT_END_NAMESPACE
 diff --git a/src/qml/jsruntime/qv4functiontable_p.h b/src/qml/jsruntime/qv4functiontable_p.h
 new file mode 100644
-index 0000000000..69e3d2bdd5
+index 00000000..69e3d2bd
 --- /dev/null
 +++ b/src/qml/jsruntime/qv4functiontable_p.h
 @@ -0,0 +1,75 @@
@@ -595,7 +616,7 @@ index 0000000000..69e3d2bdd5
 +#endif // QV4FUNCTIONTABLE_P_H
 diff --git a/src/qml/jsruntime/qv4functiontable_unix.cpp b/src/qml/jsruntime/qv4functiontable_unix.cpp
 new file mode 100644
-index 0000000000..25b5c27161
+index 00000000..25b5c271
 --- /dev/null
 +++ b/src/qml/jsruntime/qv4functiontable_unix.cpp
 @@ -0,0 +1,99 @@
@@ -700,7 +721,7 @@ index 0000000000..25b5c27161
 +QT_END_NAMESPACE
 diff --git a/src/qml/jsruntime/qv4functiontable_win64.cpp b/src/qml/jsruntime/qv4functiontable_win64.cpp
 new file mode 100644
-index 0000000000..bc5b24f6cd
+index 00000000..bc5b24f6
 --- /dev/null
 +++ b/src/qml/jsruntime/qv4functiontable_win64.cpp
 @@ -0,0 +1,153 @@
@@ -859,7 +880,7 @@ index 0000000000..bc5b24f6cd
 +QT_END_NAMESPACE
 diff --git a/tests/auto/qml/qv4assembler/data/crash.qml b/tests/auto/qml/qv4assembler/data/crash.qml
 new file mode 100644
-index 0000000000..dfdb9ceba5
+index 00000000..dfdb9ceb
 --- /dev/null
 +++ b/tests/auto/qml/qv4assembler/data/crash.qml
 @@ -0,0 +1,53 @@
@@ -917,7 +938,7 @@ index 0000000000..dfdb9ceba5
 +}
 +
 diff --git a/tests/auto/qml/qv4assembler/qv4assembler.pro b/tests/auto/qml/qv4assembler/qv4assembler.pro
-index afd7586ac7..895e241cc9 100644
+index afd7586a..895e241c 100644
 --- a/tests/auto/qml/qv4assembler/qv4assembler.pro
 +++ b/tests/auto/qml/qv4assembler/qv4assembler.pro
 @@ -1,7 +1,12 @@
@@ -934,7 +955,7 @@ index afd7586ac7..895e241cc9 100644
  
  QT += qml-private testlib
 diff --git a/tests/auto/qml/qv4assembler/tst_qv4assembler.cpp b/tests/auto/qml/qv4assembler/tst_qv4assembler.cpp
-index afc00ec72c..61a3e7780c 100644
+index afc00ec7..61a3e778 100644
 --- a/tests/auto/qml/qv4assembler/tst_qv4assembler.cpp
 +++ b/tests/auto/qml/qv4assembler/tst_qv4assembler.cpp
 @@ -26,20 +26,37 @@
@@ -1020,5 +1041,5 @@ index afc00ec72c..61a3e7780c 100644
  #define JIT_ENABLED 1
  #else
 -- 
-2.37.1.windows.1
+2.37.3
 
