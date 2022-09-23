@@ -170,6 +170,12 @@ modules:
           - patches/qt/declarative/0124-qtdeclarative-Include-limits-in-yarr-h.patch
           - patches/qt/declarative/0125-qtdeclarative-Build-fixes-for-GCC-11.patch
           - patches/qt/declarative/Make-QQuickWindow-renderer-follow-real-logical-size.patch
+          - patches/qt/declarative/0134-V4-Generate-function-tables-on-64bit-windows.patch
+          - patches/qt/declarative/0135-Use-lowercase-name-for-window-header.patch
+          - patches/qt/declarative/0136-JIT-When-making-memory-writable-include-the-exceptio.patch
+          - patches/qt/declarative/0137-masm-Add-error-handling-for-failed-mprotect.patch
+          - patches/qt/declarative/0138-Fix-Clang-10-warning-about-converting-ULLONG_MAX-to-.patch
+          - patches/qt/declarative/0139-Fix-Wdeprecated-copy-warnings.patch
   - name: qtquickcontrols
     buildsystem: qmake
     cleanup:
