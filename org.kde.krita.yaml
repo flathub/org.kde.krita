@@ -379,8 +379,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/5b/cb/c27c925ae07bd03a2597fa1db17bfc2a4ac57da61aeb90f8ec98ffbb975b/sip-6.6.2.tar.gz
-        sha256: 0e3efac1c5dfd8e525ae57140927df26993e13f58b89d1577c314f4105bfd90d
+        url: https://files.pythonhosted.org/packages/28/09/87e20f2be19051bea42df699947aba30f84422908ec2b8d827bcdf0ab365/sip-6.7.1.tar.gz
+        sha256: 28170fdf880f937026fc87faa9c177b062c353c5d169ea3242b07802614ddd0c
         x-checker-data:
           type: pypi
           name: sip
@@ -393,8 +393,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/31/36/6c73f2bd8e4ac5594f6331735951d16d0800f297473db77996966d57cfc7/PyQt-builder-1.13.0.tar.gz
-        sha256: 4877580c38ceb5320e129b381d083b0a8601c68166d8b99707f08fa0a1689eef
+        url: https://files.pythonhosted.org/packages/3e/ed/fa5ffe4a72903747cdd5860a46483795edc0b70562015dde42724e9ce00f/PyQt-builder-1.14.0.tar.gz
+        sha256: 6755931c6d2f8940553e0334d10c933ce5cc18b64425e94fda1accf4ff774f59
         x-checker-data:
           type: pypi
           name: PyQt-builder
@@ -595,8 +595,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.4.8.tar.gz
-        sha256: 398f6d95bf808d3108e27547b372cb4ac8dc2298a3c4251eb7aa3d4c6d4bb3e2
+        url: https://github.com/libexpat/libexpat/releases/download/R_2_4_9/expat-2.4.9.tar.gz
+        sha256: 4415710268555b32c4e5ab06a583bea9fec8ff89333b218b70b43d4ca10e38fa
         x-checker-data:
           type: anitya
           project-id: 770
@@ -699,8 +699,8 @@ modules:
       - -DWITH_NSS3=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-22.09.0.tar.xz
-        sha256: d7a8f748211359cadb774ba3e18ecda6464b34027045c0648eb30d5852a41e2e
+        url: https://poppler.freedesktop.org/poppler-22.10.0.tar.xz
+        sha256: 04e40fad924a6de62e63017a6fd4c04696c1f526dedc2ba5ef275cedf646292a
         x-checker-data:
           type: anitya
           project-id: 3686
@@ -751,8 +751,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
-        sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
+        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
           url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
@@ -781,8 +781,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
-        sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
+        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
           url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
@@ -814,8 +814,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
-        sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
+        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
           url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
