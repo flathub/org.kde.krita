@@ -379,8 +379,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/5b/cb/c27c925ae07bd03a2597fa1db17bfc2a4ac57da61aeb90f8ec98ffbb975b/sip-6.6.2.tar.gz
-        sha256: 0e3efac1c5dfd8e525ae57140927df26993e13f58b89d1577c314f4105bfd90d
+        url: https://files.pythonhosted.org/packages/08/f6/06ad8d62331b302b68fbd730eedec8346213db71857128cb3b8309fee2ad/sip-6.7.4.tar.gz
+        sha256: 9dbf8a0e7c8d76d1642e2fdd3f53e6a522f7c30980e527763c45760c2505cfbf
         x-checker-data:
           type: pypi
           name: sip
@@ -393,8 +393,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/31/36/6c73f2bd8e4ac5594f6331735951d16d0800f297473db77996966d57cfc7/PyQt-builder-1.13.0.tar.gz
-        sha256: 4877580c38ceb5320e129b381d083b0a8601c68166d8b99707f08fa0a1689eef
+        url: https://files.pythonhosted.org/packages/3e/ed/fa5ffe4a72903747cdd5860a46483795edc0b70562015dde42724e9ce00f/PyQt-builder-1.14.0.tar.gz
+        sha256: 6755931c6d2f8940553e0334d10c933ce5cc18b64425e94fda1accf4ff774f59
         x-checker-data:
           type: pypi
           name: PyQt-builder
@@ -502,8 +502,8 @@ modules:
       - /share
     sources:
       - type: archive
-        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.13.1/lcms2-2.13.1.tar.gz
-        sha256: d473e796e7b27c5af01bd6d1552d42b45b43457e7182ce9903f38bb748203b88
+        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.14/lcms2-2.14.tar.gz
+        sha256: 28474ea6f6591c4d4cee972123587001a4e6e353412a41b3e9e82219818d5740
         x-checker-data:
           type: anitya
           project-id: 9815
@@ -525,8 +525,8 @@ modules:
       - -DFREEGLUT_BUILD_STATIC_LIBS=OFF
     sources:
       - type: archive
-        url: https://github.com/FreeGLUTProject/freeglut/releases/download/v3.2.2/freeglut-3.2.2.tar.gz
-        sha256: c5944a082df0bba96b5756dddb1f75d0cd72ce27b5395c6c1dde85c2ff297a50
+        url: https://github.com/FreeGLUTProject/freeglut/releases/download/v3.4.0/freeglut-3.4.0.tar.gz
+        sha256: 3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6f3eaec
         x-checker-data:
           type: anitya
           project-id: 846
@@ -582,8 +582,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/59/f6/aafe0b7e798f25632b199523cce98552fde53e8c552b9d96765426532d5f/pybind11-2.10.0.tar.gz
-        sha256: 18977589c10f595f65ec1be90b0a0763b43e458d25d97be9db75b958eb1f43fe
+        url: https://files.pythonhosted.org/packages/2f/23/aaf147a5bc31c8be286f07d862b3699d7b49e3411fb75087525b5c31ab3e/pybind11-2.10.1.tar.gz
+        sha256: c9571b8a6607c8e90ea156a2a455383b9911f89da414e9f5e251ab58dc3e3c71
         x-checker-data:
           type: pypi
           name: pybind11
@@ -595,8 +595,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.4.8.tar.gz
-        sha256: 398f6d95bf808d3108e27547b372cb4ac8dc2298a3c4251eb7aa3d4c6d4bb3e2
+        url: https://github.com/libexpat/libexpat/releases/download/R_2_5_0/expat-2.5.0.tar.gz
+        sha256: 6b902ab103843592be5e99504f846ec109c1abb692e85347587f237a4ffa1033
         x-checker-data:
           type: anitya
           project-id: 770
@@ -616,8 +616,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.1.2.tar.gz
-        sha256: 6c6d153470a7dbe56136073e7abea42fa34d06edc519ffc0a159daf9f9962b0b
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.0.tar.gz
+        sha256: 81e3b6e0e432d20347b6396c376f9fbeceac31c2cbefe2882d83112a5b0a8123
         x-checker-data:
           type: anitya
           project-id: 9631
@@ -699,8 +699,8 @@ modules:
       - -DWITH_NSS3=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-22.09.0.tar.xz
-        sha256: d7a8f748211359cadb774ba3e18ecda6464b34027045c0648eb30d5852a41e2e
+        url: https://poppler.freedesktop.org/poppler-22.11.0.tar.xz
+        sha256: 093ba9844ed774285517361c15e21a31ba4df278a499263d4403cca74f2da828
         x-checker-data:
           type: anitya
           project-id: 3686
@@ -751,8 +751,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
-        sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
+        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
           url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
@@ -781,8 +781,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
-        sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
+        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
           url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
@@ -814,8 +814,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220222-12712.tar.gz
-        sha256: e6182435b25b04a00c75770d2a1c11e7731eb5e118c377933eeec2665980db70
+        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
+        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
           url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
@@ -837,8 +837,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libde265/releases/download/v1.0.8/libde265-1.0.8.tar.gz
-        sha256: 24c791dd334fa521762320ff54f0febfd3c09fc978880a8c5fbc40a88f21d905
+        url: https://github.com/strukturag/libde265/releases/download/v1.0.9/libde265-1.0.9.tar.gz
+        sha256: 29bc6b64bf658d81a4446a3f98e0e4636fd4fd3d971b072d440cef987d5439de
         x-checker-data:
           type: anitya
           project-id: 11239
@@ -1007,8 +1007,8 @@ modules:
       - /share/icons/hicolor/scalable
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.1.1/krita-5.1.1.tar.gz
-        sha256: 4ddbf897afa7b187131697d12a23ba39894638068b2eae12b3b434fe42ad8e24
+        url: https://download.kde.org/stable/krita/5.1.2/krita-5.1.2.tar.gz
+        sha256: 95bee250e70250a3c0d10b69cd7ddfbb0d22d3ac0a3816eb8eb02fd5f8767bee
         x-checker-data:
           type: anitya
           project-id: 10918
