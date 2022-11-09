@@ -223,6 +223,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/Attic/frameworks/5.76/kwidgetsaddons-5.76.0.tar.xz
