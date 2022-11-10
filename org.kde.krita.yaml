@@ -422,7 +422,7 @@ modules:
     buildsystem: simple
     build-commands:
       - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
-        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.9/site-packages
+        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.10/site-packages
     cleanup:
       - /bin
     sources:
@@ -609,27 +609,23 @@ modules:
           project-id: 770
           stable-only: true
           url-template: https://github.com/libexpat/libexpat/releases/download/R_${major}_${minor}_${patch}/expat-$version.tar.gz
-  - name: opencolorio
+  - name: minizip-ng
     buildsystem: cmake-ninja
     builddir: true
     config-opts:
-      - -DOCIO_BUILD_NUKE=OFF
-      - -DOCIO_BUILD_DOCS=OFF
-      - -DOCIO_BUILD_TESTS=OFF
-      - -DOCIO_BUILD_GPU_TESTS=OFF
-      - -DOCIO_BUILD_PYTHON=OFF
-      - -DOCIO_INSTALL_EXT_PACKAGES=NONE
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_SHARED_LIBS=ON
     cleanup:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.0.tar.gz
-        sha256: 81e3b6e0e432d20347b6396c376f9fbeceac31c2cbefe2882d83112a5b0a8123
+        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.7.tar.gz
+        sha256: 39981a0db1bb6da504909bce63d7493286c5e50825c056564544c990d15c55cf
         x-checker-data:
           type: anitya
-          project-id: 9631
+          project-id: 301509
           stable-only: true
-          url-template: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v$version.tar.gz
+          url-template: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/$version.tar.gz
   - name: openexr
     buildsystem: cmake-ninja
     config-opts:
@@ -646,6 +642,32 @@ modules:
           project-id: 13289
           stable-only: true
           url-template: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v$version.tar.gz
+  - name: opencolorio
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DOCIO_BUILD_NUKE=OFF
+      - -DOCIO_BUILD_DOCS=OFF
+      - -DOCIO_BUILD_TESTS=OFF
+      - -DOCIO_BUILD_GPU_TESTS=OFF
+      - -DOCIO_BUILD_PYTHON=OFF
+      - -DOCIO_INSTALL_EXT_PACKAGES=NONE
+      - -Dminizip-ng_LIBRARY=/app/lib/libminizip.so
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.0.tar.gz
+        sha256: 81e3b6e0e432d20347b6396c376f9fbeceac31c2cbefe2882d83112a5b0a8123
+        x-checker-data:
+          type: anitya
+          project-id: 9631
+          stable-only: true
+          url-template: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v$version.tar.gz
+      - type: patch
+        paths:
+          - patches/opencolorio/use-system-minizip.patch
   - name: libraw
     buildsystem: cmake-ninja
     config-opts:
@@ -1016,7 +1038,7 @@ modules:
     builddir: true
     build-options:
       env:
-        PYTHONPATH: /app/lib/python3.9/dist-packages
+        PYTHONPATH: /app/lib/python3.10/dist-packages
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
