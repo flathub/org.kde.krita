@@ -982,13 +982,14 @@ modules:
       - -DJPEGXL_ENABLE_TOOLS=OFF
       - -DJPEGXL_ENABLE_VIEWERS=OFF
     sources:
-      - type: git
-        url: https://github.com/libjxl/libjxl.git
-        tag: v0.7.0
-        commit: f95da131cf7c7ccd4da256356fde2fec1fa23bb5
+      - type: archive
+        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.7.0.tar.gz
+        sha256: 3114bba1fabb36f6f4adc2632717209aa6f84077bc4e93b420e0d63fa0455c5e
         x-checker-data:
-          type: git
-          tag-pattern: ^v([\d.]+)$
+          type: anitya
+          project-id: 232764
+          stable-only: true
+          url-template: https://github.com/libjxl/libjxl/archive/refs/tags/v$version.tar.gz
   - name: xsimd
     buildsystem: cmake-ninja
     config-opts:
