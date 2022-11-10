@@ -630,9 +630,6 @@ modules:
           project-id: 9631
           stable-only: true
           url-template: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v$version.tar.gz
-      - type: patch
-        paths:
-          - patches/opencolorio/0001-MinGW-Work-around-lack-of-strtof_l-for-locale-indepe.patch
   - name: openexr
     buildsystem: cmake-ninja
     config-opts:
