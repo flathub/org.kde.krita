@@ -359,8 +359,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/df/9e/d1a7217f69310c1db8fdf8ab396229f55a699ce34a203691794c5d1cad0c/packaging-21.3.tar.gz
-        sha256: dd47c42927d89ab911e606518907cc2d3a1f38bbd026385970643f9c5b8ecfeb
+        url: https://files.pythonhosted.org/packages/6b/f7/c240d7654ddd2d2f3f328d8468d4f1f876865f6b9038b146bec0a6737c65/packaging-22.0.tar.gz
+        sha256: 2198ec20bd4c017b8f9717e00f0c8714076fc2fd93816750ab48e2c41de2cfd3
         x-checker-data:
           type: pypi
           name: packaging
@@ -728,8 +728,8 @@ modules:
       - -DWITH_NSS3=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-22.11.0.tar.xz
-        sha256: 093ba9844ed774285517361c15e21a31ba4df278a499263d4403cca74f2da828
+        url: https://poppler.freedesktop.org/poppler-22.12.0.tar.xz
+        sha256: d9aa9cacdfbd0f8e98fc2b3bb008e645597ed480685757c3e7bc74b4278d15c0
         x-checker-data:
           type: anitya
           project-id: 3686
@@ -996,8 +996,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/9.0.1.tar.gz
-        sha256: b1bb5f92167fd3a4f25749db0be7e61ed37e0a5d943490f3accdcd2cd2918cc0
+        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/10.0.0.tar.gz
+        sha256: 73f818368b3a4dad92fab1b2933d93694241bd2365a6181747b2df1768f6afdd
         x-checker-data:
           type: anitya
           project-id: 138109
