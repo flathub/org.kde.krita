@@ -521,6 +521,7 @@ modules:
       - type: patch
         paths:
           - patches/lcms2/0002-Add-modern-CMake-toolchain.patch
+          - patches/lcms2/0003-Revert-Fix-LUT-based-optimization-on-8-bits.patch
   - shared-modules/glu/glu-9.json
   - shared-modules/glew/glew.json
   - name: freeglut
