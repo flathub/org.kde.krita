@@ -92,7 +92,7 @@ index 0000000..49b0825
 +check_cxx_source_compiles ("#include <emmintrin.h>
 +int main() { __m128i n = _mm_set1_epi8(42); }" HAVE_SSE2)
 +
-+set(lcms_plugin_SRCS
++set(lcms_plugin_SRCS 
 +    src/fast_16_tethra.c
 +    src/fast_8_curves.c
 +    src/fast_8_matsh.c
@@ -319,5 +319,6 @@ index 0000000..ed2f211
 +                                     LIBRARY DESTINATION lib
 +                                     ARCHIVE DESTINATION lib)
 +install(FILES ${UTILS_MANPAGES} DESTINATION share/man/man1)
---
+-- 
 2.37.1.windows.1
+
