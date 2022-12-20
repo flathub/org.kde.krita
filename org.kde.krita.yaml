@@ -589,8 +589,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/2f/23/aaf147a5bc31c8be286f07d862b3699d7b49e3411fb75087525b5c31ab3e/pybind11-2.10.1.tar.gz
-        sha256: c9571b8a6607c8e90ea156a2a455383b9911f89da414e9f5e251ab58dc3e3c71
+        url: https://files.pythonhosted.org/packages/cd/35/9925b1a59898b4437a99c69ab4dca052288d653025fb95ed13463078291f/pybind11-2.10.2.tar.gz
+        sha256: 26db33c5080a9d8adb38f088cd22eef0dfb5c33acc46d18ec7d37885d32848c7
         x-checker-data:
           type: pypi
           name: pybind11
@@ -677,8 +677,8 @@ modules:
       - /share/doc
     sources:
       - type: archive
-        url: https://www.libraw.org/data/LibRaw-0.20.2.tar.gz
-        sha256: dc1b486c2003435733043e4e05273477326e51c3ea554c6864a4eafaff1004a6
+        url: https://www.libraw.org/data/LibRaw-0.21.0.tar.gz
+        sha256: 8747b34e8534cc2dd7ef8c92c436414b3578904fd4bf9b87ea60f17aa99fb0bd
         x-checker-data:
           type: anitya
           project-id: 1709
