@@ -619,8 +619,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.7.tar.gz
-        sha256: 39981a0db1bb6da504909bce63d7493286c5e50825c056564544c990d15c55cf
+        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.8.tar.gz
+        sha256: 27cc2f62cd02d79b71b346fc6ace02728385f8ba9c6b5f124062b0790a04629a
         x-checker-data:
           type: anitya
           project-id: 301509
@@ -677,8 +677,8 @@ modules:
       - /share/doc
     sources:
       - type: archive
-        url: https://www.libraw.org/data/LibRaw-0.20.2.tar.gz
-        sha256: dc1b486c2003435733043e4e05273477326e51c3ea554c6864a4eafaff1004a6
+        url: https://www.libraw.org/data/LibRaw-0.21.0.tar.gz
+        sha256: 8747b34e8534cc2dd7ef8c92c436414b3578904fd4bf9b87ea60f17aa99fb0bd
         x-checker-data:
           type: anitya
           project-id: 1709
@@ -728,8 +728,8 @@ modules:
       - -DWITH_NSS3=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-22.12.0.tar.xz
-        sha256: d9aa9cacdfbd0f8e98fc2b3bb008e645597ed480685757c3e7bc74b4278d15c0
+        url: https://poppler.freedesktop.org/poppler-23.01.0.tar.xz
+        sha256: fae9b88d3d5033117d38477b79220cfd0d8e252c278ec870ab1832501741fd94
         x-checker-data:
           type: anitya
           project-id: 3686
