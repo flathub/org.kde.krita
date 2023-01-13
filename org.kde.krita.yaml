@@ -359,8 +359,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/6b/f7/c240d7654ddd2d2f3f328d8468d4f1f876865f6b9038b146bec0a6737c65/packaging-22.0.tar.gz
-        sha256: 2198ec20bd4c017b8f9717e00f0c8714076fc2fd93816750ab48e2c41de2cfd3
+        url: https://files.pythonhosted.org/packages/47/d5/aca8ff6f49aa5565df1c826e7bf5e85a6df852ee063600c1efa5b932968c/packaging-23.0.tar.gz
+        sha256: b6ad297f8907de0fa2fe1ccbd26fdaf387f5f47c7275fedf8cce89f99446cf97
         x-checker-data:
           type: pypi
           name: packaging
@@ -589,8 +589,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/2f/23/aaf147a5bc31c8be286f07d862b3699d7b49e3411fb75087525b5c31ab3e/pybind11-2.10.1.tar.gz
-        sha256: c9571b8a6607c8e90ea156a2a455383b9911f89da414e9f5e251ab58dc3e3c71
+        url: https://files.pythonhosted.org/packages/56/d3/ebc2ad811d192b91d97a45d30b4d5bcb148275db668eada4b6f55781fdc7/pybind11-2.10.3.tar.gz
+        sha256: 08cfe6d4f73746447cc85a400c8169a91608b8a00c5feecd8ff251a70565d12f
         x-checker-data:
           type: pypi
           name: pybind11
@@ -619,8 +619,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.7.tar.gz
-        sha256: 39981a0db1bb6da504909bce63d7493286c5e50825c056564544c990d15c55cf
+        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.8.tar.gz
+        sha256: 27cc2f62cd02d79b71b346fc6ace02728385f8ba9c6b5f124062b0790a04629a
         x-checker-data:
           type: anitya
           project-id: 301509
@@ -658,8 +658,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.0.tar.gz
-        sha256: 81e3b6e0e432d20347b6396c376f9fbeceac31c2cbefe2882d83112a5b0a8123
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.1.tar.gz
+        sha256: 36f27c5887fc4e5c241805c29b8b8e68725aa05520bcaa7c7ec84c0422b8580e
         x-checker-data:
           type: anitya
           project-id: 9631
@@ -677,8 +677,8 @@ modules:
       - /share/doc
     sources:
       - type: archive
-        url: https://www.libraw.org/data/LibRaw-0.20.2.tar.gz
-        sha256: dc1b486c2003435733043e4e05273477326e51c3ea554c6864a4eafaff1004a6
+        url: https://www.libraw.org/data/LibRaw-0.21.1.tar.gz
+        sha256: 630a6bcf5e65d1b1b40cdb8608bdb922316759bfb981c65091fec8682d1543cd
         x-checker-data:
           type: anitya
           project-id: 1709
@@ -894,8 +894,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.14.0/libheif-1.14.0.tar.gz
-        sha256: 9a2b969d827e162fa9eba582ebd0c9f6891f16e426ef608d089b1f24962295b5
+        url: https://github.com/strukturag/libheif/releases/download/v1.14.2/libheif-1.14.2.tar.gz
+        sha256: d016905e247d6952cd7ee4f9b90957350b6a6caa466bc76fdfe6eb302b6d088c
         x-checker-data:
           type: anitya
           project-id: 64439
@@ -1051,8 +1051,8 @@ modules:
       - /share/icons/hicolor/scalable
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.1.4/krita-5.1.4.tar.gz
-        sha256: c22b020862596eb2fdd911e1b179dbbce7b081be111457a2eacaf6ae1cca2dcb
+        url: https://download.kde.org/stable/krita/5.1.5/krita-5.1.5.tar.gz
+        sha256: 1c775ebef0f799a9a6b74440c3d906ab913c27541b177ed621704de714e9a4d3
         x-checker-data:
           type: anitya
           project-id: 10918
