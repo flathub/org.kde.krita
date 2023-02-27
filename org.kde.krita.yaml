@@ -387,8 +387,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/fd/9b/8e727256983e5b1d975f8dfce6f477b5ab6bada14a00b07fa3db51fcd6fe/sip-6.7.5.tar.gz
-        sha256: 9655d089e1d0c5fbf66bde11558a874980729132b5bd0c2ae355ac1a7b893ab4
+        url: https://files.pythonhosted.org/packages/f1/ba/19f9cb16416a3c98bd5969b1bd9bf3c92dd278788d8d949ed66b8e0edf0d/sip-6.7.7.tar.gz
+        sha256: dee9c06fa8ae6d441a401f922867fc6196edda274eebd9fbfec54f0769c2a9e2
         x-checker-data:
           type: pypi
           name: sip
@@ -401,8 +401,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/3e/ed/fa5ffe4a72903747cdd5860a46483795edc0b70562015dde42724e9ce00f/PyQt-builder-1.14.0.tar.gz
-        sha256: 6755931c6d2f8940553e0334d10c933ce5cc18b64425e94fda1accf4ff774f59
+        url: https://files.pythonhosted.org/packages/21/6c/685981114cb350f2f8e4a0827aa7f60f142e15816aa48f3204e5a1e2578c/PyQt-builder-1.14.1.tar.gz
+        sha256: 83bc3e300aff8b41405804b6a9c2913389ab59c48ad9f0cb8584a6ef73bca502
         x-checker-data:
           type: pypi
           name: PyQt-builder
@@ -413,8 +413,8 @@ modules:
         "PyQt5_sip" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/39/5f/fd9384fdcb9cd0388088899c110838007f49f5da1dd1ef6749bfb728a5da/PyQt5_sip-12.11.0.tar.gz
-        sha256: b4710fd85b57edef716cc55fae45bfd5bfac6fc7ba91036f1dcc3f331ca0eb39
+        url: https://files.pythonhosted.org/packages/d2/f4/4c3e5fc1584f5a2964cfc89bf420cfcc59aba0b1f2d08446e2b491a21ed5/PyQt5_sip-12.11.1.tar.gz
+        sha256: 97d3fbda0f61edb1be6529ec2d5c7202ae83aee4353e4b264a159f8c9ada4369
         x-checker-data:
           type: pypi
           name: PyQt5_sip
@@ -427,8 +427,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/e1/57/2023316578646e1adab903caab714708422f83a57f97eb34a5d13510f4e1/PyQt5-5.15.7.tar.gz
-        sha256: 755121a52b3a08cb07275c10ebb96576d36e320e572591db16cfdbc558101594
+        url: https://files.pythonhosted.org/packages/5c/46/b4b6eae1e24d9432905ef1d4e7c28b6610e28252527cdc38f2a75997d8b5/PyQt5-5.15.9.tar.gz
+        sha256: dc41e8401a90dc3e2b692b411bd5492ab559ae27a27424eed4bd3915564ec4c0
         x-checker-data:
           type: pypi
           name: PyQt5
@@ -658,8 +658,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.0.tar.gz
-        sha256: 81e3b6e0e432d20347b6396c376f9fbeceac31c2cbefe2882d83112a5b0a8123
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.1.tar.gz
+        sha256: 36f27c5887fc4e5c241805c29b8b8e68725aa05520bcaa7c7ec84c0422b8580e
         x-checker-data:
           type: anitya
           project-id: 9631
@@ -708,8 +708,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-data-0.4.11.tar.gz
-        sha256: 2cec05cd1bb03af98a8b06a1e22f6e6e1a65b1e2f3816cb3069bb0874825f08c
+        url: https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz
+        sha256: c835b640a40ce357e1b83666aabd95edffa24ddddd49b8daff63adb851cdab74
         x-checker-data:
           type: anitya
           project-id: 3687
@@ -728,8 +728,8 @@ modules:
       - -DWITH_NSS3=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-23.01.0.tar.xz
-        sha256: fae9b88d3d5033117d38477b79220cfd0d8e252c278ec870ab1832501741fd94
+        url: https://poppler.freedesktop.org/poppler-23.02.0.tar.xz
+        sha256: 3315dda270fe2b35cf1f41d275948c39652fa863b90de0766f6b293d9a558fc9
         x-checker-data:
           type: anitya
           project-id: 3686
@@ -741,8 +741,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/stachenov/quazip/archive/refs/tags/v1.3.tar.gz
-        sha256: c1239559cd6860cab80a0fd81f4204e606f9324f702dab6166b0960676ee1754
+        url: https://github.com/stachenov/quazip/archive/refs/tags/v1.4.tar.gz
+        sha256: 79633fd3a18e2d11a7d5c40c4c79c1786ba0c74b59ad752e8429746fe1781dd6
         x-checker-data:
           type: anitya
           project-id: 4141
@@ -760,8 +760,8 @@ modules:
       - -DENABLE_TOOLS=OFF
     sources:
       - type: archive
-        url: https://storage.googleapis.com/aom-releases/libaom-3.5.0.tar.gz
-        sha256: d37dbee372e2430a7efde813984ae6d78bdf1fc4080ebe32457c9115408b0738
+        url: https://storage.googleapis.com/aom-releases/libaom-3.6.0.tar.gz
+        sha256: a4a6c0fab685da743b796662a928fcdf7ae60594edc306efb73e78a17ea6cde6
         x-checker-data:
           type: anitya
           project-id: 17628
@@ -875,8 +875,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libde265/releases/download/v1.0.9/libde265-1.0.9.tar.gz
-        sha256: 29bc6b64bf658d81a4446a3f98e0e4636fd4fd3d971b072d440cef987d5439de
+        url: https://github.com/strukturag/libde265/releases/download/v1.0.11/libde265-1.0.11.tar.gz
+        sha256: 2f8f12cabbdb15e53532b7c1eb964d4e15d444db1be802505e6ac97a25035bab
         x-checker-data:
           type: anitya
           project-id: 11239
@@ -894,8 +894,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.14.2/libheif-1.14.2.tar.gz
-        sha256: d016905e247d6952cd7ee4f9b90957350b6a6caa466bc76fdfe6eb302b6d088c
+        url: https://github.com/strukturag/libheif/releases/download/v1.15.1/libheif-1.15.1.tar.gz
+        sha256: 28d5a376fe7954d2d03453f983aaa0b7486f475c27c7806bda31df9102325556
         x-checker-data:
           type: anitya
           project-id: 64439
@@ -960,8 +960,8 @@ modules:
       - -DBUILD_SHARED_LIBS=OFF
     sources:
       - type: archive
-        url: https://github.com/google/highway/archive/refs/tags/1.0.2.tar.gz
-        sha256: e8ef71236ac0d97f12d553ec1ffc5b6375d57b5f0b860c7447dd69b6ed1072db
+        url: https://github.com/google/highway/archive/refs/tags/1.0.3.tar.gz
+        sha256: 566fc77315878473d9a6bd815f7de78c73734acdcb745c3dde8579560ac5440e
         x-checker-data:
           type: anitya
           project-id: 205809
@@ -983,8 +983,8 @@ modules:
       - -DJPEGXL_ENABLE_VIEWERS=OFF
     sources:
       - type: archive
-        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.7.0.tar.gz
-        sha256: 3114bba1fabb36f6f4adc2632717209aa6f84077bc4e93b420e0d63fa0455c5e
+        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.8.1.tar.gz
+        sha256: 60f43921ad3209c9e180563025eda0c0f9b1afac51a2927b9ff59fff3950dc56
         x-checker-data:
           type: anitya
           project-id: 232764
