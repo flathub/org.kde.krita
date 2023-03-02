@@ -100,6 +100,8 @@ modules:
       - type: git
         url: https://invent.kde.org/szaman/qtdeclarative.git
         commit: 967fb735aeb5ef26fb1ccab42bc0720442c14fa2
+        disable-shallow-clone: true
+        disable-submodules: true
   - name: qtimageformats
     buildsystem: qmake
     cleanup:
@@ -153,7 +155,7 @@ modules:
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qtx11extras.git
-        commit: 7568b1a9bf4d331d6ddbac10261a38277dd838a163fcc3b3734be96a0cbffe80
+        commit: 9134cdba9386e408ce2ffe515ca0c3f6f6c66685
   - name: qttranslations
     buildsystem: qmake
     cleanup:
@@ -161,7 +163,7 @@ modules:
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qttranslations.git
-        commit: 1e5ce25d1fea6e69ae9bd78ac4860a7d85e206b8db1ff2c258785626ddcf3995
+        commit: c38edd3a5501bcd53132e1e4abb7d25a98e0e1a9
   - name: extra-cmake-modules
     buildsystem: cmake-ninja
     cleanup:
