@@ -36,6 +36,8 @@ cleanup:
   - '*.la'
   - '*.cmake'
   - '*.prl'
+cleanup-commands:
+  - 'mkdir -p /app/lib/ffmpeg'
 add-extensions:
   org.kde.krita.Codecs:
     directory: lib/codecs
