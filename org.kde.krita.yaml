@@ -36,6 +36,22 @@ cleanup:
   - '*.la'
   - '*.cmake'
   - '*.prl'
+add-extensions:
+  org.kde.krita.Codecs:
+    directory: lib/codecs
+    add-ld-path: lib
+    bundle: true
+    autodelete: true
+  org.freedesktop.Platform.openh264:
+    directory: lib/openh264
+    version: '2.3.1'
+    add-ld-path: .
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    version: '22.08'
+    add-ld-path: .
+    no-autodownload: false
+    autodelete: false
 modules:
   - name: qtbase
     build-options:
@@ -174,6 +190,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/extra-cmake-modules-5.103.0.tar.xz
         sha256: 92ca2e55cb38956fbdeaf254231f074647173ccfd12dc9664989c6fa9e9c4346
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/extra-cmake-modules-$version.tar.xz
   - name: kconfig
     buildsystem: cmake-ninja
     config-opts:
@@ -184,6 +205,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/kconfig-5.103.0.tar.xz
         sha256: 5f41e6f566e1eb0ee455886d9ffb69e080ed219e40f4a315b6dd0fd8de3bb918
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kconfig-$version.tar.xz
   - name: karchive
     buildsystem: cmake-ninja
     config-opts:
@@ -192,6 +218,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/karchive-5.103.0.tar.xz
         sha256: 372bdf691ddc43e663b5c6ca88b2c73fa0fac9ee8e3600b469f9b026c8dd1353
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/karchive-$version.tar.xz
   - name: kwidgetsaddons
     buildsystem: cmake-ninja
     config-opts:
@@ -200,6 +231,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/kwidgetsaddons-5.103.0.tar.xz
         sha256: 4c08cc7e8b28d1fbbf2804b44b534c66173b784457c4ca04b5609178e68c6441
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kwidgetsaddons-$version.tar.xz
   - name: kcompletion
     buildsystem: cmake-ninja
     config-opts:
@@ -208,6 +244,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/kcompletion-5.103.0.tar.xz
         sha256: d02374cba2bb3da774a938ef72744282af80a6c63851baa5825af173c7cb764f
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kcompletion-$version.tar.xz
   - name: kcoreaddons
     buildsystem: cmake-ninja
     config-opts:
@@ -218,6 +259,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/kcoreaddons-5.103.0.tar.xz
         sha256: beb99d0274c2bffd8e6aa87199438393222a0317e2e1118d510b5b6abf772f6a
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kcoreaddons-$version.tar.xz
   - name: kguiaddons
     buildsystem: cmake-ninja
     config-opts:
@@ -227,6 +273,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/kguiaddons-5.103.0.tar.xz
         sha256: e63280fdefc4d82b42fc7b8e8e30c0b92e05538b00fb31086683019cc2d5b232
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kguiaddons-$version.tar.xz
   - name: ki18n
     buildsystem: cmake-ninja
     config-opts:
@@ -235,6 +286,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/ki18n-5.103.0.tar.xz
         sha256: 38ea91627f427d9ab74ebaa278163a5a94af2eaba5ac9e3d16a472d9457840e6
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/ki18n-$version.tar.xz
   - name: kitemmodels
     buildsystem: cmake-ninja
     config-opts:
@@ -243,15 +299,24 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/kitemmodels-5.103.0.tar.xz
         sha256: 356c4d6fa808f2cad93629e7362b0cc95e0217b116ac9e07429c8f0d18a370cb
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kitemmodels-$version.tar.xz
   - name: kitemviews
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
-      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/kitemviews-5.103.0.tar.xz
         sha256: 8069046d455ea404f67403b057a6060055038a570c5a8307712128dd52649c4e
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kitemviews-$version.tar.xz
   - name: kimageformats
     buildsystem: cmake-ninja
     config-opts:
@@ -260,6 +325,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/kimageformats-5.103.0.tar.xz
         sha256: dd7dc417aacc9dfe74745e4dfd9750129051c36502fa1cd18b92c4035d721e7e
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kimageformats-$version.tar.xz
   - name: kwindowsystem
     buildsystem: cmake-ninja
     config-opts:
@@ -268,6 +338,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/kwindowsystem-5.103.0.tar.xz
         sha256: ec6af8efd4399d140929b1a057bff8c679210d98fd26f309fdf8f89fccbf13a5
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kwindowsystem-$version.tar.xz
   - name: kcrash
     buildsystem: cmake-ninja
     config-opts:
@@ -276,6 +351,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.103/kcrash-5.103.0.tar.xz
         sha256: 3598a171f9162709b9020ed665520beab05104bfc8902c718c2fe788e7d7ebe7
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kcrash-$version.tar.xz
   - name: toml
     buildsystem: simple
     build-commands:
@@ -626,13 +706,16 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.1.tar.gz
-        sha256: 36f27c5887fc4e5c241805c29b8b8e68725aa05520bcaa7c7ec84c0422b8580e
-        x-checker-data:
-          type: anitya
-          project-id: 9631
-          stable-only: true
-          url-template: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v$version.tar.gz
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.0.tar.gz
+        sha256: 81e3b6e0e432d20347b6396c376f9fbeceac31c2cbefe2882d83112a5b0a8123
+        # x-checker-data:
+        #   type: anitya
+        #   project-id: 9631
+        #   stable-only: true
+        #   url-template: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v$version.tar.gz
+      - type: patch
+        paths:
+          - patches/opencolorio/use-system-minizip.patch
   - name: libraw
     buildsystem: cmake-ninja
     config-opts:
@@ -750,7 +833,7 @@ modules:
         sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
+          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
           version-pattern: x265-snapshot-([\d-]+).tar.gz
           url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
@@ -783,7 +866,7 @@ modules:
         sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
+          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
           version-pattern: x265-snapshot-([\d-]+).tar.gz
           url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
@@ -819,7 +902,7 @@ modules:
         sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
+          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
           version-pattern: x265-snapshot-([\d-]+).tar.gz
           url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
@@ -971,16 +1054,42 @@ modules:
           url-template: https://github.com/xtensor-stack/xsimd/archive/refs/tags/$version.tar.gz
   - name: ffmpeg
     config-opts:
-      - --enable-rpath
+      - --prefix=/app/lib/codecs
       - --enable-gpl
+      - --enable-version3
       - --disable-static
       - --enable-shared
-      - --disable-doc
-      - --disable-ffplay
       - --disable-ffprobe
-      - --enable-libopus
+      - --disable-doc
+      - --disable-avdevice
+      - --disable-postproc
+      - --enable-libaom
+      - --enable-demuxer=image2
+      - --enable-demuxer=image2_alias_pix
+      - --enable-demuxer=image2_brender_pix
+      # Container Formats
+      - --enable-muxer=webm
+      - --enable-muxer=matroska
+      - --enable-muxer=ogg
+      # Image Formats
+      - --enable-libwebp
+      - --enable-encoder=png
+      - --enable-decoder=png
+      - --enable-encoder=apng
+      - --enable-decoder=apng
+      # Video Codecs
+      - --enable-encoder=libaom_av1
       - --enable-libvpx
-      - --enable-libx264
+      - --enable-encoder=libvpx_vp9
+      - --enable-encoder=libvpx_vp8
+      - --enable-libopenh264
+      - --enable-libtheora
+      # Audio Codecs
+      - --enable-encoder=flac
+      - --enable-encoder=aac
+      - --enable-libmp3lame
+      - --enable-libopus
+      - --enable-libvorbis
     cleanup:
       - /share/ffmpeg/examples
     sources:
