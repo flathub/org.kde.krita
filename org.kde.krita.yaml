@@ -97,6 +97,7 @@ modules:
     cleanup:
       - /bin
     sources:
+      # See link for current Krita Qt fork and git tag https://invent.kde.org/graphics/krita/-/blob/master/3rdparty/ext_qt/CMakeLists.txt
       - type: git
         url: https://invent.kde.org/szaman/qtbase.git
         commit: 62d5736f323be823101791d3863814a10036cafd
