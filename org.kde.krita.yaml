@@ -36,7 +36,7 @@ cleanup:
   - '*.cmake'
   - '*.prl'
 cleanup-commands:
-  - 'mkdir -p /app/lib/ffmpeg'
+  - mkdir -p /app/lib/ffmpeg
 add-extensions:
   org.kde.krita.Codecs:
     directory: lib/codecs
@@ -45,7 +45,7 @@ add-extensions:
     autodelete: true
   org.freedesktop.Platform.openh264:
     directory: lib/openh264
-    version: '2.3.1'
+    version: 2.3.1
     add-ld-path: .
   org.freedesktop.Platform.ffmpeg-full:
     directory: lib/ffmpeg
@@ -595,8 +595,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.6.tar.gz
-        sha256: ea5592230f5ab917bea3ceab266cf38eb4aa4a523078d46eac0f5a89c52304db
+        url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.7.tar.gz
+        sha256: bff1fa140f4af0e7f02c6cb78d41b9a7d5508e6bcdfda3a583e35460eb6d4b47
         x-checker-data:
           type: anitya
           project-id: 223366
