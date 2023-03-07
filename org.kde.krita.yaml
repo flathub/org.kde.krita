@@ -36,6 +36,7 @@ cleanup:
   - '*.cmake'
   - '*.prl'
 cleanup-commands:
+  - 'mkdir -p /app/lib/openh264'
   - 'mkdir -p /app/lib/ffmpeg'
 add-extensions:
   org.kde.krita.Codecs:
@@ -51,7 +52,7 @@ add-extensions:
     directory: lib/ffmpeg
     version: '22.08'
     add-ld-path: .
-    no-autodownload: false
+    no-autodownload: true
     autodelete: false
 modules:
   - name: qtbase
