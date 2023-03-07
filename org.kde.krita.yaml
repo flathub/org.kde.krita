@@ -35,6 +35,24 @@ cleanup:
   - '*.la'
   - '*.cmake'
   - '*.prl'
+cleanup-commands:
+  - 'mkdir -p /app/lib/ffmpeg'
+add-extensions:
+  org.kde.krita.Codecs:
+    directory: lib/codecs
+    add-ld-path: lib
+    bundle: true
+    autodelete: true
+  org.freedesktop.Platform.openh264:
+    directory: lib/openh264
+    version: '2.3.1'
+    add-ld-path: .
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    version: '22.08'
+    add-ld-path: .
+    no-autodownload: false
+    autodelete: false
 modules:
   - name: qtbase
     build-options:
@@ -46,8 +64,7 @@ modules:
         aarch64:
           config-opts:
             - -no-reduce-relocations
-            - -optimize-size
-            - -opengl desktop
+            - -opengl es2
     config-opts:
       - -confirm-license
       - -opensource
@@ -60,7 +77,7 @@ modules:
       - -nomake
       - tests
       - -system-harfbuzz
-      - -qt-sqlite
+      - -system-sqlite
       - -accessibility
       - -dbus-linked
       - -fontconfig
@@ -80,39 +97,10 @@ modules:
     cleanup:
       - /bin
     sources:
-      - type: archive
-        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtbase-everywhere-src-5.12.12.tar.xz
-        sha256: 7c15c31590b6ec12408242b1a32075d1d545f35e1d41fdbad31ec670d00680f2
-      - type: patch
-        paths:
-          - patches/qt/base/FileChooser-portal-skip-empty-filters.patch
-          - patches/qt/base/qtbase-avoid-hardcoding-kernel-version.patch
-          - patches/qt/base/qtbase-use-wayland-on-gnome.patch
-          - patches/qt/base/qtbase-make-sure-to-correctly-construct-base-platform-theme.patch
-          - patches/qt/base/open-file-portal-writable.patch
-          - patches/qt/base/0012-Synthesize-Enter-LeaveEvent-for-accepted-QTabletEven.patch
-          - patches/qt/base/0013-Poison-Qt-s-headers-with-a-mark-about-presence-of-En.patch
-          - patches/qt/base/0100-Fix-artifacts-when-rendering-multisubpath-dashed-QPa.patch
-          - patches/qt/base/0101-Don-t-eat-ShortcutOverride-events-when-there-is-a-pa.patch
-          - patches/qt/base/0110-Pass-proper-dirty-rect-in-paint-event-to-QOpenGLWidg.patch
-          - patches/qt/base/0111-Fix-unbalanced-KeyPress-Release-events-in-children-o.patch
-          - patches/qt/base/0112-Fix-shortcuts-assigned-to-special-keys-on-non-latin-.patch
-          - patches/qt/base/0113-Fix-multiple-shortcuts-match-from-different-keyboard.patch
-          - patches/qt/base/0114-Fix-shortcuts-with-special-keys-on-non-US-layouts-on.patch
-          - patches/qt/base/0001-Check-if-we-reached-the-end-of-Iterator.patch
-          - patches/qt/base/0116-Make-Qt-relocatable.patch
-          - patches/qt/base/0119-Fix-relocated-Qt-to-be-found-when-its-path-has-non-A.patch
-          - patches/qt/base/0120-qtbase-Fix-build-with-GCC-11.patch
-          - patches/qt/base/0126-qtbase-Build-fixes-for-GCC-11.patch
-          - patches/qt/base/0131-Fix-build-with-Android-NDK-21.4.patch
-          - patches/qt/base/0001-Do-not-crash-if-the-foundry-name-is-an-empty-space.patch
-          - patches/qt/base/bug449118-QMdiSubWindow-Set-correct-ControlLabel-size.patch
-          - patches/qt/base/bug449779-Check-for-uninitialized-QDockAreaLayoutInfo.patch
-          - patches/qt/base/frac_dpi_paint_artifacts/0001-Add-faster-path-for-scaling-QRegion-with-multiple-re.patch
-          - patches/qt/base/frac_dpi_paint_artifacts/0002-Fix-QPainter-off-by-one-clipping-for-some-non-intege.patch
-          - patches/qt/base/frac_dpi_paint_artifacts/0003-Fix-under-non-integer-scaling-incorrect-update-area.patch
-          - patches/qt/base/0001-QMenu-make-less-sensitive-to-mouse-jitter.patch
-          - patches/qt/base/0001-Fix-unbalanced-KeyPress-Release-on-non-latin-keyboar.patch
+      # See link for current Krita Qt fork and git tag https://invent.kde.org/graphics/krita/-/blob/master/3rdparty/ext_qt/CMakeLists.txt
+      - type: git
+        url: https://invent.kde.org/szaman/qtbase.git
+        commit: 62d5736f323be823101791d3863814a10036cafd
       - type: shell
         commands:
           - mv configure configure.qt
@@ -121,193 +109,255 @@ modules:
           - processed=`sed -e 's/--/-/g ; s/=/ /g' <<< $@`
           - ./configure.qt $processed
         dest-filename: configure
-  - name: qttools
-    buildsystem: qmake
-    cleanup:
-      - /bin
-      - /phrasebooks
-    sources:
-      - type: archive
-        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qttools-everywhere-src-5.12.12.tar.xz
-        sha256: 33897d94f4d8f5c5b88f78d61759f774e0d12c1aec3fc001b2a418eea77f4263
-  - name: qtx11extras
-    buildsystem: qmake
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtx11extras-everywhere-src-5.12.12.tar.xz
-        sha256: d3a46415ecd91d61c532cb7d7dd1800545add61966fc22e15487db77927be875
-  - name: qtsvg
-    buildsystem: qmake
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtsvg-everywhere-src-5.12.12.tar.xz
-        sha256: 1623928e548ab86c525a5fa8d8eb02841ecf749f98ba78410311c60bf5fb75e2
-  - name: qtmultimedia
-    buildsystem: qmake
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtmultimedia-everywhere-src-5.12.12.tar.xz
-        sha256: b6807ec865feaec2a89bfefb075fe8e2beff6b0db41c7f8aadb345541c8b6e35
   - name: qtdeclarative
     buildsystem: qmake
     cleanup:
       - /bin
       - /lib/plugins/qmltooling
     sources:
-      - type: archive
-        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtdeclarative-everywhere-src-5.12.12.tar.xz
-        sha256: a63c0ae198abc65dcb7c84e8fb8891df7ef56f72347d7382a4d08c5a8a364790
-      - type: patch
-        paths:
-          - patches/qt/declarative/0121-Fix-compilation-of-QtDeclarative-with-GCC11.patch
-          - patches/qt/declarative/0122-Don-t-use-UINT_MAX-as-invalid-array-index-in-PropertyKey.patch
-          - patches/qt/declarative/0124-qtdeclarative-Include-limits-in-yarr-h.patch
-          - patches/qt/declarative/0125-qtdeclarative-Build-fixes-for-GCC-11.patch
-          - patches/qt/declarative/Make-QQuickWindow-renderer-follow-real-logical-size.patch
-          - patches/qt/declarative/0134-V4-Generate-function-tables-on-64bit-windows.patch
-          - patches/qt/declarative/0135-Use-lowercase-name-for-window-header.patch
-          - patches/qt/declarative/0136-JIT-When-making-memory-writable-include-the-exceptio.patch
-          - patches/qt/declarative/0137-masm-Add-error-handling-for-failed-mprotect.patch
-          - patches/qt/declarative/0138-Fix-Clang-10-warning-about-converting-ULLONG_MAX-to-.patch
-          - patches/qt/declarative/0139-Fix-Wdeprecated-copy-warnings.patch
-  - name: qtquickcontrols
-    buildsystem: qmake
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtquickcontrols-everywhere-src-5.12.12.tar.xz
-        sha256: 63b9666522aea7262eca154968b1717c65ecaa8f2602fbefe901a33d90ed438d
+      - type: git
+        url: https://invent.kde.org/szaman/qtdeclarative.git
+        commit: 967fb735aeb5ef26fb1ccab42bc0720442c14fa2
+        disable-shallow-clone: true
+        disable-submodules: true
   - name: qtimageformats
     buildsystem: qmake
     cleanup:
       - /bin
     sources:
-      - type: archive
-        url: http://download.qt.io/archive/qt/5.12/5.12.12/submodules/qtimageformats-everywhere-src-5.12.12.tar.xz
-        sha256: 5b1e56df31fd70f75911427f133be159abf2adf408bf7c8733938097eb096436
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtimageformats.git
+        commit: adbc372b890ed90f006a6c4f3ca56bf0cba477ef
+  - name: qttools
+    buildsystem: qmake
+    cleanup:
+      - /bin/assistant
+      - /bin/qhelpgenerator
+      - /bin/qcollectiongenerator
+      - /bin/qhelpconverter
+      - /bin/pixeltool
+      - /bin/designer
+      - /bin/lrelease
+      - /bin/lupdate
+      - /bin/lconvert
+      - /bin/linguist
+      - /bin/qdoc
+      - /bin/qtattributionsscanner
+      - /bin/qtplugininfo
+      - /bin/qtdiag
+      - /bin/qdbusviewer
+    sources:
+      - type: git
+        url: https://invent.kde.org/szaman/qttools.git
+        commit: 3cea28be7c7dfe6fd90d3eef88ac6c2307f09051
+  - name: qtmultimedia
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtmultimedia.git
+        commit: f3dc18968c437c993886d3bfb668b62344a10860
+  - name: qtsvg
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtsvg.git
+        commit: 83296f10ebdb9a666b11dc69f3a148c38b9c425c
+  - name: qtx11extras
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtx11extras.git
+        commit: 9134cdba9386e408ce2ffe515ca0c3f6f6c66685
+  - name: qttranslations
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qttranslations.git
+        commit: c38edd3a5501bcd53132e1e4abb7d25a98e0e1a9
   - name: extra-cmake-modules
     buildsystem: cmake-ninja
+    cleanup:
+      - '*'
     config-opts:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/extra-cmake-modules-5.76.0.tar.xz
-        sha256: 4845e9e0a43ba15158c0cfdc7ab594e7d02692fab9083201715270a096704a32
+        url: https://download.kde.org/stable/frameworks/5.103/extra-cmake-modules-5.103.0.tar.xz
+        sha256: 92ca2e55cb38956fbdeaf254231f074647173ccfd12dc9664989c6fa9e9c4346
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/extra-cmake-modules-$version.tar.xz
   - name: kconfig
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
-      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     cleanup:
       - /bin
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/kconfig-5.76.0.tar.xz
-        sha256: 153d3ed114954594b0dcc00e1317483609649c064203e6eb8b110686dbaba686
+        url: https://download.kde.org/stable/frameworks/5.103/kconfig-5.103.0.tar.xz
+        sha256: 5f41e6f566e1eb0ee455886d9ffb69e080ed219e40f4a315b6dd0fd8de3bb918
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kconfig-$version.tar.xz
   - name: karchive
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/karchive-5.76.0.tar.xz
-        sha256: 503d33b247ae24260c73aac2c48601eb4f8be3f10c9149549ea5dd2d22082a2a
+        url: https://download.kde.org/stable/frameworks/5.103/karchive-5.103.0.tar.xz
+        sha256: 372bdf691ddc43e663b5c6ca88b2c73fa0fac9ee8e3600b469f9b026c8dd1353
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/karchive-$version.tar.xz
   - name: kwidgetsaddons
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
-      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/kwidgetsaddons-5.76.0.tar.xz
-        sha256: ab7aa94bb1f63e5bea5cf461349c1add96fd608a73c5b7c9d374e6bf035fcac6
+        url: https://download.kde.org/stable/frameworks/5.103/kwidgetsaddons-5.103.0.tar.xz
+        sha256: 4c08cc7e8b28d1fbbf2804b44b534c66173b784457c4ca04b5609178e68c6441
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kwidgetsaddons-$version.tar.xz
   - name: kcompletion
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
-      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/kcompletion-5.76.0.tar.xz
-        sha256: 014c56172040bf3aa27f81a6bb433914a5c22d2dfb1f8566be4cce678d09193a
+        url: https://download.kde.org/stable/frameworks/5.103/kcompletion-5.103.0.tar.xz
+        sha256: d02374cba2bb3da774a938ef72744282af80a6c63851baa5825af173c7cb764f
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kcompletion-$version.tar.xz
   - name: kcoreaddons
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
-      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     cleanup:
       - /bin
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/kcoreaddons-5.76.0.tar.xz
-        sha256: fbab3e3e18f42922ecdc50138ed31f62007cafa902b959d89b1233b5557282d6
+        url: https://download.kde.org/stable/frameworks/5.103/kcoreaddons-5.103.0.tar.xz
+        sha256: beb99d0274c2bffd8e6aa87199438393222a0317e2e1118d510b5b6abf772f6a
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kcoreaddons-$version.tar.xz
   - name: kguiaddons
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
-      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
+      - -DWITH_WAYLAND=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/kguiaddons-5.76.0.tar.xz
-        sha256: bdaa2ed104bfa9c2ebd702f033935a83560e1d00c7302620a6ae52cb309c7125
+        url: https://download.kde.org/stable/frameworks/5.103/kguiaddons-5.103.0.tar.xz
+        sha256: e63280fdefc4d82b42fc7b8e8e30c0b92e05538b00fb31086683019cc2d5b232
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kguiaddons-$version.tar.xz
   - name: ki18n
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
-      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/ki18n-5.76.0.tar.xz
-        sha256: 0e87bc1136e21f7860f15daa39e8d16e5a773995fce2b87b0cef0043c4ce0e7a
+        url: https://download.kde.org/stable/frameworks/5.103/ki18n-5.103.0.tar.xz
+        sha256: 38ea91627f427d9ab74ebaa278163a5a94af2eaba5ac9e3d16a472d9457840e6
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/ki18n-$version.tar.xz
   - name: kitemmodels
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
-      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/kitemmodels-5.76.0.tar.xz
-        sha256: 53855ccdd1105aa792914f9c88f357039bf2394af8400beaaecd9729f70e9cb0
+        url: https://download.kde.org/stable/frameworks/5.103/kitemmodels-5.103.0.tar.xz
+        sha256: 356c4d6fa808f2cad93629e7362b0cc95e0217b116ac9e07429c8f0d18a370cb
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kitemmodels-$version.tar.xz
   - name: kitemviews
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
-      - -DCMAKE_DISABLE_FIND_PACKAGE_PythonModuleGeneration=ON
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/kitemviews-5.76.0.tar.xz
-        sha256: b102cb67513d804fd7eed2ae20bb4ba679d38de4f236de6bc03709ff0c0bc001
+        url: https://download.kde.org/stable/frameworks/5.103/kitemviews-5.103.0.tar.xz
+        sha256: 8069046d455ea404f67403b057a6060055038a570c5a8307712128dd52649c4e
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kitemviews-$version.tar.xz
   - name: kimageformats
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/kimageformats-5.76.0.tar.xz
-        sha256: 78ced2665f8918beb617b74962d188dcbb01a92a90ba49bfd173671bdb14e68d
+        url: https://download.kde.org/stable/frameworks/5.103/kimageformats-5.103.0.tar.xz
+        sha256: dd7dc417aacc9dfe74745e4dfd9750129051c36502fa1cd18b92c4035d721e7e
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kimageformats-$version.tar.xz
   - name: kwindowsystem
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/kwindowsystem-5.76.0.tar.xz
-        sha256: 8dced74012bed3f33c3c51874aa9c3a57093573c1c0e263b758cefa96c26f7b7
+        url: https://download.kde.org/stable/frameworks/5.103/kwindowsystem-5.103.0.tar.xz
+        sha256: ec6af8efd4399d140929b1a057bff8c679210d98fd26f309fdf8f89fccbf13a5
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kwindowsystem-$version.tar.xz
   - name: kcrash
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/frameworks/5.76/kcrash-5.76.0.tar.xz
-        sha256: c4e32254b22f1f02db556be2ad40000cc52cac2e30a35682af3c75ac69710993
+        url: https://download.kde.org/stable/frameworks/5.103/kcrash-5.103.0.tar.xz
+        sha256: 3598a171f9162709b9020ed665520beab05104bfc8902c718c2fe788e7d7ebe7
+        x-checker-data:
+          type: anitya
+          project-id: 8762
+          stable-only: true
+          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kcrash-$version.tar.xz
   - name: toml
     buildsystem: simple
     build-commands:
@@ -387,8 +437,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/fd/9b/8e727256983e5b1d975f8dfce6f477b5ab6bada14a00b07fa3db51fcd6fe/sip-6.7.5.tar.gz
-        sha256: 9655d089e1d0c5fbf66bde11558a874980729132b5bd0c2ae355ac1a7b893ab4
+        url: https://files.pythonhosted.org/packages/f1/ba/19f9cb16416a3c98bd5969b1bd9bf3c92dd278788d8d949ed66b8e0edf0d/sip-6.7.7.tar.gz
+        sha256: dee9c06fa8ae6d441a401f922867fc6196edda274eebd9fbfec54f0769c2a9e2
         x-checker-data:
           type: pypi
           name: sip
@@ -401,8 +451,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/3e/ed/fa5ffe4a72903747cdd5860a46483795edc0b70562015dde42724e9ce00f/PyQt-builder-1.14.0.tar.gz
-        sha256: 6755931c6d2f8940553e0334d10c933ce5cc18b64425e94fda1accf4ff774f59
+        url: https://files.pythonhosted.org/packages/21/6c/685981114cb350f2f8e4a0827aa7f60f142e15816aa48f3204e5a1e2578c/PyQt-builder-1.14.1.tar.gz
+        sha256: 83bc3e300aff8b41405804b6a9c2913389ab59c48ad9f0cb8584a6ef73bca502
         x-checker-data:
           type: pypi
           name: PyQt-builder
@@ -413,8 +463,8 @@ modules:
         "PyQt5_sip" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/39/5f/fd9384fdcb9cd0388088899c110838007f49f5da1dd1ef6749bfb728a5da/PyQt5_sip-12.11.0.tar.gz
-        sha256: b4710fd85b57edef716cc55fae45bfd5bfac6fc7ba91036f1dcc3f331ca0eb39
+        url: https://files.pythonhosted.org/packages/d2/f4/4c3e5fc1584f5a2964cfc89bf420cfcc59aba0b1f2d08446e2b491a21ed5/PyQt5_sip-12.11.1.tar.gz
+        sha256: 97d3fbda0f61edb1be6529ec2d5c7202ae83aee4353e4b264a159f8c9ada4369
         x-checker-data:
           type: pypi
           name: PyQt5_sip
@@ -427,8 +477,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/e1/57/2023316578646e1adab903caab714708422f83a57f97eb34a5d13510f4e1/PyQt5-5.15.7.tar.gz
-        sha256: 755121a52b3a08cb07275c10ebb96576d36e320e572591db16cfdbc558101594
+        url: https://files.pythonhosted.org/packages/5c/46/b4b6eae1e24d9432905ef1d4e7c28b6610e28252527cdc38f2a75997d8b5/PyQt5-5.15.9.tar.gz
+        sha256: dc41e8401a90dc3e2b692b411bd5492ab559ae27a27424eed4bd3915564ec4c0
         x-checker-data:
           type: pypi
           name: PyQt5
@@ -491,8 +541,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/Exiv2/exiv2/releases/download/v0.27.5/exiv2-0.27.5-Source.tar.gz
-        sha256: 35a58618ab236a901ca4928b0ad8b31007ebdc0386d904409d825024e45ea6e2
+        url: https://github.com/Exiv2/exiv2/releases/download/v0.27.6/exiv2-0.27.6-Source.tar.gz
+        sha256: 4c192483a1125dc59a3d70b30d30d32edace9e14adf52802d2f853abf72db8a6
         x-checker-data:
           type: anitya
           project-id: 769
@@ -511,8 +561,8 @@ modules:
       - /share
     sources:
       - type: archive
-        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.14/lcms2-2.14.tar.gz
-        sha256: 28474ea6f6591c4d4cee972123587001a4e6e353412a41b3e9e82219818d5740
+        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.15/lcms2-2.15.tar.gz
+        sha256: b20cbcbd0f503433be2a4e81462106fa61050a35074dc24a4e356792d971ab39
         x-checker-data:
           type: anitya
           project-id: 9815
@@ -660,11 +710,11 @@ modules:
       - type: archive
         url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.0.tar.gz
         sha256: 81e3b6e0e432d20347b6396c376f9fbeceac31c2cbefe2882d83112a5b0a8123
-        x-checker-data:
-          type: anitya
-          project-id: 9631
-          stable-only: true
-          url-template: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v$version.tar.gz
+        # x-checker-data:
+        #   type: anitya
+        #   project-id: 9631
+        #   stable-only: true
+        #   url-template: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v$version.tar.gz
       - type: patch
         paths:
           - patches/opencolorio/use-system-minizip.patch
@@ -708,8 +758,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-data-0.4.11.tar.gz
-        sha256: 2cec05cd1bb03af98a8b06a1e22f6e6e1a65b1e2f3816cb3069bb0874825f08c
+        url: https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz
+        sha256: c835b640a40ce357e1b83666aabd95edffa24ddddd49b8daff63adb851cdab74
         x-checker-data:
           type: anitya
           project-id: 3687
@@ -728,8 +778,8 @@ modules:
       - -DWITH_NSS3=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-23.01.0.tar.xz
-        sha256: fae9b88d3d5033117d38477b79220cfd0d8e252c278ec870ab1832501741fd94
+        url: https://poppler.freedesktop.org/poppler-23.03.0.tar.xz
+        sha256: b04148bf849c1965ada7eff6be4685130e3a18a84e0cce73bf9bc472ec32f2b4
         x-checker-data:
           type: anitya
           project-id: 3686
@@ -741,8 +791,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/stachenov/quazip/archive/refs/tags/v1.3.tar.gz
-        sha256: c1239559cd6860cab80a0fd81f4204e606f9324f702dab6166b0960676ee1754
+        url: https://github.com/stachenov/quazip/archive/refs/tags/v1.4.tar.gz
+        sha256: 79633fd3a18e2d11a7d5c40c4c79c1786ba0c74b59ad752e8429746fe1781dd6
         x-checker-data:
           type: anitya
           project-id: 4141
@@ -754,14 +804,15 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DCONFIG_PIC=1
+      - -DBUILD_SHARED_LIBS=1
       - -DENABLE_EXAMPLES=OFF
       - -DENABLE_TESTDATA=OFF
       - -DENABLE_TESTS=OFF
       - -DENABLE_TOOLS=OFF
     sources:
       - type: archive
-        url: https://storage.googleapis.com/aom-releases/libaom-3.5.0.tar.gz
-        sha256: d37dbee372e2430a7efde813984ae6d78bdf1fc4080ebe32457c9115408b0738
+        url: https://storage.googleapis.com/aom-releases/libaom-3.6.0.tar.gz
+        sha256: a4a6c0fab685da743b796662a928fcdf7ae60594edc306efb73e78a17ea6cde6
         x-checker-data:
           type: anitya
           project-id: 17628
@@ -784,7 +835,7 @@ modules:
         sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
+          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
           version-pattern: x265-snapshot-([\d-]+).tar.gz
           url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
@@ -817,7 +868,7 @@ modules:
         sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
+          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
           version-pattern: x265-snapshot-([\d-]+).tar.gz
           url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
@@ -853,7 +904,7 @@ modules:
         sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
         x-checker-data:
           type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty/ext_heif/CMakeLists.txt
+          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
           version-pattern: x265-snapshot-([\d-]+).tar.gz
           url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
       - type: patch
@@ -875,8 +926,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libde265/releases/download/v1.0.9/libde265-1.0.9.tar.gz
-        sha256: 29bc6b64bf658d81a4446a3f98e0e4636fd4fd3d971b072d440cef987d5439de
+        url: https://github.com/strukturag/libde265/releases/download/v1.0.11/libde265-1.0.11.tar.gz
+        sha256: 2f8f12cabbdb15e53532b7c1eb964d4e15d444db1be802505e6ac97a25035bab
         x-checker-data:
           type: anitya
           project-id: 11239
@@ -889,13 +940,13 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_EXAMPLES=OFF
+      - -DWITH_EXAMPLES=OFF
     cleanup:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.14.2/libheif-1.14.2.tar.gz
-        sha256: d016905e247d6952cd7ee4f9b90957350b6a6caa466bc76fdfe6eb302b6d088c
+        url: https://github.com/strukturag/libheif/releases/download/v1.15.1/libheif-1.15.1.tar.gz
+        sha256: 28d5a376fe7954d2d03453f983aaa0b7486f475c27c7806bda31df9102325556
         x-checker-data:
           type: anitya
           project-id: 64439
@@ -960,8 +1011,8 @@ modules:
       - -DBUILD_SHARED_LIBS=OFF
     sources:
       - type: archive
-        url: https://github.com/google/highway/archive/refs/tags/1.0.2.tar.gz
-        sha256: e8ef71236ac0d97f12d553ec1ffc5b6375d57b5f0b860c7447dd69b6ed1072db
+        url: https://github.com/google/highway/archive/refs/tags/1.0.3.tar.gz
+        sha256: 566fc77315878473d9a6bd815f7de78c73734acdcb745c3dde8579560ac5440e
         x-checker-data:
           type: anitya
           project-id: 205809
@@ -983,8 +1034,8 @@ modules:
       - -DJPEGXL_ENABLE_VIEWERS=OFF
     sources:
       - type: archive
-        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.7.0.tar.gz
-        sha256: 3114bba1fabb36f6f4adc2632717209aa6f84077bc4e93b420e0d63fa0455c5e
+        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.8.1.tar.gz
+        sha256: 60f43921ad3209c9e180563025eda0c0f9b1afac51a2927b9ff59fff3950dc56
         x-checker-data:
           type: anitya
           project-id: 232764
@@ -1003,32 +1054,50 @@ modules:
           project-id: 138109
           stable-only: true
           url-template: https://github.com/xtensor-stack/xsimd/archive/refs/tags/$version.tar.gz
-  - name: x264
-    config-opts:
-      - --disable-cli
-      - --enable-shared
-    sources:
-      - type: archive
-        url: https://code.videolan.org/videolan/x264/-/archive/baee400fa9ced6f5481a728138fed6e867b0ff7f.tar.gz
-        sha256: 436a2be54d8bc0cb05dd33ecbbcb7df9c3b57362714fcdaa3a5991189a33319b
   - name: ffmpeg
     config-opts:
-      - --enable-rpath
+      - --prefix=/app/lib/codecs
       - --enable-gpl
+      - --enable-version3
       - --disable-static
       - --enable-shared
-      - --disable-doc
-      - --disable-ffplay
       - --disable-ffprobe
-      - --enable-libopus
+      - --disable-doc
+      - --disable-avdevice
+      - --disable-postproc
+      - --enable-libaom
+      - --enable-demuxer=image2
+      - --enable-demuxer=image2_alias_pix
+      - --enable-demuxer=image2_brender_pix
+      # Container Formats
+      - --enable-muxer=webm
+      - --enable-muxer=matroska
+      - --enable-muxer=ogg
+      # Image Formats
+      - --enable-libwebp
+      - --enable-encoder=png
+      - --enable-decoder=png
+      - --enable-encoder=apng
+      - --enable-decoder=apng
+      # Video Codecs
+      - --enable-encoder=libaom_av1
       - --enable-libvpx
-      - --enable-libx264
+      - --enable-encoder=libvpx_vp9
+      - --enable-encoder=libvpx_vp8
+      - --enable-libopenh264
+      - --enable-libtheora
+      # Audio Codecs
+      - --enable-encoder=flac
+      - --enable-encoder=aac
+      - --enable-libmp3lame
+      - --enable-libopus
+      - --enable-libvorbis
     cleanup:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-5.1.2.tar.xz
-        sha256: 619e706d662c8420859832ddc259cd4d4096a48a2ce1eefd052db9e440eef3dc
+        url: https://www.ffmpeg.org/releases/ffmpeg-6.0.tar.xz
+        sha256: 57be87c22d9b49c112b6d24bc67d42508660e6b718b3db89c44e47e289137082
         x-checker-data:
           type: anitya
           project-id: 5405
@@ -1042,10 +1111,12 @@ modules:
         PYTHONPATH: /app/lib/python3.10/dist-packages
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTING=OFF
+      - -DDEFINE_NO_DEPRECATED=1
       - -DFOUNDATION_BUILD=1
-      - -DBUILD_KRITA_QT_DESIGNER_PLUGINS=ON
-      - -DFETCH_TRANSLATIONS=ON
+      - -DHIDE_SAFE_ASSERTS=ON
+      - -DBUILD_TESTING=FALSE
+      - -DKRITA_ENABLE_PCH=off
+      - -DHAVE_MEMORY_LEAK_TRACKER=FALSE
     cleanup:
       - /share/icons/hicolor/1024x1024
       - /share/icons/hicolor/scalable
@@ -1074,6 +1145,6 @@ modules:
         sha256: 15e195aa728a5d88d3111a199ec73069d0491804dd49afb49beec3e85e93d994
         x-checker-data:
           type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/krita/5.1/3rdparty_plugins/ext_gmic/CMakeLists.txt
+          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty_plugins/ext_gmic/CMakeLists.txt
           version-pattern: https://files.kde.org/krita/build/dependencies/gmic-([\d.]+)-patched.tar.gz
           url-template: https://files.kde.org/krita/build/dependencies/gmic-$version-patched.tar.gz
