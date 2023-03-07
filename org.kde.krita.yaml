@@ -52,7 +52,7 @@ add-extensions:
     directory: lib/ffmpeg
     version: '22.08'
     add-ld-path: .
-    no-autodownload: false
+    no-autodownload: true
     autodelete: false
 modules:
   - name: qtbase
