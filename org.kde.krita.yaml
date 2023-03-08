@@ -15,7 +15,7 @@ finish-args:
   - --filesystem=xdg-run/gvfs
   - --env=PYTHONPATH=/app/lib/python3/dist-packages
   - --env=TMPDIR=/var/tmp
-  - --env=XDG_CURRENT_DESKTOP=gtk3
+  - --env=QT_QPA_PLATFORMTHEME=gtk3
   - --system-talk-name=org.freedesktop.ColorManager
   - --talk-name=com.canonical.AppMenu.Registrar
 cleanup:
