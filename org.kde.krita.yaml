@@ -36,7 +36,6 @@ cleanup:
   - '*.cmake'
   - '*.prl'
 cleanup-commands:
-  - mkdir -p /app/lib/openh264
   - mkdir -p /app/lib/ffmpeg
 add-extensions:
   org.kde.krita.Codecs:
@@ -44,10 +43,6 @@ add-extensions:
     add-ld-path: lib
     bundle: true
     autodelete: true
-  org.freedesktop.Platform.openh264:
-    directory: lib/openh264
-    version: 2.3.1
-    add-ld-path: .
   org.freedesktop.Platform.ffmpeg-full:
     directory: lib/ffmpeg
     version: '22.08'
