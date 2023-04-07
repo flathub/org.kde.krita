@@ -96,7 +96,7 @@ modules:
       # See link for current Krita Qt fork and git tag https://invent.kde.org/graphics/krita/-/blob/master/3rdparty/ext_qt/CMakeLists.txt
       - type: git
         url: https://invent.kde.org/szaman/qtbase.git
-        commit: 62d5736f323be823101791d3863814a10036cafd
+        commit: e075c06efbc1b61bb5e4daec895936530f158ddb
       - type: shell
         commands:
           - mv configure configure.qt
@@ -800,7 +800,7 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DCONFIG_PIC=1
-      - -DBUILD_SHARED_LIBS=1
+      - -DBUILD_SHARED_LIBS=OFF
       - -DENABLE_EXAMPLES=OFF
       - -DENABLE_TESTDATA=OFF
       - -DENABLE_TESTS=OFF
@@ -1057,11 +1057,13 @@ modules:
       - --enable-version3
       - --disable-static
       - --enable-shared
-      - --disable-ffprobe
+      - --enable-ffprobe
+      - --disable-ffplay
       - --disable-doc
       - --disable-avdevice
       - --disable-postproc
       - --enable-libaom
+      - --enable-zlib
       - --enable-demuxer=image2
       - --enable-demuxer=image2_alias_pix
       - --enable-demuxer=image2_brender_pix
@@ -1069,6 +1071,7 @@ modules:
       - --enable-muxer=webm
       - --enable-muxer=matroska
       - --enable-muxer=ogg
+      - --enable-muxer=apng
       # Image Formats
       - --enable-libwebp
       - --enable-encoder=png
