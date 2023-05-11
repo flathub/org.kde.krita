@@ -447,8 +447,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/c7/09/68bfefcdc48875e66aabafc946620483d0cd93aba52dde37d2059e5bf927/sip-6.7.8.tar.gz
-        sha256: 7e7186a36818c9d325c82e59ac5b049d9022c2d5783942c38d49497ac8a94c8f
+        url: https://files.pythonhosted.org/packages/48/75/98987181e897ef378d6c239ee733328a7264a41f2d8263e61d7b7c4c0909/sip-6.7.9.tar.gz
+        sha256: 35d51fc10f599d3696abb50f29d068ad04763df7b77808c76b74597660f99b17
         x-checker-data:
           type: pypi
           name: sip
@@ -473,8 +473,8 @@ modules:
         "PyQt5_sip" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/2a/f1/dde13ef47f3075737af449bf833ed4d56a16bd1762c66c674c3cceacd973/PyQt5_sip-12.12.0.tar.gz
-        sha256: 01bc2d443325505b07d35e4a70d239b4f97b77486e29117fb67f927a15cd8061
+        url: https://files.pythonhosted.org/packages/c1/61/4055e7a0f36339964956ff415e36f4abf82561904cc49c021da32949fc55/PyQt5_sip-12.12.1.tar.gz
+        sha256: 8fdc6e0148abd12d977a1d3828e7b79aae958e83c6cb5adae614916d888a6b10
         x-checker-data:
           type: pypi
           name: PyQt5_sip
@@ -515,8 +515,8 @@ modules:
         linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.bz2
-        sha256: 71feeed900fbccca04a3b4f2f84a7c217186f28a940ed8b7ed4725986baf99fa
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.82.0/source/boost_1_82_0.tar.bz2
+        sha256: a6e1ab9b0860e6a2881dd7b21fe9f737a095e5f33a3a874afc6a345228597ee6
         x-checker-data:
           type: anitya
           project-id: 6845
@@ -788,8 +788,8 @@ modules:
       - -DWITH_NSS3=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-23.04.0.tar.xz
-        sha256: b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1
+        url: https://poppler.freedesktop.org/poppler-23.05.0.tar.xz
+        sha256: 38294de7149ebe458191a6e6d0e2837da7dba8683900a635252f6d0ee235f990
         x-checker-data:
           type: anitya
           project-id: 3686
@@ -821,8 +821,8 @@ modules:
       - -DENABLE_TOOLS=OFF
     sources:
       - type: archive
-        url: https://storage.googleapis.com/aom-releases/libaom-3.6.0.tar.gz
-        sha256: a4a6c0fab685da743b796662a928fcdf7ae60594edc306efb73e78a17ea6cde6
+        url: https://storage.googleapis.com/aom-releases/libaom-3.6.1.tar.gz
+        sha256: 42b862f58b3d00bd3902d2dc469526574f5b012e5b178e6a9652845a113d6887
         x-checker-data:
           type: anitya
           project-id: 17628
@@ -955,8 +955,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.15.2/libheif-1.15.2.tar.gz
-        sha256: 7a4c6077f45180926583e2087571371bdd9cb21b6e6fada85a6fbd544f26a0e2
+        url: https://github.com/strukturag/libheif/releases/download/v1.16.1/libheif-1.16.1.tar.gz
+        sha256: ac15b54b6d7c315710e156d119b8a1bfc89f29621e99222b2750b1f31c9c3558
         x-checker-data:
           type: anitya
           project-id: 64439
