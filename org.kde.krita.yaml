@@ -186,8 +186,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.105/extra-cmake-modules-5.105.0.tar.xz
-        sha256: 59bbf7ae5f8f2a3addb821c6d9962d3d0f0085f3ccd55f18128763d88e31365b
+        url: https://download.kde.org/stable/frameworks/5.106/extra-cmake-modules-5.106.0.tar.xz
+        sha256: 404f58ecac5d37485e51472ff5f88149f460689bec8792ea29bae279e63cb598
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -201,8 +201,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.105/kconfig-5.105.0.tar.xz
-        sha256: 3e95f516a1e939067550a243a46cc33961d1c9b116330913176e6ea55760e152
+        url: https://download.kde.org/stable/frameworks/5.106/kconfig-5.106.0.tar.xz
+        sha256: 05294ed7db971e1c7c7ef9b1429513516a96f4951c768fce2d915c067e75502d
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -214,8 +214,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.105/karchive-5.105.0.tar.xz
-        sha256: 77ef95cf4c525fe74261c7dd817564a35e726e5c1c4d1e1479fdfec187da9749
+        url: https://download.kde.org/stable/frameworks/5.106/karchive-5.106.0.tar.xz
+        sha256: fc1e5a8e94bb000ba30a5e7ba975126363c97acec98112ab58aaec1069d5a596
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -227,8 +227,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.105/kwidgetsaddons-5.105.0.tar.xz
-        sha256: adc8c9dedc790b9ee615295c18345efddc66ab0a69d6c0cbcc8bd5df9d6a7f1e
+        url: https://download.kde.org/stable/frameworks/5.106/kwidgetsaddons-5.106.0.tar.xz
+        sha256: b701be7164d1aea3446b3e647dddf6071609355477daaeb8174531416fd118cc
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -240,8 +240,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.105/kcompletion-5.105.0.tar.xz
-        sha256: 6e76e822a8b4e49d3357958fd3880858a59ccf4defd45a0e248c57535788b981
+        url: https://download.kde.org/stable/frameworks/5.106/kcompletion-5.106.0.tar.xz
+        sha256: a526d609e1135e98b23b7ef64f5627c822b20639fd726f417259313ee5d17f1b
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -255,8 +255,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.105/kcoreaddons-5.105.0.tar.xz
-        sha256: 915cd3ac5bb3963fe79a643d70f109a9aa198f97e6a2b5c72f09cd955238daa2
+        url: https://download.kde.org/stable/frameworks/5.106/kcoreaddons-5.106.0.tar.xz
+        sha256: e80c50d0d9fc402726d92c869b0314dbb8fe8a2163627f695e0897d7c27cc07c
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -269,8 +269,8 @@ modules:
       - -DWITH_WAYLAND=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.105/kguiaddons-5.105.0.tar.xz
-        sha256: 66318ce05ce96fc69533adae525a8aa7e11ee675646fc395b46de30fafa31af1
+        url: https://download.kde.org/stable/frameworks/5.106/kguiaddons-5.106.0.tar.xz
+        sha256: 292357236c86066ef5e2680bc49537c9565d7f10c66666670e357d57e994b8d5
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -295,8 +295,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.104/kitemmodels-5.104.0.tar.xz
-        sha256: 0bac2fe2fc607443e3332911655ced5dd309e346f2f6a2ff3f29b2f45b7b18d7
+        url: https://download.kde.org/stable/frameworks/5.106/kitemmodels-5.106.0.tar.xz
+        sha256: 22a78f28d83174921b6e7803c61c53079a645609418370d368d33df2a6fdb214
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -308,8 +308,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.105/kitemviews-5.105.0.tar.xz
-        sha256: 25dac0803149156e088b51db1fc717b2c95bf373becc2625b031d0aca06235cd
+        url: https://download.kde.org/stable/frameworks/5.106/kitemviews-5.106.0.tar.xz
+        sha256: a8a28534a935c5b0ec7db29efc7507d520e08debc58268b8ec729810fb5a2fd6
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -321,8 +321,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.105/kimageformats-5.105.0.tar.xz
-        sha256: 4ea6ead739f9e850aa8908e246ff2f45f505bbadba20205fb580667bab87d0fc
+        url: https://download.kde.org/stable/frameworks/5.106/kimageformats-5.106.0.tar.xz
+        sha256: fb3f3e8aeb97fcf35151787a5ccab4938d4d711415cc5be9d61d768c32790e8f
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -334,8 +334,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.104/kwindowsystem-5.104.0.tar.xz
-        sha256: 6b10ee354ebb7d2dfd6baa1374929d30811f8169c8233e55849e31e38e6af81a
+        url: https://download.kde.org/stable/frameworks/5.106/kwindowsystem-5.106.0.tar.xz
+        sha256: 3371432556d0c884022f7e16578c775d59066419e5ee34ba1bae2e3fbb19480c
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -377,8 +377,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/10/e5/be08751d07b30889af130cec20955c987a74380a10058e6e8856e4010afc/flit_core-3.8.0.tar.gz
-        sha256: b305b30c99526df5e63d6022dd2310a0a941a187bd3884f4c8ef0418df6c39f3
+        url: https://files.pythonhosted.org/packages/c4/e6/c1ac50fe3eebb38a155155711e6e864e254ce4b6e17fe2429b4c4d5b9e80/flit_core-3.9.0.tar.gz
+        sha256: 72ad266176c4a3fcfab5f2930d76896059851240570ce9a98733b658cb786eba
         x-checker-data:
           type: pypi
           name: flit_core
@@ -447,8 +447,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/c7/09/68bfefcdc48875e66aabafc946620483d0cd93aba52dde37d2059e5bf927/sip-6.7.8.tar.gz
-        sha256: 7e7186a36818c9d325c82e59ac5b049d9022c2d5783942c38d49497ac8a94c8f
+        url: https://files.pythonhosted.org/packages/48/75/98987181e897ef378d6c239ee733328a7264a41f2d8263e61d7b7c4c0909/sip-6.7.9.tar.gz
+        sha256: 35d51fc10f599d3696abb50f29d068ad04763df7b77808c76b74597660f99b17
         x-checker-data:
           type: pypi
           name: sip
@@ -461,8 +461,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/ee/37/06bc9491c7f84ca776658106a59d3064b1c4c7533a35d547e85fc1e8087f/PyQt-builder-1.15.0.tar.gz
-        sha256: a90553703897eb41e27c2f1abd31fb9ed304c32ec3271b380015b54ea9762ddd
+        url: https://files.pythonhosted.org/packages/31/d7/dbcb710a205014ca8f1c651ed77e6f1b1d0c67ab43c664afb079d6efb658/PyQt-builder-1.15.1.tar.gz
+        sha256: a2bd3cfbf952e959141dfe55b44b451aa945ca8916d1b773850bb2f9c0fa2985
         x-checker-data:
           type: pypi
           name: PyQt-builder
@@ -473,8 +473,8 @@ modules:
         "PyQt5_sip" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/2a/f1/dde13ef47f3075737af449bf833ed4d56a16bd1762c66c674c3cceacd973/PyQt5_sip-12.12.0.tar.gz
-        sha256: 01bc2d443325505b07d35e4a70d239b4f97b77486e29117fb67f927a15cd8061
+        url: https://files.pythonhosted.org/packages/c1/61/4055e7a0f36339964956ff415e36f4abf82561904cc49c021da32949fc55/PyQt5_sip-12.12.1.tar.gz
+        sha256: 8fdc6e0148abd12d977a1d3828e7b79aae958e83c6cb5adae614916d888a6b10
         x-checker-data:
           type: pypi
           name: PyQt5_sip
@@ -515,8 +515,8 @@ modules:
         linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.bz2
-        sha256: 71feeed900fbccca04a3b4f2f84a7c217186f28a940ed8b7ed4725986baf99fa
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.82.0/source/boost_1_82_0.tar.bz2
+        sha256: a6e1ab9b0860e6a2881dd7b21fe9f737a095e5f33a3a874afc6a345228597ee6
         x-checker-data:
           type: anitya
           project-id: 6845
@@ -551,8 +551,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/Exiv2/exiv2/releases/download/v0.27.6/exiv2-0.27.6-Source.tar.gz
-        sha256: 4c192483a1125dc59a3d70b30d30d32edace9e14adf52802d2f853abf72db8a6
+        url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-Source.tar.gz
+        sha256: 89af3b5ef7277753ef7a7b5374ae017c6b9e304db3b688f1948e73e103491f3d
         x-checker-data:
           type: anitya
           project-id: 769
@@ -605,8 +605,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.7.tar.gz
-        sha256: bff1fa140f4af0e7f02c6cb78d41b9a7d5508e6bcdfda3a583e35460eb6d4b47
+        url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.9.tar.gz
+        sha256: f1d8aacd46afed958babfced3190d2d3c8209b66da451f556abd6da94c165cf3
         x-checker-data:
           type: anitya
           project-id: 223366
@@ -679,8 +679,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.10.tar.gz
-        sha256: d4a549731d8c7074e421dbab6d8b8ad0a93067752fe767c464f0f40fa5f0a80d
+        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/4.0.0.tar.gz
+        sha256: f9062e576de026fd5026d65597de3b05263cd4d91400cacdbbe36dfa8a642fff
         x-checker-data:
           type: anitya
           project-id: 301509
@@ -788,8 +788,8 @@ modules:
       - -DWITH_NSS3=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-23.04.0.tar.xz
-        sha256: b6d893dc7dcd4138b9e9df59a13c59695e50e80dc5c2cacee0674670693951a1
+        url: https://poppler.freedesktop.org/poppler-23.05.0.tar.xz
+        sha256: 38294de7149ebe458191a6e6d0e2837da7dba8683900a635252f6d0ee235f990
         x-checker-data:
           type: anitya
           project-id: 3686
@@ -821,8 +821,8 @@ modules:
       - -DENABLE_TOOLS=OFF
     sources:
       - type: archive
-        url: https://storage.googleapis.com/aom-releases/libaom-3.6.0.tar.gz
-        sha256: a4a6c0fab685da743b796662a928fcdf7ae60594edc306efb73e78a17ea6cde6
+        url: https://storage.googleapis.com/aom-releases/libaom-3.6.1.tar.gz
+        sha256: 42b862f58b3d00bd3902d2dc469526574f5b012e5b178e6a9652845a113d6887
         x-checker-data:
           type: anitya
           project-id: 17628
@@ -955,8 +955,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.15.2/libheif-1.15.2.tar.gz
-        sha256: 7a4c6077f45180926583e2087571371bdd9cb21b6e6fada85a6fbd544f26a0e2
+        url: https://github.com/strukturag/libheif/releases/download/v1.16.2/libheif-1.16.2.tar.gz
+        sha256: 7f97e4205c0bd9f9b8560536c8bd2e841d1c9a6d610401eb3eb87ed9cdfe78ea
         x-checker-data:
           type: anitya
           project-id: 64439
@@ -1057,8 +1057,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/11.0.0.tar.gz
-        sha256: 50c31c319c8b36c8946eb954c7cca2e2ece86bf8a66a7ebf321b24cd273e7c47
+        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/11.1.0.tar.gz
+        sha256: aa54dba8daade472656eba0d27154f072fec06ee3831aefcac69a5f6c7dbbae7
         x-checker-data:
           type: anitya
           project-id: 138109
