@@ -551,12 +551,14 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-Source.tar.gz
-        sha256: 89af3b5ef7277753ef7a7b5374ae017c6b9e304db3b688f1948e73e103491f3d
+        url: https://github.com/Exiv2/exiv2/releases/download/v0.27.6/exiv2-0.27.6-Source.tar.gz
+        sha256: 4c192483a1125dc59a3d70b30d30d32edace9e14adf52802d2f853abf72db8a6
         x-checker-data:
           type: anitya
           project-id: 769
           stable-only: true
+          versions:
+            '<': '0.28.0'
           url-template: https://github.com/Exiv2/exiv2/releases/download/v$version/exiv2-$version-Source.tar.gz
   - name: lcms2
     buildsystem: cmake-ninja
@@ -679,12 +681,14 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/4.0.0.tar.gz
-        sha256: f9062e576de026fd5026d65597de3b05263cd4d91400cacdbbe36dfa8a642fff
+        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.10.tar.gz
+        sha256: d4a549731d8c7074e421dbab6d8b8ad0a93067752fe767c464f0f40fa5f0a80d
         x-checker-data:
           type: anitya
           project-id: 301509
           stable-only: true
+          versions:
+            '<': '4.0.0'
           url-template: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/$version.tar.gz
   - name: openexr
     buildsystem: cmake-ninja
@@ -1057,12 +1061,14 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/11.1.0.tar.gz
-        sha256: aa54dba8daade472656eba0d27154f072fec06ee3831aefcac69a5f6c7dbbae7
+        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/9.0.1.tar.gz
+        sha256: b1bb5f92167fd3a4f25749db0be7e61ed37e0a5d943490f3accdcd2cd2918cc0
         x-checker-data:
           type: anitya
           project-id: 138109
           stable-only: true
+          versions:
+            '<': '10.0.0'
           url-template: https://github.com/xtensor-stack/xsimd/archive/refs/tags/$version.tar.gz
   - name: ffmpeg
     config-opts:
