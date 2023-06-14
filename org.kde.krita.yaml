@@ -1143,11 +1143,6 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/krita/5.1.5/krita-5.1.5.tar.gz
         sha256: 1c775ebef0f799a9a6b74440c3d906ab913c27541b177ed621704de714e9a4d3
-        x-checker-data:
-          type: anitya
-          project-id: 10918
-          stable-only: true
-          url-template: https://download.kde.org/stable/krita/$version/krita-$version.tar.gz
       - type: patch
         paths:
           - patches/krita/AppData.patch
