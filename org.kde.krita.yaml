@@ -1072,56 +1072,22 @@ modules:
           url-template: https://github.com/xtensor-stack/xsimd/archive/refs/tags/$version.tar.gz
   - name: ffmpeg
     config-opts:
-      - --prefix=/app/lib/codecs
+      - --enable-rpath
       - --enable-gpl
-      - --enable-version3
       - --disable-static
       - --enable-shared
-      - --enable-ffprobe
-      - --disable-ffplay
       - --disable-doc
-      - --disable-avdevice
-      - --disable-postproc
-      - --enable-libaom
-      - --enable-zlib
-      - --enable-demuxer=image2
-      - --enable-demuxer=image2_alias_pix
-      - --enable-demuxer=image2_brender_pix
-      # Container Formats
-      - --enable-muxer=webm
-      - --enable-muxer=matroska
-      - --enable-muxer=ogg
-      - --enable-muxer=apng
-      # Image Formats
-      - --enable-libwebp
-      - --enable-encoder=png
-      - --enable-decoder=png
-      - --enable-encoder=apng
-      - --enable-decoder=apng
-      # Video Codecs
-      - --enable-encoder=libaom_av1
-      - --enable-libvpx
-      - --enable-encoder=libvpx_vp9
-      - --enable-encoder=libvpx_vp8
-      - --enable-libopenh264
-      - --enable-libtheora
-      # Audio Codecs
-      - --enable-encoder=flac
-      - --enable-encoder=aac
-      - --enable-libmp3lame
+      - --disable-ffplay
+      - --disable-ffprobe
       - --enable-libopus
-      - --enable-libvorbis
+      - --enable-libvpx
+      - --enable-libx264
     cleanup:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-6.0.tar.xz
-        sha256: 57be87c22d9b49c112b6d24bc67d42508660e6b718b3db89c44e47e289137082
-        x-checker-data:
-          type: anitya
-          project-id: 5405
-          stable-only: true
-          url-template: https://www.ffmpeg.org/releases/ffmpeg-$version.tar.xz
+        url: https://www.ffmpeg.org/releases/ffmpeg-5.1.2.tar.xz
+        sha256: 619e706d662c8420859832ddc259cd4d4096a48a2ce1eefd052db9e440eef3dc
   - name: krita
     buildsystem: cmake-ninja
     builddir: true
