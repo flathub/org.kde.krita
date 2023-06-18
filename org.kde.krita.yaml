@@ -1056,6 +1056,14 @@ modules:
           versions:
             <: 10.0.0
           url-template: https://github.com/xtensor-stack/xsimd/archive/refs/tags/$version.tar.gz
+  - name: x264
+    config-opts:
+      - --disable-cli
+      - --enable-shared
+    sources:
+      - type: archive
+        url: https://code.videolan.org/videolan/x264/-/archive/baee400fa9ced6f5481a728138fed6e867b0ff7f.tar.gz
+        sha256: 436a2be54d8bc0cb05dd33ecbbcb7df9c3b57362714fcdaa3a5991189a33319b
   - name: ffmpeg
     config-opts:
       - --enable-rpath
