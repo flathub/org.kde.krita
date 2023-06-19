@@ -35,20 +35,6 @@ cleanup:
   - '*.la'
   - '*.cmake'
   - '*.prl'
-cleanup-commands:
-  - mkdir -p /app/lib/ffmpeg
-add-extensions:
-  org.kde.krita.Codecs:
-    directory: lib/codecs
-    add-ld-path: lib
-    bundle: true
-    autodelete: true
-  org.freedesktop.Platform.ffmpeg-full:
-    directory: lib/ffmpeg
-    version: '22.08'
-    add-ld-path: .
-    no-autodownload: true
-    autodelete: false
 modules:
   - name: qtbase
     build-options:
@@ -282,8 +268,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.105/ki18n-5.105.0.tar.xz
-        sha256: ba26cd1fc188ab305293f8f1276ab7871f57f4ab1309bb8d2adf42fb20958f3a
+        url: https://download.kde.org/stable/frameworks/5.107/ki18n-5.107.0.tar.xz
+        sha256: 17dd8fe31b75367f6a8cfd73e1a8a9676031ff9acf86dcd9456fab46c25e8be0
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -551,14 +537,14 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/Exiv2/exiv2/releases/download/v0.27.6/exiv2-0.27.6-Source.tar.gz
-        sha256: 4c192483a1125dc59a3d70b30d30d32edace9e14adf52802d2f853abf72db8a6
+        url: https://github.com/Exiv2/exiv2/releases/download/v0.27.7/exiv2-0.27.7-Source.tar.gz
+        sha256: 70629dc27e3d4dd5c3fa91afbea93166d338b1de284e6a4c44bbf9dcfe7bbc6d
         x-checker-data:
           type: anitya
           project-id: 769
           stable-only: true
           versions:
-            '<': '0.28.0'
+            <: 0.28.0
           url-template: https://github.com/Exiv2/exiv2/releases/download/v$version/exiv2-$version-Source.tar.gz
   - name: lcms2
     buildsystem: cmake-ninja
@@ -688,7 +674,7 @@ modules:
           project-id: 301509
           stable-only: true
           versions:
-            '<': '4.0.0'
+            <: 4.0.0
           url-template: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/$version.tar.gz
   - name: openexr
     buildsystem: cmake-ninja
@@ -940,8 +926,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libde265/releases/download/v1.0.11/libde265-1.0.11.tar.gz
-        sha256: 2f8f12cabbdb15e53532b7c1eb964d4e15d444db1be802505e6ac97a25035bab
+        url: https://github.com/strukturag/libde265/releases/download/v1.0.12/libde265-1.0.12.tar.gz
+        sha256: 62185ea2182e68cf68bba20cc6eb4c287407b509cf0a827d7ddb75614db77b5c
         x-checker-data:
           type: anitya
           project-id: 11239
@@ -1068,60 +1054,34 @@ modules:
           project-id: 138109
           stable-only: true
           versions:
-            '<': '10.0.0'
+            <: 10.0.0
           url-template: https://github.com/xtensor-stack/xsimd/archive/refs/tags/$version.tar.gz
+  - name: x264
+    config-opts:
+      - --disable-cli
+      - --enable-shared
+    sources:
+      - type: archive
+        url: https://code.videolan.org/videolan/x264/-/archive/baee400fa9ced6f5481a728138fed6e867b0ff7f.tar.gz
+        sha256: 436a2be54d8bc0cb05dd33ecbbcb7df9c3b57362714fcdaa3a5991189a33319b
   - name: ffmpeg
     config-opts:
-      - --prefix=/app/lib/codecs
+      - --enable-rpath
       - --enable-gpl
-      - --enable-version3
       - --disable-static
       - --enable-shared
-      - --enable-ffprobe
-      - --disable-ffplay
       - --disable-doc
-      - --disable-avdevice
-      - --disable-postproc
-      - --enable-libaom
-      - --enable-zlib
-      - --enable-demuxer=image2
-      - --enable-demuxer=image2_alias_pix
-      - --enable-demuxer=image2_brender_pix
-      # Container Formats
-      - --enable-muxer=webm
-      - --enable-muxer=matroska
-      - --enable-muxer=ogg
-      - --enable-muxer=apng
-      # Image Formats
-      - --enable-libwebp
-      - --enable-encoder=png
-      - --enable-decoder=png
-      - --enable-encoder=apng
-      - --enable-decoder=apng
-      # Video Codecs
-      - --enable-encoder=libaom_av1
-      - --enable-libvpx
-      - --enable-encoder=libvpx_vp9
-      - --enable-encoder=libvpx_vp8
-      - --enable-libopenh264
-      - --enable-libtheora
-      # Audio Codecs
-      - --enable-encoder=flac
-      - --enable-encoder=aac
-      - --enable-libmp3lame
+      - --disable-ffplay
+      - --disable-ffprobe
       - --enable-libopus
-      - --enable-libvorbis
+      - --enable-libvpx
+      - --enable-libx264
     cleanup:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-6.0.tar.xz
-        sha256: 57be87c22d9b49c112b6d24bc67d42508660e6b718b3db89c44e47e289137082
-        x-checker-data:
-          type: anitya
-          project-id: 5405
-          stable-only: true
-          url-template: https://www.ffmpeg.org/releases/ffmpeg-$version.tar.xz
+        url: https://www.ffmpeg.org/releases/ffmpeg-5.1.2.tar.xz
+        sha256: 619e706d662c8420859832ddc259cd4d4096a48a2ce1eefd052db9e440eef3dc
   - name: krita
     buildsystem: cmake-ninja
     builddir: true
