@@ -377,8 +377,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/71/22/207523d16464c40a0310d2d4d8926daffa00ac1f5b1576170a32db749636/pyparsing-3.0.9.tar.gz
-        sha256: 2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb
+        url: https://files.pythonhosted.org/packages/4f/13/28e88033cab976721512e7741000fb0635fa078045e530a91abb25aea0c0/pyparsing-3.1.0.tar.gz
+        sha256: edb662d6fe322d6e990b1594b5feaeadf806803359e3d4d42f11e295e588f0ea
         x-checker-data:
           type: pypi
           name: pyparsing
@@ -685,8 +685,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.8.tar.gz
-        sha256: 3ff47111ef7e5da6f69330e66e1e90ae620b79df1cedf2512bb9bffe86c2c617
+        url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.9.tar.gz
+        sha256: 103e902d3902800ab07b5f3a298be7afd2755312737b2cdbfa01326ff99dac07
         x-checker-data:
           type: anitya
           project-id: 13289
