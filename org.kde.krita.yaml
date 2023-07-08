@@ -172,8 +172,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.107/extra-cmake-modules-5.107.0.tar.xz
-        sha256: 3969aad56d1e6a5901e926aaf7a73510d98c4b363564ed3f1222d4135da633ed
+        url: https://download.kde.org/stable/frameworks/5.108/extra-cmake-modules-5.108.0.tar.xz
+        sha256: ff14abd21abd34c2d8c00ee7a1ccd173b9a57ed1824e5c01090897ffffed447a
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -187,8 +187,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.107/kconfig-5.107.0.tar.xz
-        sha256: 9697d4bca5255e62df99f7e80b4d0f22d532317b4bff3d67e81c4f7641ee5b13
+        url: https://download.kde.org/stable/frameworks/5.108/kconfig-5.108.0.tar.xz
+        sha256: 4daeae499981bbc45ceb841d37a33487eea88910077f11ecfc2a8fee8b03033f
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -200,8 +200,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.107/karchive-5.107.0.tar.xz
-        sha256: e88cb94b9af8a88f360e627b3ae7a2b99ccdfe3fe9e1961452056b2a00f04a7f
+        url: https://download.kde.org/stable/frameworks/5.108/karchive-5.108.0.tar.xz
+        sha256: 9e9049551ec7e21dbf173e27390d5ce919d34bf31f395bebb467bfec348075e5
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -213,8 +213,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.107/kwidgetsaddons-5.107.0.tar.xz
-        sha256: 0fa19b9933c3f5553d16bb38b0d9f6fe0a290d58b70e7debf45714102ce887c9
+        url: https://download.kde.org/stable/frameworks/5.108/kwidgetsaddons-5.108.0.tar.xz
+        sha256: e8a009a23a2e6d9ae70be93b185ee641b8e5191aac35896fe9bf15065adffaa8
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -226,8 +226,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.107/kcompletion-5.107.0.tar.xz
-        sha256: 50ab6473d2092bf98fc6d0ed7000566e9bb490f1139e1a502dabc39dfe6449f5
+        url: https://download.kde.org/stable/frameworks/5.108/kcompletion-5.108.0.tar.xz
+        sha256: b8bd3ba590b58408c1aeb6163e8ec751fe3695f1bcc4b8ce92e272b31c18ff39
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -241,8 +241,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.107/kcoreaddons-5.107.0.tar.xz
-        sha256: 64baee484852ab2798aba18cc4780a1caafb688a5e0a0524de3bc7eb2a1eaf84
+        url: https://download.kde.org/stable/frameworks/5.108/kcoreaddons-5.108.0.tar.xz
+        sha256: c8b3a1abe2fef61b97dff9d58e29fc14cb01ab153c6feddfcd5bb22a632a0e51
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -255,8 +255,8 @@ modules:
       - -DWITH_WAYLAND=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.107/kguiaddons-5.107.0.tar.xz
-        sha256: ad2f6e6ca7dd3c230de54bab357e33a9c21e85a2836f63565e3b77ebf79984c1
+        url: https://download.kde.org/stable/frameworks/5.108/kguiaddons-5.108.0.tar.xz
+        sha256: a14804e91a4388c23e4a6981b84fa5b82e0b3a41c5bbd0ce230945bcbcd8ce07
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -268,8 +268,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.107/ki18n-5.107.0.tar.xz
-        sha256: 17dd8fe31b75367f6a8cfd73e1a8a9676031ff9acf86dcd9456fab46c25e8be0
+        url: https://download.kde.org/stable/frameworks/5.108/ki18n-5.108.0.tar.xz
+        sha256: 59ef5eaf705478f498511b696b31db269861129d11987684a34802902c50ff4e
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -281,8 +281,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.107/kitemmodels-5.107.0.tar.xz
-        sha256: b7f5aae6a5d0605f737ab3e993f9a195ba164f6f89672013e26b1276808a11af
+        url: https://download.kde.org/stable/frameworks/5.108/kitemmodels-5.108.0.tar.xz
+        sha256: 3bc9f5670ebef9fb746d0406cb461540a9bf54d6cd8ed34dce72cdde420bad15
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -294,8 +294,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.107/kitemviews-5.107.0.tar.xz
-        sha256: d5460cee8e9b08c1c0472e88e07bbe04d33cf69da6faf45febd9680972a00b17
+        url: https://download.kde.org/stable/frameworks/5.108/kitemviews-5.108.0.tar.xz
+        sha256: 6177eeaf6bf92da89511b18a4b720ce1454fed9a9f49d75ed0dc6c4a00f2ac8d
         x-checker-data:
           type: anitya
           project-id: 8762
@@ -307,8 +307,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.107/kimageformats-5.107.0.tar.xz
-        sha256: 97258ad36bf98cd1aaeeb29c49946031f5051d9984bda9f41fda5a35ccd4d1c1
+        url: https://download.kde.org/stable/frameworks/5.108/kimageformats-5.108.0.tar.xz
+        sha256: ec2039d88314ebd76df4397e97b1386a4f2704361d0c0a849d48dc4deddcbe1e
         x-checker-data:
           type: anitya
           project-id: 8762
