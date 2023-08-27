@@ -43,10 +43,6 @@ modules:
           config-opts:
             - -reduce-relocations
             - -force-debug-info
-        aarch64:
-          config-opts:
-            - -no-reduce-relocations
-            - -opengl es2
     config-opts:
       - -confirm-license
       - -opensource
