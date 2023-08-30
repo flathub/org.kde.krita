@@ -43,6 +43,9 @@ modules:
           config-opts:
             - -reduce-relocations
             - -force-debug-info
+        aarch64:
+          config-opts:
+            - -no-reduce-relocations
     config-opts:
       - -confirm-license
       - -opensource
