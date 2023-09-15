@@ -858,14 +858,6 @@ modules:
       - type: archive
         url: https://github.com/xtensor-stack/xsimd/archive/5647254635ea6f590b7366e0848a8a0ab3007efa.tar.gz
         sha256: 5b175c8b671d4287343b0e79e9e3a8070992815f5e0ed44bfc9bce01f8880814
-  - name: x264
-    config-opts:
-      - --disable-cli
-      - --enable-shared
-    sources:
-      - type: archive
-        url: https://code.videolan.org/videolan/x264/-/archive/baee400fa9ced6f5481a728138fed6e867b0ff7f.tar.gz
-        sha256: 436a2be54d8bc0cb05dd33ecbbcb7df9c3b57362714fcdaa3a5991189a33319b
   - name: ffmpeg
     config-opts:
       - --enable-gpl
