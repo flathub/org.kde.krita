@@ -860,6 +860,7 @@ modules:
         sha256: 5b175c8b671d4287343b0e79e9e3a8070992815f5e0ed44bfc9bce01f8880814
   - name: ffmpeg
     config-opts:
+      - --disable-inline-asm
       - --enable-gpl
       - --enable-version3
       - --disable-static
