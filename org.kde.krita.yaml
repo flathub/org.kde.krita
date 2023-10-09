@@ -433,8 +433,18 @@ modules:
         linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.gz
-        sha256: 4b2136f98bdd1f5857f1c3dea9ac2018effe65286cf251534b6ae20cc45e1847
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.83.0/source/boost_1_83_0.tar.gz
+        sha256: c0685b68dd44cc46574cce86c4e17c0f611b15e195be9848dfd0769a0a207628
+  - name: fftw
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTS=OFF
+      - -DENABLE_THREADS=ON
+    sources:
+      - type: archive
+        url: https://fftw.org/fftw-3.3.10.tar.gz
+        sha256: 56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467
   - name: eigen
     buildsystem: cmake-ninja
     builddir: true
@@ -451,12 +461,24 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DEXPAT_BUILD_TOOLS=OFF
+      - -DEXPAT_BUILD_EXAMPLES=OFF
+      - -DEXPAT_BUILD_TESTS=OFF
+      - -DEXPAT_SHARED_LIBS=ON
+      - -DEXPAT_BUILD_DOCS=OFF
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
     cleanup:
       - /bin
     sources:
       - type: archive
         url: https://github.com/libexpat/libexpat/releases/download/R_2_5_0/expat-2.5.0.tar.gz
         sha256: 6b902ab103843592be5e99504f846ec109c1abb692e85347587f237a4ffa1033
+  - name: inih
+    buildsystem: meson
+    sources:
+      - type: archive
+        url: https://github.com/benhoyt/inih/archive/refs/tags/r57.tar.gz
+        sha256: f03f98ca35c3adb56b2358573c8d3eda319ccd5287243d691e724b7eafa970b3
   - name: exiv2
     buildsystem: cmake-ninja
     config-opts:
@@ -469,8 +491,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/Exiv2/exiv2/releases/download/v0.27.5/exiv2-0.27.5-Source.tar.gz
-        sha256: 35a58618ab236a901ca4928b0ad8b31007ebdc0386d904409d825024e45ea6e2
+        url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-Source.tar.gz
+        sha256: 89af3b5ef7277753ef7a7b5374ae017c6b9e304db3b688f1948e73e103491f3d
   - name: lcms2
     buildsystem: cmake-ninja
     config-opts:
@@ -484,12 +506,11 @@ modules:
       - /share
     sources:
       - type: archive
-        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.14/lcms2-2.14.tar.gz
-        sha256: 28474ea6f6591c4d4cee972123587001a4e6e353412a41b3e9e82219818d5740
+        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.15/lcms2-2.15.tar.gz
+        sha256: b20cbcbd0f503433be2a4e81462106fa61050a35074dc24a4e356792d971ab39
       - type: patch
         paths:
           - patches/lcms2/0002-Add-modern-CMake-toolchain.patch
-          - patches/lcms2/0003-Revert-Fix-LUT-based-optimization-on-8-bits.patch
   - shared-modules/glu/glu-9.json
   - shared-modules/glew/glew.json
   - name: freeglut
@@ -507,6 +528,9 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_TESTING=OFF
+      - -DPYTHON=OFF
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=O
     sources:
       - type: archive
         url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.9.tar.gz
@@ -525,6 +549,7 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
       - -DBUILD_SHARED_LIBS=ON
       - -DYAML_BUILD_SHARED_LIBS=ON
       - -DYAML_CPP_BUILD_TOOLS=OFF
@@ -597,8 +622,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.1.tar.gz
-        sha256: 36f27c5887fc4e5c241805c29b8b8e68725aa05520bcaa7c7ec84c0422b8580e
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.3.0.tar.gz
+        sha256: 32b7be676c110d849a77886d8a409159f0367309b2b2f5dae5aa0c38f42b445a
   - name: libraw
     config-opts:
       - --disable-examples
@@ -608,8 +633,8 @@ modules:
       - /share/doc
     sources:
       - type: archive
-        url: https://www.libraw.org/data/LibRaw-0.20.2.tar.gz
-        sha256: dc1b486c2003435733043e4e05273477326e51c3ea554c6864a4eafaff1004a6
+        url: https://www.libraw.org/data/LibRaw-0.21.1.tar.gz
+        sha256: 630a6bcf5e65d1b1b40cdb8608bdb922316759bfb981c65091fec8682d1543cd
       - type: shell
         commands:
           - autoreconf -vfi
@@ -620,7 +645,7 @@ modules:
       - -DBUILD_SHARED_LIBS=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/release-service/22.12.1/src/libkdcraw-22.12.1.tar.xz
+        url: https://download.kde.org/Attic/release-service/22.12.1/src/libkdcraw-22.12.1.tar.xz
         sha256: 8b0a71937f7ed4926c2c047e0bd36001e5e98f52b1cf633d8bfbe4e4eeac65eb
   - name: gsl
     config-opts:
@@ -631,6 +656,14 @@ modules:
       - type: archive
         url: https://github.com/ampl/gsl/archive/8eac3b0b5cffb90004a729f0675011e718f41379.zip
         sha256: 124bf79bfd2c3cb07df02a2b0e80e13d29a94cab8acae1c2c1e086474381a6c2
+  - name: poppler-data
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz
+        sha256: c835b640a40ce357e1b83666aabd95edffa24ddddd49b8daff63adb851cdab74
   - name: poppler
     buildsystem: cmake-ninja
     config-opts:
@@ -641,20 +674,21 @@ modules:
       - -DENABLE_UTILS=FALSE
       - -DENABLE_GLIB=FALSE
       - -DENABLE_LIBOPENJPEG=none
+      - -DENABLE_QT6=OFF
       - -DWITH_NSS3=OFF
       - -DBUILD_MANUAL_TESTS=OFF
     sources:
       - type: archive
-        url: https://poppler.freedesktop.org/poppler-22.08.0.tar.xz
-        sha256: b493328721402f25cb7523f9cdc2f7d7c59f45ad999bde75c63c90604db0f20b
+        url: https://poppler.freedesktop.org/poppler-23.10.0.tar.xz
+        sha256: 31a3dfdea79f4922402d313737415a44d44dc14d6b317f959a77c5bba0647dd9
   - name: quazip
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/stachenov/quazip/archive/v0.9.1.tar.gz
-        sha256: 5d36b745cb94da440432690050e6db45b99b477cfe9bc3b82fd1a9d36fff95f5
+        url: https://github.com/stachenov/quazip/archive/refs/tags/v1.4.tar.gz
+        sha256: 79633fd3a18e2d11a7d5c40c4c79c1786ba0c74b59ad752e8429746fe1781dd6
   - name: aom
     buildsystem: cmake-ninja
     builddir: true
@@ -668,8 +702,8 @@ modules:
       - -DENABLE_TOOLS=OFF
     sources:
       - type: archive
-        url: https://storage.googleapis.com/aom-releases/libaom-3.6.1.tar.gz
-        sha256: 42b862f58b3d00bd3902d2dc469526574f5b012e5b178e6a9652845a113d6887
+        url: https://storage.googleapis.com/aom-releases/libaom-3.7.0.tar.gz
+        sha256: d1773bb6f050b430af47741306ac37a6aa2fec7364cb0dc27e3b1454a138934f
   - name: libx265-10bit
     buildsystem: cmake-ninja
     subdir: source
@@ -763,8 +797,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libde265/releases/download/v1.0.8/libde265-1.0.8.tar.gz
-        sha256: 24c791dd334fa521762320ff54f0febfd3c09fc978880a8c5fbc40a88f21d905
+        url: https://github.com/strukturag/libde265/releases/download/v1.0.12/libde265-1.0.12.tar.gz
+        sha256: 62185ea2182e68cf68bba20cc6eb4c287407b509cf0a827d7ddb75614db77b5c
       - type: patch
         paths:
           - patches/libde265/0001-Quick-check-for-SSE-support.patch
@@ -777,8 +811,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.13.0/libheif-1.13.0.tar.gz
-        sha256: c20ae01bace39e89298f6352f1ff4a54b415b33b9743902da798e8a1e51d7ca1
+        url: https://github.com/strukturag/libheif/releases/download/v1.16.2/libheif-1.16.2.tar.gz
+        sha256: 7f97e4205c0bd9f9b8560536c8bd2e841d1c9a6d610401eb3eb87ed9cdfe78ea
   - name: kseexpr
     buildsystem: cmake-ninja
     config-opts:
@@ -797,8 +831,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/json-c/json-c/archive/refs/tags/json-c-0.16-20220414.tar.gz
-        sha256: 3ecaeedffd99a60b1262819f9e60d7d983844073abc74e495cb822b251904185
+        url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.17.tar.gz
+        sha256: 7550914d58fb63b2c3546f3ccfbe11f1c094147bd31a69dcd23714d7956159e6
   - name: libmypaint
     buildsystem: cmake-ninja
     config-opts:
@@ -823,8 +857,8 @@ modules:
       - -DBUILD_SHARED_LIBS=OFF
     sources:
       - type: archive
-        url: https://github.com/google/highway/archive/refs/tags/1.0.4.tar.gz
-        sha256: faccd343935c9e98afd1016e9d20e0b8b89d908508d1af958496f8c2d3004ac2
+        url: https://github.com/google/highway/archive/refs/tags/1.0.7.tar.gz
+        sha256: 5434488108186c170a5e2fca5e3c9b6ef59a1caa4d520b008a9b8be6b8abe6c5
   - name: libjxl
     buildsystem: cmake-ninja
     config-opts:
@@ -841,23 +875,23 @@ modules:
       - -DJPEGXL_ENABLE_VIEWERS=OFF
     sources:
       - type: archive
-        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.9-snapshot.tar.gz
-        sha256: 2177f72fb141dce69d071c24864fbebc9aa7133e8dda212783609e1996024078
+        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.8.2.tar.gz
+        sha256: c70916fb3ed43784eb840f82f05d390053a558e2da106e40863919238fa7b420
   - name: xsimd
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/xtensor-stack/xsimd/archive/5647254635ea6f590b7366e0848a8a0ab3007efa.tar.gz
-        sha256: 5b175c8b671d4287343b0e79e9e3a8070992815f5e0ed44bfc9bce01f8880814
+        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/11.1.0.tar.gz
+        sha256: aa54dba8daade472656eba0d27154f072fec06ee3831aefcac69a5f6c7dbbae7
   - name: libunibreak
     cleanup:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/adah1972/libunibreak/releases/download/libunibreak_5_0/libunibreak-5.0.tar.gz
-        sha256: 58f2fe4f9d9fc8277eb324075ba603479fa847a99a4b134ccb305ca42adf7158
+        url: https://github.com/adah1972/libunibreak/releases/download/libunibreak_5_1/libunibreak-5.1.tar.gz
+        sha256: dd1a92d4c5646aa0e457ff41d89812ec5243863be6c20bbcb5ee380f3dd78377
   - name: ffmpeg
     config-opts:
       - --disable-inline-asm
@@ -914,8 +948,33 @@ modules:
       - -Dzug_BUILD_EXAMPLES=OFF
     sources:
       - type: archive
-        url: https://github.com/arximboldi/zug/archive/deb266f4c7c35d325de7eb3d033f06e0809495f2.tar.gz
-        sha256: 4b36442059899b8570336ff9e2901f62fd58b839c9e3ff5d35497454e2324625
+        url: https://github.com/arximboldi/zug/archive/refs/tags/v0.1.0.tar.gz
+        sha256: 7d9d57a55399784392ba8fa67fcf246b9f5aec8f002c69e1fe4b5f66657214b8
+  - name: hiredis
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/redis/hiredis/archive/refs/tags/v1.1.0.tar.gz
+        sha256: fe6d21741ec7f3fc9df409d921f47dfc73a4d8ff64f4ac6f1d95f951bf7f53d6
+  - name: ccache
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/ccache/ccache/archive/refs/tags/v4.8.3.tar.gz
+        sha256: 9418e1c5c9f62ee31d450a2a04a6bbdc7575dc8a0179880cc48c67c721431375
+  - name: catch2
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://github.com/catchorg/Catch2/archive/refs/tags/v3.4.0.tar.gz
+        sha256: 122928b814b75717316c71af69bd2b43387643ba076a6ec16e7882bfb2dfacbb
   - name: immer
     buildsystem: cmake-ninja
     config-opts:
@@ -924,8 +983,8 @@ modules:
       - -Dzug_BUILD_EXAMPLES=OFF
     sources:
       - type: archive
-        url: https://github.com/arximboldi/immer/archive/42e6beafed53f2ecd971360270f421f9c2e36642.tar.gz
-        sha256: af9c4284b6adf412e8859e8e40e9cc6e40fa25a2d6cc54121b5713e7ba4ad119
+        url: https://github.com/arximboldi/immer/archive/refs/tags/v0.8.1.tar.gz
+        sha256: de8411c84830864604bb685dc8f2e3c0dbdc40b95b2f6726092f7dcc85e75209
   - name: lager
     buildsystem: cmake-ninja
     config-opts:
@@ -960,9 +1019,7 @@ modules:
           - patches/mlt/0004-MLT-check-pointers-before-dereferencing.patch
           - patches/mlt/0001-Fix-producer_krita-to-stop-at-the-end-of-the-stream.patch
   - name: raqm
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    buildsystem: meson
     sources:
       - type: archive
         url: https://github.com/HOST-Oman/libraqm/releases/download/v0.10.1/raqm-0.10.1.tar.xz
