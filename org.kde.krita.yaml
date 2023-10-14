@@ -370,8 +370,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/ce/8c/f66d1c45946e73a46f258b9628fe974ba8cc46c41b4750a59be192981695/sip-6.7.11.tar.gz
-        sha256: f0dc3287a0b172e5664931c87847750d47e4fdcda4fe362b514af8edd655b469
+        url: https://files.pythonhosted.org/packages/a6/4e/c34eee70109e9a8110672f074fc18b5022bf4b9b4c92641245c73ae0b21a/sip-6.7.12.tar.gz
+        sha256: 08e66f742592eb818ac8fda4173e2ed64c9f2d40b70bee11db1c499127d98450
         x-checker-data:
           type: pypi
           name: sip
@@ -384,8 +384,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/cb/f0/dc998da4a3358249a0e53927c831a52bfc2aa070a96e8164fffcf3dce349/PyQt-builder-1.15.2.tar.gz
-        sha256: 746cfe83c03ebff4458d478a1c06714790ef93e458ecd5a28bc2837bac88eb74
+        url: https://files.pythonhosted.org/packages/21/e9/5ee4d76d3f4c566b090924e36da067748db948a5faeff4142d149a4d5a15/PyQt-builder-1.15.3.tar.gz
+        sha256: 5b33e99edcb77d4a63a38605f4457a04cff4e254c771ed529ebc9589906ccdb1
         x-checker-data:
           type: pypi
           name: PyQt-builder
@@ -396,8 +396,8 @@ modules:
         "PyQt5_sip" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/99/61/6954ff8f8ab550a8fec56a2f29be362f281ee71b6edc7615b905adb0e6a9/PyQt5_sip-12.12.2.tar.gz
-        sha256: 10d9bfa9f59f0fd1cad81be187479316ffc95684f573efea94512cb4257d2b17
+        url: https://files.pythonhosted.org/packages/ee/81/fce2a475aa56c1f49707d9306b930695b6ff078c2242c9f2fd72a3214e1f/PyQt5_sip-12.13.0.tar.gz
+        sha256: 7f321daf84b9c9dbca61b80e1ef37bdaffc0e93312edae2cd7da25b953971d91
         x-checker-data:
           type: pypi
           name: PyQt5_sip
@@ -410,8 +410,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/5c/46/b4b6eae1e24d9432905ef1d4e7c28b6610e28252527cdc38f2a75997d8b5/PyQt5-5.15.9.tar.gz
-        sha256: dc41e8401a90dc3e2b692b411bd5492ab559ae27a27424eed4bd3915564ec4c0
+        url: https://files.pythonhosted.org/packages/4d/5d/b8b6e26956ec113ad3f566e02abd12ac3a56b103fcc7e0735e27ee4a1df3/PyQt5-5.15.10.tar.gz
+        sha256: d46b7804b1b10a4ff91753f8113e5b5580d2b4462f3226288e2d84497334898a
         x-checker-data:
           type: pypi
           name: PyQt5
@@ -433,8 +433,8 @@ modules:
         linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.83.0/source/boost_1_83_0.tar.gz
-        sha256: c0685b68dd44cc46574cce86c4e17c0f611b15e195be9848dfd0769a0a207628
+        url: https://boostorg.jfrog.io/artifactory/main/release/1.80.0/source/boost_1_80_0.tar.gz
+        sha256: 4b2136f98bdd1f5857f1c3dea9ac2018effe65286cf251534b6ae20cc45e1847
   - name: fftw
     buildsystem: cmake-ninja
     config-opts:
@@ -461,24 +461,15 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DEXPAT_BUILD_TOOLS=OFF
-      - -DEXPAT_BUILD_EXAMPLES=OFF
-      - -DEXPAT_BUILD_TESTS=OFF
-      - -DEXPAT_SHARED_LIBS=ON
-      - -DEXPAT_BUILD_DOCS=OFF
-      - -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+      - -DBUILD_tests=OFF
+      - -DBUILD_examples=OFF
+      - -DBUILD_tools=OFF
     cleanup:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/libexpat/libexpat/releases/download/R_2_5_0/expat-2.5.0.tar.gz
-        sha256: 6b902ab103843592be5e99504f846ec109c1abb692e85347587f237a4ffa1033
-  - name: inih
-    buildsystem: meson
-    sources:
-      - type: archive
-        url: https://github.com/benhoyt/inih/archive/refs/tags/r57.tar.gz
-        sha256: f03f98ca35c3adb56b2358573c8d3eda319ccd5287243d691e724b7eafa970b3
+        url: https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.4.8.tar.xz
+        sha256: f79b8f904b749e3e0d20afeadecf8249c55b2e32d4ebb089ae378df479dcaf25
   - name: exiv2
     buildsystem: cmake-ninja
     config-opts:
@@ -491,8 +482,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/Exiv2/exiv2/releases/download/v0.28.0/exiv2-0.28.0-Source.tar.gz
-        sha256: 89af3b5ef7277753ef7a7b5374ae017c6b9e304db3b688f1948e73e103491f3d
+        url: https://github.com/Exiv2/exiv2/releases/download/v0.27.5/exiv2-0.27.5-Source.tar.gz
+        sha256: 35a58618ab236a901ca4928b0ad8b31007ebdc0386d904409d825024e45ea6e2
   - name: lcms2
     buildsystem: cmake-ninja
     config-opts:
@@ -506,11 +497,12 @@ modules:
       - /share
     sources:
       - type: archive
-        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.15/lcms2-2.15.tar.gz
-        sha256: b20cbcbd0f503433be2a4e81462106fa61050a35074dc24a4e356792d971ab39
+        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.14/lcms2-2.14.tar.gz
+        sha256: 28474ea6f6591c4d4cee972123587001a4e6e353412a41b3e9e82219818d5740
       - type: patch
         paths:
           - patches/lcms2/0002-Add-modern-CMake-toolchain.patch
+          - patches/lcms2/0003-Revert-Fix-LUT-based-optimization-on-8-bits.patch
   - shared-modules/glu/glu-9.json
   - shared-modules/glew/glew.json
   - name: freeglut
@@ -585,16 +577,6 @@ modules:
       - type: archive
         url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.7.tar.gz
         sha256: 39981a0db1bb6da504909bce63d7493286c5e50825c056564544c990d15c55cf
-  - name: libdeflate
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/ebiggers/libdeflate/releases/download/v1.19/libdeflate-1.19.tar.gz
-        sha256: d9bb9bdd8cc5a8c1f7f6226fa0053dd72861e15f366e7ff7d0d191eac16d66f3
   - name: openexr
     buildsystem: cmake-ninja
     config-opts:
@@ -604,8 +586,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.2.1.tar.gz
-        sha256: 61e175aa2203399fb3c8c2288752fbea3c2637680d50b6e306ea5f8ffdd46a9b
+        url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.11.tar.gz
+        sha256: 06b4a20d0791b5ec0f804c855d320a0615ce8445124f293616a086e093f1f1e1
   - name: opencolorio
     buildsystem: cmake-ninja
     builddir: true
@@ -622,8 +604,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.3.0.tar.gz
-        sha256: 32b7be676c110d849a77886d8a409159f0367309b2b2f5dae5aa0c38f42b445a
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.1.tar.gz
+        sha256: 36f27c5887fc4e5c241805c29b8b8e68725aa05520bcaa7c7ec84c0422b8580e
   - name: libraw
     config-opts:
       - --disable-examples
