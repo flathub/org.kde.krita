@@ -1048,7 +1048,7 @@ modules:
     sources:
       - type: archive
         url: https://download.kde.org/stable/krita/5.2.0/krita-5.2.0.tar.gz
-        sha256: 773ce3a3b3ccf0fdb2a58ea3ac2def26781bf6d7262d04a8be01d6ea1b3e9980
+        sha256: d36a19738a59c36750b9cc7522e3c9b255901a33aac069a0783827508a8a9297
       - type: patch
         paths:
           - patches/krita/AppData.patch
