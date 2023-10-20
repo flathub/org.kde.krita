@@ -36,6 +36,11 @@ cleanup:
   - '*.cmake'
   - '*.prl'
 modules:
+  - name: python
+    sources:
+      - type: archive
+        url: https://www.python.org/ftp/python/3.10.7/Python-3.10.7.tar.xz
+        md5: b8094f007b3a835ca3be6bdf8116cccc
   - name: qtbase
     build-options:
       arch:
@@ -405,7 +410,7 @@ modules:
     buildsystem: simple
     build-commands:
       - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
-        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.11/site-packages
+        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.10/site-packages
     cleanup:
       - /bin
     sources:
@@ -1015,7 +1020,7 @@ modules:
     builddir: true
     build-options:
       env:
-        PYTHONPATH: /app/lib/python3.11/dist-packages
+        PYTHONPATH: /app/lib/python3.10/dist-packages
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DDEFINE_NO_DEPRECATED=1
