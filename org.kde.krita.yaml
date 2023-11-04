@@ -41,6 +41,20 @@ modules:
       - type: archive
         url: https://www.python.org/ftp/python/3.10.7/Python-3.10.7.tar.xz
         md5: b8094f007b3a835ca3be6bdf8116cccc
+  - name: wheel
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "wheel" --no-build-isolation
+    cleanup:
+      - /bin
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/fb/d0/0b4c18a0b85c20233b0c3bc33f792aefd7f12a5832b4da77419949ff6fd9/wheel-0.41.3.tar.gz
+        sha256: 4d4987ce51a49370ea65c0bfd2234e8ce80a12780820d9dc462597a6e60d0841
+        x-checker-data:
+          type: wheel
+          name: packaging
   - name: qtbase
     build-options:
       arch:
