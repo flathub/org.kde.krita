@@ -139,8 +139,22 @@ modules:
         url: https://files.pythonhosted.org/packages/fb/d0/0b4c18a0b85c20233b0c3bc33f792aefd7f12a5832b4da77419949ff6fd9/wheel-0.41.3.tar.gz
         sha256: 4d4987ce51a49370ea65c0bfd2234e8ce80a12780820d9dc462597a6e60d0841
         x-checker-data:
-          type: wheel
-          name: packaging
+          type: pypi
+          name: wheel
+  - name: setuptools
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "setuptools" --no-build-isolation
+    cleanup:
+      - /bin
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/ef/cc/93f7213b2ab5ed383f98ce8020e632ef256b406b8569606c3f160ed8e1c9/setuptools-68.2.2.tar.gz
+        sha256: 4ac1475276d2f1c48684874089fefcd83bd7162ddaafb81fac866ba0db282a87
+        x-checker-data:
+          type: pypi
+          name: setuptools
   - name: sip
     buildsystem: simple
     build-commands:
