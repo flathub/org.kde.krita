@@ -37,6 +37,8 @@ cleanup:
   - '*.prl'
 modules:
   - name: python
+    config-opts:
+      - --enable-shared
     sources:
       - type: archive
         url: https://www.python.org/ftp/python/3.10.7/Python-3.10.7.tar.xz
