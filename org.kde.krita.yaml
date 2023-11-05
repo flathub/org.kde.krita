@@ -604,8 +604,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.1.tar.gz
-        sha256: 36f27c5887fc4e5c241805c29b8b8e68725aa05520bcaa7c7ec84c0422b8580e
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.3.0.tar.gz
+        sha256: 32b7be676c110d849a77886d8a409159f0367309b2b2f5dae5aa0c38f42b445a
   - name: libraw
     config-opts:
       - --disable-examples
@@ -865,8 +865,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/11.1.0.tar.gz
-        sha256: aa54dba8daade472656eba0d27154f072fec06ee3831aefcac69a5f6c7dbbae7
+        url: https://github.com/xtensor-stack/xsimd/archive/5647254635ea6f590b7366e0848a8a0ab3007efa.tar.gz
+        sha256: 5b175c8b671d4287343b0e79e9e3a8070992815f5e0ed44bfc9bce01f8880814
   - name: libunibreak
     cleanup:
       - /bin
@@ -1029,8 +1029,8 @@ modules:
       - /share/icons/hicolor/scalable
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.2.0/krita-5.2.0.tar.gz
-        sha256: d36a19738a59c36750b9cc7522e3c9b255901a33aac069a0783827508a8a9297
+        url: https://download.kde.org/stable/krita/5.2.1/krita-5.2.1.tar.gz
+        sha256: 27665b512b3b78eff117e8dbf70e7b53e7ec7f4417a27fd4d22aefb012b2f5cf
       - type: patch
         paths:
           - patches/krita/AppData.patch
