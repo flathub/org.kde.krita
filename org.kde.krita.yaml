@@ -1,7 +1,7 @@
 app-id: org.kde.krita
 default-branch: stable
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '22.08'
 sdk: org.freedesktop.Sdk
 command: krita
 rename-icon: krita
@@ -468,8 +468,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/libexpat/libexpat/releases/download/R_2_4_8/expat-2.4.8.tar.xz
-        sha256: f79b8f904b749e3e0d20afeadecf8249c55b2e32d4ebb089ae378df479dcaf25
+        url: https://github.com/libexpat/libexpat/releases/download/R_2_5_0/expat-2.5.0.tar.gz
+        sha256: 6b902ab103843592be5e99504f846ec109c1abb692e85347587f237a4ffa1033
   - name: exiv2
     buildsystem: cmake-ninja
     config-opts:
@@ -876,7 +876,6 @@ modules:
         sha256: dd1a92d4c5646aa0e457ff41d89812ec5243863be6c20bbcb5ee380f3dd78377
   - name: ffmpeg
     config-opts:
-      - --disable-inline-asm
       - --enable-gpl
       - --enable-version3
       - --disable-static
