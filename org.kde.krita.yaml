@@ -370,8 +370,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/a6/4e/c34eee70109e9a8110672f074fc18b5022bf4b9b4c92641245c73ae0b21a/sip-6.7.12.tar.gz
-        sha256: 08e66f742592eb818ac8fda4173e2ed64c9f2d40b70bee11db1c499127d98450
+        url: https://files.pythonhosted.org/packages/b1/42/d47a0f4e1b1213ba7319b046a2e543b5d7f79964852cae262f35ca30a50c/sip-6.8.1.tar.gz
+        sha256: 3002df415e168ac3ffe393942dbc7131cb82ade50000e1526f46a88ade26f598
         x-checker-data:
           type: pypi
           name: sip
@@ -384,8 +384,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/21/e9/5ee4d76d3f4c566b090924e36da067748db948a5faeff4142d149a4d5a15/PyQt-builder-1.15.3.tar.gz
-        sha256: 5b33e99edcb77d4a63a38605f4457a04cff4e254c771ed529ebc9589906ccdb1
+        url: https://files.pythonhosted.org/packages/c0/75/a3384eea8770c17e77821368618a5140c4ae0c37f9c05a84ef55f4807172/PyQt-builder-1.15.4.tar.gz
+        sha256: 39f8c75db17d9ce17cb6bbf3df1650b5cebc1ea4e5bd73843d21cc96612b2ae1
         x-checker-data:
           type: pypi
           name: PyQt-builder
