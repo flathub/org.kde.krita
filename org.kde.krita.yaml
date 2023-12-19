@@ -375,6 +375,8 @@ modules:
         x-checker-data:
           type: pypi
           name: sip
+          versions:
+            '<': '6.8.0'
   - name: pyqt-builder
     buildsystem: simple
     build-commands:
