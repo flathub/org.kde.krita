@@ -1,7 +1,7 @@
 app-id: org.kde.krita
 default-branch: stable
 runtime: org.freedesktop.Platform
-runtime-version: '22.08'
+runtime-version: '23.08'
 sdk: org.freedesktop.Sdk
 command: krita
 rename-icon: krita
@@ -81,7 +81,7 @@ modules:
       # See link for current Krita Qt fork and git tag https://invent.kde.org/graphics/krita/-/blob/master/3rdparty/ext_qt/CMakeLists.txt
       - type: git
         url: https://invent.kde.org/szaman/qtbase.git
-        commit: 0e4356d8a0fe7939a86575d28fe69e2f0637899a
+        commit: de476dd64e8b1589cc3786af41f83f1dedf76795
       - type: shell
         commands:
           - mv configure configure.qt
@@ -407,7 +407,7 @@ modules:
     buildsystem: simple
     build-commands:
       - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
-        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.10/site-packages
+        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.11/site-packages
     cleanup:
       - /bin
     sources:
@@ -1016,7 +1016,7 @@ modules:
     builddir: true
     build-options:
       env:
-        PYTHONPATH: /app/lib/python3.10/dist-packages
+        PYTHONPATH: /app/lib/python3.11/dist-packages
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DDEFINE_NO_DEPRECATED=1
