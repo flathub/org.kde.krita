@@ -16,6 +16,7 @@ finish-args:
   - --env=PYTHONPATH=/app/lib/python3/dist-packages
   - --env=TMPDIR=/var/tmp
   - --env=QT_QPA_PLATFORMTHEME=gtk3
+  - --env=FLATPAK=1
   - --system-talk-name=org.freedesktop.ColorManager
   - --talk-name=com.canonical.AppMenu.Registrar
 cleanup:
@@ -1035,6 +1036,7 @@ modules:
       - type: patch
         paths:
           - patches/krita/AppData.patch
+          - patches/krita/krita_dont_use_native_file_chooser.patch
   - name: gmic
     buildsystem: cmake-ninja
     subdir: gmic-qt
