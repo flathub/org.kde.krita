@@ -329,8 +329,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/ee/b5/b43a27ac7472e1818c4bafd44430e69605baefe1f34440593e0332ec8b4d/packaging-24.0.tar.gz
-        sha256: eb82c5e3e56209074766e6885bb04b8c38a0c015d0a30036ebe7ece34c9989e9
+        url: https://files.pythonhosted.org/packages/51/65/50db4dda066951078f0a96cf12f4b9ada6e4b811516bf0262c0f4f7064d4/packaging-24.1.tar.gz
+        sha256: 026ed72c8ed3fcce5bf8950572258698927fd1dbda10a5e981cdf0ac37f4f002
         x-checker-data:
           type: pypi
           name: packaging
@@ -387,8 +387,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/c0/75/a3384eea8770c17e77821368618a5140c4ae0c37f9c05a84ef55f4807172/PyQt-builder-1.15.4.tar.gz
-        sha256: 39f8c75db17d9ce17cb6bbf3df1650b5cebc1ea4e5bd73843d21cc96612b2ae1
+        url: https://files.pythonhosted.org/packages/f0/73/9e2755469405520b38162a4f594db1e0a28e2d29ab367acba1cd3c0783b5/pyqt_builder-1.16.3.tar.gz
+        sha256: 3ce5c03dc3fc856b782da3f53b4f3f3b6556aad7bd8416d7bbfc274d03bcf032
         x-checker-data:
           type: pypi
           name: PyQt-builder
@@ -566,8 +566,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/3a/cc/903bb18de90b5d6e15379c97175371ac6414795d94b9c2f6468a9c1303aa/pybind11-2.11.1.tar.gz
-        sha256: 00cd59116a6e8155aecd9174f37ba299d1d397ed4a6b86ac1dfe01b3e40f2cc4
+        url: https://files.pythonhosted.org/packages/98/50/a8dc5a7b9fbb9a90dfc9003b3eecc046b9f64dc9b8d464119064c0344a83/pybind11-2.13.1.tar.gz
+        sha256: 65be498b1cac516161add1508e65375674916bebf2570d057dc9c3c7bcbbc7b0
         x-checker-data:
           type: pypi
           name: pybind11
