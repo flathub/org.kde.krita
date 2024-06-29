@@ -258,10 +258,14 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DKIMAGEFORMATS_JXL=OFF
     sources:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.101/kimageformats-5.101.0.tar.xz
         sha256: ae19b07141fdf977035e6decc50fa45855c0e635f57333a2443d3c24464c625f
+      - type: patch
+        paths:
+          - patches/frameworks/0001-comment-out-jxl-0.9.0-API-change.patch
   - name: kwindowsystem
     buildsystem: cmake-ninja
     config-opts:
@@ -371,13 +375,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/a6/4e/c34eee70109e9a8110672f074fc18b5022bf4b9b4c92641245c73ae0b21a/sip-6.7.12.tar.gz
-        sha256: 08e66f742592eb818ac8fda4173e2ed64c9f2d40b70bee11db1c499127d98450
-        x-checker-data:
-          type: pypi
-          name: sip
-          versions:
-            <: 6.8.0
+        url: https://pypi.python.org/packages/source/s/sip/sip-6.6.2.tar.gz
+        sha256: 0e3efac1c5dfd8e525ae57140927df26993e13f58b89d1577c314f4105bfd90d
   - name: pyqt-builder
     buildsystem: simple
     build-commands:
@@ -387,11 +386,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/c0/75/a3384eea8770c17e77821368618a5140c4ae0c37f9c05a84ef55f4807172/PyQt-builder-1.15.4.tar.gz
-        sha256: 39f8c75db17d9ce17cb6bbf3df1650b5cebc1ea4e5bd73843d21cc96612b2ae1
-        x-checker-data:
-          type: pypi
-          name: PyQt-builder
+        url: https://pypi.io/packages/source/P/PyQt-builder/PyQt-builder-1.13.0.tar.gz
+        sha256: 4877580c38ceb5320e129b381d083b0a8601c68166d8b99707f08fa0a1689eef
   - name: pyqt5_sip
     buildsystem: simple
     build-commands:
@@ -399,11 +395,8 @@ modules:
         "PyQt5_sip" --no-build-isolation
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/ee/81/fce2a475aa56c1f49707d9306b930695b6ff078c2242c9f2fd72a3214e1f/PyQt5_sip-12.13.0.tar.gz
-        sha256: 7f321daf84b9c9dbca61b80e1ef37bdaffc0e93312edae2cd7da25b953971d91
-        x-checker-data:
-          type: pypi
-          name: PyQt5_sip
+        url: https://pypi.python.org/packages/source/P/PyQt5-sip/PyQt5_sip-12.11.0.tar.gz
+        sha256: b4710fd85b57edef716cc55fae45bfd5bfac6fc7ba91036f1dcc3f331ca0eb39
   - name: pyqt5
     buildsystem: simple
     build-commands:
@@ -413,11 +406,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/4d/5d/b8b6e26956ec113ad3f566e02abd12ac3a56b103fcc7e0735e27ee4a1df3/PyQt5-5.15.10.tar.gz
-        sha256: d46b7804b1b10a4ff91753f8113e5b5580d2b4462f3226288e2d84497334898a
-        x-checker-data:
-          type: pypi
-          name: PyQt5
+        url: https://pypi.python.org/packages/source/P/PyQt5/PyQt5-5.15.7.tar.gz
+        sha256: 755121a52b3a08cb07275c10ebb96576d36e320e572591db16cfdbc558101594
   - name: fcitx5-qt
     buildsystem: cmake-ninja
     config-opts:
@@ -852,6 +842,7 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
+      - -DJPEGXL_VERSION=0.10.0
       - -DJPEGXL_ENABLE_BENCHMARK=OFF
       - -DJPEGXL_ENABLE_COVERAGE=OFF
       - -DJPEGXL_ENABLE_EXAMPLES=OFF
@@ -861,10 +852,12 @@ modules:
       - -DJPEGXL_ENABLE_SKCMS=OFF
       - -DJPEGXL_ENABLE_TOOLS=OFF
       - -DJPEGXL_ENABLE_VIEWERS=OFF
+      - -DJPEGXL_ENABLE_JPEGLI_LIBJPEG=OFF
+      - -DJPEGXL_ENABLE_JPEGLI=OFF
     sources:
       - type: archive
-        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.8.2.tar.gz
-        sha256: c70916fb3ed43784eb840f82f05d390053a558e2da106e40863919238fa7b420
+        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.10.0.tar.gz
+        sha256: ab32d52b033c814d24762db4942a3b45315d9db37bf5c8a9741ccc1bb0a52d97
   - name: xsimd
     buildsystem: cmake-ninja
     config-opts:
@@ -995,13 +988,11 @@ modules:
       - -DMOD_OPENCV=OFF
     sources:
       - type: git
-        url: https://github.com/Eoin-ONeill-Yokai/mlt.git
-        tag: 1924f3712e3dc0f7a1e5a1aa658dbbbf0e863754
+        url: https://github.com/mltframework/mlt.git
+        tag: v7.22.0
       - type: patch
         paths:
-          - patches/mlt/0001-macOS-allow-finding-plugins-outside-bundles.patch
-          - patches/mlt/0004-MLT-check-pointers-before-dereferencing.patch
-          - patches/mlt/0001-Fix-producer_krita-to-stop-at-the-end-of-the-stream.patch
+          - patches/mlt/0002-MLT-check-pointers-before-dereferencing.patch
   - name: raqm
     buildsystem: meson
     sources:
@@ -1031,11 +1022,10 @@ modules:
       - /share/icons/hicolor/scalable
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.2.2/krita-5.2.2.tar.gz
-        sha256: c1d2e4a36d7d8aa296d021e52be493cc679d3fe5e8aa4fc13c434d33e8154ce2
+        url: https://download.kde.org/stable/krita/5.2.3/krita-5.2.3.tar.gz
+        sha256: 466a46edb93c3e37ad65207cf960234890a72744e0f44f2c855de4c7d8825cc0
       - type: patch
         paths:
-          - patches/krita/AppData.patch
           - patches/krita/krita_dont_use_native_file_chooser.patch
   - name: gmic
     buildsystem: cmake-ninja
