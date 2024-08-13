@@ -40,21 +40,21 @@ cleanup-commands:
   - mkdir -p ${FLATPAK_DEST}/extensions/Plugins
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins:
-    directory: "extensions/Plugins"
+    directory: extensions/Plugins
     version: '23.08'
     add-ld-path: lib
     merge-dirs: ladspa
     subdirectories: true
     no-autodownload: true
   org.freedesktop.LinuxAudio.Plugins.swh:
-    directory: "extensions/Plugins/swh"
+    directory: extensions/Plugins/swh
     version: '23.08'
     add-ld-path: lib
     merge-dirs: ladspa
     autodelete: false
     subdirectories: true
   org.freedesktop.LinuxAudio.Plugins.TAP:
-    directory: "extensions/Plugins/TAP"
+    directory: extensions/Plugins/TAP
     version: '23.08'
     add-ld-path: lib
     merge-dirs: ladspa
@@ -580,8 +580,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/98/50/a8dc5a7b9fbb9a90dfc9003b3eecc046b9f64dc9b8d464119064c0344a83/pybind11-2.13.1.tar.gz
-        sha256: 65be498b1cac516161add1508e65375674916bebf2570d057dc9c3c7bcbbc7b0
+        url: https://files.pythonhosted.org/packages/78/b7/789a3404d89bc2f22cb54447dfe9ad24d91a74dfe8586d7728fd75881bb2/pybind11-2.13.3.tar.gz
+        sha256: 84b1314ca72397f79854161cf852466629dd374bb0efce0c6501d745699d9a43
         x-checker-data:
           type: pypi
           name: pybind11
