@@ -580,8 +580,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/78/b7/789a3404d89bc2f22cb54447dfe9ad24d91a74dfe8586d7728fd75881bb2/pybind11-2.13.3.tar.gz
-        sha256: 84b1314ca72397f79854161cf852466629dd374bb0efce0c6501d745699d9a43
+        url: https://files.pythonhosted.org/packages/94/f2/875f05b1618d8127823041b99035bb3edd2cbef6298c75736e5c0bb39b7f/pybind11-2.13.4.tar.gz
+        sha256: 75a9e1f967d3cd3fd59f981eb39406f9de05e33a4dd8f5f18b8e29cae023e1d5
         x-checker-data:
           type: pypi
           name: pybind11
