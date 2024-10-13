@@ -1046,8 +1046,8 @@ modules:
       - /share/icons/hicolor/scalable
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.2.3/krita-5.2.3.tar.gz
-        sha256: 466a46edb93c3e37ad65207cf960234890a72744e0f44f2c855de4c7d8825cc0
+        url: https://download.kde.org/stable/krita/5.2.6/krita-5.2.6.tar.gz
+        sha256: 48d7128554fdf4b4e92c54ae31b52af7921f47a8da6cecaa06744abbfc82d5fb
       - type: patch
         paths:
           - patches/krita/krita_dont_use_native_file_chooser.patch
