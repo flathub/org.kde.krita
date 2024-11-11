@@ -329,8 +329,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/c4/e6/c1ac50fe3eebb38a155155711e6e864e254ce4b6e17fe2429b4c4d5b9e80/flit_core-3.9.0.tar.gz
-        sha256: 72ad266176c4a3fcfab5f2930d76896059851240570ce9a98733b658cb786eba
+        url: https://files.pythonhosted.org/packages/d5/ae/09427bea9227a33ec834ed5461432752fd5d02b14f93dd68406c91684622/flit_core-3.10.1.tar.gz
+        sha256: 66e5b87874a0d6e39691f0e22f09306736b633548670ad3c09ec9db03c5662f7
         x-checker-data:
           type: pypi
           name: flit_core
@@ -357,8 +357,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/51/65/50db4dda066951078f0a96cf12f4b9ada6e4b811516bf0262c0f4f7064d4/packaging-24.1.tar.gz
-        sha256: 026ed72c8ed3fcce5bf8950572258698927fd1dbda10a5e981cdf0ac37f4f002
+        url: https://files.pythonhosted.org/packages/d0/63/68dbb6eb2de9cb10ee4c9c14a0148804425e13c4fb20d61cce69f53106da/packaging-24.2.tar.gz
+        sha256: c228a6dc5e932d346bc5739379109d49e8853dd8223571c7c5b55260edc0b97f
         x-checker-data:
           type: pypi
           name: packaging
@@ -385,8 +385,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/35/b9/de2a5c0144d7d75a57ff355c0c24054f965b2dc3036456ae03a51ea6264b/tomli-2.0.2.tar.gz
-        sha256: d46d457a85337051c36524bc5349dd91b1877838e2979ac5ced3e710ed8a60ed
+        url: https://files.pythonhosted.org/packages/1e/e4/1b6cbcc82d8832dd0ce34767d5c560df8a3547ad8cbc427f34601415930a/tomli-2.1.0.tar.gz
+        sha256: 3f646cae2aec94e17d04973e4249548320197cfabdf130015d023de4b74d8ab8
         x-checker-data:
           type: pypi
           name: tomli
