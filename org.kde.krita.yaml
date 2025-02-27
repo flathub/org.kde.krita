@@ -1,6 +1,6 @@
 app-id: org.kde.krita
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: krita
 rename-icon: krita
@@ -41,21 +41,21 @@ cleanup-commands:
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins:
     directory: extensions/Plugins
-    version: '23.08'
+    version: '24.08'
     add-ld-path: lib
     merge-dirs: ladspa
     subdirectories: true
     no-autodownload: true
   org.freedesktop.LinuxAudio.Plugins.swh:
     directory: extensions/Plugins/swh
-    version: '23.08'
+    version: '24.08'
     add-ld-path: lib
     merge-dirs: ladspa
     autodelete: false
     subdirectories: true
   org.freedesktop.LinuxAudio.Plugins.TAP:
     directory: extensions/Plugins/TAP
-    version: '23.08'
+    version: '24.08'
     add-ld-path: lib
     merge-dirs: ladspa
     autodelete: false
@@ -1032,7 +1032,7 @@ modules:
     builddir: true
     build-options:
       env:
-        PYTHONPATH: /app/lib/python3.11/dist-packages
+        PYTHONPATH: /app/lib/python3.12/dist-packages
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DDEFINE_NO_DEPRECATED=1
