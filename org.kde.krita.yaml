@@ -343,8 +343,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/8b/1a/3544f4f299a47911c2ab3710f534e52fea62a633c96806995da5d25be4b2/pyparsing-3.2.1.tar.gz
-        sha256: 61980854fd66de3a90028d679a954d5f2623e83144b5afe5ee86f43d762e5f0a
+        url: https://files.pythonhosted.org/packages/55/f0/3a81fb395058f5fc84bccb0dc9ca09eddf69b3cc86ccab6729c680121912/pyparsing-3.2.2.tar.gz
+        sha256: 2a857aee851f113c2de9d4bfd9061baea478cb0f1c7ca6cbf594942d6d111575
         x-checker-data:
           type: pypi
           name: pyparsing
