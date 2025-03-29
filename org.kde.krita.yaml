@@ -103,10 +103,10 @@ modules:
     cleanup:
       - /bin
     sources:
-      # See link for current Krita Qt fork and git tag https://invent.kde.org/graphics/krita/-/blob/master/3rdparty/ext_qt/CMakeLists.txt
+      # See link for current Krita Qt fork and git tag https://invent.kde.org/packaging/krita-deps-management/-/blob/master/ext_qt/CMakeLists.txt
       - type: git
         url: https://invent.kde.org/szaman/qtbase.git
-        commit: de476dd64e8b1589cc3786af41f83f1dedf76795
+        commit: c84b3651b33e168998503c547698c60d67553a2b
       - type: shell
         commands:
           - mv configure configure.qt
@@ -329,8 +329,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/bc/18/b9b81cab2b8f63e6e7f72e1ba2766a0454fcd563e7a77b8299cb917ba805/flit_core-3.11.0.tar.gz
-        sha256: 6ceeee3219e9d2ea282041f3e027c441597b450b33007cb81168e887b6113a8f
+        url: https://files.pythonhosted.org/packages/69/59/b6fc2188dfc7ea4f936cd12b49d707f66a1cb7a1d2c16172963534db741b/flit_core-3.12.0.tar.gz
+        sha256: 18f63100d6f94385c6ed57a72073443e1a71a4acb4339491615d0f16d6ff01b2
         x-checker-data:
           type: pypi
           name: flit_core
@@ -343,8 +343,8 @@ modules:
       - /bin
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/8b/1a/3544f4f299a47911c2ab3710f534e52fea62a633c96806995da5d25be4b2/pyparsing-3.2.1.tar.gz
-        sha256: 61980854fd66de3a90028d679a954d5f2623e83144b5afe5ee86f43d762e5f0a
+        url: https://files.pythonhosted.org/packages/bb/22/f1129e69d94ffff626bdb5c835506b3a5b4f3d070f17ea295e12c2c6f60f/pyparsing-3.2.3.tar.gz
+        sha256: b9c13f1ab8b3b542f72e28f634bad4de758ab3ce4546e4301970ad6fa77c38be
         x-checker-data:
           type: pypi
           name: pyparsing
@@ -572,19 +572,20 @@ modules:
         url: https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.7.0.tar.gz
         sha256: 43e6a9fcb146ad871515f0d0873947e5d497a1c9c60c58cb102a97b47208b7c3
   - name: pybind11
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "pybind11" --no-build-isolation
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     cleanup:
       - /bin
     sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/d2/c1/72b9622fcb32ff98b054f724e213c7f70d6898baa714f4516288456ceaba/pybind11-2.13.6.tar.gz
-        sha256: ba6af10348c12b24e92fa086b39cfba0eff619b61ac77c406167d813b096d39a
+      - type: archive
+        url: https://github.com/pybind/pybind11/archive/refs/tags/v2.13.6.tar.gz
+        sha256: e08cb87f4773da97fa7b5f035de8763abc656d87d5773e62f6da0587d1f0ec20
         x-checker-data:
-          type: pypi
-          name: pybind11
+          type: anitya
+          project-id: 13384
+          url-template: https://github.com/pybind/pybind11/archive/refs/tags/v$version.tar.gz
   - name: minizip-ng
     buildsystem: cmake-ninja
     builddir: true
@@ -658,31 +659,6 @@ modules:
       - type: archive
         url: https://github.com/ampl/gsl/archive/8eac3b0b5cffb90004a729f0675011e718f41379.zip
         sha256: 124bf79bfd2c3cb07df02a2b0e80e13d29a94cab8acae1c2c1e086474381a6c2
-  - name: poppler-data
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz
-        sha256: c835b640a40ce357e1b83666aabd95edffa24ddddd49b8daff63adb851cdab74
-  - name: poppler
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_GTK_TESTS=OFF
-      - -DBUILD_QT5_TESTS=FALSE
-      - -DBUILD_CPP_TESTS=FALSE
-      - -DENABLE_UTILS=FALSE
-      - -DENABLE_GLIB=FALSE
-      - -DENABLE_LIBOPENJPEG=none
-      - -DENABLE_QT6=OFF
-      - -DWITH_NSS3=OFF
-      - -DBUILD_MANUAL_TESTS=OFF
-    sources:
-      - type: archive
-        url: https://poppler.freedesktop.org/poppler-23.10.0.tar.xz
-        sha256: 31a3dfdea79f4922402d313737415a44d44dc14d6b317f959a77c5bba0647dd9
   - name: quazip
     buildsystem: cmake-ninja
     config-opts:
@@ -804,17 +780,6 @@ modules:
       - type: patch
         paths:
           - patches/libde265/0001-Quick-check-for-SSE-support.patch
-  - name: libheif
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DWITH_EXAMPLES=OFF
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.16.2/libheif-1.16.2.tar.gz
-        sha256: 7f97e4205c0bd9f9b8560536c8bd2e841d1c9a6d610401eb3eb87ed9cdfe78ea
   - name: kseexpr
     buildsystem: cmake-ninja
     config-opts:
@@ -888,8 +853,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/xtensor-stack/xsimd/archive/5647254635ea6f590b7366e0848a8a0ab3007efa.tar.gz
-        sha256: 5b175c8b671d4287343b0e79e9e3a8070992815f5e0ed44bfc9bce01f8880814
+        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/13.1.0.tar.gz
+        sha256: 88c9dc6da677feadb40fe09f467659ba0a98e9987f7491d51919ee13d897efa4
   - name: libunibreak
     cleanup:
       - /bin
@@ -942,8 +907,8 @@ modules:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-6.1.1.tar.xz
-        sha256: 8684f4b00f94b85461884c3719382f1261f0d9eb3d59640a1f4ac0873616f968
+        url: https://www.ffmpeg.org/releases/ffmpeg-7.1.tar.xz
+        sha256: 40973d44970dbc83ef302b0609f2e74982be2d85916dd2ee7472d30678a7abe6
   - name: zug
     buildsystem: cmake-ninja
     config-opts:
@@ -1013,10 +978,7 @@ modules:
     sources:
       - type: git
         url: https://github.com/mltframework/mlt.git
-        tag: v7.22.0
-      - type: patch
-        paths:
-          - patches/mlt/0002-MLT-check-pointers-before-dereferencing.patch
+        tag: v7.30.0
   - name: raqm
     buildsystem: meson
     sources:
@@ -1060,5 +1022,5 @@ modules:
       - -DENABLE_SYSTEM_GMIC=FALSE
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.5.0.1-patched.tar.gz
-        sha256: 1ae8ca0d368615af6ebdf1cbff005cb20868e1032b9d2c016ce7af91c9582392
+        url: https://files.kde.org/krita/build/dependencies/gmic-3.5.3.0.tar.gz
+        sha256: 64a913946a2c41c68c51018c3c21274b78b5a6cd8d75dd43f3b543b642a37d33
