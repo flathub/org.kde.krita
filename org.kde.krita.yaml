@@ -425,7 +425,7 @@ modules:
     buildsystem: simple
     build-commands:
       - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
-        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.11/site-packages
+        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.12/site-packages
     cleanup:
       - /bin
     sources:
@@ -659,6 +659,31 @@ modules:
       - type: archive
         url: https://github.com/ampl/gsl/archive/8eac3b0b5cffb90004a729f0675011e718f41379.zip
         sha256: 124bf79bfd2c3cb07df02a2b0e80e13d29a94cab8acae1c2c1e086474381a6c2
+  - name: poppler-data
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: archive
+        url: https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz
+        sha256: c835b640a40ce357e1b83666aabd95edffa24ddddd49b8daff63adb851cdab74
+  - name: poppler
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_GTK_TESTS=OFF
+      - -DBUILD_QT5_TESTS=FALSE
+      - -DBUILD_CPP_TESTS=FALSE
+      - -DENABLE_UTILS=FALSE
+      - -DENABLE_GLIB=FALSE
+      - -DENABLE_LIBOPENJPEG=none
+      - -DENABLE_QT6=OFF
+      - -DWITH_NSS3=OFF
+      - -DBUILD_MANUAL_TESTS=OFF
+    sources:
+      - type: archive
+        url: https://poppler.freedesktop.org/poppler-23.10.0.tar.xz
+        sha256: 31a3dfdea79f4922402d313737415a44d44dc14d6b317f959a77c5bba0647dd9
   - name: quazip
     buildsystem: cmake-ninja
     config-opts:
