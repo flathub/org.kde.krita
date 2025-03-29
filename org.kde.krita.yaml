@@ -106,7 +106,7 @@ modules:
       # See link for current Krita Qt fork and git tag https://invent.kde.org/graphics/krita/-/blob/master/3rdparty/ext_qt/CMakeLists.txt
       - type: git
         url: https://invent.kde.org/szaman/qtbase.git
-        commit: de476dd64e8b1589cc3786af41f83f1dedf76795
+        commit: c84b3651b33e168998503c547698c60d67553a2b
       - type: shell
         commands:
           - mv configure configure.qt
@@ -306,6 +306,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.101/kcrash-5.101.0.tar.xz
         sha256: 6dd10951db01918681a8ce6e9e3a99d3f8b5170d2c5a0b5212007e68db0c937a
+  - name: python
+    sources:
+      - type: archive
+        url: https://www.python.org/ftp/python/3.10.16/Python-3.10.16.tar.xz
+        sha256: bfb249609990220491a1b92850a07135ed0831e41738cf681d63cf01b2a8fbd1
   - name: toml
     buildsystem: simple
     build-commands:
@@ -390,6 +395,15 @@ modules:
         x-checker-data:
           type: pypi
           name: tomli
+  - name: wheel
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "wheel" --no-build-isolation
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/8a/98/2d9906746cdc6a6ef809ae6338005b3f21bb568bea3165cfc6a243fdc25c/wheel-0.45.1.tar.gz
+        sha256: 661e1abd9198507b1409a20c02106d9670b2576e916d58f520316666abca6729
   - name: sip
     buildsystem: simple
     build-commands:
@@ -425,7 +439,7 @@ modules:
     buildsystem: simple
     build-commands:
       - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
-        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.11/site-packages
+        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.10/site-packages
     cleanup:
       - /bin
     sources:
@@ -888,8 +902,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/xtensor-stack/xsimd/archive/5647254635ea6f590b7366e0848a8a0ab3007efa.tar.gz
-        sha256: 5b175c8b671d4287343b0e79e9e3a8070992815f5e0ed44bfc9bce01f8880814
+        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/13.1.0.tar.gz
+        sha256: 88c9dc6da677feadb40fe09f467659ba0a98e9987f7491d51919ee13d897efa4
   - name: libunibreak
     cleanup:
       - /bin
@@ -942,8 +956,8 @@ modules:
       - /share/ffmpeg/examples
     sources:
       - type: archive
-        url: https://www.ffmpeg.org/releases/ffmpeg-6.1.1.tar.xz
-        sha256: 8684f4b00f94b85461884c3719382f1261f0d9eb3d59640a1f4ac0873616f968
+        url: https://www.ffmpeg.org/releases/ffmpeg-7.1.tar.xz
+        sha256: 40973d44970dbc83ef302b0609f2e74982be2d85916dd2ee7472d30678a7abe6
   - name: zug
     buildsystem: cmake-ninja
     config-opts:
@@ -1032,7 +1046,7 @@ modules:
     builddir: true
     build-options:
       env:
-        PYTHONPATH: /app/lib/python3.11/dist-packages
+        PYTHONPATH: /app/lib/python3.10/dist-packages
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DDEFINE_NO_DEPRECATED=1
@@ -1060,5 +1074,5 @@ modules:
       - -DENABLE_SYSTEM_GMIC=FALSE
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.5.0.1-patched.tar.gz
-        sha256: 1ae8ca0d368615af6ebdf1cbff005cb20868e1032b9d2c016ce7af91c9582392
+        url: https://files.kde.org/krita/build/dependencies/gmic-3.5.3.0.tar.gz
+        sha256: 64a913946a2c41c68c51018c3c21274b78b5a6cd8d75dd43f3b543b642a37d33
