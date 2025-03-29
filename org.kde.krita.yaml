@@ -306,6 +306,11 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.101/kcrash-5.101.0.tar.xz
         sha256: 6dd10951db01918681a8ce6e9e3a99d3f8b5170d2c5a0b5212007e68db0c937a
+  - name: python
+    sources:
+      - type: archive
+        url: https://www.python.org/ftp/python/3.10.16/Python-3.10.16.tar.xz
+        sha256: bfb249609990220491a1b92850a07135ed0831e41738cf681d63cf01b2a8fbd1
   - name: toml
     buildsystem: simple
     build-commands:
@@ -390,6 +395,15 @@ modules:
         x-checker-data:
           type: pypi
           name: tomli
+  - name: wheel
+    buildsystem: simple
+    build-commands:
+      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
+        "wheel" --no-build-isolation
+    sources:
+      - type: file
+        url: https://files.pythonhosted.org/packages/8a/98/2d9906746cdc6a6ef809ae6338005b3f21bb568bea3165cfc6a243fdc25c/wheel-0.45.1.tar.gz
+        sha256: 661e1abd9198507b1409a20c02106d9670b2576e916d58f520316666abca6729
   - name: sip
     buildsystem: simple
     build-commands:
@@ -425,7 +439,7 @@ modules:
     buildsystem: simple
     build-commands:
       - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
-        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.12/site-packages
+        --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.10/site-packages
     cleanup:
       - /bin
     sources:
@@ -1019,7 +1033,7 @@ modules:
     builddir: true
     build-options:
       env:
-        PYTHONPATH: /app/lib/python3.12/dist-packages
+        PYTHONPATH: /app/lib/python3.10/dist-packages
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DDEFINE_NO_DEPRECATED=1
