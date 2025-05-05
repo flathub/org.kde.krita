@@ -1,0 +1,28 @@
+From 1a857831edfa3e8ec89b901ae0b59aef049826be Mon Sep 17 00:00:00 2001
+From: Dmitry Kazakov <dimula73@gmail.com>
+Date: Thu, 17 Apr 2025 16:34:48 +0200
+Subject: [PATCH] Fix include paths for libavcodec's codecs
+
+---
+ libavcodec/meson.build | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/libavcodec/meson.build b/libavcodec/meson.build
+index 6dee879922..86d61db43a 100644
+--- a/libavcodec/meson.build
++++ b/libavcodec/meson.build
+@@ -1234,6 +1234,12 @@ endforeach
+ 
+ libavcodec_optional_sources += libavcodec_vvc_optional_sources
+ 
++foreach i : [libavcodec_optional_sources]
++  foreach k, v: i
++    libavcodec_optional_includes += {k: include_directories('.')}
++  endforeach
++endforeach
++
+ kwargs = {'prefix': '#include "libavcodec/version.h"'} + get_version_define_kwargs
+ 
+ libavcodec_majorver = cc.get_define('LIBAVCODEC_VERSION_MAJOR', kwargs: kwargs)
+-- 
+2.25.1
