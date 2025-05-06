@@ -1,0 +1,24 @@
+From 91c5a66ae8a1390943d6a83e0ce6231fc8936329 Mon Sep 17 00:00:00 2001
+From: Dmitry Kazakov <dimula73@gmail.com>
+Date: Thu, 17 Apr 2025 15:04:29 +0200
+Subject: [PATCH] Fix building with libvpl present
+
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 7714bcfed7..174dc4908e 100644
+--- a/meson.build
++++ b/meson.build
+@@ -966,7 +966,7 @@ check_pkg_config = [
+   ['libvmaf', ['libvmaf.h'], ['compute_vmaf'], {'version': '>= 2.0.0'}],
+   ['libvorbis', ['vorbis/codec.h'], ['vorbis_info_init'], {'pkg': 'vorbis'}],
+   ['libvorbisenc', ['vorbis/vorbisenc.h'], ['vorbis_encode_init'], {'pkg': 'vorbisenc'}],
+-  ['libvpl', ['mfxvideo.h', 'mfxdispatcher.h'], ['MFXLoad'], {'pkg': 'vpl', 'version': '>= 2.6', 'c_args': '-DMFX_DEPRECATED_OFF'}],
++  ['libvpl', ['mfxvideo.h', 'mfxdispatcher.h'], ['MFXLoad'], {'pkg': 'vpl', 'version': '>= 2.6', 'c_args': ['-DMFX_DEPRECATED_OFF']}],
+   ['libvvenc', ['vvenc/vvenc.h'], ['MFXLoad'], {'pkg': 'vpl', 'version': '>= 1.6.1'}],
+   ['libx264', ['stdint.h', 'x264.h'], ['x264_encoder_encode'], {'pkg': 'x264'}],
+   ['libx265', ['x265.h'], ['x265_api_get'], {'pkg': 'x265'}],
+-- 
+2.25.1
