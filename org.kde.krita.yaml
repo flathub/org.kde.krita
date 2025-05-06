@@ -37,6 +37,7 @@ cleanup:
   - '*.cmake'
   - '*.prl'
 cleanup-commands:
+  - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
   - mkdir -p ${FLATPAK_DEST}/extensions/Plugins
 add-extensions:
   org.kde.krita.Codecs:
@@ -44,6 +45,10 @@ add-extensions:
     add-ld-path: lib
     bundle: true
     autodelete: true
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: lib/ffmpeg
+    version: '24.08'
+    add-ld-path: .
   org.freedesktop.LinuxAudio.Plugins:
     directory: extensions/Plugins
     version: '24.08'
