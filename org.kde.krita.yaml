@@ -1,6 +1,6 @@
 app-id: org.kde.krita
 runtime: org.freedesktop.Platform
-runtime-version: '23.08'
+runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
 command: krita
 rename-icon: krita
@@ -39,23 +39,28 @@ cleanup:
 cleanup-commands:
   - mkdir -p ${FLATPAK_DEST}/extensions/Plugins
 add-extensions:
+  org.kde.krita.Codecs:
+    directory: lib/codecs
+    add-ld-path: lib
+    bundle: true
+    autodelete: true
   org.freedesktop.LinuxAudio.Plugins:
     directory: extensions/Plugins
-    version: '23.08'
+    version: '24.08'
     add-ld-path: lib
     merge-dirs: ladspa
     subdirectories: true
     no-autodownload: true
   org.freedesktop.LinuxAudio.Plugins.swh:
     directory: extensions/Plugins/swh
-    version: '23.08'
+    version: '24.08'
     add-ld-path: lib
     merge-dirs: ladspa
     autodelete: false
     subdirectories: true
   org.freedesktop.LinuxAudio.Plugins.TAP:
     directory: extensions/Plugins/TAP
-    version: '23.08'
+    version: '24.08'
     add-ld-path: lib
     merge-dirs: ladspa
     autodelete: false
@@ -455,8 +460,8 @@ modules:
         linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-        url: https://archives.boost.io/release/1.80.0/source/boost_1_80_0.tar.gz
-        sha256: 4b2136f98bdd1f5857f1c3dea9ac2018effe65286cf251534b6ae20cc45e1847
+        url: https://archives.boost.io/release/1.88.0/source/boost_1_88_0.tar.gz
+        sha256: 3621533e820dcab1e8012afd583c0c73cf0f77694952b81352bf38c1488f9cb4
   - name: fftw
     buildsystem: cmake-ninja
     config-opts:
@@ -801,8 +806,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.16.2/libheif-1.16.2.tar.gz
-        sha256: 7f97e4205c0bd9f9b8560536c8bd2e841d1c9a6d610401eb3eb87ed9cdfe78ea
+        url: https://github.com/strukturag/libheif/releases/download/v1.19.8/libheif-1.19.8.tar.gz
+        sha256: 6c4a5b08e6eae66d199977468859dea3b5e059081db8928f7c7c16e53836c906
   - name: kseexpr
     buildsystem: cmake-ninja
     config-opts:
@@ -885,69 +890,6 @@ modules:
       - type: archive
         url: https://github.com/adah1972/libunibreak/releases/download/libunibreak_5_1/libunibreak-5.1.tar.gz
         sha256: dd1a92d4c5646aa0e457ff41d89812ec5243863be6c20bbcb5ee380f3dd78377
-  - name: libvpl
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: git
-        url: https://github.com/intel/libvpl.git
-        tag: v2.14.0
-  - name: ffmpeg
-    config-opts:
-      - --enable-gpl
-      - --enable-version3
-      - --disable-static
-      - --enable-shared
-      - --enable-ffprobe
-      - --disable-ffplay
-      - --disable-doc
-      - --disable-avdevice
-      - --disable-postproc
-      - --enable-sdl
-      - --enable-libaom
-      - --enable-zlib
-      - --enable-demuxer=image2
-      - --enable-demuxer=image2_alias_pix
-      - --enable-demuxer=image2_brender_pix
-      # Container Formats
-      - --enable-muxer=webm
-      - --enable-muxer=matroska
-      - --enable-muxer=ogg
-      - --enable-muxer=apng
-      # Image Formats
-      - --enable-libwebp
-      - --enable-encoder=png
-      - --enable-decoder=png
-      - --enable-encoder=apng
-      - --enable-decoder=apng
-      # Video Codecs
-      - --enable-encoder=libaom_av1
-      - --enable-libvpl
-      - --enable-libvpx
-      - --enable-encoder=libvpx_vp9
-      - --enable-encoder=libvpx_vp8
-      - --enable-libopenh264
-      - --enable-libtheora
-      # Audio Codecs
-      - --enable-encoder=flac
-      - --enable-encoder=aac
-      - --enable-libmp3lame
-      - --enable-libopus
-      - --enable-libvorbis
-    cleanup:
-      - /share/ffmpeg/examples
-    sources:
-      - type: git
-        url: https://gitlab.freedesktop.org/gstreamer/meson-ports/ffmpeg.git
-        commit: 7601055639e789cdeeff793c48eaaf3186a70aad
-      - type: patch
-        paths:
-          - patches/ffmpeg/0010-Fix-building-with-libvpl-present.patch
-          - patches/ffmpeg/0011-Switch-deps-of-QSV-codecs-to-libvpl-instead-of-libmf.patch
-          - patches/ffmpeg/0012-Fix-include-paths-for-libavcodec-s-codecs.patch
-          - patches/ffmpeg/0013-Fix-VP9-hw-accelerated-encoder-with-libvpl.patch
-          - patches/ffmpeg/0014-Fix-version-file-generation-in-version.py.patch
   - name: zug
     buildsystem: cmake-ninja
     config-opts:
@@ -1031,6 +973,72 @@ modules:
         paths:
           - patches/raqm/0001-Add-arbitrary-run-break-function.patch
           - patches/raqm/0002-Fix-Unicode-codepoint-conversion-from-UTF-16.patch
+  - name: libvpl
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    sources:
+      - type: git
+        url: https://github.com/intel/libvpl.git
+        tag: v2.14.0
+  - name: ffmpeg
+    config-opts:
+      - --prefix=/app/lib/codecs
+      - --enable-gpl
+      - --enable-version3
+      - --disable-static
+      - --enable-shared
+      - --enable-ffprobe
+      - --disable-ffplay
+      - --disable-doc
+      - --disable-avdevice
+      - --disable-postproc
+      - --enable-sdl
+      - --enable-libaom
+      - --enable-zlib
+      - --enable-demuxer=image2
+      - --enable-demuxer=image2_alias_pix
+      - --enable-demuxer=image2_brender_pix
+      # Container Formats
+      - --enable-muxer=webm
+      - --enable-muxer=matroska
+      - --enable-muxer=ogg
+      - --enable-muxer=apng
+      # Image Formats
+      - --enable-libwebp
+      - --enable-encoder=png
+      - --enable-decoder=png
+      - --enable-encoder=apng
+      - --enable-decoder=apng
+      # Video Codecs
+      - --enable-encoder=libaom_av1
+      - --enable-libvpl
+      - --enable-libvpx
+      - --enable-encoder=libvpx_vp9
+      - --enable-encoder=libvpx_vp8
+      - --enable-libopenh264
+      - --enable-libtheora
+      # Audio Codecs
+      - --enable-encoder=flac
+      - --enable-encoder=aac
+      - --enable-libmp3lame
+      - --enable-libopus
+      - --enable-libvorbis
+    cleanup:
+      - /lib/codecs/include
+      - /lib/codecs/lib/pkgconfig
+      - /lib/codecs/share
+    sources:
+      - type: git
+        url: https://gitlab.freedesktop.org/gstreamer/meson-ports/ffmpeg.git
+        commit: 7601055639e789cdeeff793c48eaaf3186a70aad
+      - type: patch
+        paths:
+          - patches/ffmpeg/0010-Fix-building-with-libvpl-present.patch
+          - patches/ffmpeg/0011-Switch-deps-of-QSV-codecs-to-libvpl-instead-of-libmf.patch
+          - patches/ffmpeg/0012-Fix-include-paths-for-libavcodec-s-codecs.patch
+          - patches/ffmpeg/0013-Fix-VP9-hw-accelerated-encoder-with-libvpl.patch
+          - patches/ffmpeg/0014-Fix-version-file-generation-in-version.py.patch
   - name: krita
     buildsystem: cmake-ninja
     builddir: true
@@ -1049,6 +1057,7 @@ modules:
       - type: patch
         paths:
           - patches/krita/krita_dont_use_native_file_chooser.patch
+          - patches/krita/2296.patch
   - name: gmic
     buildsystem: cmake-ninja
     subdir: gmic-qt
