@@ -1057,8 +1057,13 @@ modules:
       - /share/icons/hicolor/1024x1024
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.2.9/krita-5.2.9.tar.gz
-        sha256: 08c9af556debf26931bd6506792e391b4b7a3334a5a20f516b324904334acba6
+        url: https://download.kde.org/stable/krita/5.2.11/krita-5.2.11.tar.gz
+        sha256: 19ac246a06e96f7f837b57f2e5b1abd51dd09f0c948df7077e08b3b2d360c50f
+        x-checker-data:
+          type: anitya
+          project-id: 10918
+          stable-only: true
+          url-template: https://download.kde.org/stable/krita/$version/krita-$version.tar.gz
       - type: patch
         paths:
           - patches/krita/krita_dont_use_native_file_chooser.patch
