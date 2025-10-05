@@ -1,6 +1,6 @@
 app-id: org.kde.krita
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 sdk: org.freedesktop.Sdk
 command: krita
 rename-icon: krita
@@ -37,35 +37,25 @@ cleanup:
   - '*.cmake'
   - '*.prl'
 cleanup-commands:
-  - mkdir -p ${FLATPAK_DEST}/lib/ffmpeg
   - mkdir -p ${FLATPAK_DEST}/extensions/Plugins
 add-extensions:
-  org.kde.krita.Codecs:
-    directory: lib/codecs
-    add-ld-path: lib
-    bundle: true
-    autodelete: true
-  org.freedesktop.Platform.ffmpeg-full:
-    directory: lib/ffmpeg
-    version: '24.08'
-    add-ld-path: .
   org.freedesktop.LinuxAudio.Plugins:
     directory: extensions/Plugins
-    version: '24.08'
+    version: '25.08'
     add-ld-path: lib
     merge-dirs: ladspa
     subdirectories: true
     no-autodownload: true
   org.freedesktop.LinuxAudio.Plugins.swh:
     directory: extensions/Plugins/swh
-    version: '24.08'
+    version: '25.08'
     add-ld-path: lib
     merge-dirs: ladspa
     autodelete: false
     subdirectories: true
   org.freedesktop.LinuxAudio.Plugins.TAP:
     directory: extensions/Plugins/TAP
-    version: '24.08'
+    version: '25.08'
     add-ld-path: lib
     merge-dirs: ladspa
     autodelete: false
@@ -467,16 +457,6 @@ modules:
       - type: archive
         url: https://archives.boost.io/release/1.88.0/source/boost_1_88_0.tar.gz
         sha256: 3621533e820dcab1e8012afd583c0c73cf0f77694952b81352bf38c1488f9cb4
-  - name: fftw
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTS=OFF
-      - -DENABLE_THREADS=ON
-    sources:
-      - type: archive
-        url: https://fftw.org/fftw-3.3.10.tar.gz
-        sha256: 56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467
   - name: eigen
     buildsystem: cmake-ninja
     builddir: true
@@ -489,19 +469,6 @@ modules:
       - type: archive
         url: https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
         sha256: 8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72
-  - name: expat
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_tests=OFF
-      - -DBUILD_examples=OFF
-      - -DBUILD_tools=OFF
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/libexpat/libexpat/releases/download/R_2_5_0/expat-2.5.0.tar.gz
-        sha256: 6b902ab103843592be5e99504f846ec109c1abb692e85347587f237a4ffa1033
   - name: exiv2
     buildsystem: cmake-ninja
     config-opts:
@@ -514,40 +481,17 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/Exiv2/exiv2/releases/download/v0.27.5/exiv2-0.27.5-Source.tar.gz
-        sha256: 35a58618ab236a901ca4928b0ad8b31007ebdc0386d904409d825024e45ea6e2
-  - name: lcms2
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTS=FALSE
-      - -DBUILD_UTILS=FALSE
-      - -DBUILD_STATIC=FALSE
-      - -DBUILD_PLUGINS=TRUE
-    cleanup:
-      - /bin
-      - /share
-    sources:
-      - type: archive
-        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.14/lcms2-2.14.tar.gz
-        sha256: 28474ea6f6591c4d4cee972123587001a4e6e353412a41b3e9e82219818d5740
-      - type: patch
-        paths:
-          - patches/lcms2/0002-Add-modern-CMake-toolchain.patch
-          - patches/lcms2/0003-Revert-Fix-LUT-based-optimization-on-8-bits.patch
+        url: https://github.com/Exiv2/exiv2/archive/refs/tags/v0.28.7.tar.gz
+        sha256: 5e292b02614dbc0cee40fe1116db2f42f63ef6b2ba430c77b614e17b8d61a638
+    modules:
+      - name: inih
+        buildsystem: meson
+        sources:
+          - type: archive
+            url: https://github.com/benhoyt/inih/archive/refs/tags/r62.tar.gz
+            sha256: 9c15fa751bb8093d042dae1b9f125eb45198c32c6704cd5481ccde460d4f8151
   - shared-modules/glu/glu-9.json
   - shared-modules/glew/glew.json
-  - name: freeglut
-    buildsystem: cmake-ninja
-    build-options:
-      cflags: -fcommon
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DFREEGLUT_BUILD_STATIC_LIBS=OFF
-    sources:
-      - type: archive
-        url: https://github.com/FreeGLUTProject/freeglut/releases/download/v3.4.0/freeglut-3.4.0.tar.gz
-        sha256: 3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6f3eaec
   - name: imath
     buildsystem: cmake-ninja
     config-opts:
@@ -581,8 +525,8 @@ modules:
       - -DYAML_CPP_BUILD_CONTRIB=OFF
     sources:
       - type: archive
-        url: https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.7.0.tar.gz
-        sha256: 43e6a9fcb146ad871515f0d0873947e5d497a1c9c60c58cb102a97b47208b7c3
+        url: https://github.com/jbeder/yaml-cpp/archive/a83cd31548b19d50f3f983b069dceb4f4d50756d.tar.gz
+        sha256: f2fe272e4675e57b040f4ffb4ca83a413b00ebeb45af50f4b0fb92e0d22b45b5
   - name: minizip-ng
     buildsystem: cmake-ninja
     builddir: true
@@ -593,8 +537,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.7.tar.gz
-        sha256: 39981a0db1bb6da504909bce63d7493286c5e50825c056564544c990d15c55cf
+        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/4.0.10.tar.gz
+        sha256: c362e35ee973fa7be58cc5e38a4a6c23cc8f7e652555daf4f115a9eb2d3a6be7
   - name: openexr
     buildsystem: cmake-ninja
     config-opts:
@@ -622,8 +566,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.3.0.tar.gz
-        sha256: 32b7be676c110d849a77886d8a409159f0367309b2b2f5dae5aa0c38f42b445a
+        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.5.0.tar.gz
+        sha256: 124e2bfa8a9071959d6ddbb64ffbf78d3f6fe3c923ae23e96a6bbadde1af55b6
   - name: libraw
     config-opts:
       - --disable-examples
@@ -656,31 +600,6 @@ modules:
       - type: archive
         url: https://github.com/ampl/gsl/archive/8eac3b0b5cffb90004a729f0675011e718f41379.zip
         sha256: 124bf79bfd2c3cb07df02a2b0e80e13d29a94cab8acae1c2c1e086474381a6c2
-  - name: poppler-data
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz
-        sha256: c835b640a40ce357e1b83666aabd95edffa24ddddd49b8daff63adb851cdab74
-  - name: poppler
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_GTK_TESTS=OFF
-      - -DBUILD_QT5_TESTS=FALSE
-      - -DBUILD_CPP_TESTS=FALSE
-      - -DENABLE_UTILS=FALSE
-      - -DENABLE_GLIB=FALSE
-      - -DENABLE_LIBOPENJPEG=none
-      - -DENABLE_QT6=OFF
-      - -DWITH_NSS3=OFF
-      - -DBUILD_MANUAL_TESTS=OFF
-    sources:
-      - type: archive
-        url: https://poppler.freedesktop.org/poppler-23.10.0.tar.xz
-        sha256: 31a3dfdea79f4922402d313737415a44d44dc14d6b317f959a77c5bba0647dd9
   - name: quazip
     buildsystem: cmake-ninja
     config-opts:
@@ -689,130 +608,6 @@ modules:
       - type: archive
         url: https://github.com/stachenov/quazip/archive/refs/tags/v1.4.tar.gz
         sha256: 79633fd3a18e2d11a7d5c40c4c79c1786ba0c74b59ad752e8429746fe1781dd6
-  - name: aom
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DCONFIG_PIC=1
-      - -DBUILD_SHARED_LIBS=OFF
-      - -DENABLE_EXAMPLES=OFF
-      - -DENABLE_TESTDATA=OFF
-      - -DENABLE_TESTS=OFF
-      - -DENABLE_TOOLS=OFF
-    sources:
-      - type: archive
-        url: https://storage.googleapis.com/aom-releases/libaom-3.7.0.tar.gz
-        sha256: d1773bb6f050b430af47741306ac37a6aa2fec7364cb0dc27e3b1454a138934f
-  - name: libx265-10bit
-    buildsystem: cmake-ninja
-    subdir: source
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DHIGH_BIT_DEPTH=TRUE
-      - -DEXPORT_C_API=FALSE
-      - -DENABLE_CLI=FALSE
-      - -DENABLE_SHARED=FALSE
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
-        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
-      - type: patch
-        paths:
-          - patches/libx265/A01-build-fix.patch
-          - patches/libx265/A02-threads-priority.patch
-          - patches/libx265/A03-threads-pool-adjustments.patch
-          - patches/libx265/A04-64-bit_for_aarch64.patch
-          - patches/libx265/A05-disable-scanPosLast-aarch64-asm.patch
-          - patches/libx265/A06-common-threading.patch
-          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
-          - patches/libx265/0003-Skip-PDB-in-MinGW.patch
-    post-install:
-      - mv /app/lib/libx265.a /app/lib/libx265_main10.a
-  - name: libx265-12bit
-    buildsystem: cmake-ninja
-    subdir: source
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DHIGH_BIT_DEPTH=TRUE
-      - -DMAIN12=TRUE
-      - -DEXPORT_C_API=FALSE
-      - -DENABLE_CLI=FALSE
-      - -DENABLE_SHARED=FALSE
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
-        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
-      - type: patch
-        paths:
-          - patches/libx265/A01-build-fix.patch
-          - patches/libx265/A02-threads-priority.patch
-          - patches/libx265/A03-threads-pool-adjustments.patch
-          - patches/libx265/A04-64-bit_for_aarch64.patch
-          - patches/libx265/A05-disable-scanPosLast-aarch64-asm.patch
-          - patches/libx265/A06-common-threading.patch
-          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
-          - patches/libx265/0003-Skip-PDB-in-MinGW.patch
-    post-install:
-      - mv /app/lib/libx265.a /app/lib/libx265_main12.a
-  - name: libx265
-    skip-arches:
-      - aarch64
-    buildsystem: cmake-ninja
-    subdir: source
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DENABLE_SHARED=TRUE
-      - -DENABLE_HDR10_PLUS=TRUE
-      - -DEXTRA_LIB='x265_main10.a;x265_main12.a'
-      - -DEXTRA_LINK_FLAGS=-L.
-      - -DLINKED_10BIT=TRUE
-      - -DLINKED_12BIT=TRUE
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
-        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
-      - type: patch
-        paths:
-          - patches/libx265/A01-build-fix.patch
-          - patches/libx265/A02-threads-priority.patch
-          - patches/libx265/A03-threads-pool-adjustments.patch
-          - patches/libx265/A04-64-bit_for_aarch64.patch
-          - patches/libx265/A05-disable-scanPosLast-aarch64-asm.patch
-          - patches/libx265/A06-common-threading.patch
-          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
-          - patches/libx265/0003-Skip-PDB-in-MinGW.patch
-  - name: libde265
-    skip-arches:
-      - aarch64
-    config-opts:
-      - --disable-sherlock265
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/strukturag/libde265/releases/download/v1.0.12/libde265-1.0.12.tar.gz
-        sha256: 62185ea2182e68cf68bba20cc6eb4c287407b509cf0a827d7ddb75614db77b5c
-      - type: patch
-        paths:
-          - patches/libde265/0001-Quick-check-for-SSE-support.patch
-  - name: libheif
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DWITH_EXAMPLES=OFF
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.19.8/libheif-1.19.8.tar.gz
-        sha256: 6c4a5b08e6eae66d199977468859dea3b5e059081db8928f7c7c16e53836c906
   - name: kseexpr
     buildsystem: cmake-ninja
     config-opts:
@@ -825,61 +620,29 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/kseexpr/4.0.4/kseexpr-4.0.4.0.tar.gz
         sha256: ea4f6a8e820e6cc12d2a1e6977e96ea5457f37729fe0bc4ee8cc62d4c26c36ae
-  - name: json-c
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.17.tar.gz
-        sha256: 7550914d58fb63b2c3546f3ccfbe11f1c094147bd31a69dcd23714d7956159e6
   - name: libmypaint
-    buildsystem: cmake-ninja
     config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - --disable-gegl
+      - --disable-introspection
+    cleanup:
+      - /include
+      - /lib/pkgconfig
+      - /share
     sources:
       - type: archive
         url: https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz
         sha256: 741754f293f6b7668f941506da07cd7725629a793108bb31633fb6c3eae5315f
-      - type: patch
-        paths:
-          - patches/mypaint/0001-Add-cmake-build-system.patch
-          - patches/mypaint/0002-cmake-library-versioning-info-for-pkg-config.patch
-          - patches/mypaint/0003-cmake-library-versioning-info-for-CMake-itself.patch
-          - patches/mypaint/0004-cmake-Fix-relative-paths.patch
-          - patches/mypaint/0005-Export-all-symbols.patch
-  - name: highway
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTING=OFF
-      - -DBUILD_STATIC_LIBS=ON
-      - -DBUILD_SHARED_LIBS=OFF
-    sources:
-      - type: archive
-        url: https://github.com/google/highway/archive/refs/tags/1.0.7.tar.gz
-        sha256: 5434488108186c170a5e2fca5e3c9b6ef59a1caa4d520b008a9b8be6b8abe6c5
-  - name: libjxl
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTING=OFF
-      - -DJPEGXL_VERSION=0.11.1
-      - -DJPEGXL_ENABLE_BENCHMARK=OFF
-      - -DJPEGXL_ENABLE_COVERAGE=OFF
-      - -DJPEGXL_ENABLE_EXAMPLES=OFF
-      - -DJPEGXL_ENABLE_FUZZERS=OFF
-      - -DJPEGXL_ENABLE_JNI=OFF
-      - -DJPEGXL_ENABLE_SJPEG=OFF
-      - -DJPEGXL_ENABLE_SKCMS=OFF
-      - -DJPEGXL_ENABLE_TOOLS=OFF
-      - -DJPEGXL_ENABLE_VIEWERS=OFF
-      - -DJPEGXL_ENABLE_JPEGLI_LIBJPEG=OFF
-      - -DJPEGXL_ENABLE_JPEGLI=OFF
-    sources:
-      - type: archive
-        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.11.1.tar.gz
-        sha256: 1492dfef8dd6c3036446ac3b340005d92ab92f7d48ee3271b5dac1d36945d3d9
+    modules:
+      - name: json-c
+        buildsystem: cmake-ninja
+        config-opts:
+          - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+          - -DCMAKE_POLICY_VERSION_MINIMUM=3.5
+        sources:
+          - type: archive
+            url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.18.tar.gz
+            sha256: 876ab046479166b869afc6896d288183bbc0e5843f141200c677b3e8dfb11724
+      - shared-modules/intltool/intltool-0.51.json
   - name: xsimd
     buildsystem: cmake-ninja
     config-opts:
@@ -911,16 +674,8 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-        url: https://github.com/redis/hiredis/archive/refs/tags/v1.1.0.tar.gz
-        sha256: fe6d21741ec7f3fc9df409d921f47dfc73a4d8ff64f4ac6f1d95f951bf7f53d6
-  - name: ccache
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/ccache/ccache/archive/refs/tags/v4.8.3.tar.gz
-        sha256: 9418e1c5c9f62ee31d450a2a04a6bbdc7575dc8a0179880cc48c67c721431375
+        url: https://github.com/redis/hiredis/archive/refs/tags/v1.3.0.tar.gz
+        sha256: 25cee4500f359cf5cad3b51ed62059aadfc0939b05150c1f19c7e2829123631c
   - name: catch2
     buildsystem: cmake-ninja
     builddir: true
@@ -986,64 +741,53 @@ modules:
       - type: git
         url: https://github.com/intel/libvpl.git
         tag: v2.14.0
-  - name: ffmpeg
+  - name: poppler
+    buildsystem: cmake-ninja
     config-opts:
-      - --prefix=/app/lib/codecs
-      - --enable-gpl
-      - --enable-version3
-      - --disable-static
-      - --enable-shared
-      - --enable-ffprobe
-      - --disable-ffplay
-      - --disable-doc
-      - --disable-avdevice
-      - --disable-postproc
-      - --enable-sdl
-      - --enable-libaom
-      - --enable-zlib
-      - --enable-demuxer=image2
-      - --enable-demuxer=image2_alias_pix
-      - --enable-demuxer=image2_brender_pix
-      # Container Formats
-      - --enable-muxer=webm
-      - --enable-muxer=matroska
-      - --enable-muxer=ogg
-      - --enable-muxer=apng
-      # Image Formats
-      - --enable-libwebp
-      - --enable-encoder=png
-      - --enable-decoder=png
-      - --enable-encoder=apng
-      - --enable-decoder=apng
-      # Video Codecs
-      - --enable-encoder=libaom_av1
-      - --enable-libvpl
-      - --enable-libvpx
-      - --enable-encoder=libvpx_vp9
-      - --enable-encoder=libvpx_vp8
-      - --enable-libopenh264
-      - --enable-libtheora
-      # Audio Codecs
-      - --enable-encoder=flac
-      - --enable-encoder=aac
-      - --enable-libmp3lame
-      - --enable-libopus
-      - --enable-libvorbis
-    cleanup:
-      - /lib/codecs/include
-      - /lib/codecs/lib/pkgconfig
-      - /lib/codecs/share
+      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DBUILD_GTK_TESTS=OFF
+      - -DBUILD_QT5_TESTS=FALSE
+      - -DBUILD_CPP_TESTS=FALSE
+      - -DENABLE_UTILS=FALSE
+      - -DENABLE_GLIB=FALSE
+      - -DENABLE_LIBOPENJPEG=none
+      - -DENABLE_QT6=OFF
+      - -DWITH_NSS3=OFF
+      - -DBUILD_MANUAL_TESTS=OFF
     sources:
-      - type: git
-        url: https://gitlab.freedesktop.org/gstreamer/meson-ports/ffmpeg.git
-        commit: 7601055639e789cdeeff793c48eaaf3186a70aad
+      - type: archive
+        url: https://poppler.freedesktop.org/poppler-25.10.0.tar.xz
+        sha256: 6b5e9bb64dabb15787a14db1675291c7afaf9387438cc93a4fb7f6aec4ee6fe0
+  - name: fftw
+    config-opts:
+      - --enable-shared
+      - --enable-threads
+    build-options:
+      arch:
+        x86_64:
+          config-opts:
+            - --enable-sse2
+            - --enable-avx
+            - --enable-avx-128-fma
+        aarch64:
+          config-opts:
+            - --enable-neon
+    cleanup:
+      - /bin
+      - /include
+      - /lib/cmake
+      - /lib/pkgconfig
+      - /share/man
+      - /share/info
+      - '*.la'
+      - '*.so'
+    sources:
+      - type: archive
+        url: http://www.fftw.org/fftw-3.3.10.tar.gz
+        sha256: 56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467
       - type: patch
         paths:
-          - patches/ffmpeg/0010-Fix-building-with-libvpl-present.patch
-          - patches/ffmpeg/0011-Switch-deps-of-QSV-codecs-to-libvpl-instead-of-libmf.patch
-          - patches/ffmpeg/0012-Fix-include-paths-for-libavcodec-s-codecs.patch
-          - patches/ffmpeg/0013-Fix-VP9-hw-accelerated-encoder-with-libvpl.patch
-          - patches/ffmpeg/0014-Fix-version-file-generation-in-version.py.patch
+          - patches/fftw/fix-autotools-build.patch
   - name: krita
     buildsystem: cmake-ninja
     builddir: true
