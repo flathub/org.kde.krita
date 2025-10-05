@@ -760,13 +760,18 @@ modules:
         sha256: 6b5e9bb64dabb15787a14db1675291c7afaf9387438cc93a4fb7f6aec4ee6fe0
   - name: fftw
     config-opts:
+      - --enable-shared
       - --enable-threads
     build-options:
       arch:
         x86_64:
           config-opts:
-            - --enable-sse
             - --enable-sse2
+            - --enable-avx
+            - --enable-avx-128-fma
+        aarch64:
+          config-opts:
+            - --enable-neon
     cleanup:
       - /bin
       - /include
@@ -782,7 +787,7 @@ modules:
         sha256: 56c932549852cddcfafdab3820b0200c7742675be92179e59e6215b340e26467
       - type: patch
         paths:
-          - patches/fftw3f/fix-autotools-build.patch
+          - patches/fftw/fix-autotools-build.patch
   - name: krita
     buildsystem: cmake-ninja
     builddir: true
