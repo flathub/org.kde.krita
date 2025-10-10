@@ -335,8 +335,8 @@ modules:
               - --enable-shared
             sources:
               - type: archive
-                url: https://www.python.org/ftp/python/3.10.18/Python-3.10.18.tar.xz
-                sha256: ae665bc678abd9ab6a6e1573d2481625a53719bc517e9a634ed2b9fefae3817f
+                url: https://www.python.org/ftp/python/3.10.19/Python-3.10.19.tar.xz
+                sha256: c8f4a596572201d81dd7df91f70e177e19a70f1d489968b54b5fbbf29a97c076
                 x-checker-data:
                   type: anitya
                   project-id: 13254
