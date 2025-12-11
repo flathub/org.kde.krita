@@ -801,8 +801,8 @@ modules:
       - /share/icons/hicolor/1024x1024
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.2.13/krita-5.2.13.tar.gz
-        sha256: cb909430c99e2bf10684f1c13d76876691ee62572d9aaa54d7058931f9615531
+        url: https://download.kde.org/stable/krita/5.2.14/krita-5.2.14.tar.gz
+        sha256: 556900726c2ff14e60f7bac1e8e9150100f2cd92669ca5dc74ac5851efac2887
         x-checker-data:
           type: anitya
           project-id: 10918
@@ -821,5 +821,5 @@ modules:
       - -DENABLE_SYSTEM_GMIC=FALSE
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.5.3.0.tar.gz
-        sha256: 64a913946a2c41c68c51018c3c21274b78b5a6cd8d75dd43f3b543b642a37d33
+        url: https://files.kde.org/krita/build/dependencies/gmic-3.6.4.1.tar.gz
+        sha256: a6b6c69301560be2ea2b5583a8ec19bd7e50e4b41a977745517ce920bc05fafe
