@@ -358,20 +358,6 @@ modules:
                 x-checker-data:
                   type: pypi
                   name: flit_core
-          - name: python-wheel
-            buildsystem: simple
-            build-commands:
-              - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
-                --prefix=${FLATPAK_DEST} "wheel" --no-build-isolation
-            cleanup:
-              - /bin
-            sources:
-              - type: file
-                url: https://files.pythonhosted.org/packages/89/24/a2eb353a6edac9a0303977c4cb048134959dd2a51b48a269dfc9dde00c8a/wheel-0.46.3.tar.gz
-                sha256: e3e79874b07d776c40bd6033f8ddf76a7dad46a7b8aa1b2787a83083519a1803
-                x-checker-data:
-                  type: pypi
-                  name: wheel
           - name: python-packaging
             buildsystem: simple
             build-commands:
@@ -386,6 +372,20 @@ modules:
                 x-checker-data:
                   type: pypi
                   name: packaging
+          - name: python-wheel
+            buildsystem: simple
+            build-commands:
+              - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
+                --prefix=${FLATPAK_DEST} "wheel" --no-build-isolation
+            cleanup:
+              - /bin
+            sources:
+              - type: file
+                url: https://files.pythonhosted.org/packages/89/24/a2eb353a6edac9a0303977c4cb048134959dd2a51b48a269dfc9dde00c8a/wheel-0.46.3.tar.gz
+                sha256: e3e79874b07d776c40bd6033f8ddf76a7dad46a7b8aa1b2787a83083519a1803
+                x-checker-data:
+                  type: pypi
+                  name: wheel
           - name: python-ply
             buildsystem: simple
             build-commands:
