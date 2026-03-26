@@ -1,0 +1,12 @@
+diff --git a/krita/org.kde.krita.appdata.xml b/krita/org.kde.krita.appdata.xml
+index cc5466b..7209c4a 100644
+--- a/krita/org.kde.krita.appdata.xml
++++ b/krita/org.kde.krita.appdata.xml
+@@ -90,7 +90,6 @@
+   <summary xml:lang="zh-CN">自由开源的数字绘画软件</summary>
+   <summary xml:lang="zh-TW">數位繪圖，自由創作</summary>
+   <description>
+-    <b>This flatpak is community maintained. Please report Flatpak specific bugs that do not occur on the upstream AppImage at https://github.com/flathub/org.kde.krita/issues.</b>
+     <p>Krita is the full-featured digital art studio.</p>
+     <p xml:lang="ar">كريتا هو استديو فنون رقميّة بمزايا شاملة.</p>
+     <p xml:lang="bg">Krita е пълнофункционално студио за дигитално изкуство.</p>
