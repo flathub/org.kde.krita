@@ -106,7 +106,7 @@ modules:
       # See link for current Krita Qt fork and git tag https://invent.kde.org/packaging/krita-deps-management/-/blob/master/ext_qt/CMakeLists.txt
       - type: git
         url: https://invent.kde.org/szaman/qtbase.git
-        commit: c84b3651b33e168998503c547698c60d67553a2b
+        commit: 3a918b166a8454b51d0a388269407b4599e600b4
       - type: shell
         commands:
           - mv configure configure.qt
@@ -180,6 +180,22 @@ modules:
       - type: git
         url: https://invent.kde.org/qt/qt/qttranslations.git
         commit: c38edd3a5501bcd53132e1e4abb7d25a98e0e1a9
+  - name: qtquickcontrols2
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtquickcontrols2.git
+        commit: 5465566a4ad9f6f9758bed304153f0c7fec3437b
+  - name: qtgraphicaleffects
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtgraphicaleffects.git
+        commit: a2b1600300cda89804d48ec90e0068a075fecc8b
   - name: extra-cmake-modules
     buildsystem: cmake-ninja
     cleanup:
@@ -250,6 +266,11 @@ modules:
     config-opts:
       - -DBUILD_TESTING=OFF
       - -DWITH_WAYLAND=OFF
+    cleanup:
+      - /share/applications/google-maps-geo-handler.desktop
+      - /share/applications/openstreetmap-geo-handler.desktop
+      - /share/applications/qwant-maps-geo-handler.desktop
+      - /share/applications/wheelmap-geo-handler.desktop
     sources:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.101/kguiaddons-5.101.0.tar.xz
@@ -797,12 +818,45 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=FALSE
+    post-install:
+      - mv ${FLATPAK_DEST}/share/applications/krita_brush.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.brush.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_csv.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.csv.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_exr.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.exr.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_gif.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.gif.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_heif.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.heif.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_heightmap.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.heightmap.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_jp2.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.jp2.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_jpeg.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.jpeg.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_jxl.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.jxl.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_kra.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.kra.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_krz.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.krz.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_ora.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.ora.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_pdf.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.pdf.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_png.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.png.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_psd.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.psd.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_qimageio.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.qimageio.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_raw.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.raw.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_rgbe.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.rgbe.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_spriter.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.spriter.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_svg.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.svg.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_tga.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.tga.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_tiff.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.tiff.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_webp.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.webp.desktop
+      - mv ${FLATPAK_DEST}/share/applications/krita_xcf.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.xcf.desktop
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/16x16/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/16x16/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/22x22/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/22x22/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/32x32/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/32x32/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/64x64/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/128x128/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/256x256/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/512x512/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/mimetypes/org.kde.krita.application-x-krita.png
     cleanup:
       - /share/icons/hicolor/1024x1024
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/5.2.16/krita-5.2.16.tar.gz
-        sha256: 3c2880a421f86dc9b58317db166b23a3bc6c64754f38c7deffe246fee1a13cb5
+        url: https://download.kde.org/stable/krita/6.0.0/krita-6.0.0.tar.gz
+        sha256: 932b6876126f7c629e427ee3d012300c8286b05a184277354b414af641a0f1ed
         x-checker-data:
           type: anitya
           project-id: 10918
@@ -811,7 +865,7 @@ modules:
       - type: patch
         paths:
           - patches/krita/krita_dont_use_native_file_chooser.patch
-          - patches/krita/2296.patch
+          - patches/krita/krita_appdata.patch
   - name: gmic
     buildsystem: cmake-ninja
     subdir: gmic-qt
@@ -821,5 +875,5 @@ modules:
       - -DENABLE_SYSTEM_GMIC=FALSE
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.6.4.1.tar.gz
-        sha256: a6b6c69301560be2ea2b5583a8ec19bd7e50e4b41a977745517ce920bc05fafe
+        url: https://github.com/vanyossi/gmic/releases/download/v3.7.4.1/gmic-3.7.4.1.tar.gz
+        sha256: 15674b544264fbc3f020be6fae27477aee6ac49316416f538e578a18ddb23879
