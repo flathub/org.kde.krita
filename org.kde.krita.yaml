@@ -106,7 +106,7 @@ modules:
       # See link for current Krita Qt fork and git tag https://invent.kde.org/packaging/krita-deps-management/-/blob/master/ext_qt/CMakeLists.txt
       - type: git
         url: https://invent.kde.org/szaman/qtbase.git
-        commit: d31098f5c77c4778e786248e65ce4c2e367b5de3
+        commit: 3a918b166a8454b51d0a388269407b4599e600b4
       - type: shell
         commands:
           - mv configure configure.qt
@@ -865,6 +865,7 @@ modules:
       - type: patch
         paths:
           - patches/krita/krita_dont_use_native_file_chooser.patch
+          - patches/krita/krita_appdata.patch
   - name: gmic
     buildsystem: cmake-ninja
     subdir: gmic-qt
