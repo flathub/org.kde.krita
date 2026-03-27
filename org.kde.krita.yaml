@@ -266,6 +266,11 @@ modules:
     config-opts:
       - -DBUILD_TESTING=OFF
       - -DWITH_WAYLAND=OFF
+    cleanup:
+      - /share/applications/google-maps-geo-handler.desktop
+      - /share/applications/openstreetmap-geo-handler.desktop
+      - /share/applications/qwant-maps-geo-handler.desktop
+      - /share/applications/wheelmap-geo-handler.desktop
     sources:
       - type: archive
         url: https://download.kde.org/stable/frameworks/5.101/kguiaddons-5.101.0.tar.xz
@@ -838,6 +843,14 @@ modules:
       - mv ${FLATPAK_DEST}/share/applications/krita_tiff.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.tiff.desktop
       - mv ${FLATPAK_DEST}/share/applications/krita_webp.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.webp.desktop
       - mv ${FLATPAK_DEST}/share/applications/krita_xcf.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.xcf.desktop
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/16x16/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/16x16/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/22x22/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/22x22/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/32x32/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/32x32/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/64x64/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/128x128/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/256x256/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/mimetypes/org.kde.krita.application-x-krita.png
+      - mv ${FLATPAK_DEST}/share/icons/hicolor/512x512/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/mimetypes/org.kde.krita.application-x-krita.png
     cleanup:
       - /share/icons/hicolor/1024x1024
     sources:
