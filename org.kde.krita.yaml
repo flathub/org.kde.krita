@@ -106,7 +106,7 @@ modules:
       # See link for current Krita Qt fork and git tag https://invent.kde.org/packaging/krita-deps-management/-/blob/master/ext_qt/CMakeLists.txt
       - type: git
         url: https://invent.kde.org/szaman/qtbase.git
-        commit: c84b3651b33e168998503c547698c60d67553a2b
+        commit: d31098f5c77c4778e786248e65ce4c2e367b5de3
       - type: shell
         commands:
           - mv configure configure.qt
@@ -180,6 +180,22 @@ modules:
       - type: git
         url: https://invent.kde.org/qt/qt/qttranslations.git
         commit: c38edd3a5501bcd53132e1e4abb7d25a98e0e1a9
+  - name: qtquickcontrols2
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtquickcontrols2.git
+        commit: 5465566a4ad9f6f9758bed304153f0c7fec3437b
+  - name: qtgraphicaleffects
+    buildsystem: qmake
+    cleanup:
+      - /bin
+    sources:
+      - type: git
+        url: https://invent.kde.org/qt/qt/qtgraphicaleffects.git
+        commit: a2b1600300cda89804d48ec90e0068a075fecc8b
   - name: extra-cmake-modules
     buildsystem: cmake-ninja
     cleanup:
@@ -811,7 +827,6 @@ modules:
       - type: patch
         paths:
           - patches/krita/krita_dont_use_native_file_chooser.patch
-          - patches/krita/2296.patch
   - name: gmic
     buildsystem: cmake-ninja
     subdir: gmic-qt
@@ -821,5 +836,5 @@ modules:
       - -DENABLE_SYSTEM_GMIC=FALSE
     sources:
       - type: archive
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.6.4.1.tar.gz
-        sha256: a6b6c69301560be2ea2b5583a8ec19bd7e50e4b41a977745517ce920bc05fafe
+        url: https://github.com/vanyossi/gmic/releases/download/v3.7.4.1/gmic-3.7.4.1.tar.gz
+        sha256: 15674b544264fbc3f020be6fae27477aee6ac49316416f538e578a18ddb23879
