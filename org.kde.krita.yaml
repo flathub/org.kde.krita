@@ -1,13 +1,6 @@
 app-id: org.kde.krita
-<<<<<<< HEAD
-default-branch: beta
-desktop-file-name-suffix: ' (Beta)'
-runtime: org.freedesktop.Platform
-runtime-version: '22.08'
-=======
 runtime: org.freedesktop.Platform
 runtime-version: '25.08'
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
 sdk: org.freedesktop.Sdk
 command: krita
 rename-icon: krita
@@ -19,17 +12,11 @@ finish-args:
   - --device=dri
   - --filesystem=host
   - --filesystem=xdg-run/gvfs
-<<<<<<< HEAD
-  - --env=PYTHONPATH=/app/lib/python3/dist-packages
-  - --env=TMPDIR=/var/tmp
-  - --env=XDG_CURRENT_DESKTOP=gtk3
-=======
   - --env=PYTHONPATH=/app/lib/python3.10/site-packages
   - --env=LADSPA_PATH=/app/extensions/Plugins/ladspa:/app/lib/ladspa
   - --env=TMPDIR=/var/tmp
   - --env=QT_QPA_PLATFORMTHEME=gtk3
   - --env=FLATPAK=1
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
   - --system-talk-name=org.freedesktop.ColorManager
   - --talk-name=com.canonical.AppMenu.Registrar
 cleanup:
@@ -50,25 +37,6 @@ cleanup:
   - '*.cmake'
   - '*.prl'
 cleanup-commands:
-<<<<<<< HEAD
-  - 'mkdir -p /app/lib/ffmpeg'
-add-extensions:
-  org.kde.krita.Codecs:
-    directory: lib/codecs
-    add-ld-path: lib
-    bundle: true
-    autodelete: true
-  org.freedesktop.Platform.openh264:
-    directory: lib/openh264
-    version: '2.3.1'
-    add-ld-path: .
-  org.freedesktop.Platform.ffmpeg-full:
-    directory: lib/ffmpeg
-    version: '22.08'
-    add-ld-path: .
-    no-autodownload: false
-    autodelete: false
-=======
   - mkdir -p ${FLATPAK_DEST}/extensions/Plugins
 add-extensions:
   org.freedesktop.LinuxAudio.Plugins:
@@ -92,7 +60,6 @@ add-extensions:
     merge-dirs: ladspa
     autodelete: false
     subdirectories: true
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
 modules:
   - name: qtbase
     build-options:
@@ -104,10 +71,6 @@ modules:
         aarch64:
           config-opts:
             - -no-reduce-relocations
-<<<<<<< HEAD
-            - -opengl es2
-=======
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
     config-opts:
       - -confirm-license
       - -opensource
@@ -140,16 +103,10 @@ modules:
     cleanup:
       - /bin
     sources:
-<<<<<<< HEAD
-      - type: git
-        url: https://invent.kde.org/szaman/qtbase.git
-        commit: 62d5736f323be823101791d3863814a10036cafd
-=======
       # See link for current Krita Qt fork and git tag https://invent.kde.org/packaging/krita-deps-management/-/blob/master/ext_qt/CMakeLists.txt
       - type: git
         url: https://invent.kde.org/szaman/qtbase.git
         commit: 3a918b166a8454b51d0a388269407b4599e600b4
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
       - type: shell
         commands:
           - mv configure configure.qt
@@ -199,17 +156,6 @@ modules:
       - type: git
         url: https://invent.kde.org/szaman/qttools.git
         commit: 3cea28be7c7dfe6fd90d3eef88ac6c2307f09051
-<<<<<<< HEAD
-  - name: qtmultimedia
-    buildsystem: qmake
-    cleanup:
-      - /bin
-    sources:
-      - type: git
-        url: https://invent.kde.org/qt/qt/qtmultimedia.git
-        commit: f3dc18968c437c993886d3bfb668b62344a10860
-=======
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
   - name: qtsvg
     buildsystem: qmake
     cleanup:
@@ -234,8 +180,6 @@ modules:
       - type: git
         url: https://invent.kde.org/qt/qt/qttranslations.git
         commit: c38edd3a5501bcd53132e1e4abb7d25a98e0e1a9
-<<<<<<< HEAD
-=======
   - name: qtquickcontrols2
     buildsystem: qmake
     cleanup:
@@ -252,7 +196,6 @@ modules:
       - type: git
         url: https://invent.kde.org/qt/qt/qtgraphicaleffects.git
         commit: a2b1600300cda89804d48ec90e0068a075fecc8b
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
   - name: extra-cmake-modules
     buildsystem: cmake-ninja
     cleanup:
@@ -261,15 +204,6 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-<<<<<<< HEAD
-        url: https://download.kde.org/stable/frameworks/5.103/extra-cmake-modules-5.103.0.tar.xz
-        sha256: 92ca2e55cb38956fbdeaf254231f074647173ccfd12dc9664989c6fa9e9c4346
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/extra-cmake-modules-$version.tar.xz
-=======
         url: https://download.kde.org/stable/frameworks/5.101/extra-cmake-modules-5.101.0.tar.xz
         sha256: 8c4c561310db587d390a6c84afc97e1addbaddd73b9d7a4c7309c5da9b9bc8f2
       - type: patch
@@ -278,283 +212,10 @@ modules:
           - patches/frameworks/0002-Android-Recursively-find-dependency-of-dependencies.patch
           - patches/frameworks/0003-Revert-Use-BIN_INSTALL_DIR-data-for-DATAROOTDIR-on-W.patch
           - patches/frameworks/0001-ANDROID-Find-dependencies-of-manually-specified-libr.patch
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
   - name: kconfig
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
-<<<<<<< HEAD
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/kconfig-5.103.0.tar.xz
-        sha256: 5f41e6f566e1eb0ee455886d9ffb69e080ed219e40f4a315b6dd0fd8de3bb918
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kconfig-$version.tar.xz
-  - name: karchive
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_TESTING=OFF
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/karchive-5.103.0.tar.xz
-        sha256: 372bdf691ddc43e663b5c6ca88b2c73fa0fac9ee8e3600b469f9b026c8dd1353
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/karchive-$version.tar.xz
-  - name: kwidgetsaddons
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_TESTING=OFF
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/kwidgetsaddons-5.103.0.tar.xz
-        sha256: 4c08cc7e8b28d1fbbf2804b44b534c66173b784457c4ca04b5609178e68c6441
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kwidgetsaddons-$version.tar.xz
-  - name: kcompletion
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_TESTING=OFF
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/kcompletion-5.103.0.tar.xz
-        sha256: d02374cba2bb3da774a938ef72744282af80a6c63851baa5825af173c7cb764f
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kcompletion-$version.tar.xz
-  - name: kcoreaddons
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_TESTING=OFF
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/kcoreaddons-5.103.0.tar.xz
-        sha256: beb99d0274c2bffd8e6aa87199438393222a0317e2e1118d510b5b6abf772f6a
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kcoreaddons-$version.tar.xz
-  - name: kguiaddons
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_TESTING=OFF
-      - -DWITH_WAYLAND=OFF
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/kguiaddons-5.103.0.tar.xz
-        sha256: e63280fdefc4d82b42fc7b8e8e30c0b92e05538b00fb31086683019cc2d5b232
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kguiaddons-$version.tar.xz
-  - name: ki18n
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_TESTING=OFF
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/ki18n-5.103.0.tar.xz
-        sha256: 38ea91627f427d9ab74ebaa278163a5a94af2eaba5ac9e3d16a472d9457840e6
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/ki18n-$version.tar.xz
-  - name: kitemmodels
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_TESTING=OFF
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/kitemmodels-5.103.0.tar.xz
-        sha256: 356c4d6fa808f2cad93629e7362b0cc95e0217b116ac9e07429c8f0d18a370cb
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kitemmodels-$version.tar.xz
-  - name: kitemviews
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_TESTING=OFF
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/kitemviews-5.103.0.tar.xz
-        sha256: 8069046d455ea404f67403b057a6060055038a570c5a8307712128dd52649c4e
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kitemviews-$version.tar.xz
-  - name: kimageformats
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_TESTING=OFF
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/kimageformats-5.103.0.tar.xz
-        sha256: dd7dc417aacc9dfe74745e4dfd9750129051c36502fa1cd18b92c4035d721e7e
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kimageformats-$version.tar.xz
-  - name: kwindowsystem
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_TESTING=OFF
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/kwindowsystem-5.103.0.tar.xz
-        sha256: ec6af8efd4399d140929b1a057bff8c679210d98fd26f309fdf8f89fccbf13a5
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kwindowsystem-$version.tar.xz
-  - name: kcrash
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DBUILD_TESTING=OFF
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/frameworks/5.103/kcrash-5.103.0.tar.xz
-        sha256: 3598a171f9162709b9020ed665520beab05104bfc8902c718c2fe788e7d7ebe7
-        x-checker-data:
-          type: anitya
-          project-id: 8762
-          stable-only: true
-          url-template: https://download.kde.org/stable/frameworks/$major.$minor/kcrash-$version.tar.xz
-  - name: toml
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "toml" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34d9b30660f6f9daaf70eead706e3203ec3c/toml-0.10.2.tar.gz
-        sha256: b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f
-        x-checker-data:
-          type: pypi
-          name: toml
-  - name: flit_core
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "flit_core" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/10/e5/be08751d07b30889af130cec20955c987a74380a10058e6e8856e4010afc/flit_core-3.8.0.tar.gz
-        sha256: b305b30c99526df5e63d6022dd2310a0a941a187bd3884f4c8ef0418df6c39f3
-        x-checker-data:
-          type: pypi
-          name: flit_core
-  - name: pyparsing
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "pyparsing" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/71/22/207523d16464c40a0310d2d4d8926daffa00ac1f5b1576170a32db749636/pyparsing-3.0.9.tar.gz
-        sha256: 2b020ecf7d21b687f219b71ecad3631f644a47f01403fa1d1036b0c6416d70fb
-        x-checker-data:
-          type: pypi
-          name: pyparsing
-  - name: packaging
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "packaging" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/47/d5/aca8ff6f49aa5565df1c826e7bf5e85a6df852ee063600c1efa5b932968c/packaging-23.0.tar.gz
-        sha256: b6ad297f8907de0fa2fe1ccbd26fdaf387f5f47c7275fedf8cce89f99446cf97
-        x-checker-data:
-          type: pypi
-          name: packaging
-  - name: ply
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "ply" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/e5/69/882ee5c9d017149285cab114ebeab373308ef0f874fcdac9beb90e0ac4da/ply-3.11.tar.gz
-        sha256: 00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3
-        x-checker-data:
-          type: pypi
-          name: ply
-  - name: sip
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "sip" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/f1/ba/19f9cb16416a3c98bd5969b1bd9bf3c92dd278788d8d949ed66b8e0edf0d/sip-6.7.7.tar.gz
-        sha256: dee9c06fa8ae6d441a401f922867fc6196edda274eebd9fbfec54f0769c2a9e2
-        x-checker-data:
-          type: pypi
-          name: sip
-  - name: pyqt-builder
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "PyQt-builder" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/21/6c/685981114cb350f2f8e4a0827aa7f60f142e15816aa48f3204e5a1e2578c/PyQt-builder-1.14.1.tar.gz
-        sha256: 83bc3e300aff8b41405804b6a9c2913389ab59c48ad9f0cb8584a6ef73bca502
-        x-checker-data:
-          type: pypi
-          name: PyQt-builder
-  - name: pyqt5_sip
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "PyQt5_sip" --no-build-isolation
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/d2/f4/4c3e5fc1584f5a2964cfc89bf420cfcc59aba0b1f2d08446e2b491a21ed5/PyQt5_sip-12.11.1.tar.gz
-        sha256: 97d3fbda0f61edb1be6529ec2d5c7202ae83aee4353e4b264a159f8c9ada4369
-        x-checker-data:
-          type: pypi
-          name: PyQt5_sip
-  - name: pyqt5
-    buildsystem: simple
-    build-commands:
-=======
     cleanup:
       - /bin
     sources:
@@ -669,21 +330,12 @@ modules:
   - name: pyqt
     buildsystem: simple
     build-commands:
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
       - sip-install --confirm-license --no-designer-plugin --no-qml-plugin --no-dbus-python
         --no-tools --verbose --target-dir ${FLATPAK_DEST}/lib/python3.10/site-packages
     cleanup:
       - /bin
     sources:
       - type: archive
-<<<<<<< HEAD
-        url: https://files.pythonhosted.org/packages/5c/46/b4b6eae1e24d9432905ef1d4e7c28b6610e28252527cdc38f2a75997d8b5/PyQt5-5.15.9.tar.gz
-        sha256: dc41e8401a90dc3e2b692b411bd5492ab559ae27a27424eed4bd3915564ec4c0
-        x-checker-data:
-          type: pypi
-          name: PyQt5
-  - name: fcitx-qt5
-=======
         url: https://pypi.python.org/packages/source/P/PyQt5/PyQt5-5.15.7.tar.gz
         sha256: 755121a52b3a08cb07275c10ebb96576d36e320e572591db16cfdbc558101594
     modules:
@@ -804,23 +456,10 @@ modules:
             url: https://pypi.python.org/packages/source/P/PyQt5-sip/PyQt5_sip-12.11.0.tar.gz
             sha256: b4710fd85b57edef716cc55fae45bfd5bfac6fc7ba91036f1dcc3f331ca0eb39
   - name: fcitx5-qt
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
-<<<<<<< HEAD
-      - -DENABLE_LIBRARY=OFF
-    sources:
-      - type: archive
-        url: https://github.com/fcitx/fcitx-qt5/archive/refs/tags/1.2.7.tar.gz
-        sha256: 4c1c5e4f9c9067f7274a23411599f8510f52d4fa892c87af63466ec806667823
-        x-checker-data:
-          type: anitya
-          project-id: 6513
-          stable-only: true
-          url-template: https://github.com/fcitx/fcitx-qt5/archive/refs/tags/$version.tar.gz
-=======
       - -DENABLE_QT4=OFF
       - -DENABLE_QT5=ON
       - -DENABLE_QT6=OFF
@@ -829,7 +468,6 @@ modules:
       - type: archive
         url: https://github.com/fcitx/fcitx5-qt/archive/refs/tags/5.1.9.tar.gz
         sha256: 4e691182f20984d11f8ea391a57b2711e362c43fda21236327e386c07f9c8998
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
   - name: boost
     buildsystem: simple
     build-commands:
@@ -838,18 +476,8 @@ modules:
         linkflags="$LDFLAGS" -j $FLATPAK_BUILDER_N_JOBS install
     sources:
       - type: archive
-<<<<<<< HEAD
-        url: https://boostorg.jfrog.io/artifactory/main/release/1.81.0/source/boost_1_81_0.tar.bz2
-        sha256: 71feeed900fbccca04a3b4f2f84a7c217186f28a940ed8b7ed4725986baf99fa
-        x-checker-data:
-          type: anitya
-          project-id: 6845
-          stable-only: true
-          url-template: https://boostorg.jfrog.io/artifactory/main/release/$version/source/boost_${major}_${minor}_${patch}.tar.bz2
-=======
         url: https://archives.boost.io/release/1.88.0/source/boost_1_88_0.tar.gz
         sha256: 3621533e820dcab1e8012afd583c0c73cf0f77694952b81352bf38c1488f9cb4
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
   - name: eigen
     buildsystem: cmake-ninja
     builddir: true
@@ -862,21 +490,6 @@ modules:
       - type: archive
         url: https://gitlab.com/libeigen/eigen/-/archive/3.4.0/eigen-3.4.0.tar.gz
         sha256: 8586084f71f9bde545ee7fa6d00288b264a2b7ac3607b974e54d13e7162c1c72
-<<<<<<< HEAD
-        x-checker-data:
-          type: anitya
-          project-id: 13751
-          stable-only: true
-          url-template: https://gitlab.com/libeigen/eigen/-/archive/$version/eigen-$version.tar.gz
-  - name: exiv2
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DCMAKE_CXX_STANDARD=14
-      - -DEXIV2_BUILD_SAMPLES=OFF
-      - -DEXIV2_ENABLE_NLS=OFF
-      - -DEXIV2_BUILD_EXIV2_COMMAND=OFF
-=======
   - name: exiv2
     buildsystem: cmake-ninja
     config-opts:
@@ -941,164 +554,10 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_SHARED_LIBS=ON
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
     cleanup:
       - /bin
     sources:
       - type: archive
-<<<<<<< HEAD
-        url: https://github.com/Exiv2/exiv2/releases/download/v0.27.6/exiv2-0.27.6-Source.tar.gz
-        sha256: 4c192483a1125dc59a3d70b30d30d32edace9e14adf52802d2f853abf72db8a6
-        x-checker-data:
-          type: anitya
-          project-id: 769
-          stable-only: true
-          url-template: https://github.com/Exiv2/exiv2/releases/download/v$version/exiv2-$version-Source.tar.gz
-  - name: lcms2
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTS=FALSE
-      - -DBUILD_UTILS=FALSE
-      - -DBUILD_STATIC=FALSE
-      - -DBUILD_PLUGINS=TRUE
-    cleanup:
-      - /bin
-      - /share
-    sources:
-      - type: archive
-        url: https://github.com/mm2/Little-CMS/releases/download/lcms2.15/lcms2-2.15.tar.gz
-        sha256: b20cbcbd0f503433be2a4e81462106fa61050a35074dc24a4e356792d971ab39
-        x-checker-data:
-          type: anitya
-          project-id: 9815
-          stable-only: true
-          url-template: https://github.com/mm2/Little-CMS/releases/download/lcms$version/lcms2-$version.tar.gz
-      - type: patch
-        paths:
-          - patches/lcms2/0002-Add-modern-CMake-toolchain.patch
-  - shared-modules/glu/glu-9.json
-  - shared-modules/glew/glew.json
-  - name: freeglut
-    buildsystem: cmake-ninja
-    build-options:
-      cflags: -fcommon
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DFREEGLUT_BUILD_STATIC_LIBS=OFF
-    sources:
-      - type: archive
-        url: https://github.com/FreeGLUTProject/freeglut/releases/download/v3.4.0/freeglut-3.4.0.tar.gz
-        sha256: 3c0bcb915d9b180a97edaebd011b7a1de54583a838644dcd42bb0ea0c6f3eaec
-        x-checker-data:
-          type: anitya
-          project-id: 846
-          stable-only: true
-          url-template: https://github.com/FreeGLUTProject/freeglut/releases/download/v$version/freeglut-$version.tar.gz
-  - name: imath
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.6.tar.gz
-        sha256: ea5592230f5ab917bea3ceab266cf38eb4aa4a523078d46eac0f5a89c52304db
-        x-checker-data:
-          type: anitya
-          project-id: 223366
-          stable-only: true
-          url-template: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v$version.tar.gz
-  - name: pystring
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/imageworks/pystring/archive/281419de2f91f9e0f2df6acddfea3b06a43436be.tar.gz
-        sha256: 46161e75f85a3e8867233aebb6f4399f405c565db76dc07731a7ef662459609d
-      - type: file
-        path: patches/pystring/CMakeLists.txt
-  - name: yaml-cpp
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_SHARED_LIBS=ON
-      - -DYAML_BUILD_SHARED_LIBS=ON
-      - -DYAML_CPP_BUILD_TOOLS=OFF
-      - -DYAML_CPP_BUILD_TESTS=OFF
-      - -DYAML_CPP_BUILD_CONTRIB=OFF
-    sources:
-      - type: archive
-        url: https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-0.7.0.tar.gz
-        sha256: 43e6a9fcb146ad871515f0d0873947e5d497a1c9c60c58cb102a97b47208b7c3
-        x-checker-data:
-          type: anitya
-          project-id: 5284
-          stable-only: true
-          url-template: https://github.com/jbeder/yaml-cpp/archive/refs/tags/yaml-cpp-$version.tar.gz
-  - name: pybind11
-    buildsystem: simple
-    build-commands:
-      - pip3 install --exists-action=i --no-index --find-links="file://${PWD}" --prefix=${FLATPAK_DEST}
-        "pybind11" --no-build-isolation
-    cleanup:
-      - /bin
-    sources:
-      - type: file
-        url: https://files.pythonhosted.org/packages/56/d3/ebc2ad811d192b91d97a45d30b4d5bcb148275db668eada4b6f55781fdc7/pybind11-2.10.3.tar.gz
-        sha256: 08cfe6d4f73746447cc85a400c8169a91608b8a00c5feecd8ff251a70565d12f
-        x-checker-data:
-          type: pypi
-          name: pybind11
-  - name: expat
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/libexpat/libexpat/releases/download/R_2_5_0/expat-2.5.0.tar.gz
-        sha256: 6b902ab103843592be5e99504f846ec109c1abb692e85347587f237a4ffa1033
-        x-checker-data:
-          type: anitya
-          project-id: 770
-          stable-only: true
-          url-template: https://github.com/libexpat/libexpat/releases/download/R_${major}_${minor}_${patch}/expat-$version.tar.gz
-  - name: minizip-ng
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_SHARED_LIBS=ON
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/3.0.8.tar.gz
-        sha256: 27cc2f62cd02d79b71b346fc6ace02728385f8ba9c6b5f124062b0790a04629a
-        x-checker-data:
-          type: anitya
-          project-id: 301509
-          stable-only: true
-          url-template: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/$version.tar.gz
-  - name: openexr
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DNAMESPACE_VERSIONING=OFF
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.5.tar.gz
-        sha256: 93925805c1fc4f8162b35f0ae109c4a75344e6decae5a240afdfce25f8a433ec
-        x-checker-data:
-          type: anitya
-          project-id: 13289
-          stable-only: true
-          url-template: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v$version.tar.gz
-=======
         url: https://github.com/zlib-ng/minizip-ng/archive/refs/tags/4.0.10.tar.gz
         sha256: c362e35ee973fa7be58cc5e38a4a6c23cc8f7e652555daf4f115a9eb2d3a6be7
   - name: openexr
@@ -1112,7 +571,6 @@ modules:
       - type: archive
         url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.11.tar.gz
         sha256: 06b4a20d0791b5ec0f804c855d320a0615ce8445124f293616a086e093f1f1e1
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
   - name: opencolorio
     buildsystem: cmake-ninja
     builddir: true
@@ -1124,38 +582,17 @@ modules:
       - -DOCIO_BUILD_GPU_TESTS=OFF
       - -DOCIO_BUILD_PYTHON=OFF
       - -DOCIO_INSTALL_EXT_PACKAGES=NONE
-<<<<<<< HEAD
-      - -Dminizip-ng_LIBRARY=/app/lib/libminizip.so
-=======
       - -DOCIO_BUILD_APPS=OFF
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
     cleanup:
       - /bin
     sources:
       - type: archive
-<<<<<<< HEAD
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.2.0.tar.gz
-        sha256: 81e3b6e0e432d20347b6396c376f9fbeceac31c2cbefe2882d83112a5b0a8123
-        # x-checker-data:
-        #   type: anitya
-        #   project-id: 9631
-        #   stable-only: true
-        #   url-template: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v$version.tar.gz
-      - type: patch
-        paths:
-          - patches/opencolorio/use-system-minizip.patch
-  - name: libraw
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-=======
         url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.5.0.tar.gz
         sha256: 124e2bfa8a9071959d6ddbb64ffbf78d3f6fe3c923ae23e96a6bbadde1af55b6
   - name: libraw
     config-opts:
       - --disable-examples
       - --disable-static
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
     cleanup:
       - /bin
       - /share/doc
@@ -1163,17 +600,6 @@ modules:
       - type: archive
         url: https://www.libraw.org/data/LibRaw-0.21.1.tar.gz
         sha256: 630a6bcf5e65d1b1b40cdb8608bdb922316759bfb981c65091fec8682d1543cd
-<<<<<<< HEAD
-        x-checker-data:
-          type: anitya
-          project-id: 1709
-          stable-only: true
-          url-template: https://www.libraw.org/data/LibRaw-$version.tar.gz
-      - type: patch
-        paths:
-          - patches/libraw/0001-LibRaw-cmake.patch
-          - patches/libraw/0002-Use-CMake-install-prefix.patch
-=======
       - type: shell
         commands:
           - autoreconf -vfi
@@ -1186,7 +612,6 @@ modules:
       - type: archive
         url: https://download.kde.org/Attic/release-service/22.12.1/src/libkdcraw-22.12.1.tar.xz
         sha256: 8b0a71937f7ed4926c2c047e0bd36001e5e98f52b1cf633d8bfbe4e4eeac65eb
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
   - name: gsl
     config-opts:
       - --disable-static
@@ -1194,361 +619,14 @@ modules:
       - /bin
     sources:
       - type: archive
-<<<<<<< HEAD
-        url: https://ftp.gnu.org/gnu/gsl/gsl-2.7.1.tar.gz
-        sha256: dcb0fbd43048832b757ff9942691a8dd70026d5da0ff85601e52687f6deeb34b
-        x-checker-data:
-          type: anitya
-          project-id: 1267
-          stable-only: true
-          url-template: https://ftp.gnu.org/gnu/gsl/gsl-$version.tar.gz
-  - name: poppler-data
-=======
         url: https://github.com/ampl/gsl/archive/8eac3b0b5cffb90004a729f0675011e718f41379.zip
         sha256: 124bf79bfd2c3cb07df02a2b0e80e13d29a94cab8acae1c2c1e086474381a6c2
   - name: quazip
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
     sources:
       - type: archive
-<<<<<<< HEAD
-        url: https://poppler.freedesktop.org/poppler-data-0.4.12.tar.gz
-        sha256: c835b640a40ce357e1b83666aabd95edffa24ddddd49b8daff63adb851cdab74
-        x-checker-data:
-          type: anitya
-          project-id: 3687
-          stable-only: true
-          url-template: https://poppler.freedesktop.org/poppler-data-$version.tar.gz
-  - name: poppler
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_GTK_TESTS=OFF
-      - -DBUILD_QT5_TESTS=FALSE
-      - -DBUILD_CPP_TESTS=FALSE
-      - -DENABLE_UTILS=FALSE
-      - -DENABLE_GLIB=FALSE
-      - -DENABLE_LIBOPENJPEG=none
-      - -DWITH_NSS3=OFF
-    sources:
-      - type: archive
-        url: https://poppler.freedesktop.org/poppler-23.03.0.tar.xz
-        sha256: b04148bf849c1965ada7eff6be4685130e3a18a84e0cce73bf9bc472ec32f2b4
-        x-checker-data:
-          type: anitya
-          project-id: 3686
-          stable-only: true
-          url-template: https://poppler.freedesktop.org/poppler-$version.tar.xz
-  - name: quazip
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/stachenov/quazip/archive/refs/tags/v1.4.tar.gz
-        sha256: 79633fd3a18e2d11a7d5c40c4c79c1786ba0c74b59ad752e8429746fe1781dd6
-        x-checker-data:
-          type: anitya
-          project-id: 4141
-          stable-only: true
-          url-template: https://github.com/stachenov/quazip/archive/refs/tags/v$version.tar.gz
-  - name: aom
-    buildsystem: cmake-ninja
-    builddir: true
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DCONFIG_PIC=1
-      - -DBUILD_SHARED_LIBS=1
-      - -DENABLE_EXAMPLES=OFF
-      - -DENABLE_TESTDATA=OFF
-      - -DENABLE_TESTS=OFF
-      - -DENABLE_TOOLS=OFF
-    sources:
-      - type: archive
-        url: https://storage.googleapis.com/aom-releases/libaom-3.6.0.tar.gz
-        sha256: a4a6c0fab685da743b796662a928fcdf7ae60594edc306efb73e78a17ea6cde6
-        x-checker-data:
-          type: anitya
-          project-id: 17628
-          stable-only: true
-          url-template: https://storage.googleapis.com/aom-releases/libaom-$version.tar.gz
-  - name: libx265-10bit
-    buildsystem: cmake-ninja
-    subdir: source
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DHIGH_BIT_DEPTH=TRUE
-      - -DEXPORT_C_API=FALSE
-      - -DENABLE_CLI=FALSE
-      - -DENABLE_SHARED=FALSE
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
-        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
-        x-checker-data:
-          type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
-          version-pattern: x265-snapshot-([\d-]+).tar.gz
-          url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
-      - type: patch
-        paths:
-          - patches/libx265/A01-build-fix.patch
-          - patches/libx265/A02-threads-priority.patch
-          - patches/libx265/A03-threads-pool-adjustments.patch
-          - patches/libx265/A04-64-bit_for_aarch64.patch
-          - patches/libx265/A05-disable-scanPosLast-aarch64-asm.patch
-          - patches/libx265/A06-common-threading.patch
-          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
-          - patches/libx265/0003-Skip-PDB-in-MinGW.patch
-    post-install:
-      - mv /app/lib/libx265.a /app/lib/libx265_main10.a
-  - name: libx265-12bit
-    buildsystem: cmake-ninja
-    subdir: source
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DHIGH_BIT_DEPTH=TRUE
-      - -DMAIN12=TRUE
-      - -DEXPORT_C_API=FALSE
-      - -DENABLE_CLI=FALSE
-      - -DENABLE_SHARED=FALSE
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
-        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
-        x-checker-data:
-          type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
-          version-pattern: x265-snapshot-([\d-]+).tar.gz
-          url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
-      - type: patch
-        paths:
-          - patches/libx265/A01-build-fix.patch
-          - patches/libx265/A02-threads-priority.patch
-          - patches/libx265/A03-threads-pool-adjustments.patch
-          - patches/libx265/A04-64-bit_for_aarch64.patch
-          - patches/libx265/A05-disable-scanPosLast-aarch64-asm.patch
-          - patches/libx265/A06-common-threading.patch
-          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
-          - patches/libx265/0003-Skip-PDB-in-MinGW.patch
-    post-install:
-      - mv /app/lib/libx265.a /app/lib/libx265_main12.a
-  - name: libx265
-    skip-arches:
-      - aarch64
-    buildsystem: cmake-ninja
-    subdir: source
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DENABLE_SHARED=TRUE
-      - -DENABLE_HDR10_PLUS=TRUE
-      - -DEXTRA_LIB='x265_main10.a;x265_main12.a'
-      - -DEXTRA_LINK_FLAGS=-L.
-      - -DLINKED_10BIT=TRUE
-      - -DLINKED_12BIT=TRUE
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-20220709-12716.tar.gz
-        sha256: 19ef8b21301f13d795601184884859e9f4a2f87fcda83757bd7dcd588056e926
-        x-checker-data:
-          type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty/ext_heif/CMakeLists.txt
-          version-pattern: x265-snapshot-([\d-]+).tar.gz
-          url-template: https://github.com/HandBrake/HandBrake-contribs/releases/download/contribs/x265-snapshot-$version.tar.gz
-      - type: patch
-        paths:
-          - patches/libx265/A01-build-fix.patch
-          - patches/libx265/A02-threads-priority.patch
-          - patches/libx265/A03-threads-pool-adjustments.patch
-          - patches/libx265/A04-64-bit_for_aarch64.patch
-          - patches/libx265/A05-disable-scanPosLast-aarch64-asm.patch
-          - patches/libx265/A06-common-threading.patch
-          - patches/libx265/0001-Silence-nasm-2.15-warnings.patch
-          - patches/libx265/0003-Skip-PDB-in-MinGW.patch
-  - name: libde265
-    skip-arches:
-      - aarch64
-    config-opts:
-      - --disable-sherlock265
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/strukturag/libde265/releases/download/v1.0.11/libde265-1.0.11.tar.gz
-        sha256: 2f8f12cabbdb15e53532b7c1eb964d4e15d444db1be802505e6ac97a25035bab
-        x-checker-data:
-          type: anitya
-          project-id: 11239
-          stable-only: true
-          url-template: https://github.com/strukturag/libde265/releases/download/v$version/libde265-$version.tar.gz
-      - type: patch
-        paths:
-          - patches/libde265/0001-Quick-check-for-SSE-support.patch
-  - name: libheif
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DWITH_EXAMPLES=OFF
-    cleanup:
-      - /bin
-    sources:
-      - type: archive
-        url: https://github.com/strukturag/libheif/releases/download/v1.15.1/libheif-1.15.1.tar.gz
-        sha256: 28d5a376fe7954d2d03453f983aaa0b7486f475c27c7806bda31df9102325556
-        x-checker-data:
-          type: anitya
-          project-id: 64439
-          stable-only: true
-          url-template: https://github.com/strukturag/libheif/releases/download/v$version/libheif-$version.tar.gz
-  - name: kseexpr
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DENABLE_LLVM_BACKEND=OFF
-      - -DBUILD_DOC=OFF
-      - -DBUILD_TESTS=OFF
-      - -DBUILD_UTILS=OFF
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/kseexpr/4.0.4/kseexpr-4.0.4.0.tar.gz
-        sha256: ea4f6a8e820e6cc12d2a1e6977e96ea5457f37729fe0bc4ee8cc62d4c26c36ae
-        x-checker-data:
-          type: anitya
-          project-id: 288024
-          stable-only: true
-          url-template: https://download.kde.org/stable/kseexpr/$version0.$version1.$version2/kseexpr-$version.tar.gz
-  - name: json-c
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://s3.amazonaws.com/json-c_releases/releases/json-c-0.16.tar.gz
-        sha256: 8e45ac8f96ec7791eaf3bb7ee50e9c2100bbbc87b8d0f1d030c5ba8a0288d96b
-        x-checker-data:
-          type: anitya
-          project-id: 1477
-          stable-only: true
-          url-template: https://s3.amazonaws.com/json-c_releases/releases/json-c-$version.tar.gz
-  - name: libmypaint
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz
-        sha256: 741754f293f6b7668f941506da07cd7725629a793108bb31633fb6c3eae5315f
-        x-checker-data:
-          type: anitya
-          project-id: 12974
-          stable-only: true
-          url-template: https://github.com/mypaint/libmypaint/releases/download/v$version/libmypaint-$version.tar.xz
-      - type: patch
-        paths:
-          - patches/mypaint/0001-Add-cmake-build-system.patch
-          - patches/mypaint/0002-cmake-library-versioning-info-for-pkg-config.patch
-          - patches/mypaint/0003-cmake-library-versioning-info-for-CMake-itself.patch
-          - patches/mypaint/0004-cmake-Fix-relative-paths.patch
-          - patches/mypaint/0005-Export-all-symbols.patch
-  - name: highway
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTING=OFF
-      - -DBUILD_STATIC_LIBS=ON
-      - -DBUILD_SHARED_LIBS=OFF
-    sources:
-      - type: archive
-        url: https://github.com/google/highway/archive/refs/tags/1.0.3.tar.gz
-        sha256: 566fc77315878473d9a6bd815f7de78c73734acdcb745c3dde8579560ac5440e
-        x-checker-data:
-          type: anitya
-          project-id: 205809
-          stable-only: true
-          url-template: https://github.com/google/highway/archive/refs/tags/$version.tar.gz
-  - name: libjxl
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DBUILD_TESTING=OFF
-      - -DJPEGXL_ENABLE_BENCHMARK=OFF
-      - -DJPEGXL_ENABLE_COVERAGE=OFF
-      - -DJPEGXL_ENABLE_EXAMPLES=OFF
-      - -DJPEGXL_ENABLE_FUZZERS=OFF
-      - -DJPEGXL_ENABLE_JNI=OFF
-      - -DJPEGXL_ENABLE_SJPEG=OFF
-      - -DJPEGXL_ENABLE_SKCMS=OFF
-      - -DJPEGXL_ENABLE_TOOLS=OFF
-      - -DJPEGXL_ENABLE_VIEWERS=OFF
-    sources:
-      - type: archive
-        url: https://github.com/libjxl/libjxl/archive/refs/tags/v0.8.1.tar.gz
-        sha256: 60f43921ad3209c9e180563025eda0c0f9b1afac51a2927b9ff59fff3950dc56
-        x-checker-data:
-          type: anitya
-          project-id: 232764
-          stable-only: true
-          url-template: https://github.com/libjxl/libjxl/archive/refs/tags/v$version.tar.gz
-  - name: xsimd
-    buildsystem: cmake-ninja
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    sources:
-      - type: archive
-        url: https://github.com/xtensor-stack/xsimd/archive/refs/tags/10.0.0.tar.gz
-        sha256: 73f818368b3a4dad92fab1b2933d93694241bd2365a6181747b2df1768f6afdd
-        x-checker-data:
-          type: anitya
-          project-id: 138109
-          stable-only: true
-          url-template: https://github.com/xtensor-stack/xsimd/archive/refs/tags/$version.tar.gz
-  - name: ffmpeg
-    config-opts:
-      - --prefix=/app/lib/codecs
-      - --enable-gpl
-      - --enable-version3
-      - --disable-static
-      - --enable-shared
-      - --disable-ffprobe
-      - --disable-doc
-      - --disable-avdevice
-      - --disable-postproc
-      - --enable-libaom
-      - --enable-demuxer=image2
-      - --enable-demuxer=image2_alias_pix
-      - --enable-demuxer=image2_brender_pix
-      # Container Formats
-      - --enable-muxer=webm
-      - --enable-muxer=matroska
-      - --enable-muxer=ogg
-      # Image Formats
-      - --enable-libwebp
-      - --enable-encoder=png
-      - --enable-decoder=png
-      - --enable-encoder=apng
-      - --enable-decoder=apng
-      # Video Codecs
-      - --enable-encoder=libaom_av1
-      - --enable-libvpx
-      - --enable-encoder=libvpx_vp9
-      - --enable-encoder=libvpx_vp8
-      - --enable-libopenh264
-      - --enable-libtheora
-      # Audio Codecs
-      - --enable-encoder=flac
-      - --enable-encoder=aac
-      - --enable-libmp3lame
-      - --enable-libopus
-      - --enable-libvorbis
-=======
         url: https://github.com/stachenov/quazip/archive/refs/tags/v1.4.tar.gz
         sha256: 79633fd3a18e2d11a7d5c40c4c79c1786ba0c74b59ad752e8429746fe1781dd6
   - name: kseexpr
@@ -1567,22 +645,12 @@ modules:
     config-opts:
       - --disable-gegl
       - --disable-introspection
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
     cleanup:
       - /include
       - /lib/pkgconfig
       - /share
     sources:
       - type: archive
-<<<<<<< HEAD
-        url: https://www.ffmpeg.org/releases/ffmpeg-6.0.tar.xz
-        sha256: 57be87c22d9b49c112b6d24bc67d42508660e6b718b3db89c44e47e289137082
-        x-checker-data:
-          type: anitya
-          project-id: 5405
-          stable-only: true
-          url-template: https://www.ffmpeg.org/releases/ffmpeg-$version.tar.xz
-=======
         url: https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz
         sha256: 741754f293f6b7668f941506da07cd7725629a793108bb31633fb6c3eae5315f
     modules:
@@ -1741,30 +809,11 @@ modules:
       - type: patch
         paths:
           - patches/fftw/fix-autotools-build.patch
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
   - name: krita
     buildsystem: cmake-ninja
     builddir: true
     build-options:
       env:
-<<<<<<< HEAD
-        PYTHONPATH: /app/lib/python3.10/dist-packages
-    config-opts:
-      - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-      - -DDEFINE_NO_DEPRECATED=1
-      - -DFOUNDATION_BUILD=1
-      - -DHIDE_SAFE_ASSERTS=ON
-      - -DBUILD_TESTING=FALSE
-      - -DKRITA_ENABLE_PCH=off
-      - -DHAVE_MEMORY_LEAK_TRACKER=FALSE
-    cleanup:
-      - /share/icons/hicolor/1024x1024
-      - /share/icons/hicolor/scalable
-    sources:
-      - type: archive
-        url: https://download.kde.org/stable/krita/5.1.5/krita-5.1.5.tar.gz
-        sha256: 1c775ebef0f799a9a6b74440c3d906ab913c27541b177ed621704de714e9a4d3
-=======
         PYTHONPATH: /app/lib/python3.10/site-packages
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
@@ -1808,7 +857,6 @@ modules:
       - type: archive
         url: https://download.kde.org/stable/krita/6.0.0/krita-6.0.0.tar.gz
         sha256: 932b6876126f7c629e427ee3d012300c8286b05a184277354b414af641a0f1ed
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
         x-checker-data:
           type: anitya
           project-id: 10918
@@ -1816,12 +864,8 @@ modules:
           url-template: https://download.kde.org/stable/krita/$version/krita-$version.tar.gz
       - type: patch
         paths:
-<<<<<<< HEAD
-          - patches/krita/AppData.patch
-=======
           - patches/krita/krita_dont_use_native_file_chooser.patch
           - patches/krita/krita_appdata.patch
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
   - name: gmic
     buildsystem: cmake-ninja
     subdir: gmic-qt
@@ -1831,15 +875,5 @@ modules:
       - -DENABLE_SYSTEM_GMIC=FALSE
     sources:
       - type: archive
-<<<<<<< HEAD
-        url: https://files.kde.org/krita/build/dependencies/gmic-3.1.6.1-patched.tar.gz
-        sha256: 15e195aa728a5d88d3111a199ec73069d0491804dd49afb49beec3e85e93d994
-        x-checker-data:
-          type: html
-          url: https://invent.kde.org/graphics/krita/-/raw/master/3rdparty_plugins/ext_gmic/CMakeLists.txt
-          version-pattern: https://files.kde.org/krita/build/dependencies/gmic-([\d.]+)-patched.tar.gz
-          url-template: https://files.kde.org/krita/build/dependencies/gmic-$version-patched.tar.gz
-=======
         url: https://github.com/vanyossi/gmic/releases/download/v3.7.4.1/gmic-3.7.4.1.tar.gz
         sha256: 15674b544264fbc3f020be6fae27477aee6ac49316416f538e578a18ddb23879
->>>>>>> 5dd70c41a1f9cf712f9f5c24985f7ae9748541f9
