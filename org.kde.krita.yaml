@@ -585,6 +585,7 @@ modules:
       - -DOCIO_BUILD_APPS=OFF
     cleanup:
       - /bin
+      - /share
     sources:
       - type: archive
         url: https://github.com/AcademySoftwareFoundation/OpenColorIO/archive/refs/tags/v2.5.0.tar.gz
@@ -702,6 +703,8 @@ modules:
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    cleanup:
+      - /share
     sources:
       - type: archive
         url: https://github.com/catchorg/Catch2/archive/refs/tags/v3.4.0.tar.gz
@@ -737,6 +740,8 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DMOD_OPENCV=OFF
+    cleanup:
+      - /share
     sources:
       - type: archive
         url: https://github.com/mltframework/mlt/releases/download/v7.28.0/mlt-7.28.0.tar.gz
@@ -762,6 +767,7 @@ modules:
       - type: git
         url: https://github.com/intel/libvpl.git
         tag: v2.14.0
+        commit: 025d43d086a3e663184cb49febe86152bf05409f
   - name: poppler
     buildsystem: cmake-ninja
     config-opts:
@@ -819,38 +825,18 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=FALSE
     post-install:
-      - mv ${FLATPAK_DEST}/share/applications/krita_brush.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.brush.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_csv.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.csv.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_exr.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.exr.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_gif.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.gif.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_heif.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.heif.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_heightmap.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.heightmap.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_jp2.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.jp2.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_jpeg.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.jpeg.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_jxl.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.jxl.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_kra.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.kra.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_krz.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.krz.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_ora.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.ora.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_pdf.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.pdf.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_png.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.png.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_psd.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.psd.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_qimageio.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.qimageio.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_raw.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.raw.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_rgbe.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.rgbe.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_spriter.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.spriter.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_svg.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.svg.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_tga.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.tga.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_tiff.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.tiff.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_webp.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.webp.desktop
-      - mv ${FLATPAK_DEST}/share/applications/krita_xcf.desktop ${FLATPAK_DEST}/share/applications/org.kde.krita.xcf.desktop
-      - mv ${FLATPAK_DEST}/share/icons/hicolor/16x16/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/16x16/mimetypes/org.kde.krita.application-x-krita.png
-      - mv ${FLATPAK_DEST}/share/icons/hicolor/22x22/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/22x22/mimetypes/org.kde.krita.application-x-krita.png
-      - mv ${FLATPAK_DEST}/share/icons/hicolor/32x32/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/32x32/mimetypes/org.kde.krita.application-x-krita.png
-      - mv ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/48x48/mimetypes/org.kde.krita.application-x-krita.png
-      - mv ${FLATPAK_DEST}/share/icons/hicolor/64x64/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/mimetypes/org.kde.krita.application-x-krita.png
-      - mv ${FLATPAK_DEST}/share/icons/hicolor/128x128/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/128x128/mimetypes/org.kde.krita.application-x-krita.png
-      - mv ${FLATPAK_DEST}/share/icons/hicolor/256x256/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/256x256/mimetypes/org.kde.krita.application-x-krita.png
-      - mv ${FLATPAK_DEST}/share/icons/hicolor/512x512/mimetypes/application-x-krita.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/mimetypes/org.kde.krita.application-x-krita.png
+      - sed -i '/<p>Krita is the full-featured digital art studio.<\/p>/i \    <p>This flatpak is community maintained. Please report Flatpak specific bugs that do not occur on the upstream AppImage at https://github.com/flathub/org.kde.krita/issues.</p>' ${FLATPAK_DEST}/share/metainfo/org.kde.krita.appdata.xml
+      - |
+        applicationsdir=${FLATPAK_DEST}/share/applications
+        for f in ${applicationsdir}/krita_*.desktop; do
+          mv $f ${applicationsdir}/org.kde.krita.${f##*/krita_}
+        done
+      - |
+        hicolordir=${FLATPAK_DEST}/share/icons/hicolor
+        for s in 16 22 32 48 64 128 256 512; do
+          mimetypesdir=${hicolordir}/${s}x${s}/mimetypes
+          mv ${mimetypesdir}/application-x-krita.png ${mimetypesdir}/org.kde.krita.application-x-krita.png
+        done
     cleanup:
       - /share/icons/hicolor/1024x1024
     sources:
