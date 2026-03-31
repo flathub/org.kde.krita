@@ -840,6 +840,7 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=FALSE
+      - -DBUILD_WITH_QT6=ON
       - -DALLOW_UNSTABLE=QT6
     post-install:
       - sed -i '/<p>Krita is the full-featured digital art studio.<\/p>/i \    <p>This flatpak is community maintained. Please report Flatpak specific bugs that do not occur on the upstream AppImage at https://github.com/flathub/org.kde.krita/issues.</p>' ${FLATPAK_DEST}/share/metainfo/org.kde.krita.appdata.xml
