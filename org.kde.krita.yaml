@@ -622,10 +622,11 @@ modules:
     config-opts:
       - -DBUILD_TESTING=OFF
       - -DBUILD_SHARED_LIBS=OFF
+      - -DQT_MAJOR_VERSION=6
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/release-service/22.12.1/src/libkdcraw-22.12.1.tar.xz
-        sha256: 8b0a71937f7ed4926c2c047e0bd36001e5e98f52b1cf633d8bfbe4e4eeac65eb
+        url: https://download.kde.org/stable/release-service/24.12.2/src/libkdcraw-24.12.2.tar.xz
+        sha256: ef05c88669201701556eac097f51cf264a297d3b45db8c06465f2345ff5ceb96
   - name: gsl
     config-opts:
       - --disable-static
@@ -653,8 +654,8 @@ modules:
       - -DBUILD_UTILS=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/kseexpr/4.0.4/kseexpr-4.0.4.0.tar.gz
-        sha256: ea4f6a8e820e6cc12d2a1e6977e96ea5457f37729fe0bc4ee8cc62d4c26c36ae
+        url: https://invent.kde.org/graphics/kseexpr/-/archive/v6.0.0.0/kseexpr-v6.0.0.0.tar.gz
+        sha256: 60f84d26f922b65951a81cfb37323040927c5f01101a60f9563573016e0a52b8
   - name: libmypaint
     config-opts:
       - --disable-gegl
@@ -791,9 +792,11 @@ modules:
       - -DENABLE_UTILS=FALSE
       - -DENABLE_GLIB=FALSE
       - -DENABLE_LIBOPENJPEG=none
-      - -DENABLE_QT6=OFF
       - -DWITH_NSS3=OFF
       - -DBUILD_MANUAL_TESTS=OFF
+      - -DENABLE_QT5=OFF
+      - -DENABLE_QT6=ON
+      - -DENABLE_LIBCURL=OFF
     sources:
       - type: archive
         url: https://poppler.freedesktop.org/poppler-25.10.0.tar.xz
