@@ -9,7 +9,8 @@ rename-icon: krita
 finish-args:
   - --share=ipc
   - --share=network
-  - --socket=x11
+  - --socket=fallback-x11
+  - --socket=wayland
   - --socket=pulseaudio
   - --device=dri
   - --filesystem=host
@@ -64,80 +65,52 @@ add-extensions:
     subdirectories: true
 modules:
   - name: qtbase
-    build-options:
-      arch:
-        x86_64:
-          config-opts:
-            - -reduce-relocations
-            - -force-debug-info
-        aarch64:
-          config-opts:
-            - -no-reduce-relocations
+    buildsystem: cmake-ninja
     config-opts:
-      - -confirm-license
-      - -opensource
-      - -shared
-      - -platform
-      - linux-g++
-      - -optimized-qmake
-      - -nomake
-      - examples
-      - -nomake
-      - tests
-      - -system-harfbuzz
-      - -system-sqlite
-      - -accessibility
-      - -dbus-linked
-      - -fontconfig
-      - -glib
-      - -icu
-      - -openssl-linked
-      - -no-pch
-      - -no-rpath
-      - -no-directfb
-      - -no-linuxfb
-      - -no-kms
-      - -system-proxies
-      - -gtk
-      - -no-use-gold-linker
-      - -archdatadir
-      - /app/lib
+      - -DINSTALL_ARCHDATADIR=lib
+      - -DQT_DISABLE_RPATH=ON
+      - -DBUILD_WITH_PCH=FALSE
+      - -DQT_FEATURE_openssl_linked=ON
+      - -DQT_FEATURE_system_sqlite=ON
     cleanup:
       - /bin
     sources:
-      # See link for current Krita Qt fork and git tag https://invent.kde.org/packaging/krita-deps-management/-/blob/master/ext_qt/CMakeLists.txt
+      # See link for current Krita Qt fork and git tag https://invent.kde.org/packaging/krita-deps-management/-/blob/transition.now/qt6/ext_qt/CMakeLists.txt?ref_type=heads
       - type: git
-        url: https://invent.kde.org/szaman/qtbase.git
-        commit: 3a918b166a8454b51d0a388269407b4599e600b4
-      - type: shell
-        commands:
-          - mv configure configure.qt
-      - type: script
-        commands:
-          - processed=`sed -e 's/--/-/g ; s/=/ /g' <<< $@`
-          - ./configure.qt $processed
-        dest-filename: configure
-  - name: qtdeclarative
-    buildsystem: qmake
+        url: https://invent.kde.org/dkazakov/qtbase.git
+        commit: 0da6f39761c964b62a56d41092b8260f75394140
+  - name: qtshadertools
+    buildsystem: cmake-ninja
+    build-options:
+      cxxflags: -include cstdint # Remove when bumped to ver with GCC 15 supported
     cleanup:
       - /bin
       - /lib/plugins/qmltooling
     sources:
       - type: git
-        url: https://invent.kde.org/szaman/qtdeclarative.git
-        commit: 967fb735aeb5ef26fb1ccab42bc0720442c14fa2
+        url: https://invent.kde.org/qt/qt/qtshadertools.git
+        commit: 79c340e5632f3487c9fa08b9efedca4762c651ec
+  - name: qtdeclarative
+    buildsystem: cmake-ninja
+    cleanup:
+      - /bin
+      - /lib/plugins/qmltooling
+    sources:
+      - type: git
+        url: https://invent.kde.org/dkazakov/qtdeclarative.git
+        commit: 3c797fa613418cf201fee47ec9d70b8577d632e6
         disable-shallow-clone: true
         disable-submodules: true
   - name: qtimageformats
-    buildsystem: qmake
+    buildsystem: cmake-ninja
     cleanup:
       - /bin
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qtimageformats.git
-        commit: adbc372b890ed90f006a6c4f3ca56bf0cba477ef
+        commit: 882622945a55ee4ca8ac87e6fdcab2b9f1ade1a4
   - name: qttools
-    buildsystem: qmake
+    buildsystem: cmake-ninja
     cleanup:
       - /bin/assistant
       - /bin/qhelpgenerator
@@ -156,48 +129,40 @@ modules:
       - /bin/qdbusviewer
     sources:
       - type: git
-        url: https://invent.kde.org/szaman/qttools.git
-        commit: 3cea28be7c7dfe6fd90d3eef88ac6c2307f09051
+        url: https://invent.kde.org/dkazakov/qttools.git
+        commit: 5af29328f183c686fec96a6beba6b2728136cdc2
   - name: qtsvg
-    buildsystem: qmake
+    buildsystem: cmake-ninja
     cleanup:
       - /bin
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qtsvg.git
-        commit: 83296f10ebdb9a666b11dc69f3a148c38b9c425c
-  - name: qtx11extras
-    buildsystem: qmake
-    cleanup:
-      - /bin
-    sources:
-      - type: git
-        url: https://invent.kde.org/qt/qt/qtx11extras.git
-        commit: 9134cdba9386e408ce2ffe515ca0c3f6f6c66685
+        commit: a96fa8e059b4e969bc79c57a7328e297df138434
   - name: qttranslations
-    buildsystem: qmake
+    buildsystem: cmake-ninja
     cleanup:
       - /bin
     sources:
       - type: git
         url: https://invent.kde.org/qt/qt/qttranslations.git
-        commit: c38edd3a5501bcd53132e1e4abb7d25a98e0e1a9
-  - name: qtquickcontrols2
-    buildsystem: qmake
+        commit: fe446af4b8ac6b4a1b4126ff811e9871c4aaed4e
+  - name: qt5compat
+    buildsystem: cmake-ninja
     cleanup:
       - /bin
     sources:
       - type: git
-        url: https://invent.kde.org/qt/qt/qtquickcontrols2.git
-        commit: 5465566a4ad9f6f9758bed304153f0c7fec3437b
-  - name: qtgraphicaleffects
-    buildsystem: qmake
+        url: https://invent.kde.org/dkazakov/qt5compat.git
+        commit: 84c59db8288a4cff0585e8c1faa7f14ac9d68cc9
+  - name: qtwayland
+    buildsystem: cmake-ninja
     cleanup:
       - /bin
     sources:
       - type: git
-        url: https://invent.kde.org/qt/qt/qtgraphicaleffects.git
-        commit: a2b1600300cda89804d48ec90e0068a075fecc8b
+        url: https://invent.kde.org/dkazakov/qtwayland.git
+        commit: 588a97543d85cbc9531bdbb91b3967f0a08255a5
   - name: extra-cmake-modules
     buildsystem: cmake-ninja
     cleanup:
@@ -206,15 +171,28 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/extra-cmake-modules-5.101.0.tar.xz
-        sha256: 8c4c561310db587d390a6c84afc97e1addbaddd73b9d7a4c7309c5da9b9bc8f2
+        url: https://download.kde.org/stable/frameworks/6.7/extra-cmake-modules-6.7.0.tar.xz
+        sha256: d81de82692d3d2bb77110332a65c8266252becc2c3f307ce814990ce5607b8dc
       - type: patch
         paths:
-          - patches/frameworks/0001-Android-Skip-setting-up-fastlane.patch
-          - patches/frameworks/0002-Android-Recursively-find-dependency-of-dependencies.patch
-          - patches/frameworks/0003-Revert-Use-BIN_INSTALL_DIR-data-for-DATAROOTDIR-on-W.patch
-          - patches/frameworks/0001-ANDROID-Find-dependencies-of-manually-specified-libr.patch
+          - patches/extra-cmake-modules/0001-android-Disable-fastline-metadata-creation.patch
+          - patches/extra-cmake-modules/0002-Android-Recursively-find-dependency-of-dependencies.patch
+          - patches/extra-cmake-modules/0003-android-Fix-specifydependencies.cmake-to-handle-Qt6-.patch
+          - patches/extra-cmake-modules/0004-windows-Revert-Use-BIN_INSTALL_DIR-data-for-DATAROOT.patch
+          - patches/extra-cmake-modules/0005-android-Find-dependencies-of-manually-specified-libr.patch
+          - patches/extra-cmake-modules/0001-Fix-QML-modules-to-be-rebuilt-all-the-time-with-Qt5.patch
   - name: kconfig
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DBUILD_TESTING=OFF
+      - -DKCONFIG_USE_DBUS=OFF
+    cleanup:
+      - /bin
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/6.7/kconfig-6.7.0.tar.xz
+        sha256: be2d5ddb63e56703bc097e5d9912b39abc513ac51654de2e0d83a1aed2c54b1b
+  - name: kcodecs
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
@@ -222,47 +200,46 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/kconfig-5.101.0.tar.xz
-        sha256: ca747e485756e6d65e4eed85d1187c80b7facc958f379a68fbe862f068cb5383
-      - type: patch
-        paths:
-          - patches/frameworks/0001-Patch-kconfig-to-save-the-config-to-AppConfigLocatio.patch
-          - patches/frameworks/0002-Work-around-CMake-multi-config-generators.patch
-          - patches/frameworks/0001-Android-Fix-a-bug-where-new-file-wouldn-t-be-created.patch
+        url: https://download.kde.org/stable/frameworks/6.7/kcodecs-6.7.0.tar.xz
+        sha256: 9ab494055e06bdce45568b7c47edb2aa9ecaa9dec0c0fb152367b4321921b9f2
   - name: karchive
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/karchive-5.101.0.tar.xz
-        sha256: 58bcb6c61bc4a3fe48a0cbeaf392d42b6b8d33e1bc4c51faf24db0912ecfa9b0
+        url: https://download.kde.org/stable/frameworks/6.7/karchive-6.7.0.tar.xz
+        sha256: eb4243e627f51f1224a99af5d0a6f8e309f9e5dbb7478f7a78e34e2b8541398a
   - name: kwidgetsaddons
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DBUILD_PYTHON_BINDINGS=OFF
+      - -DBUILD_DESIGNERPLUGIN=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/kwidgetsaddons-5.101.0.tar.xz
-        sha256: 78913d3303e94329db964bf072b9e565bd582fbbd026310dce6e994c8d083823
+        url: https://download.kde.org/stable/frameworks/6.7/kwidgetsaddons-6.7.0.tar.xz
+        sha256: bd36342893863e6110c5f1245f8ae0b3a338275f4eaf124b15585d2fe492329a
   - name: kcompletion
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DBUILD_DESIGNERPLUGIN=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/kcompletion-5.101.0.tar.xz
-        sha256: d80f6fbe23285f9f914ed67ffd2a825d36850c086121666bbb62257126553f30
+        url: https://download.kde.org/stable/frameworks/6.7/kcompletion-6.7.0.tar.xz
+        sha256: 7ed5a96ab0d2ab17bb521ecaaf44d6ec6b7c9a3d6e09403360ba49b24d94560f
   - name: kcoreaddons
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
+      - -DBUILD_PYTHON_BINDINGS=OFF
     cleanup:
       - /bin
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/kcoreaddons-5.101.0.tar.xz
-        sha256: 77b64fc17f7ebbbd53bbb3614b4c3c73a0a9b21607e96e6abb2823ef1972b72a
+        url: https://download.kde.org/stable/frameworks/6.7/kcoreaddons-6.7.0.tar.xz
+        sha256: 48511e9dab1f2e80b3c4822bb87c2e981186de3b8977d92082d34d003b1283c5
   - name: kguiaddons
     buildsystem: cmake-ninja
     config-opts:
@@ -275,60 +252,79 @@ modules:
       - /share/applications/wheelmap-geo-handler.desktop
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/kguiaddons-5.101.0.tar.xz
-        sha256: 9894e4193b3cb7b4ed5e3a591cf12043fb87683b09db77e465aa4453c7c757b7
-      - type: patch
-        paths:
-          - patches/frameworks/0001-geo-scheme-handler-Don-t-make-it-into-a-bundle-i.patch
+        url: https://download.kde.org/stable/frameworks/6.7/kguiaddons-6.7.0.tar.xz
+        sha256: ac437ca6baf50b0178bc8bf0b4dd1e6e70e0e4ef1ac770259738a1c42d035bcc
   - name: ki18n
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/ki18n-5.101.0.tar.xz
-        sha256: bf1530be9279d476c0531988eeb1c032e208f6010c8f00880bb5d694229fef65
+        url: https://download.kde.org/stable/frameworks/6.7/ki18n-6.7.0.tar.xz
+        sha256: 555b5bc19546c3a791c69724e238c5d1710a9575cf8740012f8fc546f354122b
       - type: patch
         paths:
-          - patches/frameworks/0001-ki18n-fix-loading-catalogs-with-patched-gettext.patch
-          - patches/frameworks/0002-Ensure-langenv-string-is-null-terminated.patch
-          - patches/frameworks/0003-Patch-the-location-where-ki18n-looks-for-catalogs.patch
-  - name: kitemviews
+          - patches/ki18n/0001-ki18n-fix-loading-catalogs-with-patched-gettext.patch
+          - patches/ki18n/0002-Ensure-langenv-string-is-null-terminated.patch
+  - name: kitemmodels
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/kitemviews-5.101.0.tar.xz
-        sha256: aca259eeff2dde1434cdf3ff3d979e9b17dd55bad15dd7341f92700cf8418fb1
+        url: https://download.kde.org/stable/frameworks/6.7/kitemmodels-6.7.0.tar.xz
+        sha256: 0aa0205323baf2d519ebb8f96ce7ed5524a8164a7440d905f977418bfbe6d349
+  - name: kitemviews
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DBUILD_TESTING=OFF
+      - -DBUILD_DESIGNERPLUGIN=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/6.7/kitemviews-6.7.0.tar.xz
+        sha256: 5e635162993c9f1e15f3a1109ca3227d0d2ce57cf7070615651b65cf790db049
   - name: kimageformats
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
       - -DKIMAGEFORMATS_JXL=OFF
+      - -DCMAKE_DISABLE_FIND_PACKAGE_OpenEXR=TRUE
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/kimageformats-5.101.0.tar.xz
-        sha256: ae19b07141fdf977035e6decc50fa45855c0e635f57333a2443d3c24464c625f
-      - type: patch
-        paths:
-          - patches/frameworks/0001-comment-out-jxl-0.9.0-API-change.patch
+        url: https://download.kde.org/stable/frameworks/6.7/kimageformats-6.7.0.tar.xz
+        sha256: 722850648ac167e4c0ee631571fde49e9fd15d004a127dd804a14f9f579b731f
+  - name: plasma-wayland-protocols
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://github.com/KDE/plasma-wayland-protocols/archive/refs/tags/v1.13.0.tar.gz
+        sha256: b4441a673cfb5dcdef921a2793b2dc6de6c4bed00ac005814376fc16caf1a016
   - name: kwindowsystem
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/kwindowsystem-5.101.0.tar.xz
-        sha256: ef6b9e733e320be63a4557da0453b1a8ea81519e01c1737eff69b66401302eb8
+        url: https://download.kde.org/stable/frameworks/6.7/kwindowsystem-6.7.0.tar.xz
+        sha256: 62c0f0b4a9507939d84aeeda55bbd4300b88c04e37953e5189b139003310a8f4
+  - name: kcolorscheme
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DBUILD_TESTING=OFF
+    sources:
+      - type: archive
+        url: https://download.kde.org/stable/frameworks/6.7/kcolorscheme-6.7.0.tar.xz
+        sha256: 1b4c6e84f1dd96b2ee62be755f60da60d61ba80d6709eeb3186d8882e72e2130
   - name: kcrash
     buildsystem: cmake-ninja
     config-opts:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/kcrash-5.101.0.tar.xz
-        sha256: 6dd10951db01918681a8ce6e9e3a99d3f8b5170d2c5a0b5212007e68db0c937a
+        url: https://download.kde.org/stable/frameworks/6.7/kcrash-6.7.0.tar.xz
+        sha256: 1dc2c65d8ef62ef98457f8ab423b7686de3e713766c06e64d6322aa9db26eea4
   - name: pyqt
     buildsystem: simple
     build-commands:
@@ -338,8 +334,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/0e/07/c9ed0bd428df6f87183fca565a79fee19fa7c88c7f00a7f011ab4379e77a/PyQt5-5.15.11.tar.gz
-        sha256: fda45743ebb4a27b4b1a51c6d8ef455c4c1b5d610c90d2934c7802b5c1557c52
+        url: https://files.pythonhosted.org/packages/ce/bf/ff284a136b39cb1873c18e4fca4a40a8847c84a1910c5fb38c6a77868968/pyqt6-6.8.1.tar.gz
+        sha256: 91d937d6166274fafd70f4dee11a8da6dbfdb0da53de05f5d62361ddf775e256
     modules:
       - name: sip
         buildsystem: simple
@@ -467,19 +463,19 @@ modules:
         buildsystem: simple
         build-commands:
           - pip3 install --verbose --exists-action=i --no-index --find-links="file://${PWD}"
-            --prefix=${FLATPAK_DEST} "PyQt5_sip" --no-build-isolation
+            --prefix=${FLATPAK_DEST} "PyQt6_sip" --no-build-isolation
         sources:
           - type: file
-            url: https://files.pythonhosted.org/packages/01/79/086b50414bafa71df494398ad277d72e58229a3d1c1b1c766d12b14c2e6d/pyqt5_sip-12.17.0.tar.gz
-            sha256: 682dadcdbd2239af9fdc0c0628e2776b820e128bec88b49b8d692fe682f90b4f
+            url: https://files.pythonhosted.org/packages/90/18/0405c54acba0c8e276dd6f0601890e6e735198218d031a6646104870fe22/pyqt6_sip-13.10.0.tar.gz
+            sha256: d6daa95a0bd315d9ec523b549e0ce97455f61ded65d5eafecd83ed2aa4ae5350
   - name: fcitx5-qt
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=OFF
       - -DENABLE_QT4=OFF
-      - -DENABLE_QT5=ON
-      - -DENABLE_QT6=OFF
+      - -DENABLE_QT5=OFF
+      - -DENABLE_QT6=ON
       - -DBUILD_ONLY_PLUGIN=ON
     sources:
       - type: archive
@@ -841,6 +837,7 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=FALSE
+      - -DALLOW_UNSTABLE=QT6
     post-install:
       - sed -i '/<p>Krita is the full-featured digital art studio.<\/p>/i \    <p>This flatpak is community maintained. Please report Flatpak specific bugs that do not occur on the upstream AppImage at https://github.com/flathub/org.kde.krita/issues.</p>' ${FLATPAK_DEST}/share/metainfo/org.kde.krita.appdata.xml
       - |

@@ -1,0 +1,27 @@
+From ba71b15dacbe0c90ca6b034e4e7f90566cf747ec Mon Sep 17 00:00:00 2001
+From: Dmitry Kazakov <dimula73@gmail.com>
+Date: Thu, 31 Jul 2025 19:25:36 +0200
+Subject: [PATCH] Fix QML modules to be rebuilt all the time with Qt5
+
+It seems like BYPRODUCTS field of add_custom_command() requires
+absolute path, not something based in WORKING_DIRECTORY
+---
+ modules/ECMQmlModule5.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/modules/ECMQmlModule5.cmake b/modules/ECMQmlModule5.cmake
+index 2c96710..ac91475 100644
+--- a/modules/ECMQmlModule5.cmake
++++ b/modules/ECMQmlModule5.cmake
+@@ -333,7 +333,7 @@ function(ecm_finalize_qml_module ARG_TARGET)
+             WORKING_DIRECTORY ${_runtime_output_dir}
+             COMMAND ${CMAKE_COMMAND} -E make_directory ${_file_path}
+             COMMAND ${CMAKE_COMMAND} -E copy ${_file} ${_file_path}
+-            BYPRODUCTS ${_file_path}/${_filename}
++            BYPRODUCTS ${_runtime_output_dir}/${_file_path}/${_filename}
+         )
+     endforeach()
+ endfunction()
+-- 
+2.49.0.windows.1
+
