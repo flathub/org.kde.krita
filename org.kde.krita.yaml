@@ -18,7 +18,6 @@ finish-args:
   - --env=PYTHONPATH=/app/lib/python3.13/site-packages
   - --env=LADSPA_PATH=/app/extensions/Plugins/ladspa:/app/lib/ladspa
   - --env=TMPDIR=/var/tmp
-  - --env=QT_QPA_PLATFORMTHEME=gtk3
   - --env=FLATPAK=1
   - --system-talk-name=org.freedesktop.ColorManager
   - --talk-name=com.canonical.AppMenu.Registrar
@@ -72,6 +71,8 @@ modules:
       - -DBUILD_WITH_PCH=FALSE
       - -DQT_FEATURE_openssl_linked=ON
       - -DQT_FEATURE_system_sqlite=ON
+      - -DQT_FEATURE_xcb=ON
+      - -DFEATURE_mimetype_database=OFF
     cleanup:
       - /bin
     sources:
