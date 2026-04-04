@@ -600,7 +600,6 @@ modules:
       - -DOCIO_BUILD_APPS=OFF
     cleanup:
       - /bin
-      - /share
     sources:
       - type: archive
         url: https://github.com/AcademySoftwareFoundation/OpenColorIO/releases/download/v2.5.1/OpenColorIO-2.5.1.tar.gz
@@ -718,8 +717,6 @@ modules:
     builddir: true
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
-    cleanup:
-      - /share
     sources:
       - type: archive
         url: https://github.com/catchorg/Catch2/archive/refs/tags/v3.4.0.tar.gz
@@ -755,8 +752,6 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DMOD_OPENCV=OFF
-    cleanup:
-      - /share
     sources:
       - type: archive
         url: https://github.com/mltframework/mlt/releases/download/v7.28.0/mlt-7.28.0.tar.gz
