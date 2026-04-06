@@ -15,6 +15,9 @@ finish-args:
   - --env=PYTHONPATH=/app/lib/python3.13/site-packages
   - --env=LADSPA_PATH=/app/extensions/Plugins/ladspa:/app/lib/ladspa
   - --env=TMPDIR=/var/tmp
+  - --unset-env=QT_PLUGIN_PATH
+  - --unset-env=QT_QPA_PLATFORM
+  - --env=QT_QPA_PLATFORMTHEME=gtk3
   - --env=FLATPAK=1
   - --system-talk-name=org.freedesktop.ColorManager
   - --talk-name=com.canonical.AppMenu.Registrar
