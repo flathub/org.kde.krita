@@ -1,0 +1,26 @@
+From d9c8b244a94462319412edfc34e9304e21bf8cdb Mon Sep 17 00:00:00 2001
+From: Dmitry Kazakov <dimula73@gmail.com>
+Date: Mon, 17 Feb 2025 14:03:11 +0100
+Subject: [PATCH 3/5] [android] Fix specifydependencies.cmake to handle Qt6
+ libraries
+
+---
+ toolchain/specifydependencies.cmake | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/toolchain/specifydependencies.cmake b/toolchain/specifydependencies.cmake
+index 259c011..b5ddd52 100644
+--- a/toolchain/specifydependencies.cmake
++++ b/toolchain/specifydependencies.cmake
+@@ -30,7 +30,7 @@ macro(list_dependencies target libs)
+             string(REGEX MATCH ".*\\(NEEDED\\) +Shared library: +\\[(.+)\\]$" matched ${line})
+             set(currentLib ${CMAKE_MATCH_1})
+ 
+-            if(NOT ${currentLib} MATCHES "libQt5.*" AND matched)
++            if(NOT ${currentLib} MATCHES "libQt5.*" AND NOT ${currentLib} MATCHES "libQt6.*" AND matched)
+                 find_file(ourlib-${currentLib} ${currentLib} HINTS ${OUTPUT_DIR} ${EXPORT_DIR} ${ECM_ADDITIONAL_FIND_ROOT_PATH} NO_DEFAULT_PATH PATH_SUFFIXES lib)
+ 
+                 if(ourlib-${currentLib})
+-- 
+2.23.0.windows.1
+

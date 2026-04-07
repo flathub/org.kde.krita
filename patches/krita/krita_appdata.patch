@@ -1,0 +1,45 @@
+diff --git a/krita/org.kde.krita.appdata.xml b/krita/org.kde.krita.appdata.xml
+index 8d3f711..7e85a2a 100644
+--- a/krita/org.kde.krita.appdata.xml
++++ b/krita/org.kde.krita.appdata.xml
+@@ -632,22 +633,24 @@
+     </release>
+     <release date="2026-01-28" version="5.2.15">
+       <url>https://krita.org/en/posts/2026/krita-5.2.15-released/</url>
+-<description>A bug fix release with a number of crash fixes and workarounds to improve use with the Xiaomi Pad</description>
+-      <description xml:lang="ar">هذا الإصدار مخصص لإصلاح العلات مع عدد من إصلاحات الانهيار وحلول بديلة لتحسين الاستخدام مع Xiaomi Pad</description>
+-      <description xml:lang="ca">Una versió de correcció d'errors amb diverses correccions de fallades i solucions per a millorar l'ús amb el Xiaomi Pad</description>
+-      <description xml:lang="ca-valencia">Una versió d'esmena d'errors amb diverses correccions de fallades i solucions per a millorar l'ús amb el Xiaomi Pad</description>
+-      <description xml:lang="cs">Opravné vydání, která obsahuje řadu oprav pádů a řešení, aby se zlepšila použitelnost s tabletem Xiaomi Pad</description>
+-      <description xml:lang="es">Una versión de corrección de errores con una serie de correcciones de fallos y soluciones alternativas para mejorar el uso del Xiaomi Pad.</description>
+-      <description xml:lang="fr">Une version corrective incluant la correction de plusieurs plantages et des solutions de contournement pour améliorer l'utilisation du pavé tactile de Xiaomi</description>
+-      <description xml:lang="he">מהדורת תיקון תקלות עם כמה תיקוני תקלות ומעקפים לשיפור השימושיות עם Xiaomi Pad</description>
+-      <description xml:lang="it">Un rilascio di correzione errori che corregge diversi blocchi e contiene soluzioni temporanee per migliorarne l'uso col Xiaomi Pad</description>
+-      <description xml:lang="ka">გასწორდა ხარვეზები, მათ შორის პროგრამის გათიშვის შემთხვევები და დაემატა დროებითი გადაწყვეტები Xiaomi Pad-თან თავსებადობის გასაუმჯობესებლად</description>
+-      <description xml:lang="nl">Dit is een uitgave met gerepareerde bugs waarin een aantal crashes zijn opgelost om gebruik te verbeteren met de Xiaomi Pad</description>
+-      <description xml:lang="pt-BR">Uma versão com correções de bugs, incluindo diversas soluções para travamentos e soluções alternativas para melhorar a experiência com o Xiaomi Pad</description>
+-      <description xml:lang="ru">Выпуск с исправлениями ошибок, включая устранение ряда причин аварийного завершения и обходные решения для улучшения работы с планшетом Xiaomi Pad.</description>
+-      <description xml:lang="sl">Izboljšana različica z več popravki napak in rešitvami za boljšo uporabo s tablico Xiaomi Pad.</description>
+-      <description xml:lang="uk">Це випуск із виправленнями вад, зокрема аварійних завершень роботи, а також удосконаленнями для користування з Xiaomi Pad</description>
+-      <description xml:lang="zh-CN">这是一个程序缺陷修复版本，重点修复了一系列崩溃问题，并改善了小米平板的压感笔兼容性。</description>
++      <description>
++        <p>A bug fix release with a number of crash fixes and workarounds to improve use with the Xiaomi Pad</p>
++        <p xml:lang="ar">هذا الإصدار مخصص لإصلاح العلات مع عدد من إصلاحات الانهيار وحلول بديلة لتحسين الاستخدام مع Xiaomi Pad</p>
++        <p xml:lang="ca">Una versió de correcció d'errors amb diverses correccions de fallades i solucions per a millorar l'ús amb el Xiaomi Pad</p>
++        <p xml:lang="ca-valencia">Una versió d'esmena d'errors amb diverses correccions de fallades i solucions per a millorar l'ús amb el Xiaomi Pad</p>
++        <p xml:lang="cs">Opravné vydání, která obsahuje řadu oprav pádů a řešení, aby se zlepšila použitelnost s tabletem Xiaomi Pad</p>
++        <p xml:lang="es">Una versión de corrección de errores con una serie de correcciones de fallos y soluciones alternativas para mejorar el uso del Xiaomi Pad.</p>
++        <p xml:lang="fr">Une version corrective incluant la correction de plusieurs plantages et des solutions de contournement pour améliorer l'utilisation du pavé tactile de Xiaomi</p>
++        <p xml:lang="he">מהדורת תיקון תקלות עם כמה תיקוני תקלות ומעקפים לשיפור השימושיות עם Xiaomi Pad</p>
++        <p xml:lang="it">Un rilascio di correzione errori che corregge diversi blocchi e contiene soluzioni temporanee per migliorarne l'uso col Xiaomi Pad</p>
++        <p xml:lang="ka">გასწორდა ხარვეზები, მათ შორის პროგრამის გათიშვის შემთხვევები და დაემატა დროებითი გადაწყვეტები Xiaomi Pad-თან თავსებადობის გასაუმჯობესებლად</p>
++        <p xml:lang="nl">Dit is een uitgave met gerepareerde bugs waarin een aantal crashes zijn opgelost om gebruik te verbeteren met de Xiaomi Pad</p>
++        <p xml:lang="pt-BR">Uma versão com correções de bugs, incluindo diversas soluções para travamentos e soluções alternativas para melhorar a experiência com o Xiaomi Pad</p>
++        <p xml:lang="ru">Выпуск с исправлениями ошибок, включая устранение ряда причин аварийного завершения и обходные решения для улучшения работы с планшетом Xiaomi Pad.</p>
++        <p xml:lang="sl">Izboljšana različica z več popravki napak in rešitvami za boljšo uporabo s tablico Xiaomi Pad.</p>
++        <p xml:lang="uk">Це випуск із виправленнями вад, зокрема аварійних завершень роботи, а також удосконаленнями для користування з Xiaomi Pad</p>
++        <p xml:lang="zh-CN">这是一个程序缺陷修复版本，重点修复了一系列崩溃问题，并改善了小米平板的压感笔兼容性。</p>
++      </description>
+     </release>
+     <release date="2025-12-11" version="5.2.14">
+       <url>https://krita.org/en/posts/2025/krita-5.2.14-released/</url>
