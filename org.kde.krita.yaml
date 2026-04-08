@@ -359,8 +359,8 @@ modules:
               - --without-static-libpython
             sources:
               - type: archive
-                url: https://www.python.org/ftp/python/3.13.12/Python-3.13.12.tar.xz
-                sha256: 2a84cd31dd8d8ea8aaff75de66fc1b4b0127dd5799aa50a64ae9a313885b4593
+                url: https://www.python.org/ftp/python/3.13.13/Python-3.13.13.tar.xz
+                sha256: 2ab91ff401783ccca64f75d10c882e957bdfd60e2bf5a72f8421793729b78a71
                 x-checker-data:
                   type: anitya
                   project-id: 13254
@@ -837,7 +837,10 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=FALSE
     post-install:
-      - sed -i '/<p>Krita is the full-featured digital art studio.<\/p>/i \    <p>This flatpak is community maintained. Please report Flatpak specific bugs that do not occur on the upstream AppImage at https://github.com/flathub/org.kde.krita/issues.</p>' ${FLATPAK_DEST}/share/metainfo/org.kde.krita.appdata.xml
+      - sed -i '/<p>Krita is the full-featured digital art studio.<\/p>/i \    <p>This
+        flatpak is community maintained. Please report Flatpak specific bugs that
+        do not occur on the upstream AppImage at https://github.com/flathub/org.kde.krita/issues.</p>'
+        ${FLATPAK_DEST}/share/metainfo/org.kde.krita.appdata.xml
       - |
         cd ${FLATPAK_DEST}/share/applications
         rename krita_ org.kde.krita. krita*.desktop
