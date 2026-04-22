@@ -359,8 +359,8 @@ modules:
               - --without-static-libpython
             sources:
               - type: archive
-                url: https://www.python.org/ftp/python/3.13.12/Python-3.13.12.tar.xz
-                sha256: 2a84cd31dd8d8ea8aaff75de66fc1b4b0127dd5799aa50a64ae9a313885b4593
+                url: https://www.python.org/ftp/python/3.13.13/Python-3.13.13.tar.xz
+                sha256: 2ab91ff401783ccca64f75d10c882e957bdfd60e2bf5a72f8421793729b78a71
                 x-checker-data:
                   type: anitya
                   project-id: 13254
@@ -391,8 +391,8 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/65/ee/299d360cdc32edc7d2cf530f3accf79c4fca01e96ffc950d8a52213bd8e4/packaging-26.0.tar.gz
-                sha256: 00243ae351a257117b6a241061796684b084ed1c516a08c48a3f7e147a9d80b4
+                url: https://files.pythonhosted.org/packages/df/de/0d2b39fb4af88a0258f3bac87dfcbb48e73fbdea4a2ed0e2213f9a4c2f9a/packaging-26.1.tar.gz
+                sha256: f042152b681c4bfac5cae2742a55e103d27ab2ec0f3d88037136b6bfe7c9c5de
                 x-checker-data:
                   type: pypi
                   name: packaging
@@ -405,8 +405,8 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/89/24/a2eb353a6edac9a0303977c4cb048134959dd2a51b48a269dfc9dde00c8a/wheel-0.46.3.tar.gz
-                sha256: e3e79874b07d776c40bd6033f8ddf76a7dad46a7b8aa1b2787a83083519a1803
+                url: https://files.pythonhosted.org/packages/39/62/75f18a0f03b4219c456652c7780e4d749b929eb605c098ce3a5b6b6bc081/wheel-0.47.0.tar.gz
+                sha256: cc72bd1009ba0cf63922e28f94d9d83b920aa2bb28f798a31d0691b02fa3c9b3
                 x-checker-data:
                   type: pypi
                   name: wheel
@@ -837,7 +837,10 @@ modules:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=FALSE
     post-install:
-      - sed -i '/<p>Krita is the full-featured digital art studio.<\/p>/i \    <p>This flatpak is community maintained. Please report Flatpak specific bugs that do not occur on the upstream AppImage at https://github.com/flathub/org.kde.krita/issues.</p>' ${FLATPAK_DEST}/share/metainfo/org.kde.krita.appdata.xml
+      - sed -i '/<p>Krita is the full-featured digital art studio.<\/p>/i \    <p>This
+        flatpak is community maintained. Please report Flatpak specific bugs that
+        do not occur on the upstream AppImage at https://github.com/flathub/org.kde.krita/issues.</p>'
+        ${FLATPAK_DEST}/share/metainfo/org.kde.krita.appdata.xml
       - |
         cd ${FLATPAK_DEST}/share/applications
         rename krita_ org.kde.krita. krita*.desktop
