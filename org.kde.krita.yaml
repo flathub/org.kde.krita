@@ -841,6 +841,9 @@ modules:
       - |
         cd ${FLATPAK_DEST}/share/applications
         rename krita_ org.kde.krita. krita*.desktop
+        for f in org.kde.krita.*; do
+          desktop-file-edit --set-key=Icon --set-value=org.kde.krita f
+        done
       - |
         hicolordir=${FLATPAK_DEST}/share/icons/hicolor
         for s in 16 22 32 48 64 128 256 512; do
