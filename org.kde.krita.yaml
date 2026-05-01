@@ -840,8 +840,10 @@ modules:
       - sed -i '/<p>Krita is the full-featured digital art studio.<\/p>/i \    <p>This flatpak is community maintained. Please report Flatpak specific bugs that do not occur on the upstream AppImage at https://github.com/flathub/org.kde.krita/issues.</p>' ${FLATPAK_DEST}/share/metainfo/org.kde.krita.appdata.xml
       - |
         cd ${FLATPAK_DEST}/share/applications
-        sed -i 's/Icon=krita/Icon=org.kde.krita/g' krita_*.desktop
         rename krita_ org.kde.krita. krita*.desktop
+        for f in org.kde.krita.*; do
+          desktop-file-edit --set-key=Icon --set-value=org.kde.krita f
+        done
       - |
         hicolordir=${FLATPAK_DEST}/share/icons/hicolor
         for s in 16 22 32 48 64 128 256 512; do
