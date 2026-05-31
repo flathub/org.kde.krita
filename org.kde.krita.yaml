@@ -867,6 +867,7 @@ modules:
       - type: patch
         paths:
           - patches/krita/krita_dont_use_native_file_chooser.patch
+          - patches/krita/krita_appdata.patch
   - name: gmic
     buildsystem: cmake-ninja
     subdir: gmic-qt
