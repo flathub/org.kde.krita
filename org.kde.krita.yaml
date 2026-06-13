@@ -19,6 +19,7 @@ finish-args:
   - --unset-env=QT_QPA_PLATFORM
   - --env=QT_QPA_PLATFORMTHEME=gtk3
   - --env=FLATPAK=1
+  - --env=QML_DISABLE_DISK_CACHE=1
   - --system-talk-name=org.freedesktop.ColorManager
   - --talk-name=com.canonical.AppMenu.Registrar
 cleanup:
