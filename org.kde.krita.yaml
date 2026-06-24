@@ -21,6 +21,7 @@ finish-args:
   - --unset-env=QT_QPA_PLATFORM
   - --env=QT_QPA_PLATFORMTHEME=gtk3
   - --env=FLATPAK=1
+  - --env=QML_DISABLE_DISK_CACHE=1
   - --system-talk-name=org.freedesktop.ColorManager
 cleanup:
   - /doc
@@ -837,13 +838,17 @@ modules:
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
       - -DBUILD_TESTING=FALSE
-      - -DBUILD_WITH_QT6=ON
-      - -DALLOW_UNSTABLE=QT6
     post-install:
-      - sed -i '/<p>Krita is the full-featured digital art studio.<\/p>/i \    <p>This flatpak is community maintained. Please report Flatpak specific bugs that do not occur on the upstream AppImage at https://github.com/flathub/org.kde.krita/issues.</p>' ${FLATPAK_DEST}/share/metainfo/org.kde.krita.appdata.xml
+      - sed -i '/<p>Krita is the full-featured digital art studio.<\/p>/i \    <p>This
+        flatpak is community maintained. Please report Flatpak specific bugs that
+        do not occur on the upstream AppImage at https://github.com/flathub/org.kde.krita/issues.</p>'
+        ${FLATPAK_DEST}/share/metainfo/org.kde.krita.appdata.xml
       - |
         cd ${FLATPAK_DEST}/share/applications
         rename krita_ org.kde.krita. krita*.desktop
+        for f in org.kde.krita.*; do
+          desktop-file-edit --set-icon=${FLATPAK_ID} $f
+        done
       - |
         hicolordir=${FLATPAK_DEST}/share/icons/hicolor
         for s in 16 22 32 48 64 128 256 512; do
@@ -854,8 +859,8 @@ modules:
       - /share/icons/hicolor/1024x1024
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/6.0.1/krita-6.0.1.tar.gz
-        sha256: 08e75d14c805261fc8228bec16def4705f6e9cfb0191e71bd04cc4c0e182848a
+        url: https://download.kde.org/stable/krita/6.0.2.1/krita-6.0.2.1.tar.gz
+        sha256: 67533cb115dec2a5987b5afa7dd4cf8e0444b907cd99349cf1d0fb64456e40f8
         x-checker-data:
           type: anitya
           project-id: 10918
