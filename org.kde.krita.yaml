@@ -378,8 +378,8 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/69/59/b6fc2188dfc7ea4f936cd12b49d707f66a1cb7a1d2c16172963534db741b/flit_core-3.12.0.tar.gz
-                sha256: 18f63100d6f94385c6ed57a72073443e1a71a4acb4339491615d0f16d6ff01b2
+                url: https://files.pythonhosted.org/packages/46/ef/34533186e76c526d9ec17a1ad9a10c7354cbfb20f51583cc36dfe4bdccd0/flit_core-4.0.2.tar.gz
+                sha256: b6929defd93884b584d7c87829e0e7b5c26ed6be17b0b873979019314aa841c8
                 x-checker-data:
                   type: pypi
                   name: flit_core
@@ -392,8 +392,8 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/d7/f1/e7a6dd94a8d4a5626c03e4e99c87f241ba9e350cd9e6d75123f992427270/packaging-26.2.tar.gz
-                sha256: ff452ff5a3e828ce110190feff1178bb1f2ea2281fa2075aadb987c2fb221661
+                url: https://files.pythonhosted.org/packages/7d/fa/3944b40b07da9ce895c0e6303a5ab7d53da063554f534556b134a54d6093/packaging-26.3.tar.gz
+                sha256: 94edc256424af38762eb31306eed28beb9f0efc50a8837492c9d6fd6004aed79
                 x-checker-data:
                   type: pypi
                   name: packaging
@@ -420,8 +420,8 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/4f/db/cfac1baf10650ab4d1c111714410d2fbb77ac5a616db26775db562c8fab2/setuptools-82.0.1.tar.gz
-                sha256: 7d872682c5d01cfde07da7bccc7b65469d3dca203318515ada1de5eda35efbf9
+                url: https://files.pythonhosted.org/packages/34/26/f5d29e25ffdb535afef2d35cdb55b325298f96debd670da4c325e08d70f4/setuptools-83.0.0.tar.gz
+                sha256: 025bccbbf0fa05b6192bc64ae1e7b16e001fd6d6d4d5de03c97b1c1ade523bef
                 x-checker-data:
                   type: pypi
                   name: setuptools
@@ -858,8 +858,8 @@ modules:
       - /share/icons/hicolor/1024x1024
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/6.0.2.1/krita-6.0.2.1.tar.gz
-        sha256: 67533cb115dec2a5987b5afa7dd4cf8e0444b907cd99349cf1d0fb64456e40f8
+        url: https://download.kde.org/stable/krita/6.0.3/krita-6.0.3.tar.gz
+        sha256: 06397997a3b6700d5167068dc0f50cc356d82018611ed37087a1566790b721a8
         x-checker-data:
           type: anitya
           project-id: 10918
