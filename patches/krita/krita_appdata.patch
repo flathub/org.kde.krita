@@ -2,94 +2,123 @@ diff --git a/krita/org.kde.krita.appdata.xml b/krita/org.kde.krita.appdata.xml
 index 8d3f711..7e85a2a 100644
 --- a/krita/org.kde.krita.appdata.xml
 +++ b/krita/org.kde.krita.appdata.xml
-@@ -650,22 +650,22 @@
-         <p>A hotfix release fixing two regressions in for 5.3.2</p>
+@@ -666,29 +666,6 @@
+         <p xml:lang="uk">Проміжний випуск із виправленнями вад для каналу Krita Stable</p>
+         <p xml:lang="zh-CN">Krita 稳定分支的小缺陷修复版本</p>
        </description>
-       <artifacts>
+-      <artifacts>
 -        <artifact type="binary" platform="x86_64-appimage" bundle="appimage">
-+        <artifact type="binary" platform="x86_64-linux-any" bundle="appimage">
-           <location>https://download.kde.org/stable/krita/5.3.2.1/krita-5.3.2.1-x86_64.AppImage</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.3/krita-5.3.3-x86_64.AppImage</location>
+-        </artifact>
 -        <artifact type="binary" platform="macOS">
-+        <artifact type="binary" platform="aarch64-macos-any">
-           <location>https://download.kde.org/stable/krita/5.3.2.1/krita-5.3.2.1-signed.dmg</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.3/krita-5.3.3-signed.dmg</location>
+-        </artifact>
 -        <artifact type="binary" platform="win64">
-+        <artifact type="binary" platform="x86_64-windows-any">
-           <location>https://download.kde.org/stable/krita/5.3.2.1/krita-x64-5.3.2.1-setup.exe</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.3/krita-x64-5.3.3-setup.exe</location>
+-        </artifact>
 -        <artifact type="binary" platform="android-x86_64">
-+        <artifact type="binary" platform="x86_64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.2.1/krita-x86_64-5.3.2.1-release-signed.apk</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.3/krita-x86_64-5.3.3-release-signed.apk</location>
+-        </artifact>
 -        <artifact type="binary" platform="android-arm64_v8a">
-+        <artifact type="binary" platform="aarch64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.2.1/krita-arm64-v8a-5.3.2.1-release-signed.apk</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.3/krita-arm64-v8a-5.3.3-release-signed.apk</location>
+-        </artifact>
 -        <artifact type="binary" platform="android-armeabi_v7a">
-+        <artifact type="binary" platform="aarch64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.2.1/krita-armeabi-v7a-5.3.2.1-release-signed.apk</location>
-         </artifact>
-         <artifact type="source">
-@@ -679,22 +679,22 @@
-         <p>A minor bugfix release for the Krita Stable channel</p>
+-          <location>https://download.kde.org/stable/krita/5.3.3/krita-armeabi-v7a-5.3.3-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="source">
+-          <location>https://download.kde.org/stable/krita/6.0.3/krita-6.0.3.tar.xz</location>
+-        </artifact>
+-      </artifacts>
+     </release>
+     <release date="2026-06-01" version="5.3.2.1">
+       <url>https://krita.org/en/posts/2026/krita-5.3.2.1-released/</url>
+@@ -712,29 +689,6 @@
+         <p xml:lang="uk">Проміжний випуск із виправленнями вад для каналу Krita Stable</p>
+         <p xml:lang="zh-CN">Krita 稳定分支的小缺陷修复版本</p>
        </description>
-       <artifacts>
+-      <artifacts>
 -        <artifact type="binary" platform="x86_64-appimage" bundle="appimage">
-+        <artifact type="binary" platform="x86_64-linux-any" bundle="appimage">
-           <location>https://download.kde.org/stable/krita/5.3.2/krita-5.3.2-x86_64.AppImage</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.2.1/krita-5.3.2.1-x86_64.AppImage</location>
+-        </artifact>
 -        <artifact type="binary" platform="macOS">
-+        <artifact type="binary" platform="aarch64-macos-any">
-           <location>https://download.kde.org/stable/krita/5.3.2/krita-5.3.2-signed.dmg</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.2.1/krita-5.3.2.1-signed.dmg</location>
+-        </artifact>
 -        <artifact type="binary" platform="win64">
-+        <artifact type="binary" platform="x86_64-windows-any">
-           <location>https://download.kde.org/stable/krita/5.3.2/krita-x64-5.3.2-setup.exe</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.2.1/krita-x64-5.3.2.1-setup.exe</location>
+-        </artifact>
 -        <artifact type="binary" platform="android-x86_64">
-+        <artifact type="binary" platform="x86_64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.2/krita-x86_64-5.3.2-release-signed.apk</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.2.1/krita-x86_64-5.3.2.1-release-signed.apk</location>
+-        </artifact>
 -        <artifact type="binary" platform="android-arm64_v8a">
-+        <artifact type="binary" platform="aarch64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.2/krita-arm64-v8a-5.3.2-release-signed.apk</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.2.1/krita-arm64-v8a-5.3.2.1-release-signed.apk</location>
+-        </artifact>
 -        <artifact type="binary" platform="android-armeabi_v7a">
-+        <artifact type="binary" platform="aarch64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.2/krita-armeabi-v7a-5.3.2-release-signed.apk</location>
-         </artifact>
-         <artifact type="source">
-@@ -726,22 +726,22 @@
+-          <location>https://download.kde.org/stable/krita/5.3.2.1/krita-armeabi-v7a-5.3.2.1-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="source">
+-          <location>https://download.kde.org/stable/krita/6.0.2.1/krita-6.0.2.1.tar.xz</location>
+-        </artifact>
+-      </artifacts>
+     </release>
+     <release date="2026-05-27" version="5.3.2">
+       <url>https://krita.org/en/posts/2026/krita-5.3.2-released/</url>
+@@ -758,29 +712,6 @@
+         <p xml:lang="uk">Проміжний випуск із виправленнями вад для каналу Krita Stable</p>
+         <p xml:lang="zh-CN">Krita 稳定分支的小缺陷修复版本</p>
+       </description>
+-      <artifacts>
+-        <artifact type="binary" platform="x86_64-appimage" bundle="appimage">
+-          <location>https://download.kde.org/stable/krita/5.3.2/krita-5.3.2-x86_64.AppImage</location>
+-        </artifact>
+-        <artifact type="binary" platform="macOS">
+-          <location>https://download.kde.org/stable/krita/5.3.2/krita-5.3.2-signed.dmg</location>
+-        </artifact>
+-        <artifact type="binary" platform="win64">
+-          <location>https://download.kde.org/stable/krita/5.3.2/krita-x64-5.3.2-setup.exe</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-x86_64">
+-          <location>https://download.kde.org/stable/krita/5.3.2/krita-x86_64-5.3.2-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-arm64_v8a">
+-          <location>https://download.kde.org/stable/krita/5.3.2/krita-arm64-v8a-5.3.2-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-armeabi_v7a">
+-          <location>https://download.kde.org/stable/krita/5.3.2/krita-armeabi-v7a-5.3.2-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="source">
+-          <location>https://download.kde.org/stable/krita/6.0.2/krita-6.0.2.tar.xz</location>
+-        </artifact>
+-      </artifacts>
+     </release>
+     <release date="2026-03-31" version="5.3.1">
+       <url>https://krita.org/en/posts/2026/krita-5.3.1-released/</url>
+@@ -806,97 +737,55 @@
+         <p xml:lang="uk">У цьому випуску, в основному, виправлено проблему уповільнення для користувачів Windows, які використовують інструменти автоматизації, зокрема Fancy Zones з Microsoft Windows Powertoys або додаток Диск Google.</p>
          <p xml:lang="zh-CN">这一版软件主要修复了 Windows 用户在使用某些自动化工具，如 Powertoys 的 Fancy Zones 或 Google Drive 插件时的拖慢问题。</p>
        </description>
-       <artifacts>
+-      <artifacts>
 -        <artifact type="binary" platform="x86_64-appimage" bundle="appimage">
-+        <artifact type="binary" platform="x86_64-linux-any" bundle="appimage">
-           <location>https://download.kde.org/stable/krita/5.3.1/krita-5.3.1-x86_64.AppImage</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.1/krita-5.3.1-x86_64.AppImage</location>
+-        </artifact>
 -        <artifact type="binary" platform="macOS">
-+        <artifact type="binary" platform="aarch64-macos-any">
-           <location>https://download.kde.org/stable/krita/5.3.1/krita-5.3.1-signed.dmg</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.1/krita-5.3.1-signed.dmg</location>
+-        </artifact>
 -        <artifact type="binary" platform="win64">
-+        <artifact type="binary" platform="x86_64-windows-any">
-           <location>https://download.kde.org/stable/krita/5.3.1/krita-x64-5.3.1-setup.exe</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.1/krita-x64-5.3.1-setup.exe</location>
+-        </artifact>
 -        <artifact type="binary" platform="android-x86_64">
-+        <artifact type="binary" platform="x86_64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.1/krita-x86_64-5.3.1-release-signed.apk</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.1/krita-x86_64-5.3.1-release-signed.apk</location>
+-        </artifact>
 -        <artifact type="binary" platform="android-arm64_v8a">
-+        <artifact type="binary" platform="aarch64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.1/krita-arm64-v8a-5.3.1-release-signed.apk</location>
-         </artifact>
+-          <location>https://download.kde.org/stable/krita/5.3.1/krita-arm64-v8a-5.3.1-release-signed.apk</location>
+-        </artifact>
 -        <artifact type="binary" platform="android-armeabi_v7a">
-+        <artifact type="binary" platform="aarch64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.1/krita-armeabi-v7a-5.3.1-release-signed.apk</location>
-         </artifact>
-         <artifact type="source">
-@@ -751,42 +751,44 @@
+-          <location>https://download.kde.org/stable/krita/5.3.1/krita-armeabi-v7a-5.3.1-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="source">
+-          <location>https://download.kde.org/stable/krita/6.0.1/krita-6.0.1.tar.xz</location>
+-        </artifact>
+-      </artifacts>
      </release>
      <release date="2026-03-24" version="5.3.0">
        <url>https://krita.org/en/posts/2026/krita-5.3.0-released/</url>
@@ -99,7 +128,7 @@ index 8d3f711..7e85a2a 100644
 -      <description xml:lang="ca-valencia">Una versió important nova amb l'eina nova de text en el llenç, les característiques de tancament de separacions, l'eina de selecció i l'eina nova de ganivet</description>
 -      <description xml:lang="cs">Nové větší vydání s novým nástrojem pro text přímo na plátně, funkcemi pro uzavření mezer, lištou nástrojů pro výběr a novým nožem</description>
 -      <description xml:lang="es">Una nueva versión mayor que incluye la nueva herramienta de texto sobre el lienzo, funciones para cerrar huecos, una barra de selección y la nueva herramienta de cuchillo.</description>
--      <description xml:lang="fr">Une nouvelle version majeure comprenant le nouvel outil de texte sur le canevas, des fonctionnalités de comblement des écarts, la barre d'outils de sélection et le nouvel outil « Couteau »</description>
+-      <description xml:lang="fr">Une nouvelle version majeure comprenant le nouvel outil de texte sur le canevas, des fonctionnalités de comblement des écarts, la barre d'outils de sélection et le nouvel outil « Couteau »</description>
 -      <description xml:lang="ga">Scaoileadh mór nua ina bhfuil an uirlis téacs ar chanbhás nua, gnéithe dúnta bearnaí, clár uirlisí roghnúcháin agus an uirlis scian nua</description>
 -      <description xml:lang="he">מהדורה עיקרית חדשה שמציגה את כלי הטקסט החדש על משטח הציור, יכולות סגירת פערים, סרגל כלי בחירה וכלי הסכין חדש</description>
 -      <description xml:lang="it">Un nuovo rilascio principale che presenta il nuovo strumento del testo su tela, funzioni di chiusura spazio, la barra degli strumenti Selezione e il nuovo strumento Coltello</description>
@@ -109,9 +138,33 @@ index 8d3f711..7e85a2a 100644
 -      <description xml:lang="ru">Крупный выпуск, включающий текстовый инструмент на холсте, функции автоматического закрытия промежутков при заливке, панель инструментов выделения и новый инструмент «Нож»</description>
 -      <description xml:lang="sk">A new major release featuring the new on-canvas text tool, gap-closing features, selection toolboar and the new knife tool</description>
 -      <description xml:lang="sl">Nova osrednja izdaja, ki vključuje novo orodje za besedilo na platnu, funkcije za zapolnjevanje vrzeli, orodno vrstico za izbiranje in novo orodje za rezanje</description>
+-      <description xml:lang="sv">En ny större utgåva med det nya textverktyget på duken, funktioner för att stänga luckor, markeringsverktygsfältet och det nya knivverktyget</description>
 -      <description xml:lang="tr">Yeni tuval üzeri metin aracı, boşluk doldurma aracı, seçim araç çubuğu ve yeni bıçak aracını içeren büyük bir yayım!</description>
 -      <description xml:lang="uk">У новому основному випуску програми реалізовано новий інструмент для роботи з текстом на полотні, можливості усування прогалин, панель інструментів позначення та новий інструмент «Ніж»</description>
 -      <description xml:lang="zh-CN">这是一个大版本更新，带来了完全重写的所见即所得文本工具、选区和填充自动闭合间隙、画布浮动选区操作工具条和漫画格子框编辑工具。</description>
+-      <artifacts>
+-        <artifact type="binary" platform="x86_64-appimage" bundle="appimage">
+-          <location>https://download.kde.org/stable/krita/5.3.0/krita-5.3.0-x86_64.AppImage</location>
+-        </artifact>
+-        <artifact type="binary" platform="macOS">
+-          <location>https://download.kde.org/stable/krita/5.3.0/krita-5.3.0-signed.dmg</location>
+-        </artifact>
+-        <artifact type="binary" platform="win64">
+-          <location>https://download.kde.org/stable/krita/5.3.0/krita-x64-5.3.0-setup.exe</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-x86_64">
+-          <location>https://download.kde.org/stable/krita/5.3.0/krita-x86_64-5.3.0-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-arm64_v8a">
+-          <location>https://download.kde.org/stable/krita/5.3.0/krita-arm64-v8a-5.3.0-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-armeabi_v7a">
+-          <location>https://download.kde.org/stable/krita/5.3.0/krita-armeabi-v7a-5.3.0-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="source">
+-          <location>https://download.kde.org/stable/krita/6.0.0/krita-6.0.0.tar.xz</location>
+-        </artifact>
+-      </artifacts>
 +      <description>
 +        <p>A new major release featuring the new on-canvas text tool, gap-closing features, selection toolboar and the new knife tool</p>
 +        <p xml:lang="ar">إصدار رئيس جديد يتضمن أداة النص الجديدة على اللوحة، وميزات سد الفجوات، وشريط أدوات التحديد، وأداة السكين الجديدة.</p>
@@ -119,7 +172,7 @@ index 8d3f711..7e85a2a 100644
 +        <p xml:lang="ca-valencia">Una versió important nova amb l'eina nova de text en el llenç, les característiques de tancament de separacions, l'eina de selecció i l'eina nova de ganivet</p>
 +        <p xml:lang="cs">Nové větší vydání s novým nástrojem pro text přímo na plátně, funkcemi pro uzavření mezer, lištou nástrojů pro výběr a novým nožem</p>
 +        <p xml:lang="es">Una nueva versión mayor que incluye la nueva herramienta de texto sobre el lienzo, funciones para cerrar huecos, una barra de selección y la nueva herramienta de cuchillo.</p>
-+        <p xml:lang="fr">Une nouvelle version majeure comprenant le nouvel outil de texte sur le canevas, des fonctionnalités de comblement des écarts, la barre d'outils de sélection et le nouvel outil « Couteau »</p>
++        <p xml:lang="fr">Une nouvelle version majeure comprenant le nouvel outil de texte sur le canevas, des fonctionnalités de comblement des écarts, la barre d'outils de sélection et le nouvel outil « Couteau »</p>
 +        <p xml:lang="ga">Scaoileadh mór nua ina bhfuil an uirlis téacs ar chanbhás nua, gnéithe dúnta bearnaí, clár uirlisí roghnúcháin agus an uirlis scian nua</p>
 +        <p xml:lang="he">מהדורה עיקרית חדשה שמציגה את כלי הטקסט החדש על משטח הציור, יכולות סגירת פערים, סרגל כלי בחירה וכלי הסכין חדש</p>
 +        <p xml:lang="it">Un nuovo rilascio principale che presenta il nuovo strumento del testo su tela, funzioni di chiusura spazio, la barra degli strumenti Selezione e il nuovo strumento Coltello</p>
@@ -129,37 +182,11 @@ index 8d3f711..7e85a2a 100644
 +        <p xml:lang="ru">Крупный выпуск, включающий текстовый инструмент на холсте, функции автоматического закрытия промежутков при заливке, панель инструментов выделения и новый инструмент «Нож»</p>
 +        <p xml:lang="sk">A new major release featuring the new on-canvas text tool, gap-closing features, selection toolboar and the new knife tool</p>
 +        <p xml:lang="sl">Nova osrednja izdaja, ki vključuje novo orodje za besedilo na platnu, funkcije za zapolnjevanje vrzeli, orodno vrstico za izbiranje in novo orodje za rezanje</p>
++        <p xml:lang="sv">En ny större utgåva med det nya textverktyget på duken, funktioner för att stänga luckor, markeringsverktygsfältet och det nya knivverktyget</p>
 +        <p xml:lang="tr">Yeni tuval üzeri metin aracı, boşluk doldurma aracı, seçim araç çubuğu ve yeni bıçak aracını içeren büyük bir yayım!</p>
 +        <p xml:lang="uk">У новому основному випуску програми реалізовано новий інструмент для роботи з текстом на полотні, можливості усування прогалин, панель інструментів позначення та новий інструмент «Ніж»</p>
 +        <p xml:lang="zh-CN">这是一个大版本更新，带来了完全重写的所见即所得文本工具、选区和填充自动闭合间隙、画布浮动选区操作工具条和漫画格子框编辑工具。</p>
 +      </description>
-       <artifacts>
--        <artifact type="binary" platform="x86_64-appimage" bundle="appimage">
-+        <artifact type="binary" platform="x86_64-linux-any" bundle="appimage">
-           <location>https://download.kde.org/stable/krita/5.3.0/krita-5.3.0-x86_64.AppImage</location>
-         </artifact>
--        <artifact type="binary" platform="macOS">
-+        <artifact type="binary" platform="aarch64-macos-any">
-           <location>https://download.kde.org/stable/krita/5.3.0/krita-5.3.0-signed.dmg</location>
-         </artifact>
--        <artifact type="binary" platform="win64">
-+        <artifact type="binary" platform="x86_64-windows-any">
-           <location>https://download.kde.org/stable/krita/5.3.0/krita-x64-5.3.0-setup.exe</location>
-         </artifact>
--        <artifact type="binary" platform="android-x86_64">
-+        <artifact type="binary" platform="x86_64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.0/krita-x86_64-5.3.0-release-signed.apk</location>
-         </artifact>
--        <artifact type="binary" platform="android-arm64_v8a">
-+        <artifact type="binary" platform="aarch64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.0/krita-arm64-v8a-5.3.0-release-signed.apk</location>
-         </artifact>
--        <artifact type="binary" platform="android-armeabi_v7a">
-+        <artifact type="binary" platform="aarch64-linux-android">
-           <location>https://download.kde.org/stable/krita/5.3.0/krita-armeabi-v7a-5.3.0-release-signed.apk</location>
-         </artifact>
-         <artifact type="source">
-@@ -796,24 +798,26 @@
      </release>
      <release date="2026-01-28" version="5.2.15">
        <url>https://krita.org/en/posts/2026/krita-5.2.15-released/</url>
@@ -179,6 +206,7 @@ index 8d3f711..7e85a2a 100644
 -      <description xml:lang="ru">Выпуск с исправлениями ошибок, включая устранение ряда причин аварийного завершения и обходные решения для улучшения работы с планшетом Xiaomi Pad.</description>
 -      <description xml:lang="sk">Vydanie opravujúce chyby s množstvom opráv pádov a obídení na zlepšenie používania s Xiaomi Pad</description>
 -      <description xml:lang="sl">Izboljšana različica z več popravki napak in rešitvami za boljšo uporabo s tablico Xiaomi Pad.</description>
+-      <description xml:lang="sv">En felrättningsutgåva med ett antal rättningar av krascher och tillfälliga lösningar för att förbättra användningen med Xiaomi Pad</description>
 -      <description xml:lang="uk">Це випуск із виправленнями вад, зокрема аварійних завершень роботи, а також удосконаленнями для користування з Xiaomi Pad</description>
 -      <description xml:lang="zh-CN">这是一个程序缺陷修复版本，重点修复了一系列崩溃问题，并改善了小米平板的压感笔兼容性。</description>
 +      <description>
@@ -198,6 +226,7 @@ index 8d3f711..7e85a2a 100644
 +        <p xml:lang="ru">Выпуск с исправлениями ошибок, включая устранение ряда причин аварийного завершения и обходные решения для улучшения работы с планшетом Xiaomi Pad.</p>
 +        <p xml:lang="sk">Vydanie opravujúce chyby s množstvom opráv pádov a obídení na zlepšenie používania s Xiaomi Pad</p>
 +        <p xml:lang="sl">Izboljšana različica z več popravki napak in rešitvami za boljšo uporabo s tablico Xiaomi Pad.</p>
++        <p xml:lang="sv">En felrättningsutgåva med ett antal rättningar av krascher och tillfälliga lösningar för att förbättra användningen med Xiaomi Pad</p>
 +        <p xml:lang="uk">Це випуск із виправленнями вад, зокрема аварійних завершень роботи, а також удосконаленнями для користування з Xiaomi Pad</p>
 +        <p xml:lang="zh-CN">这是一个程序缺陷修复版本，重点修复了一系列崩溃问题，并改善了小米平板的压感笔兼容性。</p>
 +      </description>
