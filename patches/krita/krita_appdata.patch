@@ -2,7 +2,67 @@ diff --git a/krita/org.kde.krita.appdata.xml b/krita/org.kde.krita.appdata.xml
 index 8d3f711..7e85a2a 100644
 --- a/krita/org.kde.krita.appdata.xml
 +++ b/krita/org.kde.krita.appdata.xml
-@@ -666,29 +666,6 @@
+@@ -668,29 +668,6 @@
+         <p xml:lang="uk">Проміжний випуск із виправленнями вад для каналу Krita Stable</p>
+         <p xml:lang="zh-CN">Krita 稳定分支的小缺陷修复版本</p>
+       </description>
+-      <artifacts>
+-        <artifact type="binary" platform="x86_64-appimage" bundle="appimage">
+-          <location>https://download.kde.org/stable/krita/5.3.4.1/krita-5.3.4.1-x86_64.AppImage</location>
+-        </artifact>
+-        <artifact type="binary" platform="macOS">
+-          <location>https://download.kde.org/stable/krita/5.3.4.1/krita-5.3.4.1-signed.dmg</location>
+-        </artifact>
+-        <artifact type="binary" platform="win64">
+-          <location>https://download.kde.org/stable/krita/5.3.4.1/krita-x64-5.3.4.1-setup.exe</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-x86_64">
+-          <location>https://download.kde.org/stable/krita/5.3.4.1/krita-x86_64-5.3.4.1-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-arm64_v8a">
+-          <location>https://download.kde.org/stable/krita/5.3.4.1/krita-arm64-v8a-5.3.4.1-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-armeabi_v7a">
+-          <location>https://download.kde.org/stable/krita/5.3.4.1/krita-armeabi-v7a-5.3.4.1-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="source">
+-          <location>https://download.kde.org/stable/krita/6.0.4.1/krita-6.0.4.1.tar.xz</location>
+-        </artifact>
+-      </artifacts>
+     </release>
+     <release date="2026-09-16" version="5.3.4">
+       <url>https://krita.org/en/posts/2026/krita-5.3.4-released/</url>
+@@ -716,29 +693,6 @@
+         <p xml:lang="uk">Проміжний випуск із виправленнями вад для каналу Krita Stable</p>
+         <p xml:lang="zh-CN">Krita 稳定分支的小缺陷修复版本</p>
+       </description>
+-      <artifacts>
+-        <artifact type="binary" platform="x86_64-appimage" bundle="appimage">
+-          <location>https://download.kde.org/stable/krita/5.3.4/krita-5.3.4-x86_64.AppImage</location>
+-        </artifact>
+-        <artifact type="binary" platform="macOS">
+-          <location>https://download.kde.org/stable/krita/5.3.4/krita-5.3.4-signed.dmg</location>
+-        </artifact>
+-        <artifact type="binary" platform="win64">
+-          <location>https://download.kde.org/stable/krita/5.3.4/krita-x64-5.3.4-setup.exe</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-x86_64">
+-          <location>https://download.kde.org/stable/krita/5.3.4/krita-x86_64-5.3.4-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-arm64_v8a">
+-          <location>https://download.kde.org/stable/krita/5.3.4/krita-arm64-v8a-5.3.4-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-armeabi_v7a">
+-          <location>https://download.kde.org/stable/krita/5.3.4/krita-armeabi-v7a-5.3.4-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="source">
+-          <location>https://download.kde.org/stable/krita/6.0.4/krita-6.0.4.tar.xz</location>
+-        </artifact>
+-      </artifacts>
+     </release>
+     <release date="2026-07-23" version="5.3.3">
+       <url>https://krita.org/en/posts/2026/krita-5.3.3-released/</url>
+@@ -764,29 +718,6 @@
          <p xml:lang="uk">Проміжний випуск із виправленнями вад для каналу Krita Stable</p>
          <p xml:lang="zh-CN">Krita 稳定分支的小缺陷修复版本</p>
        </description>
@@ -32,7 +92,7 @@ index 8d3f711..7e85a2a 100644
      </release>
      <release date="2026-06-01" version="5.3.2.1">
        <url>https://krita.org/en/posts/2026/krita-5.3.2.1-released/</url>
-@@ -712,29 +689,6 @@
+@@ -812,29 +743,6 @@
          <p xml:lang="uk">Проміжний випуск із виправленнями вад для каналу Krita Stable</p>
          <p xml:lang="zh-CN">Krita 稳定分支的小缺陷修复版本</p>
        </description>
@@ -62,7 +122,7 @@ index 8d3f711..7e85a2a 100644
      </release>
      <release date="2026-05-27" version="5.3.2">
        <url>https://krita.org/en/posts/2026/krita-5.3.2-released/</url>
-@@ -758,29 +712,6 @@
+@@ -860,29 +768,6 @@
          <p xml:lang="uk">Проміжний випуск із виправленнями вад для каналу Krita Stable</p>
          <p xml:lang="zh-CN">Krita 稳定分支的小缺陷修复版本</p>
        </description>
@@ -92,7 +152,7 @@ index 8d3f711..7e85a2a 100644
      </release>
      <release date="2026-03-31" version="5.3.1">
        <url>https://krita.org/en/posts/2026/krita-5.3.1-released/</url>
-@@ -806,97 +737,55 @@
+@@ -909,99 +794,6 @@
          <p xml:lang="uk">У цьому випуску, в основному, виправлено проблему уповільнення для користувачів Windows, які використовують інструменти автоматизації, зокрема Fancy Zones з Microsoft Windows Powertoys або додаток Диск Google.</p>
          <p xml:lang="zh-CN">这一版软件主要修复了 Windows 用户在使用某些自动化工具，如 Powertoys 的 Fancy Zones 或 Google Drive 插件时的拖慢问题。</p>
        </description>
@@ -119,11 +179,12 @@ index 8d3f711..7e85a2a 100644
 -          <location>https://download.kde.org/stable/krita/6.0.1/krita-6.0.1.tar.xz</location>
 -        </artifact>
 -      </artifacts>
-     </release>
-     <release date="2026-03-24" version="5.3.0">
-       <url>https://krita.org/en/posts/2026/krita-5.3.0-released/</url>
+-    </release>
+-    <release date="2026-03-24" version="5.3.0">
+-      <url>https://krita.org/en/posts/2026/krita-5.3.0-released/</url>
 -      <description>A new major release featuring the new on-canvas text tool, gap-closing features, selection toolboar and the new knife tool</description>
 -      <description xml:lang="ar">إصدار رئيس جديد يتضمن أداة النص الجديدة على اللوحة، وميزات سد الفجوات، وشريط أدوات التحديد، وأداة السكين الجديدة.</description>
+-      <description xml:lang="bg">Нова основна версия, включваща новия инструмент за текст върху платното, функции за затваряне на празнини, лента с инструменти за селекция и новия инструмент „нож“</description>
 -      <description xml:lang="ca">Una versió important nova amb l'eina nova de text en el llenç, les característiques de tancament de separacions, l'eina de selecció i l'eina nova de ganivet</description>
 -      <description xml:lang="ca-valencia">Una versió important nova amb l'eina nova de text en el llenç, les característiques de tancament de separacions, l'eina de selecció i l'eina nova de ganivet</description>
 -      <description xml:lang="cs">Nové větší vydání s novým nástrojem pro text přímo na plátně, funkcemi pro uzavření mezer, lištou nástrojů pro výběr a novým nožem</description>
@@ -165,33 +226,12 @@ index 8d3f711..7e85a2a 100644
 -          <location>https://download.kde.org/stable/krita/6.0.0/krita-6.0.0.tar.xz</location>
 -        </artifact>
 -      </artifacts>
-+      <description>
-+        <p>A new major release featuring the new on-canvas text tool, gap-closing features, selection toolboar and the new knife tool</p>
-+        <p xml:lang="ar">إصدار رئيس جديد يتضمن أداة النص الجديدة على اللوحة، وميزات سد الفجوات، وشريط أدوات التحديد، وأداة السكين الجديدة.</p>
-+        <p xml:lang="ca">Una versió important nova amb l'eina nova de text en el llenç, les característiques de tancament de separacions, l'eina de selecció i l'eina nova de ganivet</p>
-+        <p xml:lang="ca-valencia">Una versió important nova amb l'eina nova de text en el llenç, les característiques de tancament de separacions, l'eina de selecció i l'eina nova de ganivet</p>
-+        <p xml:lang="cs">Nové větší vydání s novým nástrojem pro text přímo na plátně, funkcemi pro uzavření mezer, lištou nástrojů pro výběr a novým nožem</p>
-+        <p xml:lang="es">Una nueva versión mayor que incluye la nueva herramienta de texto sobre el lienzo, funciones para cerrar huecos, una barra de selección y la nueva herramienta de cuchillo.</p>
-+        <p xml:lang="fr">Une nouvelle version majeure comprenant le nouvel outil de texte sur le canevas, des fonctionnalités de comblement des écarts, la barre d'outils de sélection et le nouvel outil « Couteau »</p>
-+        <p xml:lang="ga">Scaoileadh mór nua ina bhfuil an uirlis téacs ar chanbhás nua, gnéithe dúnta bearnaí, clár uirlisí roghnúcháin agus an uirlis scian nua</p>
-+        <p xml:lang="he">מהדורה עיקרית חדשה שמציגה את כלי הטקסט החדש על משטח הציור, יכולות סגירת פערים, סרגל כלי בחירה וכלי הסכין חדש</p>
-+        <p xml:lang="it">Un nuovo rilascio principale che presenta il nuovo strumento del testo su tela, funzioni di chiusura spazio, la barra degli strumenti Selezione e il nuovo strumento Coltello</p>
-+        <p xml:lang="ka">ახალი გამოცემა ისეთი ფუნქციებით, როგორიცაა ახალი ტილოზე წერის ხელსაწყო, დაშორების დახურვის ფუნქციები, მონიშვნის ხელსაწყოთა პანელი და ახალი დანის ხელსაწყო</p>
-+        <p xml:lang="nl">Een nieuwe, belangrijke uitgave met de nieuwe hulpmiddelen voor tekst op het werkveld, functies voor het sluiten van openingen, een selectiebord voor hulpmiddelen en het nieuwe hulpmiddel mes.</p>
-+        <p xml:lang="pt-BR">Uma nova versão principal com a nova ferramenta de texto na tela, recursos de fechamento de lacunas, painel de seleção e a nova ferramenta de faca</p>
-+        <p xml:lang="ru">Крупный выпуск, включающий текстовый инструмент на холсте, функции автоматического закрытия промежутков при заливке, панель инструментов выделения и новый инструмент «Нож»</p>
-+        <p xml:lang="sk">A new major release featuring the new on-canvas text tool, gap-closing features, selection toolboar and the new knife tool</p>
-+        <p xml:lang="sl">Nova osrednja izdaja, ki vključuje novo orodje za besedilo na platnu, funkcije za zapolnjevanje vrzeli, orodno vrstico za izbiranje in novo orodje za rezanje</p>
-+        <p xml:lang="sv">En ny större utgåva med det nya textverktyget på duken, funktioner för att stänga luckor, markeringsverktygsfältet och det nya knivverktyget</p>
-+        <p xml:lang="tr">Yeni tuval üzeri metin aracı, boşluk doldurma aracı, seçim araç çubuğu ve yeni bıçak aracını içeren büyük bir yayım!</p>
-+        <p xml:lang="uk">У новому основному випуску програми реалізовано новий інструмент для роботи з текстом на полотні, можливості усування прогалин, панель інструментів позначення та новий інструмент «Ніж»</p>
-+        <p xml:lang="zh-CN">这是一个大版本更新，带来了完全重写的所见即所得文本工具、选区和填充自动闭合间隙、画布浮动选区操作工具条和漫画格子框编辑工具。</p>
-+      </description>
-     </release>
-     <release date="2026-01-28" version="5.2.15">
-       <url>https://krita.org/en/posts/2026/krita-5.2.15-released/</url>
+-    </release>
+-    <release date="2026-01-28" version="5.2.15">
+-      <url>https://krita.org/en/posts/2026/krita-5.2.15-released/</url>
 -      <description>A bug fix release with a number of crash fixes and workarounds to improve use with the Xiaomi Pad</description>
 -      <description xml:lang="ar">هذا الإصدار مخصص لإصلاح العلات مع عدد من إصلاحات الانهيار وحلول بديلة لتحسين الاستخدام مع Xiaomi Pad</description>
+-      <description xml:lang="bg">Версия с корекции на грешки, включваща множество решения за сривове и заобиколни методи за подобряване на използването с Xiaomi Pad</description>
 -      <description xml:lang="ca">Una versió de correcció d'errors amb diverses correccions de fallades i solucions per a millorar l'ús amb el Xiaomi Pad</description>
 -      <description xml:lang="ca-valencia">Una versió d'esmena d'errors amb diverses esmenes de fallades i solucions per a millorar l'ús amb Xiaomi Pad</description>
 -      <description xml:lang="cs">Opravné vydání, která obsahuje řadu oprav pádů a řešení, aby se zlepšila použitelnost s tabletem Xiaomi Pad</description>
@@ -209,27 +249,6 @@ index 8d3f711..7e85a2a 100644
 -      <description xml:lang="sv">En felrättningsutgåva med ett antal rättningar av krascher och tillfälliga lösningar för att förbättra användningen med Xiaomi Pad</description>
 -      <description xml:lang="uk">Це випуск із виправленнями вад, зокрема аварійних завершень роботи, а також удосконаленнями для користування з Xiaomi Pad</description>
 -      <description xml:lang="zh-CN">这是一个程序缺陷修复版本，重点修复了一系列崩溃问题，并改善了小米平板的压感笔兼容性。</description>
-+      <description>
-+        <p>A bug fix release with a number of crash fixes and workarounds to improve use with the Xiaomi Pad</p>
-+        <p xml:lang="ar">هذا الإصدار مخصص لإصلاح العلات مع عدد من إصلاحات الانهيار وحلول بديلة لتحسين الاستخدام مع Xiaomi Pad</p>
-+        <p xml:lang="ca">Una versió de correcció d'errors amb diverses correccions de fallades i solucions per a millorar l'ús amb el Xiaomi Pad</p>
-+        <p xml:lang="ca-valencia">Una versió d'esmena d'errors amb diverses esmenes de fallades i solucions per a millorar l'ús amb Xiaomi Pad</p>
-+        <p xml:lang="cs">Opravné vydání, která obsahuje řadu oprav pádů a řešení, aby se zlepšila použitelnost s tabletem Xiaomi Pad</p>
-+        <p xml:lang="es">Una versión de corrección de errores con una serie de correcciones de fallos y soluciones alternativas para mejorar el uso del Xiaomi Pad.</p>
-+        <p xml:lang="fr">Une version corrective incluant la correction de plusieurs plantages et des solutions de contournement pour améliorer l'utilisation du pavé tactile de Xiaomi</p>
-+        <p xml:lang="ga">Scaoileadh ceartúcháin fabhtanna le roinnt ceartúcháin tuairteála agus réitigh sheachbhóthair chun úsáid leis an Xiaomi Pad a fheabhsú</p>
-+        <p xml:lang="he">מהדורת תיקון תקלות עם כמה תיקוני תקלות ומעקפים לשיפור השימושיות עם Xiaomi Pad</p>
-+        <p xml:lang="it">Un rilascio di correzione errori che corregge diversi blocchi e contiene soluzioni temporanee per migliorarne l'uso col Xiaomi Pad</p>
-+        <p xml:lang="ka">გასწორდა ხარვეზები, მათ შორის პროგრამის გათიშვის შემთხვევები და დაემატა დროებითი გადაწყვეტები Xiaomi Pad-თან თავსებადობის გასაუმჯობესებლად</p>
-+        <p xml:lang="nl">Dit is een uitgave met gerepareerde bugs waarin een aantal crashes zijn opgelost om gebruik te verbeteren met de Xiaomi Pad</p>
-+        <p xml:lang="pt-BR">Uma versão com correções de bugs, incluindo diversas soluções para travamentos e soluções alternativas para melhorar a experiência com o Xiaomi Pad</p>
-+        <p xml:lang="ru">Выпуск с исправлениями ошибок, включая устранение ряда причин аварийного завершения и обходные решения для улучшения работы с планшетом Xiaomi Pad.</p>
-+        <p xml:lang="sk">Vydanie opravujúce chyby s množstvom opráv pádov a obídení na zlepšenie používania s Xiaomi Pad</p>
-+        <p xml:lang="sl">Izboljšana različica z več popravki napak in rešitvami za boljšo uporabo s tablico Xiaomi Pad.</p>
-+        <p xml:lang="sv">En felrättningsutgåva med ett antal rättningar av krascher och tillfälliga lösningar för att förbättra användningen med Xiaomi Pad</p>
-+        <p xml:lang="uk">Це випуск із виправленнями вад, зокрема аварійних завершень роботи, а також удосконаленнями для користування з Xiaomi Pad</p>
-+        <p xml:lang="zh-CN">这是一个程序缺陷修复版本，重点修复了一系列崩溃问题，并改善了小米平板的压感笔兼容性。</p>
-+      </description>
      </release>
      <release date="2025-12-11" version="5.2.14">
        <url>https://krita.org/en/posts/2025/krita-5.2.14-released/</url>
