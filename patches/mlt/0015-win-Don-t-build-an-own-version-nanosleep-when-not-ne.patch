@@ -1,0 +1,75 @@
+From 9dc0dd454102307935e17d165048e2950a5ce585 Mon Sep 17 00:00:00 2001
+From: Dmitry Kazakov <dimula73@gmail.com>
+Date: Wed, 10 Jun 2026 15:53:54 +0200
+Subject: [PATCH 15/15] [win] Don't build an own version nanosleep() when not
+ needed
+
+Instead of relying of the includes order we should properly
+check if the function is actually provided by our version
+of pthread library.
+---
+ src/framework/CMakeLists.txt | 9 +++++++++
+ src/melt/CMakeLists.txt      | 2 +-
+ src/win32/win32.c            | 5 +++--
+ 3 files changed, 13 insertions(+), 3 deletions(-)
+
+diff --git a/src/framework/CMakeLists.txt b/src/framework/CMakeLists.txt
+index 4ef43fb..1383657 100644
+--- a/src/framework/CMakeLists.txt
++++ b/src/framework/CMakeLists.txt
+@@ -110,7 +110,16 @@ if(WIN32)
+     target_link_options(mlt PRIVATE -Wl,--output-def,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libmlt-${MLT_VERSION_MAJOR}.def)
+     install(FILES "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libmlt-${MLT_VERSION_MAJOR}.def" DESTINATION ${CMAKE_INSTALL_LIBDIR})
+   endif()
++
++  include(CheckSymbolExists)
++  set(CMAKE_REQUIRED_LIBRARIES Threads::Threads)
++  check_symbol_exists(nanosleep "pthread.h;pthread_time.h" HAVE_PTHREAD_NANOSLEEP)
++  unset(CMAKE_REQUIRED_LIBRARIES)
++
+   target_sources(mlt PRIVATE ../win32/win32.c)
++  set_source_files_properties(../win32/win32.c PROPERTIES
++    COMPILE_DEFINITIONS "HAVE_PTHREAD_NANOSLEEP=${HAVE_PTHREAD_NANOSLEEP}")
++
+   target_link_libraries(mlt PRIVATE Iconv::Iconv)
+   if(NOT WINDOWS_DEPLOY)
+     target_compile_definitions(mlt PRIVATE NODEPLOY)
+diff --git a/src/melt/CMakeLists.txt b/src/melt/CMakeLists.txt
+index 750b025..8a8a84d 100644
+--- a/src/melt/CMakeLists.txt
++++ b/src/melt/CMakeLists.txt
+@@ -11,7 +11,7 @@ if(SDL2_FOUND AND NOT ANDROID)
+     target_compile_definitions(melt PRIVATE HAVE_SDL2)
+     if(MINGW)
+         target_compile_definitions(melt PRIVATE main=SDL_main)
+-        target_link_libraries(melt PRIVATE mingw32 SDL2main SDL2)
++        target_link_libraries(melt PRIVATE mingw32 SDL2::SDL2main)
+     endif()
+ endif()
+
+diff --git a/src/win32/win32.c b/src/win32/win32.c
+index 6c70076..f387161 100644
+--- a/src/win32/win32.c
++++ b/src/win32/win32.c
+@@ -46,7 +46,7 @@ int usleep(unsigned int useconds)
+ 	return 0;
+ }
+
+-
++#if !HAVE_PTHREAD_NANOSLEEP
+ int nanosleep( const struct timespec * rqtp, struct timespec * rmtp )
+ {
+ 	if (rqtp->tv_nsec > 999999999) {
+@@ -55,7 +55,8 @@ int nanosleep( const struct timespec * rqtp, struct timespec * rmtp )
+ 		return -1;
+ 	}
+ 	return usleep( rqtp->tv_sec * 1000000 + rqtp->tv_nsec / 1000 );
+-}
++}
++#endif
+
+ int setenv(const char *name, const char *value, int overwrite)
+ {
+--
+2.49.0.windows.1
+

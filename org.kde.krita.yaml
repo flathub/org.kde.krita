@@ -109,7 +109,7 @@ modules:
       # See link for current Krita Qt fork and git tag https://invent.kde.org/packaging/krita-deps-management/-/blob/master/ext_qt/CMakeLists.txt
       - type: git
         url: https://invent.kde.org/szaman/qtbase.git
-        commit: 3a918b166a8454b51d0a388269407b4599e600b4
+        commit: ece38f4cd2a21482baec9c2ca03cea5b4728b18c
       - type: shell
         commands:
           - mv configure configure.qt
@@ -754,14 +754,45 @@ modules:
     buildsystem: cmake-ninja
     config-opts:
       - -DCMAKE_BUILD_TYPE=RelWithDebInfo
+      - -DMOD_SDL2=ON
+      - -DMOD_VORBIS=ON
+      - -DMOD_NORMALIZE=OFF
+      - -DMOD_RUBBERBAND=OFF
+      - -DMOD_RTAUDIO=OFF
+      - -DMOD_DECKLINK=OFF
+      - -DMOD_FREI0R=OFF
+      - -DMOD_GDK=OFF
+      - -DMOD_JACKRACK=OFF
+      - -DUSE_LV2=OFF
+      - -DUSE_VST2=OFF
+      - -DMOD_KDENLIVE=OFF
+      - -DMOD_MOVIT=OFF
+      - -DMOD_OLDFILM=OFF
       - -DMOD_OPENCV=OFF
+      - -DMOD_OPENFX=OFF
+      - -DMOD_PLUS=ON
+      - -DMOD_PLUSGPL=OFF
+      - -DMOD_QT=OFF
+      - -DMOD_QT6=OFF
+      - -DMOD_RESAMPLE=OFF
+      - -DMOD_SOX=OFF
+      - -DMOD_SPATIALAUDIO=OFF
+      - -DMOD_VIDSTAB=OFF
+      - -DMOD_XINE=OFF
+      - -DMOD_XML=OFF
     sources:
       - type: archive
-        url: https://github.com/mltframework/mlt/releases/download/v7.28.0/mlt-7.28.0.tar.gz
-        sha256: bc425bf9602213f5f4855b78cfbbcd43eeb78097c508588bde44415963955aa1
+        url: https://github.com/mltframework/mlt/releases/download/v7.38.0/mlt-7.38.0.tar.gz
+        sha256: b8f0a23c89e9250edc5038d745537c382367bf2ad3dad5d5c7cd13b0fe1c4144
       - type: patch
         paths:
+          - patches/mlt/0001-MacOS-allow-finding-plugins-outside-bundles.patch
           - patches/mlt/0002-MLT-check-pointers-before-dereferencing.patch
+          - patches/mlt/0003-Fix-installing-melt-manpage-when-DESTDIR-is-active.patch
+          - patches/mlt/0004-Android-Add-an-option-to-skip-non-plugins-in-reposit.patch
+          - patches/mlt/0013-Remove-dependency-on-libavdevice.patch
+          - patches/mlt/0014-Revert-Fix-build-on-msys2-mingw64.patch
+          - patches/mlt/0015-win-Don-t-build-an-own-version-nanosleep-when-not-ne.patch
   - name: raqm
     buildsystem: meson
     sources:

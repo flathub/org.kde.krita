@@ -1,0 +1,47 @@
+From 859e55f1616bebbf68feeda31dd1d2949b650e31 Mon Sep 17 00:00:00 2001
+From: Dmitry Kazakov <dimula73@gmail.com>
+Date: Fri, 8 May 2026 13:07:15 +0200
+Subject: [PATCH] Remove dependency on libavdevice
+
+It seems like the actual usage of avdevice has been
+removed long ago and replaced with SDL.
+---
+ CMakeLists.txt                 | 1 -
+ src/modules/avformat/factory.c | 2 --
+ 2 files changed, 3 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index cdccc77..0cd48db 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -229,7 +229,6 @@ if(MOD_AVFORMAT)
+     AVUTIL
+     AVCODEC
+     AVFILTER
+-    AVDEVICE
+     SWRESAMPLE
+   )
+ 
+diff --git a/src/modules/avformat/factory.c b/src/modules/avformat/factory.c
+index 5909600..2521aef 100644
+--- a/src/modules/avformat/factory.c
++++ b/src/modules/avformat/factory.c
+@@ -45,7 +45,6 @@ extern mlt_link link_swresample_init(mlt_profile profile, mlt_service_type, cons
+ // ffmpeg Header files
+ #include "mltavformat_export.h"
+ #include <libavcodec/avcodec.h>
+-#include <libavdevice/avdevice.h>
+ #include <libavfilter/avfilter.h>
+ #include <libavformat/avformat.h>
+ #include <libavutil/opt.h>
+@@ -58,7 +57,6 @@ static void avformat_init()
+     // Initialise avformat if necessary
+     if (avformat_initialised == 0) {
+         avformat_initialised = 1;
+-        avdevice_register_all();
+         avformat_network_init();
+         av_log_set_level(mlt_log_get_level());
+         if (getenv("MLT_AVFORMAT_PRODUCER_CACHE")) {
+-- 
+2.34.1
+

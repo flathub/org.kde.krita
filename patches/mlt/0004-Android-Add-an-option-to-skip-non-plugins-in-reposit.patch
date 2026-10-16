@@ -1,0 +1,42 @@
+From 1fc6a78274c300426dd989a4d825593bbc964dfb Mon Sep 17 00:00:00 2001
+From: Dmitry Kazakov <dimula73@gmail.com>
+Date: Fri, 24 May 2024 14:54:32 +0200
+Subject: [PATCH 4/4] Android: Add an option to skip non-plugins in repository
+ dir
+
+---
+ src/framework/mlt_repository.c | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/src/framework/mlt_repository.c b/src/framework/mlt_repository.c
+index 482a9ebb..6bf6ef66 100644
+--- a/src/framework/mlt_repository.c
++++ b/src/framework/mlt_repository.c
+@@ -80,6 +80,10 @@ mlt_repository mlt_repository_init(const char *directory)
+     int i;
+     int plugin_count = 0;
+ 
++#ifdef __ANDROID__
++    char *plugin_filter_string = getenv("MLT_PLUGIN_FILTER_STRING");
++#endif
++
+ #ifdef _WIN32
+     char *syspath = getenv("PATH");
+     char *exedir = mlt_environment("MLT_APPDIR");
+@@ -147,6 +151,13 @@ mlt_repository mlt_repository_init(const char *directory)
+             ignore = 1;
+         }
+ 
++#ifdef __ANDROID__
++	if (plugin_filter_string && strstr(object_name, plugin_filter_string) == NULL) {
++            mlt_log_info(NULL, "%s: skip non-plugin %s\n", __FUNCTION__, object_name);
++            continue;
++	}
++#endif
++
+         if (ignore) {
+             mlt_log_info(NULL, "%s: skip plugin %s\n", __FUNCTION__, object_name);
+             continue;
+-- 
+2.54.0
+
