@@ -1,0 +1,136 @@
+From b8a1a90320f0e6670e5efed74f86cabba999cd4f Mon Sep 17 00:00:00 2001
+From: Dmitry Kazakov <dimula73@gmail.com>
+Date: Wed, 10 Jun 2026 15:00:56 +0200
+Subject: [PATCH 14/15] Revert "Fix build on msys2 mingw64"
+
+This reverts commit 64aa54375d2816d82210144bb5cebaf1ba911aa5.
+---
+ CMakeLists.txt                      | 3 ---
+ src/framework/CMakeLists.txt        | 1 -
+ src/framework/mlt_types.h           | 6 +++++-
+ src/melt/CMakeLists.txt             | 1 -
+ src/modules/avformat/CMakeLists.txt | 3 ---
+ src/modules/sdl2/CMakeLists.txt     | 4 ----
+ src/win32/win32.c                   | 9 ++++-----
+ 7 files changed, 9 insertions(+), 18 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0cd48db..1499f2b 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -203,9 +203,6 @@ if(WIN32)
+     find_package(dlfcn-win32 REQUIRED)
+     set(CMAKE_DL_LIBS dlfcn-win32::dl)
+   endif()
+-  if(MINGW)
+-    string(REPLACE "iconv" "pthread" MLT_PTHREAD_LIBS "${Iconv_LIBRARY}")
+-  endif()
+ endif()
+
+ find_package(SDL2)
+diff --git a/src/framework/CMakeLists.txt b/src/framework/CMakeLists.txt
+index 6d16e09..4ef43fb 100644
+--- a/src/framework/CMakeLists.txt
++++ b/src/framework/CMakeLists.txt
+@@ -107,7 +107,6 @@ set_target_properties(mlt PROPERTIES
+
+ if(WIN32)
+   if(MINGW)
+-    target_link_libraries(mlt PRIVATE ${MLT_PTHREAD_LIBS})
+     target_link_options(mlt PRIVATE -Wl,--output-def,${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libmlt-${MLT_VERSION_MAJOR}.def)
+     install(FILES "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/libmlt-${MLT_VERSION_MAJOR}.def" DESTINATION ${CMAKE_INSTALL_LIBDIR})
+   endif()
+diff --git a/src/framework/mlt_types.h b/src/framework/mlt_types.h
+index 23f0c18..999b436 100644
+--- a/src/framework/mlt_types.h
++++ b/src/framework/mlt_types.h
+@@ -2,7 +2,7 @@
+  * \file mlt_types.h
+  * \brief Provides forward definitions of all public types
+  *
+- * Copyright (C) 2003-2025 Meltytech, LLC
++ * Copyright (C) 2003-2023 Meltytech, LLC
+  *
+  * This library is free software; you can redistribute it and/or
+  * modify it under the terms of the GNU Lesser General Public
+@@ -22,6 +22,10 @@
+ #ifndef MLT_TYPES_H
+ #define MLT_TYPES_H
+
++#ifndef GCC_VERSION
++#define GCC_VERSION (__GNUC__ * 10000 + __GNUC_MINOR__ * 100 + __GNUC_PATCHLEVEL__)
++#endif
++
+ #ifdef __cplusplus
+ extern "C" {
+ #endif
+diff --git a/src/melt/CMakeLists.txt b/src/melt/CMakeLists.txt
+index 557bac7..750b025 100644
+--- a/src/melt/CMakeLists.txt
++++ b/src/melt/CMakeLists.txt
+@@ -10,7 +10,6 @@ if(SDL2_FOUND AND NOT ANDROID)
+     target_link_libraries(melt PRIVATE SDL2::SDL2)
+     target_compile_definitions(melt PRIVATE HAVE_SDL2)
+     if(MINGW)
+-        target_link_libraries(melt PRIVATE ${MLT_PTHREAD_LIBS})
+         target_compile_definitions(melt PRIVATE main=SDL_main)
+         target_link_libraries(melt PRIVATE mingw32 SDL2main SDL2)
+     endif()
+diff --git a/src/modules/avformat/CMakeLists.txt b/src/modules/avformat/CMakeLists.txt
+index dbef25f..dae766c 100644
+--- a/src/modules/avformat/CMakeLists.txt
++++ b/src/modules/avformat/CMakeLists.txt
+@@ -46,9 +46,6 @@ endif()
+
+ if(WIN32)
+   target_compile_definitions(mltavformat PRIVATE AVDATADIR="share/ffmpeg/")
+-  if(MINGW)
+-    target_link_libraries(mltavformat PRIVATE ${MLT_PTHREAD_LIBS})
+-  endif()
+ endif()
+
+ if(CPU_MMX)
+diff --git a/src/modules/sdl2/CMakeLists.txt b/src/modules/sdl2/CMakeLists.txt
+index e46abb0..844686d 100644
+--- a/src/modules/sdl2/CMakeLists.txt
++++ b/src/modules/sdl2/CMakeLists.txt
+@@ -20,10 +20,6 @@ else()
+   target_link_libraries(mltsdl2 PRIVATE m)
+ endif()
+
+-if(MINGW)
+-  target_link_libraries(mltsdl2 PRIVATE ${MLT_PTHREAD_LIBS})
+-endif()
+-
+ set_target_properties(mltsdl2 PROPERTIES LIBRARY_OUTPUT_DIRECTORY "${MLT_MODULE_OUTPUT_DIRECTORY}")
+
+ install(TARGETS mltsdl2 LIBRARY DESTINATION ${MLT_INSTALL_MODULE_DIR})
+diff --git a/src/win32/win32.c b/src/win32/win32.c
+index 55b91d2..6c70076 100644
+--- a/src/win32/win32.c
++++ b/src/win32/win32.c
+@@ -46,17 +46,16 @@ int usleep(unsigned int useconds)
+ 	return 0;
+ }
+
+-#ifndef WIN_PTHREADS_TIME_H
+-int nanosleep(const struct timespec * rqtp, struct timespec * rmtp)
++
++int nanosleep( const struct timespec * rqtp, struct timespec * rmtp )
+ {
+ 	if (rqtp->tv_nsec > 999999999) {
+ 		/* The time interval specified 1,000,000 or more microseconds. */
+ 		errno = EINVAL;
+ 		return -1;
+ 	}
+-    return usleep(rqtp->tv_sec * 1000000 + rqtp->tv_nsec / 1000);
+-}
+-#endif
++	return usleep( rqtp->tv_sec * 1000000 + rqtp->tv_nsec / 1000 );
++}
+
+ int setenv(const char *name, const char *value, int overwrite)
+ {
+--
+2.49.0.windows.1
+
