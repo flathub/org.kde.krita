@@ -360,8 +360,8 @@ modules:
               - --without-static-libpython
             sources:
               - type: archive
-                url: https://www.python.org/ftp/python/3.13.16/Python-3.13.16.tar.xz
-                sha256: f4b1bfb3c79b5bb11b8d228a12504163b4c0dab4d679828d8f5f26b6cb6ab35d
+                url: https://www.python.org/ftp/python/3.13.17/Python-3.13.17.tar.xz
+                sha256: 6020bd10aff3bf4821be16f088ebb1591beb7b811dcd8fab1da8f7c22a7b27e7
                 x-checker-data:
                   type: anitya
                   project-id: 13254
@@ -420,8 +420,8 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/6d/44/f5da03a8ef95d369145c5bb53050e7877c9f3d312e128605fd9504829143/setuptools-84.0.0.tar.gz
-                sha256: f4695c21257f0d9b537ec2692c941d02ee143b7cc1276941349a546573b2ef73
+                url: https://files.pythonhosted.org/packages/70/b3/c19426f783614d625699a4b247faf628ea9ab1db228674491767b417f9e1/setuptools-84.2.1.tar.gz
+                sha256: 3ff8b3b5492a0aa66960f4419365a86b84e013070d4313e4d4a6894f5d64d6bc
                 x-checker-data:
                   type: pypi
                   name: setuptools
