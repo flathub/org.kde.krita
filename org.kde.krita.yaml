@@ -207,7 +207,8 @@ modules:
       - -DBUILD_TESTING=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/stable/frameworks/5.101/extra-cmake-modules-5.101.0.tar.xz
+        url: 
+          https://download.kde.org/stable/frameworks/5.101/extra-cmake-modules-5.101.0.tar.xz
         sha256: 8c4c561310db587d390a6c84afc97e1addbaddd73b9d7a4c7309c5da9b9bc8f2
       - type: patch
         paths:
@@ -339,7 +340,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://files.pythonhosted.org/packages/0e/07/c9ed0bd428df6f87183fca565a79fee19fa7c88c7f00a7f011ab4379e77a/PyQt5-5.15.11.tar.gz
+        url: 
+          https://files.pythonhosted.org/packages/0e/07/c9ed0bd428df6f87183fca565a79fee19fa7c88c7f00a7f011ab4379e77a/PyQt5-5.15.11.tar.gz
         sha256: fda45743ebb4a27b4b1a51c6d8ef455c4c1b5d610c90d2934c7802b5c1557c52
     modules:
       - name: sip
@@ -351,7 +353,8 @@ modules:
           - /bin
         sources:
           - type: file
-            url: https://files.pythonhosted.org/packages/04/85/317e2d2a3e926e928c85ea935bc5991ae09181ebdc724b4144546656fbce/sip-6.10.0-1-py3-none-any.whl
+            url: 
+              https://files.pythonhosted.org/packages/04/85/317e2d2a3e926e928c85ea935bc5991ae09181ebdc724b4144546656fbce/sip-6.10.0-1-py3-none-any.whl
             sha256: 3bd6e5ab6e5bc8e5531bbf4ff299781bc2ee5c39da876072e0465efdad215896
         modules:
           - name: python
@@ -360,8 +363,8 @@ modules:
               - --without-static-libpython
             sources:
               - type: archive
-                url: https://www.python.org/ftp/python/3.13.16/Python-3.13.16.tar.xz
-                sha256: f4b1bfb3c79b5bb11b8d228a12504163b4c0dab4d679828d8f5f26b6cb6ab35d
+                url: https://www.python.org/ftp/python/3.13.18/Python-3.13.18.tar.xz
+                sha256: abb0102e6d4ae027509bcb82327d9dd85515b44a3ba8ad538cfc5e9847029f68
                 x-checker-data:
                   type: anitya
                   project-id: 13254
@@ -378,8 +381,9 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/e7/91/add211b38c357bf1b94900b4f79c34661a92be65c0243d2b0a3393c5092d/flit_core-4.1.0.tar.gz
-                sha256: 62e12b63ead8335b37f59fabb977c7167fe476dafb5e41785dfa8c9aff843bc6
+                url: 
+                  https://files.pythonhosted.org/packages/d3/8b/0370578a456986d6995344967a479dd5c9d4e064681550c2a9594bb58b4a/flit_core-4.2.0.tar.gz
+                sha256: 84e4e4d8fdd45ba2613800a3ebc6834de26d47ec9746efc3719f94181137b460
                 x-checker-data:
                   type: pypi
                   name: flit_core
@@ -392,7 +396,8 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/7d/fa/3944b40b07da9ce895c0e6303a5ab7d53da063554f534556b134a54d6093/packaging-26.3.tar.gz
+                url: 
+                  https://files.pythonhosted.org/packages/7d/fa/3944b40b07da9ce895c0e6303a5ab7d53da063554f534556b134a54d6093/packaging-26.3.tar.gz
                 sha256: 94edc256424af38762eb31306eed28beb9f0efc50a8837492c9d6fd6004aed79
                 x-checker-data:
                   type: pypi
@@ -406,7 +411,8 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/d0/20/50ed6bdf27dec98b568a8ae25dc599f35baa3d9709f9e83fd1edb56b9a90/wheel-0.48.0.tar.gz
+                url: 
+                  https://files.pythonhosted.org/packages/d0/20/50ed6bdf27dec98b568a8ae25dc599f35baa3d9709f9e83fd1edb56b9a90/wheel-0.48.0.tar.gz
                 sha256: 94800765601e9171bf5d58d066e640662842bcedcbab982b2c90787a2c987322
                 x-checker-data:
                   type: pypi
@@ -420,8 +426,9 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/6d/44/f5da03a8ef95d369145c5bb53050e7877c9f3d312e128605fd9504829143/setuptools-84.0.0.tar.gz
-                sha256: f4695c21257f0d9b537ec2692c941d02ee143b7cc1276941349a546573b2ef73
+                url: 
+                  https://files.pythonhosted.org/packages/70/b3/c19426f783614d625699a4b247faf628ea9ab1db228674491767b417f9e1/setuptools-84.2.1.tar.gz
+                sha256: 3ff8b3b5492a0aa66960f4419365a86b84e013070d4313e4d4a6894f5d64d6bc
                 x-checker-data:
                   type: pypi
                   name: setuptools
@@ -434,7 +441,8 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/e5/69/882ee5c9d017149285cab114ebeab373308ef0f874fcdac9beb90e0ac4da/ply-3.11.tar.gz
+                url: 
+                  https://files.pythonhosted.org/packages/e5/69/882ee5c9d017149285cab114ebeab373308ef0f874fcdac9beb90e0ac4da/ply-3.11.tar.gz
                 sha256: 00c7c1aaa88358b9c765b6d3000c6eec0ba42abca5351b095321aef446081da3
                 x-checker-data:
                   type: pypi
@@ -448,7 +456,8 @@ modules:
               - /bin
             sources:
               - type: file
-                url: https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34d9b30660f6f9daaf70eead706e3203ec3c/toml-0.10.2.tar.gz
+                url: 
+                  https://files.pythonhosted.org/packages/be/ba/1f744cdc819428fc6b5084ec34d9b30660f6f9daaf70eead706e3203ec3c/toml-0.10.2.tar.gz
                 sha256: b3bda1d108d5dd99f4a20d24d9c348e91c4db7ab1b749200bded2f839ccbe68f
                 x-checker-data:
                   type: pypi
@@ -462,7 +471,8 @@ modules:
           - /bin
         sources:
           - type: file
-            url: https://files.pythonhosted.org/packages/a7/c8/027cb80c99de9bb64aafcf3f5d67c128523e0af08edf18987ea8eb5c4be9/PyQt_builder-1.18.1-py3-none-any.whl
+            url: 
+              https://files.pythonhosted.org/packages/a7/c8/027cb80c99de9bb64aafcf3f5d67c128523e0af08edf18987ea8eb5c4be9/PyQt_builder-1.18.1-py3-none-any.whl
             sha256: 59ba2b1df2692986f3b3d3ba7395a6476c54cab0cc0ece18030ffba574657afc
       - name: pyqt-sip
         buildsystem: simple
@@ -471,7 +481,8 @@ modules:
             --prefix=${FLATPAK_DEST} "PyQt5_sip" --no-build-isolation
         sources:
           - type: file
-            url: https://files.pythonhosted.org/packages/01/79/086b50414bafa71df494398ad277d72e58229a3d1c1b1c766d12b14c2e6d/pyqt5_sip-12.17.0.tar.gz
+            url: 
+              https://files.pythonhosted.org/packages/01/79/086b50414bafa71df494398ad277d72e58229a3d1c1b1c766d12b14c2e6d/pyqt5_sip-12.17.0.tar.gz
             sha256: 682dadcdbd2239af9fdc0c0628e2776b820e128bec88b49b8d692fe682f90b4f
   - name: fcitx5-qt
     buildsystem: cmake-ninja
@@ -540,7 +551,8 @@ modules:
       - -DCMAKE_POSITION_INDEPENDENT_CODE=O
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.9.tar.gz
+        url: 
+          https://github.com/AcademySoftwareFoundation/Imath/archive/refs/tags/v3.1.9.tar.gz
         sha256: f1d8aacd46afed958babfced3190d2d3c8209b66da451f556abd6da94c165cf3
   - name: pystring
     buildsystem: cmake-ninja
@@ -564,7 +576,8 @@ modules:
       - -DYAML_CPP_BUILD_CONTRIB=OFF
     sources:
       - type: archive
-        url: https://github.com/jbeder/yaml-cpp/archive/a83cd31548b19d50f3f983b069dceb4f4d50756d.tar.gz
+        url: 
+          https://github.com/jbeder/yaml-cpp/archive/a83cd31548b19d50f3f983b069dceb4f4d50756d.tar.gz
         sha256: f2fe272e4675e57b040f4ffb4ca83a413b00ebeb45af50f4b0fb92e0d22b45b5
   - name: minizip-ng
     buildsystem: cmake-ninja
@@ -587,7 +600,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.11.tar.gz
+        url: 
+          https://github.com/AcademySoftwareFoundation/openexr/archive/refs/tags/v3.1.11.tar.gz
         sha256: 06b4a20d0791b5ec0f804c855d320a0615ce8445124f293616a086e093f1f1e1
   - name: opencolorio
     buildsystem: cmake-ninja
@@ -605,7 +619,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/AcademySoftwareFoundation/OpenColorIO/releases/download/v2.5.1/OpenColorIO-2.5.1.tar.gz
+        url: 
+          https://github.com/AcademySoftwareFoundation/OpenColorIO/releases/download/v2.5.1/OpenColorIO-2.5.1.tar.gz
         sha256: 49ab04d023d7a7a7237e24f2cfead3171b0ff7f466ce20e6e32859ec8c7cc94b
   - name: libraw
     config-opts:
@@ -628,7 +643,8 @@ modules:
       - -DBUILD_SHARED_LIBS=OFF
     sources:
       - type: archive
-        url: https://download.kde.org/Attic/release-service/22.12.1/src/libkdcraw-22.12.1.tar.xz
+        url: 
+          https://download.kde.org/Attic/release-service/22.12.1/src/libkdcraw-22.12.1.tar.xz
         sha256: 8b0a71937f7ed4926c2c047e0bd36001e5e98f52b1cf633d8bfbe4e4eeac65eb
   - name: gsl
     config-opts:
@@ -669,7 +685,8 @@ modules:
       - /share
     sources:
       - type: archive
-        url: https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz
+        url: 
+          https://github.com/mypaint/libmypaint/releases/download/v1.6.1/libmypaint-1.6.1.tar.xz
         sha256: 741754f293f6b7668f941506da07cd7725629a793108bb31633fb6c3eae5315f
     modules:
       - name: json-c
@@ -695,7 +712,8 @@ modules:
       - /bin
     sources:
       - type: archive
-        url: https://github.com/adah1972/libunibreak/releases/download/libunibreak_5_1/libunibreak-5.1.tar.gz
+        url: 
+          https://github.com/adah1972/libunibreak/releases/download/libunibreak_5_1/libunibreak-5.1.tar.gz
         sha256: dd1a92d4c5646aa0e457ff41d89812ec5243863be6c20bbcb5ee380f3dd78377
   - name: zug
     buildsystem: cmake-ninja
@@ -766,7 +784,8 @@ modules:
     buildsystem: meson
     sources:
       - type: archive
-        url: https://github.com/HOST-Oman/libraqm/releases/download/v0.10.1/raqm-0.10.1.tar.xz
+        url: 
+          https://github.com/HOST-Oman/libraqm/releases/download/v0.10.1/raqm-0.10.1.tar.xz
         sha256: 4d76a358358d67c5945684f2f10b3b08fb80e924371bf3ebf8b15cd2e321d05d
       - type: patch
         paths:
