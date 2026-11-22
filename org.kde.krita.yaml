@@ -126,7 +126,7 @@ modules:
     sources:
       - type: git
         url: https://invent.kde.org/szaman/qtdeclarative.git
-        commit: 967fb735aeb5ef26fb1ccab42bc0720442c14fa2
+        commit: 502c952001fb5f2a4bca8e3a6cade393bc04d25b
         disable-shallow-clone: true
         disable-submodules: true
   - name: qtimageformats
