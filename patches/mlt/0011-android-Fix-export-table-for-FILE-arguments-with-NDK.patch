@@ -1,0 +1,29 @@
+From 48d6e557370a57142514079a1fa4a0368263730e Mon Sep 17 00:00:00 2001
+From: Dmitry Kazakov <dimula73@gmail.com>
+Date: Mon, 28 Oct 2024 16:48:18 +0100
+Subject: [PATCH] [android] Fix export table for FILE* arguments with NDK 27
+
+---
+ src/mlt++/mlt++.vers | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/mlt++/mlt++.vers b/src/mlt++/mlt++.vers
+index 1934dec..860d2b1 100644
+--- a/src/mlt++/mlt++.vers
++++ b/src/mlt++/mlt++.vers
+@@ -266,10 +266,10 @@ MLTPP_0.8.8 {
+       "vtable for Mlt::Properties";
+       "Mlt::Properties::block(void*)";
+       "Mlt::Properties::count()";
+-      "Mlt::Properties::debug(char const*, _IO_FILE*)";
++      "Mlt::Properties::debug(char const*, __sFILE*)";
+       "Mlt::Properties::dec_ref()";
+       "Mlt::Properties::delete_event(Mlt::Event*)";
+-      "Mlt::Properties::dump(_IO_FILE*)";
++      "Mlt::Properties::dump(__sFILE*)";
+       "Mlt::Properties::fire_event(char const*)";
+       "Mlt::Properties::get(char const*)";
+       "Mlt::Properties::get_data(char const*)";
+-- 
+2.34.1
+
