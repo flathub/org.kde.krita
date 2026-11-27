@@ -889,8 +889,8 @@ modules:
       - /share/icons/hicolor/1024x1024
     sources:
       - type: archive
-        url: https://download.kde.org/stable/krita/6.0.4.1/krita-6.0.4.1.tar.gz
-        sha256: eaff00521958503aa1d3ef1206d75e00b57ed65993e953689f0a04850427e2d8
+        url: https://download.kde.org/stable/krita/6.0.5/krita-6.0.5.tar.gz
+        sha256: ba3cec925923a121ab99d4f2da12531157cc8d5179a217c8554520658329400c
         x-checker-data:
           type: anitya
           project-id: 10918

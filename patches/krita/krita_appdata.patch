@@ -8,6 +8,36 @@ index 8d3f711..7e85a2a 100644
        </description>
 -      <artifacts>
 -        <artifact type="binary" platform="x86_64-appimage" bundle="appimage">
+-          <location>https://download.kde.org/stable/krita/5.3.5/krita-5.3.5-x86_64.AppImage</location>
+-        </artifact>
+-        <artifact type="binary" platform="macOS">
+-          <location>https://download.kde.org/stable/krita/5.3.5/krita-5.3.5-signed.dmg</location>
+-        </artifact>
+-        <artifact type="binary" platform="win64">
+-          <location>https://download.kde.org/stable/krita/5.3.5/krita-x64-5.3.5-setup.exe</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-x86_64">
+-          <location>https://download.kde.org/stable/krita/5.3.5/krita-x86_64-5.3.5-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-arm64_v8a">
+-          <location>https://download.kde.org/stable/krita/5.3.5/krita-arm64-v8a-5.3.5-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="binary" platform="android-armeabi_v7a">
+-          <location>https://download.kde.org/stable/krita/5.3.5/krita-armeabi-v7a-5.3.5-release-signed.apk</location>
+-        </artifact>
+-        <artifact type="source">
+-          <location>https://download.kde.org/stable/krita/6.0.5/krita-6.0.5.tar.xz</location>
+-        </artifact>
+-      </artifacts>
+     </release>
+     <release date="2026-09-16" version="5.3.4">
+       <url>https://krita.org/en/posts/2026/krita-5.3.4-released/</url>
+@@ -716,29 +693,6 @@
+         <p xml:lang="uk">Проміжний випуск із виправленнями вад для каналу Krita Stable</p>
+         <p xml:lang="zh-CN">Krita 稳定分支的小缺陷修复版本</p>
+       </description>
+-      <artifacts>
+-        <artifact type="binary" platform="x86_64-appimage" bundle="appimage">
 -          <location>https://download.kde.org/stable/krita/5.3.4.1/krita-5.3.4.1-x86_64.AppImage</location>
 -        </artifact>
 -        <artifact type="binary" platform="macOS">
@@ -27,36 +57,6 @@ index 8d3f711..7e85a2a 100644
 -        </artifact>
 -        <artifact type="source">
 -          <location>https://download.kde.org/stable/krita/6.0.4.1/krita-6.0.4.1.tar.xz</location>
--        </artifact>
--      </artifacts>
-     </release>
-     <release date="2026-09-16" version="5.3.4">
-       <url>https://krita.org/en/posts/2026/krita-5.3.4-released/</url>
-@@ -716,29 +693,6 @@
-         <p xml:lang="uk">Проміжний випуск із виправленнями вад для каналу Krita Stable</p>
-         <p xml:lang="zh-CN">Krita 稳定分支的小缺陷修复版本</p>
-       </description>
--      <artifacts>
--        <artifact type="binary" platform="x86_64-appimage" bundle="appimage">
--          <location>https://download.kde.org/stable/krita/5.3.4/krita-5.3.4-x86_64.AppImage</location>
--        </artifact>
--        <artifact type="binary" platform="macOS">
--          <location>https://download.kde.org/stable/krita/5.3.4/krita-5.3.4-signed.dmg</location>
--        </artifact>
--        <artifact type="binary" platform="win64">
--          <location>https://download.kde.org/stable/krita/5.3.4/krita-x64-5.3.4-setup.exe</location>
--        </artifact>
--        <artifact type="binary" platform="android-x86_64">
--          <location>https://download.kde.org/stable/krita/5.3.4/krita-x86_64-5.3.4-release-signed.apk</location>
--        </artifact>
--        <artifact type="binary" platform="android-arm64_v8a">
--          <location>https://download.kde.org/stable/krita/5.3.4/krita-arm64-v8a-5.3.4-release-signed.apk</location>
--        </artifact>
--        <artifact type="binary" platform="android-armeabi_v7a">
--          <location>https://download.kde.org/stable/krita/5.3.4/krita-armeabi-v7a-5.3.4-release-signed.apk</location>
--        </artifact>
--        <artifact type="source">
--          <location>https://download.kde.org/stable/krita/6.0.4/krita-6.0.4.tar.xz</location>
 -        </artifact>
 -      </artifacts>
      </release>
